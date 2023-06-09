@@ -1,0 +1,32 @@
+.init-container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: hsl(240, 94%, 13%);
+}
+
+.init-message {
+  opacity: 0;
+  animation: fade-in 2s forwards;
+  color: white;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.form-container {
+  margin-top: 20px;
+}
+
+button {
+  margin-right: 10px;
+}
