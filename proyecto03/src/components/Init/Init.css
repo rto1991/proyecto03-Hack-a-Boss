@@ -11,7 +11,7 @@
 .init-message {
   opacity: 0;
   animation: fade-in 2s forwards;
-  color: white;
+  color: rgb(242, 242, 11);
 }
 
 @keyframes fade-in {
@@ -31,4 +31,20 @@ button {
   margin-right: 10px;
   opacity: 0;
   animation: fade-in 2s forwards;
+}
+
+#init {
+  color: rgb(242, 242, 11);
+}
+
+form > button {
+  background-color: rgb(242, 242, 11);
+}
+
+#language {
+  background-color: rgb(242, 242, 11);
+}
+
+#language option {
+  background-color: rgb(242, 242, 11);
 }

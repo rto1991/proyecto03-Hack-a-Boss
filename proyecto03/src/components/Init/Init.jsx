@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { FormattedMessage } from "react-intl";
 import "./Init.css";
 
 const Init = () => {
@@ -14,11 +15,17 @@ const Init = () => {
 
   return (
     <section className="init-container">
-      <h1 className="init-message">Bienvenido a MyCloudDrive </h1>
+      <h1 id="init">
+        <FormattedMessage id="init" className="init-message" />
+      </h1>
       {showForm && (
         <form className="form-container">
-          <button>REGISTRARSE</button>
-          <button>INICIAR SESIÓN</button>
+          <button>
+            <FormattedMessage id="registrarse" />
+          </button>
+          <button>
+            <FormattedMessage id="iniciarSesion" />
+          </button>
         </form>
       )}
     </section>
