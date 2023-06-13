@@ -1,0 +1,23 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.main {
+  display: grid;
+  place-content: center;
+}
+
+body {
+  background-color: black;
+}
+
+h1 {
+  color: yellowgreen;
+}
+
+button {
+  margin: 1rem;
+}
+
