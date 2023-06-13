@@ -4,15 +4,18 @@ const jwt = require("jsonwebtoken");
 const loginUser = async (req, res) => {
   try {
     const connect = await getDB();
-
     const { mail, pwd } = req.body;
 
-    if (!mail || !pwd) return res.status(400).send("Faltan datos");
+    if (!mail || !pwd)
+      return res.status(400).send({
+        status: "error",
+        message: "Falta email o falta contraseña",
+      });
 
     //comprobar que exista el usuario
     const [user] = await connect.query(
       `
-            SELECT id, role, active, currentFolder_id
+            SELECT id, role, active, currentFolder_id, name
             FROM users
             WHERE email = ? AND password = SHA2(?, 512)
             `,
@@ -20,13 +23,16 @@ const loginUser = async (req, res) => {
     );
 
     if (user.length === 0)
-      return res.status(401).send("Email o password incorrectos");
-    //res.send(user);
+      return res.status(401).send({
+        status: "error",
+        message: "Email o password incorrectos",
+      });
 
     //jsonwebtoken
     const info = {
       id: user[0].id,
       role: user[0].role,
+      name: user[0].name,
     };
 
     //generar el token con el método "sign" el cuál recibe como argumentos un objeto con la info
@@ -45,8 +51,11 @@ const loginUser = async (req, res) => {
     });
     connect.release();
   } catch (error) {
-    console.log(error);
-    res.status(400).send(error);
+    res.status(200).send({
+      status: "error",
+      message: "Error interno del servidor",
+      data: error,
+    });
   }
 };
 
