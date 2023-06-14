@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { FormattedMessage } from "react-intl";
+import Signup from "./Signup";
 import "./Init.css";
 
 const Init = () => {
   const [showForm, setShowForm] = useState(false);
+  const [showSignup, setShowSignup] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -13,6 +15,10 @@ const Init = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  const handleSignupClick = () => {
+    setShowSignup(true);
+  };
+
   return (
     <section className="init-container">
       <h1 id="init">
@@ -20,7 +26,7 @@ const Init = () => {
       </h1>
       {showForm && (
         <form className="form-container">
-          <button>
+          <button onClick={handleSignupClick}>
             <FormattedMessage id="registrarse" />
           </button>
           <button>
@@ -28,6 +34,7 @@ const Init = () => {
           </button>
         </form>
       )}
+      {showSignup && <Signup />}
     </section>
   );
 };
