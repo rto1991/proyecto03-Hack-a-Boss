@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { FormattedMessage } from "react-intl";
-import Signup from "./Signup";
+import Signup from "../Singup/Singnup";
 import "./Init.css";
 
 const Init = () => {
