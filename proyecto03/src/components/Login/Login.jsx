@@ -1,66 +1,61 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { FormattedMessage } from "react-intl";
+import { useNavigate } from "react-router-dom";
+import Login from "../Login/";
+import "./Init.css";
 
-function Login({ setUser }) {
-  const [status, setStatus] = useState("idle"); // idle, loading, success, error
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+const Init = () => {
+  const [showForm, setShowForm] = useState(false);
+  const navigate = useNavigate();
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    setStatus("loading");
-    const res = await fetch("http://localhost:3000/users/login", {
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowForm(true);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  const handleSubmit = async (credentials) => {
+    const response = await fetch("http://46.183.113.60/users/login", {
       method: "POST",
+      body: JSON.stringify(credentials),
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        email,
-        password,
-      }),
     });
-    const data = await res.json();
-    console.log("Got:", data);
-    if (res.ok) {
-      setStatus("success");
-      setUser(data);
+
+    if (response.ok) {
+      ("Bienvenido");
     } else {
-      setStatus("error");
+      ("Algo ha salido mal");
     }
   };
 
-  if (status === "loading") {
-    return <div>Cargando...</div>;
-  }
-
-  if (status === "success") {
-    return <div>Bienvenido :)</div>;
-  }
+  const handleLoginClick = () => {
+    navigate("/login");
+  };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Email:
-        <input
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          name="mail"
-        />
-      </label>
-      <label>
-        Contraseña:
-        <input
-          name="password"
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </label>
-      <button>Entrar</button>
-      {status === "error" && (
-        <p className="error">Usuario o contraseña incorrectos.</p>
+    <section className="init-container">
+      <h1 id="init">
+        <FormattedMessage id="init" className="init-message" />
+      </h1>
+      {showForm && (
+        <form className="form-container">
+          <button>
+            <FormattedMessage id="registrarse" />
+          </button>
+          <button onClick={handleLoginClick}>
+            <FormattedMessage id="iniciarSesion" />
+          </button>
+          <Login onSubmit={handleSubmit} />
+        </form>
       )}
-    </form>
+    </section>
   );
-}
+};
 
-export default Login;
+export default Init;
+
+// NO SE ME MUESTRA EL LOGIN AL HACER CLICK Y NO TENGO IDEA DE PORQUE
