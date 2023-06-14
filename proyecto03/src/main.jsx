@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { UserProvider } from "./UserContext";
 import { IntlProvider } from "react-intl";
 import esMessages from "./components/intl/es.json";
 import App from "./App.jsx";
@@ -11,8 +12,10 @@ const messages = {
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <IntlProvider locale="es" messages={messages.es}>
-      <App />
-    </IntlProvider>
+    <UserProvider>
+      <IntlProvider locale="es" messages={messages.es}>
+        <App />
+      </IntlProvider>
+    </UserProvider>
   </React.StrictMode>
 );
