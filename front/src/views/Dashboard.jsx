@@ -1,20 +1,28 @@
 import { useUser } from "../UserContext";
-import { useUserActions } from "../hooks/api";
-
-import { useState, useEffect, useMemo } from "react";
+import "./Dashboard.css";
 
 // react-router components
-import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { Navigate } from "react-router-dom";
+import TopNavBar from "./components/TopNavBar";
+import SideMenu from "./components/SideMenu";
+import FileArea from "./components/FileArea";
+import Footer from "./components/Footer";
 
 function Dashboard() {
   const [user] = useUser();
-  const { logout } = useUserActions();
 
   if (!user || user.status == "error") {
     return <Navigate to="/" />;
   }
 
-  return <></>;
+  return (
+    <div className="mainApp">
+      <TopNavBar></TopNavBar>
+      <FileArea></FileArea>
+      <Footer></Footer>
+      <SideMenu></SideMenu>
+    </div>
+  );
 }
 
 export default Dashboard;

@@ -46,15 +46,25 @@ export default function Home() {
   const [pwd, setPassword] = useState("");
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
-    await login(mail, pwd);
+    try {
+      event.preventDefault();
+      await login(mail, pwd);
+    } catch (error) {
+      Swal.fire({
+        title: "Error!",
+        text: "Usuario o contraseña erróneos",
+        icon: "error",
+        confirmButtonText: "Ok",
+      });
+      logout();
+    }
   };
 
   if (user) {
     if (user.status == "error") {
       Swal.fire({
         title: "Error!",
-        text: "Usuario o contraseña erróneos",
+        text: user.message,
         icon: "error",
         confirmButtonText: "Ok",
       });
