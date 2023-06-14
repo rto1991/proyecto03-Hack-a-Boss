@@ -38,7 +38,7 @@ const LanguageSelector = () => {
           <option value="en" onClick={() => handleChangeLanguage("en")}>
             EN
           </option>
-          <option value="en" onClick={() => handleChangeLanguage("it")}>
+          <option value="it" onClick={() => handleChangeLanguage("it")}>
             IT
           </option>
         </select>
