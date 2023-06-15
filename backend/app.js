@@ -10,10 +10,12 @@ const { listFiles, newCarpet, deleteFile, uploadFileAnonimous } = require('./src
 const { validateUser } = require('./src/middlewares/validateUser');
 const { createFile } = require('./src/database/createFile');
 const app = express();
+const cors = require('cors');
 // este es el primer middleware por donde pasa
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(fileUpload());
+app.use(cors());
 
 // Controllers user
 app.post('/user', newUser); // listo ✅ (Permite el registro del usuario - email en pruebas)
@@ -47,7 +49,7 @@ app.use((error, req, res, next) => {
 
 
 // Puerto
-app.listen(3000, () => {
+app.listen(4000, () => {
     console.log(chalk.yellow((`Servidor funcionando 👍🏼`)));
     });
 

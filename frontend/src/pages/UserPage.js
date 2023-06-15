@@ -10,7 +10,7 @@ const UserPage = () => {
   const [ pass, setPass ] = useState('');
   const [ tel, setTel ] = useState('');
   const [ cp, setCp ] = useState('');
-  const [ address, setAddress ] = useState('');
+  const [ addres, setAddress ] = useState('');
   const [ city, setCity ] = useState('');
   const [ province, setProvince ] = useState('');
   const [ error, setError ] = useState('');
@@ -27,7 +27,7 @@ const UserPage = () => {
         last_name: lastName,
         tel,
         zipcode: cp,
-        address,
+        addres,
         city,
         province})
     } catch (error) {

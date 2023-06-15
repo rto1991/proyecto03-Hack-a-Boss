@@ -59,9 +59,10 @@ input {
 footer {
   padding: 1rem;
   text-align: center;
-  position: relative;
+  position: absolute;
   justify-content: end;
   align-items: end;
   bottom: 0;
   width: 100%;
+  color: white;
 }
