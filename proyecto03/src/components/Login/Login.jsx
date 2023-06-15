@@ -1,59 +1,66 @@
-import { useState, useEffect } from "react";
-import { FormattedMessage } from "react-intl";
-import { useNavigate } from "react-router-dom";
-import Login from "../Login/";
-import "./Init.css";
+import { useState } from "react";
 
-const Init = () => {
-  const [showForm, setShowForm] = useState(false);
-  const navigate = useNavigate();
+const Login = () => {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowForm(true);
-    }, 3000);
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
-    return () => clearTimeout(timer);
-  }, []);
-
-  const handleSubmit = async (credentials) => {
-    const response = await fetch("http://46.183.113.60/users/login", {
+    // Realizar la solicitud POST al servidor
+    await fetch("http://46.183.113.60/login", {
       method: "POST",
-      body: JSON.stringify(credentials),
       headers: {
         "Content-Type": "application/json",
       },
-    });
-
-    if (response.ok) {
-      ("Bienvenido");
-    } else {
-      ("Algo ha salido mal");
-    }
-  };
-
-  const handleLoginClick = () => {
-    navigate("/login");
+      body: JSON.stringify(formData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          console.log("Inicio de sesión exitoso");
+        } else {
+          console.log("Error en el inicio de sesión");
+        }
+      })
+      .catch((error) => {
+        // Error en la solicitud
+        console.error(error);
+      });
   };
 
   return (
-    <section className="init-container">
-      <h1 id="init">
-        <FormattedMessage id="init" className="init-message" />
-      </h1>
-      {showForm && (
-        <form className="form-container">
-          <button>
-            <FormattedMessage id="registrarse" />
-          </button>
-          <button onClick={handleLoginClick}>
-            <FormattedMessage id="iniciarSesion" />
-          </button>
-          <Login onSubmit={handleSubmit} />
-        </form>
-      )}
-    </section>
+    <div>
+      <h2>Iniciar sesión</h2>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="email">Correo electrónico:</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          value={formData.email}
+          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+          required
+        />
+
+        <label htmlFor="password">Contraseña:</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          value={formData.password}
+          onChange={(e) =>
+            setFormData({ ...formData, password: e.target.value })
+          }
+          required
+        />
+
+        <button type="submit">Iniciar sesión</button>
+      </form>
+    </div>
   );
 };
 
-export default Init;
+export default Login;
