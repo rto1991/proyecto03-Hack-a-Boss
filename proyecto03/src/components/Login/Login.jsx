@@ -57,5 +57,3 @@ const Init = () => {
 };
 
 export default Init;
-
-// NO SE ME MUESTRA EL LOGIN AL HACER CLICK Y NO TENGO IDEA DE PORQUE
