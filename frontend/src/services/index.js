@@ -8,19 +8,12 @@ export const registerUser = async (
     city,
     province}) => {
         const response = await fetch(`${process.env.REACT_APP_BACKEND}/user`, {
-            method: 'POST',
+            method: "POST",
+            body: JSON.stringify({ email, password, name, last_name, tel, zipcode, address, city, province }),
             headers: {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': 'http://localhost:3000'
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "http://127.0.0.1:3000"
             },
-            body: JSON.stringify({email,
-                password,
-                name,
-                last_name,
-                tel, zipcode,
-                address,
-                city,
-                province})
         });
 
     const json = await response.json();
