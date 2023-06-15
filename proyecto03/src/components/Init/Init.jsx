@@ -34,7 +34,7 @@ const Init = () => {
           </button>
         </form>
       )}
-      {showSignup && <Signup />}
+      <Signup />
     </section>
   );
 };

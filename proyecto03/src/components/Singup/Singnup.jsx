@@ -27,9 +27,9 @@ const Signup = () => {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          // Registro exitoso
+          ("Registrado con éxito");
         } else {
-          // Error en el registro
+          ("Error en el registro");
         }
       })
       .catch((error) => {
