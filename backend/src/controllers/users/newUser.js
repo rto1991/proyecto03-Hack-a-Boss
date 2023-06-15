@@ -44,7 +44,7 @@ const newUser = async (req, res, next) =>{
         const regCode = uuidv4();
         
         // Validar el envío de email...
-
+        /*
         // Mando un mail al usuario con el link de confirmación de email
         const emailBody = `
           Acabas de registrarte correctamente en tu ☁️⎨Disco duro ONLINE⎬☁️. 
@@ -94,7 +94,7 @@ const newUser = async (req, res, next) =>{
         ]);
 
         connect.release();
-        
+        */
         res.send({
             status: 'ok',
             message: `Usuario creado con id: ${id}`

@@ -5,7 +5,7 @@ const {newError} = require('../../helps');
 const brcypt = require('bcrypt');
 
 // Primero creo esta función
-const registerNewUser = async (email, password) => {
+const registerNewUser = async ( email, password, name, last_name, tel, zipcode, addres, city, province ) => {
     let connection; 
     try {
      connection = await getConnection();
@@ -28,9 +28,9 @@ const registerNewUser = async (email, password) => {
 
      // Crear el usuario
      const [createUser] = await connection.query(`
-     INSERT INTO probando (email, password) VALUES(?, ?)
+     INSERT INTO probando (email, password, name, last_name, tel, zipcode, addres, city, province) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)
      `,
-     [email, passHash]
+     [email, passHash, name, last_name, tel, zipcode, addres, city, province]
      );
 
      // Devuelvo el id del elemento nuevo guardado
