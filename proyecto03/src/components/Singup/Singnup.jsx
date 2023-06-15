@@ -13,11 +13,11 @@ const Signup = () => {
     province: "",
   });
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     // Realizar la solicitud POST al servidor
-    fetch("http://46.183.113.60/newUser", {
+    await fetch("http://46.183.113.60/newUser", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

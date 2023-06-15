@@ -10,12 +10,13 @@ const Init = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowForm(true);
-    }, 3000);
+    }, 2000);
 
     return () => clearTimeout(timer);
   }, []);
 
-  const handleSignupClick = () => {
+  const handleSignupClick = (event) => {
+    event.preventDefault();
     setShowSignup(true);
   };
 
@@ -29,12 +30,12 @@ const Init = () => {
           <button onClick={handleSignupClick}>
             <FormattedMessage id="registrarse" />
           </button>
+          {showSignup && <Signup />}
           <button>
             <FormattedMessage id="iniciarSesion" />
           </button>
         </form>
       )}
-      <Signup />
     </section>
   );
 };
