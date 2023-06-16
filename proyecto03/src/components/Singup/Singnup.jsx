@@ -6,18 +6,13 @@ const Signup = () => {
     lastName: "",
     email: "",
     password: "",
-    phone: "",
-    zipcode: "",
-    address: "",
-    city: "",
-    province: "",
   });
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     // Realizar la solicitud POST al servidor
-    await fetch("http://46.183.113.60/newUser", {
+    await fetch("http://localhost/newUser", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -64,7 +59,7 @@ const Signup = () => {
           required
         />
 
-        <label htmlFor="email">Correo electrónico:</label>
+        <label htmlFor="email">Email:</label>
         <input
           type="email"
           id="email"
@@ -82,62 +77,6 @@ const Signup = () => {
           value={formData.password}
           onChange={(e) =>
             setFormData({ ...formData, password: e.target.value })
-          }
-          required
-        />
-
-        <label htmlFor="phone">Teléfono:</label>
-        <input
-          type="tel"
-          id="phone"
-          name="phone"
-          value={formData.phone}
-          onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-          required
-        />
-
-        <label htmlFor="zipcode">Código Postal:</label>
-        <input
-          type="text"
-          id="zipcode"
-          name="zipcode"
-          value={formData.zipcode}
-          onChange={(e) =>
-            setFormData({ ...formData, zipcode: e.target.value })
-          }
-          required
-        />
-
-        <label htmlFor="address">Dirección:</label>
-        <input
-          type="text"
-          id="address"
-          name="address"
-          value={formData.address}
-          onChange={(e) =>
-            setFormData({ ...formData, address: e.target.value })
-          }
-          required
-        />
-
-        <label htmlFor="city">Ciudad:</label>
-        <input
-          type="text"
-          id="city"
-          name="city"
-          value={formData.city}
-          onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-          required
-        />
-
-        <label htmlFor="province">Provincia:</label>
-        <input
-          type="text"
-          id="province"
-          name="province"
-          value={formData.city}
-          onChange={(e) =>
-            setFormData({ ...formData, province: e.target.value })
           }
           required
         />
