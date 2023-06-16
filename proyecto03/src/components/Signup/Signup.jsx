@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./Signup.css";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -11,26 +12,25 @@ const Signup = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Realizar la solicitud POST al servidor
-    await fetch("http://localhost/newUser", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.success) {
-          ("Registrado con éxito");
-        } else {
-          ("Error en el registro");
-        }
-      })
-      .catch((error) => {
-        // Error en la solicitud
-        console.error(error);
+    try {
+      const response = await fetch("http://localhost:3000/newUser", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
       });
+
+      const data = await response.json();
+
+      if (data.success) {
+        console.log("Registrado con éxito");
+      } else {
+        console.log("Error en el registro");
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -86,4 +86,5 @@ const Signup = () => {
     </div>
   );
 };
+
 export default Signup;

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { FormattedMessage } from "react-intl";
-import Signup from "../Singup/Singnup";
+import Signup from "../Signup/Signup";
 import Login from "../Login/Login";
 import "./Init.css";
 
@@ -26,6 +26,10 @@ const Init = () => {
     event.preventDefault();
     setShowLogin(true);
   };
+
+  if (showSignup) {
+    return <Signup />;
+  }
 
   return (
     <section className="init-container">
