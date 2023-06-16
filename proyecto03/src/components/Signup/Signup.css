@@ -1,6 +1,17 @@
-header.language-selector {
+/* header {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: end;
+  align-items: end;
+  border: 1 px solid rgb(234, 241, 6);
+  background-color: rgb(2, 2, 64);
+  padding-top: 1 rem;
+} */
+
+header.App {
   width: 100vw;
+  height: 100vh;
+  display: flex;
   justify-content: end;
   align-items: end;
   border: 1 px solid rgb(234, 241, 6);
@@ -8,7 +19,24 @@ header.language-selector {
   padding-top: 1 rem;
 }
 
-.signup-container {
+div.root {
+  width: 100vh;
+  height: 100vh;
+  background-color: rgb(2, 2, 64);
+}
+
+body {
+  background-color: rgb(2, 2, 64);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* .signup-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -36,4 +64,4 @@ header.language-selector {
 
 .signup-form button {
   background-color: rgb(242, 242, 11);
-}
+} */
