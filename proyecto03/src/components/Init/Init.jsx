@@ -43,11 +43,11 @@ const Init = () => {
       {showForm && (
         <form className="form-container">
           <button onClick={handleSignupClick}>
-            <FormattedMessage id="registrarse" />
+            <FormattedMessage id="initRegistrarse" />
           </button>
           {showSignup && <Signup />}
           <button onClick={handleLoginClick}>
-            <FormattedMessage id="iniciarSesion" />
+            <FormattedMessage id="initLogin" />
           </button>
           {showLogin && <Login />}
         </form>

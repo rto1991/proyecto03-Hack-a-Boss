@@ -1,5 +1,14 @@
 {
   "init": "Bienvenido a MyCloudDrive",
-  "registrarse": "REGISTRARSE",
-  "iniciarSesion": "INICIAR SESION"
+  "initRegistrarse": "REGISTRARSE",
+  "initLogin": "INICIAR SESION",
+  "signupTitulo": "Regístrate en MyCloudDrive",
+  "signupNombre": "Nombre",
+  "signupApellido": "Apellido",
+  "signupEmail": "Email",
+  "signupContraseña": "Contraseña",
+  "signupButton": "REGISTRARSE",
+  "loginEmail": "Correo Electrónico",
+  "loginContraseña": "Contraseña",
+  "loginButtoN": "INCIAR SESION"
 }

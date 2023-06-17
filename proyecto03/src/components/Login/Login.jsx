@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { FormattedMessage } from "react-intl";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -34,7 +35,8 @@ const Login = () => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="email">Correo electrónico:</label>
+        <label htmlFor="email" />
+        <FormattedMessage id="loginEmail" />
         <input
           type="email"
           id="email"
@@ -44,7 +46,8 @@ const Login = () => {
           required
         />
 
-        <label htmlFor="password">Contraseña:</label>
+        <label htmlFor="password" />
+        <FormattedMessage id="loginContraseña" />
         <input
           type="password"
           id="password"
