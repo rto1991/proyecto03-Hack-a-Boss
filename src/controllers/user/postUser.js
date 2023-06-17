@@ -89,9 +89,9 @@ const postUser = async (req, res) => {
       message: "Usuario creado correctamente",
     });
   } catch (error) {
-    res.status(200).send({
+    res.status(400).send({
       status: "error",
-      message: "Error interno del servidor",
+      message: error,
       data: error,
     });
   }

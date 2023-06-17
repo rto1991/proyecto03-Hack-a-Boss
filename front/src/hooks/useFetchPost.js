@@ -16,7 +16,6 @@ function useFetchPost() {
     });
     if (!res.ok) {
       const mensaje = await res.json();
-      console.log(mensaje);
       throw new Error("API error: " + mensaje.message);
     }
     return await res.json();

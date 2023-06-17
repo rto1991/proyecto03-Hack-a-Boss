@@ -1,8 +1,10 @@
 import { useUser } from "../UserContext";
+import useFetch from "./useFetch";
 import useFetchPost from "./useFetchPost";
 
 export function useUserActions() {
   const fetchPost = useFetchPost();
+  const get = useFetch();
   const [, setUser] = useUser();
 
   const signin = (name, last_name, role, mail, pwd) =>
@@ -19,7 +21,16 @@ export function useUserActions() {
       setUser(data)
     );
 
+  const validate = (regCode) => 
+  get('http://localhost:3000/users/validate/'+regCode).then((data) => setUser(data))
+
+  const recoverPassword = (mail) =>
+  fetchPost("http://localhost:3000/users/recoverPassword", {mail}).then((data) => setUser(data));
+
+  const resetPassword = (recoverCode, newPassword) =>
+  fetchPost("http://localhost:3000/users/resetPassword", {recoverCode, newPassword}).then((data) => setUser(data));
+
   const logout = () => setUser();
 
-  return { signin, login, logout };
+  return { signin, login, logout, validate, recoverPassword, resetPassword };
 }

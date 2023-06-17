@@ -11,7 +11,9 @@ const resetUserPassword = async (req, res, next) => {
 
     // Si alguno de esos campos está vacío devolver un error
     if (!recoverCode || !newPassword || newPassword.length < 8) {
-      res.status(400).send('Faltan campos o la nueva contraseña es muy corta');
+      return res.status(400).send({
+        status: "error",
+        message: "Faltan campos o la nueva contraseña es muy corta"});
     }
 
     // Comprobar que existe un usuario en la base de datos con ese código de recuperación activo
@@ -26,7 +28,9 @@ const resetUserPassword = async (req, res, next) => {
 
     // Si no lo hay devolver un error
     if (user.length === 0) {
-        res.status(400).send('Código de recuperación incorrecto');
+        return res.status(400).send({
+          status: "error",
+          message: "Código de recuperación incorrecto"});
     }
 
     // Establecer la contraseña proporcionada a ese usuario
@@ -41,14 +45,14 @@ const resetUserPassword = async (req, res, next) => {
     
     connect.release();
     // Devolver una response
-
-    res.send({
-      status: 'ok',
-      message: 'Password del usuario cambiada',
+    return res.send({
+      status: 'info',
+      message: 'Password del usuario cambiada con éxito',
     });
   } catch (error) {
-    console.log(error);
-    res.send(error);
+    return res.status(500).send({
+      error: "error",
+      message: error});
   }
 };
 

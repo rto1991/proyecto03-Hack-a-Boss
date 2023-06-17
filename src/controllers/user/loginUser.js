@@ -7,7 +7,7 @@ const loginUser = async (req, res) => {
     const { mail, pwd } = req.body;
 
     if (!mail || !pwd)
-      return res.status(400).send({
+      return res.status(404).send({
         status: "error",
         message: "Falta email o falta contraseña",
       });
@@ -34,6 +34,15 @@ const loginUser = async (req, res) => {
       role: user[0].role,
       name: user[0].name,
     };
+
+//está el usuario activo?
+if (user[0].active == 0)
+{
+  return res.status(402).send({
+    status: "error",
+    message:"El usuario aún no está activo, por favor, valida tu usuario en el enlace que te hemos enviado al correo electrónico. Revisa tu carpeta SPAM"
+  })
+}
 
     //generar el token con el método "sign" el cuál recibe como argumentos un objeto con la info
     //una palabra secreta (nuestra/servidor) (.env SECRET_TOKEN) y el tiempo de vencimiento del token

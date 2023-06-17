@@ -45,8 +45,7 @@ function SingIn() {
     } catch (error) {
       return Swal.fire({
         title: "Error!",
-        text:
-          "Error genérico en el proceso, inténtalo de nuevo. " + error.message,
+        text: error.message,
         icon: "error",
         confirmButtonText: "Ok",
       });
@@ -64,6 +63,17 @@ function SingIn() {
         confirmButtonText: "Ok",
       });
       logout();
+    }
+    else
+    {
+      Swal.fire({
+        title: "¡Éxito!",
+        text: "Has creado tu usuario correctamente, ve a tu bandeja de entrada para validarlo y poder usar MyCloudDrive",
+        icon: "success",
+        confirmButtonText: "Ok",
+      });
+      logout();
+      navigate('/');
     }
   }
 

@@ -1,14 +1,11 @@
 import { useUserActions } from "../hooks/api";
 import { useUser } from "../UserContext";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
@@ -39,51 +36,17 @@ function Copyright(props) {
 // TODO remove, this demo shouldn't need to reset the theme.
 
 const defaultTheme = createTheme();
-export default function Home() {
-  const { login, logout, validate } = useUserActions();
+export default function PasswordChange() {
+  const { logout, resetPassword } = useUserActions();
   const [user] = useUser();
-  const [mail, setEmail] = useState("");
-  const [saveCredentials, setSaveCredentials] = useState(false);
-  const [pwd, setPassword] = useState("");
+  const [recoverCode, setRecoverCode] = useState("");
+  const [newPassword, setNewPassword] = useState("");
   const navigate = useNavigate();
-  const { regCode } = useParams();
-
-  //retrieve saved data from local storage if exists
-  
-  useEffect(() =>{
-    const localData = JSON.parse(localStorage.getItem("data"))
-    if (localData) {
-      setEmail(localData.email);
-      setPassword(localData.password);
-      setSaveCredentials(true);
-    }
-  },[])
-
  
- const validar = async (regCode) => {
-  try {
-   await validate(regCode);
-  } catch (error) {
-    Swal.fire({
-      title: "Error!",
-      text: error,
-      icon: "error",
-      confirmButtonText: "Ok",
-    });
-    logout();
-  }
- }
-
- if (regCode){
-  validar(regCode)
-  navigate('/');
- }
-
-
-  const handleSubmit = async (event) => {
+   const handleSubmit = async (event) => {
     try {
       event.preventDefault();
-      await login(mail, pwd);
+      await resetPassword(recoverCode, newPassword);
     } catch (error) {
       Swal.fire({
         title: "Error!",
@@ -91,8 +54,7 @@ export default function Home() {
         icon: "error",
         confirmButtonText: "Ok",
       });
-      navigate('/');
-      logout();
+      
     }
   };
 
@@ -104,38 +66,6 @@ export default function Home() {
         icon: "error",
         confirmButtonText: "Ok",
       });
-      logout();
-    } else if (user.status =="ok") {
-      //login con éxito
-      if (saveCredentials){
-        const savedData = {
-          email: mail,
-          password: pwd
-        }
-        localStorage.setItem("data",JSON.stringify(savedData))
-      }
-      else
-      {
-        localStorage.clear();
-      }
-      let timerInterval;
-      Swal.fire({
-        title: `Hola ${user.info.name}, entrando a tu Dashboard, solo un momentito...`,
-        timer: 2000,
-        timerProgressBar: true,
-        didOpen: () => {
-          Swal.showLoading();
-          timerInterval = setInterval(() => {}, 100);
-        },
-        willClose: () => {
-          clearInterval(timerInterval);
-        },
-      }).then((result) => {
-        /* Read more about handling dismissals below */
-        if (result.dismiss === Swal.DismissReason.timer) {
-          navigate("/dashboard");
-        }
-      });
       
     } else
     {
@@ -146,6 +76,7 @@ export default function Home() {
         confirmButtonText: "Ok",
       });
       logout();
+      navigate('/');
     }
   }
 
@@ -166,7 +97,7 @@ export default function Home() {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Bienvenidos a MyCloudDrive
+              Recupera el acceso a tu cuenta
             </Typography>
             <Box
               component="form"
@@ -175,20 +106,18 @@ export default function Home() {
               sx={{ mt: 1 }}
             >
               <TextField
-                onChange={(e) => setEmail(e.target.value)}
-                value={mail}
+                onChange={(e) => setRecoverCode(e.target.value)}
                 margin="normal"
                 required
                 fullWidth
-                id="email"
-                label="Correo electrónico"
-                name="email"
-                autoComplete="email"
+                id="recoverCode"
+                label="Código de recuperación"
+                name="recoverCode"
                 autoFocus
               />
+              
               <TextField
-                onChange={(e) => setPassword(e.target.value)}
-                value={pwd}
+                onChange={(e) => setNewPassword(e.target.value)}
                 margin="normal"
                 required
                 fullWidth
@@ -198,32 +127,17 @@ export default function Home() {
                 id="password"
                 autoComplete="current-password"
               />
-              <FormControlLabel
-                control={<Checkbox value="remember" checked={saveCredentials} color="primary" />}
-                label="Recuerdame en este ordenador"
-                onChange={(e) => setSaveCredentials(e.target.checked)}
-              />
+
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Entrar
+                Solicitar un reset
               </Button>
-              <Grid container>
-                <Grid item xs>
-                  <Link href="/passwordRecovery" variant="body2">
-                    ¿Olvidaste la contraseña?
-                  </Link>
-                </Grid>
-                <Grid item>
-                  <Link href="/singin" variant="body2">
-                    {"¿No tienes cuenta? Créate una"}
-                  </Link>
-                </Grid>
-              </Grid>
             </Box>
+            
           </Box>
           <Copyright sx={{ mt: 8, mb: 4 }} />
         </Container>
