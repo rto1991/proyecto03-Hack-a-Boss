@@ -5,10 +5,8 @@ import LanguageSelector from "./components/LanguageSelector/LanguageSelector";
 function App() {
   return (
     <Router>
-      <header className="App">
-        <LanguageSelector />
-        <Init />
-      </header>
+      <LanguageSelector />
+      <Init />
     </Router>
   );
 }

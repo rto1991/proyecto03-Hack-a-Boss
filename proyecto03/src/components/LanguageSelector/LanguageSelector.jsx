@@ -24,7 +24,7 @@ const LanguageSelector = () => {
       locale={selectedLanguage}
       messages={messages[selectedLanguage]}
     >
-      <header className="language-selector">
+      <section className="language-selector">
         <label htmlFor="language" className="language-selector__label" />
         <select
           id="language"
@@ -42,7 +42,7 @@ const LanguageSelector = () => {
             IT
           </option>
         </select>
-      </header>
+      </section>
     </IntlProvider>
   );
 };

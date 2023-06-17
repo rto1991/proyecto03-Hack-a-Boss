@@ -1,8 +1,5 @@
-header.language-selector {
+section.language-selector {
   display: flex;
-  width: 100vw;
-  justify-content: end;
-  align-items: end;
   border: 1 px solid rgb(234, 241, 6);
   background-color: rgb(2, 2, 64);
   padding-top: 1 rem;
@@ -22,7 +19,7 @@ header.language-selector {
   animation: fade-in 2s forwards;
 }
 
-.header.language-selector {
+section.language-selector {
   background-color: rgb(2, 2, 64);
 }
 
