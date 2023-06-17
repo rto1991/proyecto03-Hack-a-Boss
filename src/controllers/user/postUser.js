@@ -4,7 +4,7 @@ const path = require("path");
 
 const postUser = async (req, res) => {
   try {
-    let { mail, pwd, role } = req.body;
+    let { mail, pwd, role, name, last_name } = req.body;
     const connect = await getDB();
 
     //la variable "role" especificará que tipo de usuario se crea, actualmente para el usuario ADMIN no hay lógica creada en el programa, por tanto
@@ -23,8 +23,8 @@ const postUser = async (req, res) => {
 
     if (userExist.length > 0) {
       return res.status(409).send({
-        status: "bad",
-        mensaje: "El usuario ya existe",
+        status: "error",
+        message: "El usuario ya existe",
       });
     }
 
@@ -46,8 +46,8 @@ const postUser = async (req, res) => {
       //SHA2 es un estandar de cifrado que recibe como parámetro la llave que se utilizara y el número de bits del HASH,
       //de esta forma el valor será cifrado y se almacenará en la base de datos
       //SHA --> Secure Hash Algorithm
-      `INSERT INTO users (email, password, regCode, role) VALUES (?,SHA2(?,512),?,?)`,
-      [mail, pwd, regCode, role]
+      `INSERT INTO users (email, password, regCode, role, name, last_name) VALUES (?,SHA2(?,512),?,?,?,?)`,
+      [mail, pwd, regCode, role, name, last_name]
     );
 
     //crear su carpeta personal
@@ -56,10 +56,6 @@ const postUser = async (req, res) => {
     //creamos el registro en la BD del fichero inicial de la carpeta ROOT
 
     let userPath = path.join(process.env.ROOT_DIR, userId + "");
-
-    if (role == "admin") {
-      userPath = path.join(process.env.ROOT_DIR);
-    }
 
     //creamos la carpeta física en el disco en el direcotorio estático
     try {
@@ -90,11 +86,14 @@ const postUser = async (req, res) => {
 
     return res.status(200).send({
       status: "ok",
-      mensaje: "Usuario creado correctamente",
+      message: "Usuario creado correctamente",
     });
   } catch (error) {
-    console.log(error);
-    res.status(500).send(error);
+    res.status(200).send({
+      status: "error",
+      message: "Error interno del servidor",
+      data: error,
+    });
   }
 };
 

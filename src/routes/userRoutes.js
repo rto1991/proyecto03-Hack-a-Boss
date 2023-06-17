@@ -18,7 +18,7 @@ const userExists = require("../middlewares/userExists");
 const router = express.Router();
 
 router.get("/user/:id", userExists, isUser, getUser); //ver datos de un usuario (cualquiera logueado puede) *probado*
-router.post("/newUser", postUser); // nuevo usuario *PROBADO*
+router.post("/signin", postUser); // nuevo usuario *PROBADO*
 router.patch("/updateUser/:id", userExists, isUser, updateUser); //actualizar datos usuario (solo puede modificar los de si mismo si es usuario normal, si es admin puede modificar el que quiera) *probado*
 router.delete("/deleteUser/:id", deleteUser);
 router.post("/login", loginUser); // login *PROBADO*

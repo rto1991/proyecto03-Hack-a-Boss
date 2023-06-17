@@ -5,11 +5,13 @@ export function useUserActions() {
   const fetchPost = useFetchPost();
   const [, setUser] = useUser();
 
-  const signup = (name, email, password) =>
-    fetchPost("https://overflow.anxoso.com/signup", {
+  const signin = (name, last_name, role, mail, pwd) =>
+    fetchPost("http://localhost:3000/signin", {
       name,
-      email,
-      password,
+      last_name,
+      role,
+      mail,
+      pwd,
     }).then((data) => setUser(data));
 
   const login = (mail, pwd) =>
@@ -19,5 +21,5 @@ export function useUserActions() {
 
   const logout = () => setUser();
 
-  return { signup, login, logout };
+  return { signin, login, logout };
 }

@@ -18,9 +18,9 @@ function Dashboard() {
   return (
     <div className="mainApp">
       <TopNavBar></TopNavBar>
+      <SideMenu></SideMenu>
       <FileArea></FileArea>
       <Footer></Footer>
-      <SideMenu></SideMenu>
     </div>
   );
 }

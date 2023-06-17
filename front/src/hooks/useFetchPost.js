@@ -15,7 +15,9 @@ function useFetchPost() {
       body: isFormData ? body : JSON.stringify(body),
     });
     if (!res.ok) {
-      throw new Error("API error: " + res.status);
+      const mensaje = await res.json();
+      console.log(mensaje);
+      throw new Error("API error: " + mensaje.message);
     }
     return await res.json();
   };
