@@ -59,7 +59,9 @@ const Login = () => {
           required
         />
 
-        <button type="submit">Iniciar sesión</button>
+        <button type="submit">
+          <FormattedMessage id="loginButton" />
+        </button>
       </form>
     </div>
   );
