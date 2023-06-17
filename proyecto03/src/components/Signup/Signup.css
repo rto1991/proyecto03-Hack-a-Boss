@@ -1,67 +1,46 @@
-/* header {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: end;
-  align-items: end;
-  border: 1 px solid rgb(234, 241, 6);
-  background-color: rgb(2, 2, 64);
-  padding-top: 1 rem;
-} */
-
-header.App {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: end;
-  align-items: end;
-  border: 1 px solid rgb(234, 241, 6);
-  background-color: rgb(2, 2, 64);
-  padding-top: 1 rem;
-}
-
-div.root {
-  width: 100vh;
-  height: 100vh;
-  background-color: rgb(2, 2, 64);
-}
-
 body {
   background-color: rgb(2, 2, 64);
 }
 
 form {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-/* .signup-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
   width: 100vw;
-  background-color: rgb(2, 2, 64);
-  color: rgb(242, 242, 11);
-}
-
-.signup-form {
-  display: flex;
+  height: 80vh;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+}
+
+div {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+h2 {
+  color: rgb(242, 242, 11);
+  margin: 0 auto;
+}
+
+label {
+  color: white;
+}
+
+.language-selector {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+button {
   margin-top: 20px;
 }
 
-.signup-form label {
-  margin-bottom: 10px;
+input {
+  margin-top: 10px;
+  border-radius: 5;
 }
 
-.signup-form input {
-  margin-bottom: 15px;
+label {
+  margin-top: 10px;
 }
-
-.signup-form button {
-  background-color: rgb(242, 242, 11);
-} */

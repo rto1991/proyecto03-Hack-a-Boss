@@ -35,7 +35,7 @@ const Signup = () => {
 
   return (
     <div>
-      <h2>Registro</h2>
+      <h2>Regístrate en MyCloudDrive </h2>
       <form onSubmit={handleSubmit}>
         <label htmlFor="name">Nombre:</label>
         <input
