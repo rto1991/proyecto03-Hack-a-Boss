@@ -33,7 +33,6 @@ const Login = () => {
 
   return (
     <div>
-      <h2>Iniciar sesión</h2>
       <form onSubmit={handleSubmit}>
         <label htmlFor="email">Correo electrónico:</label>
         <input

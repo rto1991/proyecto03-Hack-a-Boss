@@ -31,6 +31,10 @@ const Init = () => {
     return <Signup />;
   }
 
+  if (showLogin) {
+    return <Login />;
+  }
+
   return (
     <section className="init-container">
       <h1 id="init">
