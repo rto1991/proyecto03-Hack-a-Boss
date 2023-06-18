@@ -20,4 +20,49 @@ export const registerUser = async (
     if(!response.ok){
         throw new Error(json.message);
     }
+
+    return json.message;
+
+    // Verificar si acá habría que meter el envío de los emails.
+}
+
+export const loginService = async ({email, password}) => {
+    const response = await fetch(`${process.env.REACT_APP_BACKEND}/login`, {
+        method: "POST",
+        body: JSON.stringify({ email, password }),
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+
+    const json = await response.json();
+    // console.log(json);
+    if(!response.ok){
+        throw new Error(json.message);
     }
+
+    // if(response){
+    //     return json.message;
+    // }
+
+    return json.token;
+        // json.id
+    
+    
+}
+
+export const getUserData = async ({token, id}) => {
+    const response = await fetch(`${process.env.REACT_APP_BACKEND}/login/${id}`, {
+        headers: {
+            Authorization: token,
+        },
+    });
+
+    const json = await response.json();
+
+    if(!response.ok){
+        throw new Error(json.message);
+    }
+
+    return json.info;
+}

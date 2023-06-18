@@ -3,6 +3,17 @@
 Para el arranque del proyecto:
 
 - Se instaló react-router-dom
+- Se debe configurar el cors como dependencia y variable en el back.
+
+En el back:
+
+- Se debe hacer npm i.
+- Arrancar con npm run dev.
+
+En el front:
+
+- Se debe hacer npm i.
+- Arrancar con npm start.
 
 Se utilizan distintos routes con los que se concatenan las conexiones al Back-end.
 
@@ -17,5 +28,11 @@ Se estimará la posibilidad de habilitar el editado del perfil del usuario.
 Para la conexión con el back:
 
 - Se debe registrar la variable en el fichero .env con la url en la cual levantamos el servidor del Backend.
+
+Uso de los estados en el front:
+
+- useNavigate
+- useState
+
 
 

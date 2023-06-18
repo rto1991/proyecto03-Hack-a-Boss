@@ -27,16 +27,24 @@ h1 {
   text-decoration: underline;
 }
 
+h2 {
+  text-decoration: dotted;
+  color: white;
+  margin-left: 2rem;
+  padding-bottom: 1rem;
+}
+
 .button {
-  margin: .5rem;
-  border-radius: 1rem;
+  margin: .9rem;
+  border-radius: 2rem;
   max-height: max-content;
-  color: blue;
-  background-color: black;
+  color: rgba(68, 68, 210, 0.904);
+  background-color: rgba(0, 0, 0, 0.754);
   cursor: pointer;
   width: 10em;
   height: 5ex;
   font-weight: bold;
+  border-color:blue;
 }
 
 form {
@@ -46,15 +54,28 @@ form {
   display: grid;
   place-content: center;
   position: relative;
- 
+}
+
+fieldset {
+  margin: 2rem;
+  padding: 2rem;
+  border-radius: 3rem;
+  background-color: rgba(161, 167, 201, 0.28);
+  max-width: 700px;
+  border-color: blue;
+  border-style: hidden;
 }
 
 input {
   display: grid;
   justify-content: center;
-  background-color: gray;
+  background-color:rgba(20, 20, 172, 0.554);
   padding: 0.3rem;
+  color: white;
+  border-radius: 0.6rem;
+  margin: 0.45rem;
 }
+
 
 footer {
   padding: 1rem;

@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { registerUser } from '../services';
 
 const UserPage = () => {
 
+  const navigate = useNavigate();
   const [ name, setName ] = useState('');
   const [ lastName, setLastName ] = useState('');
   const [ email, setEmail ] = useState('');
   const [ pass, setPass ] = useState('');
+  const [ pass1, setPass1 ] = useState('');
   const [ tel, setTel ] = useState('');
   const [ cp, setCp ] = useState('');
   const [ addres, setAddress ] = useState('');
@@ -19,6 +21,10 @@ const UserPage = () => {
     e.preventDefault();
     setError('')
 
+    if(pass !== pass1){
+      setError('Las passwords deben coincidir');
+      return
+    }
     try {
       await registerUser({
         email,
@@ -30,97 +36,111 @@ const UserPage = () => {
         addres,
         city,
         province})
+        // if(registerUser) return <Register />
+        navigate('/login');
     } catch (error) {
       setError(error.message)
     
     }
+    
   }
     return (
         <>
-        <h2>Regístrate para disfrutar de nuestros servicios</h2>
         <form onSubmit={handleForm}>
+          <fieldset>
+        <h2>Regístrate</h2>
             <label htmlFor='name'>
-              Nombre:
-              </label>
               <input
               name="name"
               type="name"
               required
               autoComplete="given-name"
+              placeholder='Nombre*'
               onChange={(e) => setName(e.target.value)}/>
+            </label>
             <label htmlFor='last_name'>
-              Apellido:
-              </label>
               <input
               name="last_name"
               type="last_name"
               required
+              placeholder='Apellido*'
               autoComplete="family-name"
               onChange={(e) => setLastName(e.target.value)}/>
+            </label>
             <label htmlFor='email'>
-              Email:
-              </label>
               <input
               name="email"
               type="email"
               required
+              placeholder='Email*'
               autoComplete="off"
-              onChange={(e) => setEmail(e.target.value)}/>            
+              onChange={(e) => setEmail(e.target.value)}/>
+            </label>          
             <label htmlFor='pass'>
-              Password:
-              </label>
               <input
               name="password"
               type="password"
               required
+              placeholder='Password*'
               autoComplete='new-password'
-              onChange={(e) => setPass(e.target.value)}/>           
+              onChange={(e) => setPass(e.target.value)}/>
+            </label>
+            <label htmlFor='pass'>
+              <input
+              name="pass1"
+              type="password"
+              required
+              placeholder='Repeat password*'
+              autoComplete='new-password'
+              onChange={(e) => setPass1(e.target.value)}/>
+            </label>          
             <label htmlFor='tel'>
-              Teléfono:
-              </label>
               <input
               name="telf"
               type="tel"
               required
-              onChange={(e) => setTel(e.target.value)}/>           
+              placeholder='Teléfono*'
+              onChange={(e) => setTel(e.target.value)}/>
+            </label>         
             <label htmlFor='cp'>
-              C.P:
-              </label>
               <input
               name="zipcode" 
               type="zipcode" 
               required
-              onChange={(e) => setCp(e.target.value)}/>           
-            <label htmlFor='address'>
-              Dirección:
-              </label>
+              placeholder='C.P.*'
+              onChange={(e) => setCp(e.target.value)}/>
+            </label>         
+            <label htmlFor='address'> 
               <input
               name="addres" 
               type="addres" 
               required
-              onChange={(e) => setAddress(e.target.value)}/>           
+              placeholder='Dirección*'
+              onChange={(e) => setAddress(e.target.value)}/>
+            </label>       
             <label htmlFor='city'>
-              Ciudad:
-              </label>
               <input 
               name="city"
               type="city" 
               required
-              onChange={(e) => setCity(e.target.value)}/>           
+              placeholder='Ciudad*'
+              onChange={(e) => setCity(e.target.value)}/>
+              </label>       
             <label htmlFor='province'>
-              Provincia:
-              </label>
               <input
               name="province" 
               type="province" 
               required
-              onChange={(e) => setProvince(e.target.value)}/>           
+              placeholder='Provincia*'
+              onChange={(e) => setProvince(e.target.value)}/> 
+              </label>          
+            <button className='button'>Regístrarme</button>
             <p>
               ¿Ya tienes cuenta?
               <Link to="/login">Inicia sesión</Link>
             </p>
-            <button className='button'>Regístrarme</button>
             {error ? <p>{error}</p> : null}
+          </fieldset>
         </form>
         </>
     );
