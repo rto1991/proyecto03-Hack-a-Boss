@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useUser } from "../UserContext";
 import useFetch from "./useFetch";
 import useFetchPost from "./useFetchPost";
@@ -34,3 +35,13 @@ export function useUserActions() {
 
   return { signin, login, logout, validate, recoverPassword, resetPassword };
 }
+
+export function useFilesActions(){
+  const get = useFetch();
+  const [files, setFiles] = useState();
+  const dir = () => {
+    get('http://localhost:3000/dir').then((data) => setFiles(data))
+  }
+  return {dir, files};
+}
+

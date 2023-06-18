@@ -6,7 +6,7 @@ function useFetchPost() {
     const isFormData = body instanceof FormData;
 
     const headers = {};
-    if (user) headers.Authorization = `Bearer ${user.token}`;
+    if (user) headers.Authorization = `${user.data.token}`;
     if (!isFormData) headers["Content-Type"] = "application/json";
 
     const res = await fetch(url, {

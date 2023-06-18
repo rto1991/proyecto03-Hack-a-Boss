@@ -15,16 +15,21 @@ const listDirectory = async (req, res) => {
     //listamos el contenido del path donde está el usuario, son los registros que coincidan con parent_dir_id de la tabla files
     const [dirList] = await connect.query(
       `
-    SELECT f.filename as 'File Name', if(f.is_folder=1,'Folder','File') as Type FROM files f INNER JOIN users u ON f.parent_dir_id = u.currentFolder_id WHERE f.id_user = ? and f.in_recycle_bin = 0`,
+    SELECT f.filename as 'fileName', if(f.is_folder=1,'Folder','File') as 'type' FROM files f INNER JOIN users u ON f.parent_dir_id = u.currentFolder_id WHERE f.id_user = ? and f.in_recycle_bin = 0`,
       [idUser]
     );
 
     let responseObject = {};
     responseObject = { currentDir: pathUser[0].filename, content: dirList };
 
-    res.status(200).send(responseObject);
+    return res.status(200).send({
+      status: "info",
+      data: responseObject});
   } catch (error) {
-    console.log(error);
+    return res.status(500).send({
+      status: "error",
+      message:"Error interno del servidor en la obtención del directorio "+error
+    })
   }
 };
 

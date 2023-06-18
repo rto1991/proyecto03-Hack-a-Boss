@@ -6,15 +6,18 @@ const isUser = async (req, res, next) => {
     const connect = await getDB();
 
     const authorization = req.headers["authorization"];
-
     if (!authorization)
-      return res.status(401).send("Falta cabecera de autorización");
+      return res.status(401).send({
+        status: "error",
+        message: "Falta cabecera de autorización"});
 
     let tokenInfo;
     try {
       tokenInfo = jwt.verify(authorization, process.env.SECRET_TOKEN);
     } catch (error) {
-      res.status(401).send("Token no valido");
+      return res.status(401).send({
+        status: "error",
+        message: "Token no válido, debes loguearte de nuevo"});
     }
 
     /**Comprobamos que el token sea valido respecto a lastAuthUpdate */
@@ -33,14 +36,20 @@ const isUser = async (req, res, next) => {
     //iat representa un timestapm (fecha y hora del jwt fue usado por ultima vez)
 
     if (timestampCreateToken < lastAuthUpdate) {
-      res.status(401).send("Token caducado");
+        return res.status(401).send({
+        status: "error",
+        message: "Token expirado, debes loguearte de nuevo"});
     }
+    
 
     // añadimos a la req las informaciones del usuario que hace la petición (payload token)
     req.userInfo = tokenInfo;
     next();
   } catch (error) {
-    console.log(error);
+    return res.status(500).send({
+      status: "error",
+      message: "Error interno del servidor. Middle isUser",
+    })
   }
 };
 
