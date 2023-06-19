@@ -20,6 +20,7 @@ const sendMail = async (to, subject, body) => {
           `,
       };
       await sgEmail.send(msg);
+      // res.send(201).send({ sucess: true });
     } catch (error) {
       console.log('Error en envío de email',error);
     }

@@ -1,8 +1,9 @@
 'use strict';
 const { newError} = require('../../../helps');
 const { registerNewUser } = require('../../database');
-const path = require("path");
-const fs = require("fs/promises");
+const { sendMail } = require('../../services/sendMail');
+// const path = require("path");
+// const fs = require("fs/promises");
 const Joi = require('joi');
 
 const users = Joi.object({
@@ -18,6 +19,7 @@ const users = Joi.object({
     })
 
 const newUser = async (req, res, next) =>{
+    let connect;
     try {
         let {email, password, name, last_name, tel, zipcode, addres, city, province, role} = req.body;
         // const connect = await getConnection();
@@ -29,9 +31,9 @@ const newUser = async (req, res, next) =>{
          }
 
         if (email && password && name && last_name && tel && zipcode && addres && city && province) {
-            const validation = users.validate(email)
+            const validation = users.validate(email, password, name, last_name, tel, zipcode, addres, city, province)
             // Aquí dentro verifico está correcto, si no emito error.
-        if (validation.error) {
+        if (!validation.error) {
          console.log('Por favor verifique la información e introduzca los datos correctamente');
          }
         }
@@ -44,64 +46,29 @@ const newUser = async (req, res, next) =>{
         const regCode = uuidv4();
         
         // Validar el envío de email...
-        /*
+        
         // Mando un mail al usuario con el link de confirmación de email
         const emailBody = `
           Acabas de registrarte correctamente en tu ☁️⎨Disco duro ONLINE⎬☁️. 
           Pulsa en este link para validar tu nuevo email: ${process.env.PUBLIC_HOST}${regCode}
         `;
         
-        const sendMail = require("../../services/sendMail");
+        // var sendMail = require("../../services/sendMail");
         sendMail(email, "Correo de verificación My Cloud Drive", emailBody);
 
         await sendMail(email, 'Confirma tu registro', emailBody);
-
-        const [ proband ] = await connect.query(
-            `INSERT INTO probando (email, password, regCode, name, last_name, tel, zipcode, addres, city, province) VALUES (?,SHA2(?,512),?,?,?,?,?,?,?)`,
-            [email, password, regCode, name, last_name, tel, zipcode, addres, city, province]
-        )
         
-        let userId = proband.insertId;
-
-        let userPath = path.join(process.env.ROOT_DIR, userId + "");
-
-        if (role == "admin") {
-            userPath = path.join(process.env.ROOT_DIR);
-        }
-
-        //creamos la carpeta física en el disco en el direcotorio estático
-        try {
-            await fs.access(process.env.ROOT_DIR);
-        } catch (error) {
-            await fs.mkdir(process.env.ROOT_DIR);
-        }
-  
-        if (role == "normal") {
-            await fs.mkdir(path.join(process.env.ROOT_DIR, userId + ""));
-        }
-  
-        const [files] = await connect.query(
-            `
-        INSERT INTO files (id_user,date_add,date_upd,fileDescription, fileName, is_folder, filePath) VALUES (?,?,?,?,?,?,?)
-            `,
-        [userId, new Date(), new Date(), "Carpeta Root", "/", 1, userPath]
-        );
-  
-        let fileId = files.insertId; // obtenemos la ID de fila insertada en la la tabla files, pues necesitamos dicha ID para actualizar el campo currentFolder en la tabla users
-        await connect.query(`UPDATE users SET currentFolder_id=? WHERE id=?`, [
-            fileId,
-            userId,
-        ]);
-
-        connect.release();
-        */
         res.send({
             status: 'ok',
             message: `Usuario creado con id: ${id}`
         })
     } catch (error) {
         next(error)
-    }
+    }finally{
+        if (connect) {
+            connect.release();
+        }
+    }  
     };
 
 

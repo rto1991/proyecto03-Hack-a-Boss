@@ -35,7 +35,7 @@ const registerNewUser = async ( email, password, name, last_name, tel, zipcode, 
 
      // Devuelvo el id del elemento nuevo guardado
      return createUser.insertId;
-
+     
     // } catch (error) {    
     }finally{
         if (connection) {
