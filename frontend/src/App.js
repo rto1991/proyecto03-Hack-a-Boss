@@ -6,8 +6,10 @@ import Auth from './components/Auth';
 import LoginPage from './pages/LoginPage';
 import UserPage from './pages/UserPage';
 import NotFound from './pages/NotFound';
+import Uservalidate from './pages/Uservalidate';
 
 function App() {
+
   return (
     <>
       <main>
@@ -15,6 +17,7 @@ function App() {
           <Routes >
             <Route path='/' element={<Auth />} />
             <Route path='/login' element={<LoginPage />} />
+            <Route path='/loginuser' element={<Uservalidate />} />
             <Route path='/user' element={<UserPage />} />
             <Route path='*' element={<NotFound />} />
           </Routes>
