@@ -15,7 +15,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Swal from "sweetalert2";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "./Home.css";
 
 function Copyright(props) {
@@ -49,36 +49,34 @@ export default function Home() {
   const { regCode } = useParams();
 
   //retrieve saved data from local storage if exists
-  
-  useEffect(() =>{
-    const localData = JSON.parse(localStorage.getItem("data"))
+
+  useEffect(() => {
+    const localData = JSON.parse(localStorage.getItem("data"));
     if (localData) {
       setEmail(localData.email);
       setPassword(localData.password);
       setSaveCredentials(true);
     }
-  },[])
+  }, []);
 
- 
- const validar = async (regCode) => {
-  try {
-   await validate(regCode);
-  } catch (error) {
-    Swal.fire({
-      title: "Error!",
-      text: error,
-      icon: "error",
-      confirmButtonText: "Ok",
-    });
-    logout();
+  const validar = async (regCode) => {
+    try {
+      await validate(regCode);
+    } catch (error) {
+      Swal.fire({
+        title: "Error!",
+        text: error,
+        icon: "error",
+        confirmButtonText: "Ok",
+      });
+      logout();
+    }
+  };
+
+  if (regCode) {
+    validar(regCode);
+    navigate("/");
   }
- }
-
- if (regCode){
-  validar(regCode)
-  navigate('/');
- }
-
 
   const handleSubmit = async (event) => {
     try {
@@ -91,7 +89,7 @@ export default function Home() {
         icon: "error",
         confirmButtonText: "Ok",
       });
-      navigate('/');
+      navigate("/");
       logout();
     }
   };
@@ -105,17 +103,15 @@ export default function Home() {
         confirmButtonText: "Ok",
       });
       logout();
-    } else if (user.status =="ok") {
+    } else if (user.status == "ok") {
       //login con éxito
-      if (saveCredentials){
+      if (saveCredentials) {
         const savedData = {
           email: mail,
-          password: pwd
-        }
-        localStorage.setItem("data",JSON.stringify(savedData))
-      }
-      else
-      {
+          password: pwd,
+        };
+        localStorage.setItem("data", JSON.stringify(savedData));
+      } else {
         localStorage.clear();
       }
       let timerInterval;
@@ -136,9 +132,7 @@ export default function Home() {
           navigate("/dashboard");
         }
       });
-      
-    } else
-    {
+    } else {
       Swal.fire({
         title: "Info!",
         text: user.message,
@@ -199,7 +193,13 @@ export default function Home() {
                 autoComplete="current-password"
               />
               <FormControlLabel
-                control={<Checkbox value="remember" checked={saveCredentials} color="primary" />}
+                control={
+                  <Checkbox
+                    value="remember"
+                    checked={saveCredentials}
+                    color="primary"
+                  />
+                }
                 label="Recuerdame en este ordenador"
                 onChange={(e) => setSaveCredentials(e.target.checked)}
               />

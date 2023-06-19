@@ -11,9 +11,10 @@ const makeFolder = async (req, res) => {
     const idUser = userInfo.id;
     const folderName = req.params.folderName; //aquí nos traemos el nombre de carpeta deseado
     const connect = await getDB();
-    const [user] = await connect.query(`SELECT u.*, f.fileName FROM users u INNER JOIN files f ON f.id = u.currentFolder_id WHERE u.id = ?`, [
-      idUser,
-    ]);
+    const [user] = await connect.query(
+      `SELECT u.*, f.fileName FROM users u INNER JOIN files f ON f.id = u.currentFolder_id WHERE u.id = ?`,
+      [idUser]
+    );
     const currentFolder_id = user[0].currentFolder_id;
 
     //creamos el directorio primero en la BD
@@ -28,11 +29,10 @@ const makeFolder = async (req, res) => {
 
     //no puede haber en el directorio actual una carpeta que se llame igual a la propuesta (ojo, si puede haber ese nombre en otros directorios, por eso el filtro en la tabla con 3 condicionantes)
     if (fileExists.length > 0) {
-      return res
-        .status(500)
-        .send(
-          `El nombre de carpeta ${folderName} ya existe en el directorio actual`
-        );
+      return res.status(500).send({
+        status: "error",
+        message: `El nombre de carpeta ${folderName} ya existe en el directorio actual`,
+      });
     }
 
     //creamos la carpeta en la BD
@@ -42,11 +42,13 @@ const makeFolder = async (req, res) => {
       [currentFolder_id]
     );
 
+    //necesitaremos, para crear a miga de pan, el directorio padre
+
     const currentPath = currentFolder[0].filePath;
 
     await connect.query(
       `
-    INSERT INTO files (id_user, date_add, date_upd, fileDescription, fileName, filePath, is_folder, parent_dir_id) VALUES (?,?,?,?,?,?,?,?)
+    INSERT INTO files (id_user, date_add, date_upd, fileDescription, fileName, filePath, is_folder, parent_dir_id, size, breadCrumb) VALUES (?,?,?,?,?,?,?,?,?,?)
     `,
       [
         idUser,
@@ -54,25 +56,29 @@ const makeFolder = async (req, res) => {
         new Date(),
         folderName,
         folderName,
-        path.join( currentPath , currentFolder[0].fileName),
+        path.join(currentPath, currentFolder[0].fileName),
         1,
         currentFolder_id,
+        0,
+        path.join(currentFolder[0].breadCrumb, folderName),
       ]
     );
 
     //creamos físicamente el fichero
     await fs.mkdir(
-      path.join(currentPath,currentFolder[0].fileName, folderName)
+      path.join(currentPath, currentFolder[0].fileName, folderName)
     );
 
     //enviamos respuesta de que la operación finalizó correctamente
-    res
-      .status(200)
-      .send(
-        `El directorio ${folderName} se creó correctamente en la ruta ${user[0].fileName}`
-      );
+    return res.status(200).send({
+      status: "info",
+      message: `El directorio ${folderName} se creó correctamente en la ruta ${user[0].fileName}`,
+    });
   } catch (error) {
-    console.log(error);
+    return res.status(500).send({
+      status: "error",
+      message: error,
+    });
   }
 };
 

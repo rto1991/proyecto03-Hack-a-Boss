@@ -4,36 +4,38 @@ import { useFilesActions } from "../../hooks/api";
 import "./FileArea.css";
 
 function FileArea() {
-const [user] = useUser();
-const {dir, files} = useFilesActions();
+  const [user] = useUser();
+  const { dir, files } = useFilesActions();
 
-useEffect(() => {
-  async function getFiles() {
-    await dir();
-  }
-  getFiles();
-},[])
+  useEffect(() => {
+    async function getFiles() {
+      await dir();
+    }
+    getFiles();
+  }, []);
 
-if (files){
-  if (files.status == "error")
-  {
-    Swal.fire({
-      title: "Error!",
-      text: user.message,
-      icon: "error",
-      confirmButtonText: "Ok",
-    });
-    setFiles();
+  if (files) {
+    if (files.status == "error") {
+      Swal.fire({
+        title: "Error!",
+        text: user.message,
+        icon: "error",
+        confirmButtonText: "Ok",
+      });
+      setFiles();
+    }
   }
-}
 
   return (
     <div className="fileArea">
-      {files?.data.content.map((f) => <li className="fileItem"><div>
-        <img src={f.type=="Folder"?"/carpeta.png":"file.png"}></img>
-        <p>{f.fileName}</p>
-        </div>
-        </li>)}
+      {files?.data.content.map((f) => (
+        <li key="f.fileName" className="fileItem">
+          <div>
+            <img src={f.type == "Folder" ? "/carpeta.png" : "file.png"}></img>
+            <p>{f.fileName}</p>
+          </div>
+        </li>
+      ))}
     </div>
   );
 }
