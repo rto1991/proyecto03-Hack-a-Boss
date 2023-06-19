@@ -1,7 +1,7 @@
 const getDB = require("../../database/db");
 const jwt = require("jsonwebtoken");
 
-const loginUser = async (req, res) => {
+const loginUser = async (req, res, next) => {
   try {
     const connect = await getDB();
     const { mail, pwd } = req.body;
@@ -39,14 +39,14 @@ const loginUser = async (req, res) => {
       breadCrumb: user[0].breadCrumb,
     };
 
-//está el usuario activo?
-if (user[0].active == 0)
-{
-  return res.status(402).send({
-    status: "error",
-    message:"El usuario aún no está activo, por favor, valida tu usuario en el enlace que te hemos enviado al correo electrónico. Revisa tu carpeta SPAM"
-  })
-}
+    //está el usuario activo?
+    if (user[0].active == 0) {
+      return res.status(402).send({
+        status: "error",
+        message:
+          "El usuario aún no está activo, por favor, valida tu usuario en el enlace que te hemos enviado al correo electrónico. Revisa tu carpeta SPAM",
+      });
+    }
 
     //generar el token con el método "sign" el cuál recibe como argumentos un objeto con la info
     //una palabra secreta (nuestra/servidor) (.env SECRET_TOKEN) y el tiempo de vencimiento del token
@@ -54,7 +54,7 @@ if (user[0].active == 0)
     const token = jwt.sign(info, process.env.SECRET_TOKEN, { expiresIn: "1d" });
 
     //se lo envío al usuario
-    res.status(200).send({
+    return res.status(200).send({
       status: "ok",
       message: "Login efectuado correctamente",
       data: {
@@ -64,7 +64,7 @@ if (user[0].active == 0)
     });
     connect.release();
   } catch (error) {
-    res.status(200).send({
+    return res.status(200).send({
       status: "error",
       message: "Error interno del servidor",
       data: error,

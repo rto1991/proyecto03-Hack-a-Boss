@@ -29,7 +29,7 @@ function FileArea() {
   return (
     <div className="fileArea">
       {files?.data.content.map((f) => (
-        <li key="f.fileName" className="fileItem">
+        <li key={f.id} className="fileItem">
           <div>
             <img src={f.type == "Folder" ? "/carpeta.png" : "file.png"}></img>
             <p>{f.fileName}</p>
