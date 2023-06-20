@@ -1,10 +1,11 @@
 const getDB = require("../../database/db");
 
 const listDirectory = async (req, res) => {
+  let connect;
   try {
     const userInfo = req.userInfo;
     const idUser = userInfo.id;
-    const connect = await getDB();
+    connect = await getDB();
     //obtenemos el path actual donde se encuentra el usuario
     const [pathUser] = await connect.query(
       `
@@ -22,16 +23,20 @@ const listDirectory = async (req, res) => {
     let responseObject = {};
     responseObject = { currentDir: pathUser[0].filename, content: dirList };
 
-    return res.status(200).send({
+    res.status(200).send({
       status: "info",
       data: responseObject,
     });
   } catch (error) {
-    return res.status(500).send({
+    res.status(500).send({
       status: "error",
       message:
         "Error interno del servidor en la obtención del directorio " + error,
     });
+  } finally {
+    if (connect) {
+      connect.release();
+    }
   }
 };
 

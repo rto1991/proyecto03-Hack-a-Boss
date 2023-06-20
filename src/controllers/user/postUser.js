@@ -3,9 +3,10 @@ const fs = require("fs/promises");
 const path = require("path");
 
 const postUser = async (req, res) => {
+  let connect;
   try {
     let { mail, pwd, role, name, last_name } = req.body;
-    const connect = await getDB();
+    connect = await getDB();
 
     //la variable "role" especificará que tipo de usuario se crea, actualmente para el usuario ADMIN no hay lógica creada en el programa, por tanto
     //si se crea un usuario con el parémtro ROLE = 'admin' en el bojeto BODY de esta petición, se creará un usuario ADMIN pero no funcionará correctamente
@@ -22,10 +23,9 @@ const postUser = async (req, res) => {
     );
 
     if (userExist.length > 0) {
-      return res.status(409).send({
-        status: "error",
-        message: "El usuario ya existe",
-      });
+      const error = new Error("El usuario ya existe");
+      error.httpStatus = 409;
+      throw error;
     }
 
     /**preparo para mandar mail de confirmacion */
@@ -81,19 +81,15 @@ const postUser = async (req, res) => {
       userId,
     ]);
 
-    //liberamos la conexión usada
-    connect.release();
-
-    return res.status(200).send({
+    res.status(200).send({
       status: "ok",
       message: "Usuario creado correctamente",
     });
   } catch (error) {
-    res.status(400).send({
-      status: "error",
-      message: error,
-      data: error,
-    });
+    console.log(error);
+    next(error);
+  } finally {
+    connect.release();
   }
 };
 

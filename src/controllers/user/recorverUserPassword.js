@@ -1,10 +1,11 @@
 const getDB = require("../../database/db");
 
 const recorverUserPassword = async (req, res) => {
+  let connect;
   try {
-    const connect = await getDB();
+    connect = await getDB();
     const { mail } = req.body;
-    
+
     //comprobamos que el email exsita en la BD
     const [currentMail] = await connect.query(
       `
@@ -15,10 +16,11 @@ const recorverUserPassword = async (req, res) => {
       [mail]
     );
 
-    if (currentMail.length === 0)
-      return res.status(404).send(
-        {status: "error",
-        message: "No hay usuario registrado con ese email"});
+    if (currentMail.length === 0) {
+      const error = new Error("No hay usuario registrado con ese email");
+      error.httpStatus = 404;
+      throw error;
+    }
 
     //generamos un codigo de recuiperacion
     const { v4: uuidv4 } = require("uuid");
@@ -44,16 +46,16 @@ const recorverUserPassword = async (req, res) => {
     const sendMail = require("../../services/sendMail");
     await sendMail(mail, "Cambio de contraseña en MyCloudDrive", mailBody);
 
-    connect.release();
-
     res.status(200).send({
       status: "info",
-      message: "Hemos enviado un email a tu cuenta con un código de reseteo, úsalo en el siguiente formulario para poder establecer una nueva contraseña",
+      message:
+        "Hemos enviado un email a tu cuenta con un código de reseteo, úsalo en el siguiente formulario para poder establecer una nueva contraseña",
     });
   } catch (error) {
-    res.status(500).send(
-      {status: "error",
-      message: error});
+    console.log(error);
+    next(error);
+  } finally {
+    connect.release();
   }
 };
 

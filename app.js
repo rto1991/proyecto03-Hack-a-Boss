@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const express = require("express");
 const path = require("path");
 const morgan = require("morgan");
@@ -10,10 +12,21 @@ const staticDir = path.join(__dirname, "src/uploads");
 app.use(express.static(staticDir));
 
 //use middlewares
-app.use(cors());
+const corsOptions = {
+  origin: "*",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
+};
+app.use(cors(corsOptions));
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(fileUpolad());
+
+// app.use((req, res) => {
+//   console.log("----", req.headers);
+//   console.log("");
+// });
 
 //use routes
 const userRouter = require("./src/routes/userRoutes");

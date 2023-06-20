@@ -1,7 +1,7 @@
 "use strict";
+require("dotenv").config();
 
 const mysql = require("mysql2/promise");
-
 
 const { HOST, USER, PASSWORD, DATABASE } = process.env;
 

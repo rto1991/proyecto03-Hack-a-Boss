@@ -5,12 +5,13 @@ const fs = require("fs/promises");
 const path = require("path");
 
 const makeFolder = async (req, res) => {
+  let connect;
   try {
     //definimos las constantes necesarias para realizar la operación
     const userInfo = req.userInfo; //aquí nos traemos la info del usuario
     const idUser = userInfo.id;
     const folderName = req.params.folderName; //aquí nos traemos el nombre de carpeta deseado
-    const connect = await getDB();
+    connect = await getDB();
     const [user] = await connect.query(
       `SELECT u.*, f.fileName FROM users u INNER JOIN files f ON f.id = u.currentFolder_id WHERE u.id = ?`,
       [idUser]
@@ -29,10 +30,11 @@ const makeFolder = async (req, res) => {
 
     //no puede haber en el directorio actual una carpeta que se llame igual a la propuesta (ojo, si puede haber ese nombre en otros directorios, por eso el filtro en la tabla con 3 condicionantes)
     if (fileExists.length > 0) {
-      return res.status(500).send({
-        status: "error",
-        message: `El nombre de carpeta ${folderName} ya existe en el directorio actual`,
-      });
+      const error = new Error(
+        `El nombre de carpeta ${folderName} ya existe en el directorio actual`
+      );
+      error.httpStatus = 500;
+      throw error;
     }
 
     //creamos la carpeta en la BD
@@ -70,15 +72,15 @@ const makeFolder = async (req, res) => {
     );
 
     //enviamos respuesta de que la operación finalizó correctamente
-    return res.status(200).send({
+    res.status(200).send({
       status: "info",
       message: `El directorio ${folderName} se creó correctamente en la ruta ${user[0].fileName}`,
     });
   } catch (error) {
-    return res.status(500).send({
-      status: "error",
-      message: error,
-    });
+    console.log(erro);
+    next(error);
+  } finally {
+    connect.release();
   }
 };
 

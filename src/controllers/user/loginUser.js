@@ -2,15 +2,21 @@ const getDB = require("../../database/db");
 const jwt = require("jsonwebtoken");
 
 const loginUser = async (req, res, next) => {
+  console.log("Petición desde FRONT");
+  let connect;
   try {
-    const connect = await getDB();
+    connect = await getDB();
     const { mail, pwd } = req.body;
 
-    if (!mail || !pwd)
-      return res.status(404).send({
-        status: "error",
-        message: "Falta email o falta contraseña",
-      });
+    if (!mail || !pwd) {
+      //return res.status(404).send({
+      //  status: "error",
+      //  message: "Falta email o falta contraseña",
+      //});
+      const error = new Error("Falta email o falta contraseña");
+      error.httpStatus = 401;
+      throw error;
+    }
 
     //comprobar que exista el usuario
     const [user] = await connect.query(
@@ -23,11 +29,11 @@ const loginUser = async (req, res, next) => {
       [mail, pwd]
     );
 
-    if (user.length === 0)
-      return res.status(401).send({
-        status: "error",
-        message: "Email o password incorrectos",
-      });
+    if (user.length === 0) {
+      const error = new Error("Email o password incorrectos");
+      error.httpStatus = 401;
+      throw error;
+    }
 
     //jsonwebtoken
     const info = {
@@ -41,11 +47,11 @@ const loginUser = async (req, res, next) => {
 
     //está el usuario activo?
     if (user[0].active == 0) {
-      return res.status(402).send({
-        status: "error",
-        message:
-          "El usuario aún no está activo, por favor, valida tu usuario en el enlace que te hemos enviado al correo electrónico. Revisa tu carpeta SPAM",
-      });
+      const error = new Error(
+        "El usuario aún no está activo, por favor, valida tu usuario en el enlace que te hemos enviado al correo electrónico. Revisa tu carpeta SPAM"
+      );
+      error.httpStatus = 402;
+      throw error;
     }
 
     //generar el token con el método "sign" el cuál recibe como argumentos un objeto con la info
@@ -54,7 +60,7 @@ const loginUser = async (req, res, next) => {
     const token = jwt.sign(info, process.env.SECRET_TOKEN, { expiresIn: "1d" });
 
     //se lo envío al usuario
-    return res.status(200).send({
+    res.status(200).send({
       status: "ok",
       message: "Login efectuado correctamente",
       data: {
@@ -62,13 +68,13 @@ const loginUser = async (req, res, next) => {
       },
       info: info,
     });
-    connect.release();
   } catch (error) {
-    return res.status(200).send({
-      status: "error",
-      message: "Error interno del servidor",
-      data: error,
-    });
+    console.log(error);
+    next(error);
+  } finally {
+    if (connect) {
+      connect.release();
+    }
   }
 };
 
