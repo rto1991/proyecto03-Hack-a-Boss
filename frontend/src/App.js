@@ -13,14 +13,14 @@ function App() {
   return (
     <>
       <main>
-          <Header />
-          <Routes >
-            <Route path='/' element={<Auth />} />
-            <Route path='/login' element={<LoginPage />} />
-            <Route path='/loginuser' element={<Uservalidate />} />
-            <Route path='/user' element={<UserPage />} />
-            <Route path='*' element={<NotFound />} />
-          </Routes>
+        <Header />
+            <Routes >
+              <Route path='/' element={<Auth />} />
+                <Route path='/login' element={<LoginPage />} />
+              <Route path='/loginuser' element={<Uservalidate />} />
+              <Route path='/user' element={<UserPage />} />
+              <Route path='*' element={<NotFound />} />
+            </Routes>
       </main>
       <Footer />
       </>

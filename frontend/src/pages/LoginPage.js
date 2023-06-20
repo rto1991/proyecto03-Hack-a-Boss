@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { loginService } from '../services';
 import { AuthContext } from '../context/AuthContext';
 
@@ -54,7 +54,7 @@ const LoginPage = () => {
               onChange={(e) => setPassword(e.target.value)}
               />
             </label>
-            <li>Token: {token}</li>
+            {/* <li>Token: {token}</li> */}
             <button className='button'>Login</button>
             <p>
               Todavía no tienes cuenta?

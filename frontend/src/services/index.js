@@ -59,6 +59,7 @@ export const getUserData = async ({token, id}) => {
     });
 
     const json = await response.json();
+    console.log(id);
 
     if(!response.ok){
         throw new Error(json.message);
