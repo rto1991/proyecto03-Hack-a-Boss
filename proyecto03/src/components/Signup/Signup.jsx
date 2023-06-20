@@ -86,3 +86,5 @@ const Signup = () => {
 };
 
 export default Signup;
+
+// solucionado el error de signup
