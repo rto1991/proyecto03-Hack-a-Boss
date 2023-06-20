@@ -1,11 +1,10 @@
-import React, { useState } from "react";
-import { useContext } from "react";
+import React, { useState, useContext } from "react";
 
 const UserContext = React.createContext();
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
-  const [selectedLanguage, setSelectedLanguage] = useState("es"); // Agrega el estado para el idioma seleccionado
+  const [selectedLanguage, setSelectedLanguage] = useState("es");
 
   const betterSetUser = (data) => {
     setUser(data);
@@ -16,12 +15,10 @@ export const UserProvider = ({ children }) => {
     }
   };
 
-  // Agrega una función para cambiar el idioma seleccionado
   const changeLanguage = (language) => {
     setSelectedLanguage(language);
   };
 
-  // Agrega el estado del idioma seleccionado al contexto de usuario
   const userContextValue = [
     user,
     betterSetUser,

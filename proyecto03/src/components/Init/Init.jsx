@@ -45,11 +45,9 @@ const Init = () => {
           <button onClick={handleSignupClick}>
             <FormattedMessage id="initRegistrarse" />
           </button>
-          {showSignup && <Signup />}
           <button onClick={handleLoginClick}>
             <FormattedMessage id="initLogin" />
           </button>
-          {showLogin && <Login />}
         </form>
       )}
     </section>

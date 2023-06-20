@@ -3,15 +3,15 @@ import { FormattedMessage } from "react-intl";
 
 const Login = () => {
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
+    mail: "",
+    pwd: "",
   });
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     // Realizar la solicitud POST al servidor
-    await fetch("http://46.183.113.60/login", {
+    await fetch("http://localhost:3000/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -42,7 +42,7 @@ const Login = () => {
           id="email"
           name="email"
           value={formData.email}
-          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+          onChange={(e) => setFormData({ ...formData, mail: e.target.value })}
           required
         />
 
@@ -53,9 +53,7 @@ const Login = () => {
           id="password"
           name="password"
           value={formData.password}
-          onChange={(e) =>
-            setFormData({ ...formData, password: e.target.value })
-          }
+          onChange={(e) => setFormData({ ...formData, pwd: e.target.value })}
           required
         />
 
