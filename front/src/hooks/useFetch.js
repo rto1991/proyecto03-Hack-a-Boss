@@ -1,17 +1,29 @@
 import { useUser } from "../UserContext";
+import Swal from "sweetalert2";
 
 function useFetch() {
   const [user] = useUser();
   const get = async (url) => {
-    const headers = {};
-    if (user) headers.Authorization = `${user.data.token}`;
-    headers["Content-Type"] = "application/json";
-    const res = await fetch(url, { headers });
-    if (!res.ok) {
-      const mensaje = await res.json();
-      throw new Error("API error: " + mensaje.message);
+    try {
+      const headers = {};
+      if (user) headers.Authorization = `${user.data.token}`;
+      headers["Content-Type"] = "application/json";
+      const res = await fetch(url, { headers });
+      if (!res.ok) {
+        const mensaje = await res.json();
+        const error = new Error("API error:" + mensaje.message);
+        error.httpStatus = 500;
+        throw error;
+      }
+      return await res.json();
+    } catch (error) {
+      Swal.fire({
+        title: "Error!",
+        text: error,
+        icon: "error",
+        confirmButtonText: "Ok",
+      });
     }
-    return await res.json();
   };
   return get;
 }

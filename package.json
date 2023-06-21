@@ -18,6 +18,7 @@
     "fs-move": "^4.0.2",
     "jsonwebtoken": "^9.0.0",
     "mysql2": "^3.2.4",
+    "react-contexify": "^6.0.0",
     "sharp": "^0.32.1",
     "uuid": "^9.0.0"
   },

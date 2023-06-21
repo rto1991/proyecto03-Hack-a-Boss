@@ -22,7 +22,12 @@ function Dashboard() {
   return (
     <div className="mainApp">
       <TopNavBar></TopNavBar>
-      <FileSearch info={info} changeDir={changeDir} files={files}></FileSearch>
+      <FileSearch
+        setInfo={setInfo}
+        info={info}
+        changeDir={changeDir}
+        files={files}
+      ></FileSearch>
       <SideMenu
         dir={dir}
         makeFolder={makeFolder}

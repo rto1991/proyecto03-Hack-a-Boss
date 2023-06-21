@@ -2,17 +2,12 @@ import { TextField } from "@mui/material";
 import "./FileSearch.css";
 import Swal from "sweetalert2";
 
-function FileSearch({ files, changeDir, info }) {
+function FileSearch({ files, changeDir, info, setInfo }) {
   const upLevel = async () => {
     try {
       await changeDir("..p");
     } catch (error) {
-      Swal.fire({
-        title: "Error!",
-        text: error,
-        icon: "error",
-        confirmButtonText: "Ok",
-      });
+      console.log("error chachi");
     }
   };
 
