@@ -42,9 +42,9 @@ app.use((req, res) => {
   });
 });
 
+// Middleware para captura de errores
 app.use((error, req, res, next) => {
   console.error(error);
-
   res.status(error.httpStatus || 500).send({
     status: "error",
     message: error.message,

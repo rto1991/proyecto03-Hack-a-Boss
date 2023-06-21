@@ -1,11 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useUser } from "../../UserContext";
-import { useFilesActions } from "../../hooks/api";
 import "./FileArea.css";
+import Swal from "sweetalert2";
 
-function FileArea() {
+function FileArea({ dir, setFiles, files, changeDir }) {
   const [user] = useUser();
-  const { dir, files } = useFilesActions();
 
   useEffect(() => {
     async function getFiles() {
@@ -13,6 +12,15 @@ function FileArea() {
     }
     getFiles();
   }, []);
+
+  const dobleClickHandler = async (f) => {
+    if (f.type == "Folder") {
+      await changeDir(f.fileName);
+      await dir();
+    } else {
+      alert("Pinchaste en archivo");
+    }
+  };
 
   if (files) {
     if (files.status == "error") {
@@ -29,7 +37,11 @@ function FileArea() {
   return (
     <div className="fileArea">
       {files?.data.content.map((f) => (
-        <li key={f.id} className="fileItem">
+        <li
+          onDoubleClick={() => dobleClickHandler(f)}
+          key={f.id}
+          className="fileItem"
+        >
           <div>
             <img src={f.type == "Folder" ? "/carpeta.png" : "file.png"}></img>
             <p>{f.fileName}</p>

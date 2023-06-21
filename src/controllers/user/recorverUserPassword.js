@@ -1,6 +1,6 @@
 const getDB = require("../../database/db");
 
-const recorverUserPassword = async (req, res) => {
+const recorverUserPassword = async (req, res, next) => {
   let connect;
   try {
     connect = await getDB();

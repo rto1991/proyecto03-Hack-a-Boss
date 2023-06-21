@@ -1,21 +1,13 @@
-import { useFilesActions } from "../../hooks/api";
 import "./SideMenu.css";
 import Swal from "sweetalert2";
 
-function SideMenu() {
+function SideMenu({ makeFolder, dir, info, setInfo }) {
   function closeMenu() {
     document.getElementById("mySidenav").style.width = "0";
   }
 
-  const { makeFolder, dir } = useFilesActions();
-  const info = useFilesActions();
-
-  const crearCarpeta = (folderName) => {
-    makeFolder(folderName);
-  };
-
-  const getDir = async () => {
-    await dir();
+  const crearCarpeta = async (folderName) => {
+    await makeFolder(folderName);
   };
 
   const showInputModal = () => {
@@ -30,21 +22,26 @@ function SideMenu() {
       showLoaderOnConfirm: true,
       preConfirm: async (folderName) => {
         await crearCarpeta(folderName);
-        Swal.fire({
-          title: info.status + "!",
-          text: info.message,
-          icon: info.status,
-          confirmButtonText: "Ok",
-        });
+        closeMenu();
       },
       allowOutsideClick: () => !Swal.isLoading(),
     }).then((result) => {
       if (result.isConfirmed) {
-        closeMenu();
-        getDir();
       }
     });
   };
+
+  if (info) {
+    console.log(info);
+    Swal.fire({
+      title: info.status + "!",
+      text: info.message,
+      icon: info.status,
+      confirmButtonText: "Ok",
+    });
+    dir();
+    setInfo();
+  }
 
   return (
     <div id="mySidenav" className="sidenav">

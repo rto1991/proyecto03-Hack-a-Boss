@@ -1,5 +1,5 @@
 const getDB = require("../../database/db");
-const validateUser = async (req, res) => {
+const validateUser = async (req, res, next) => {
   let connect;
   try {
     connect = await getDB();

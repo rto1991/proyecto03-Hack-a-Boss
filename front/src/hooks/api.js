@@ -48,7 +48,7 @@ export function useUserActions() {
 export function useFilesActions() {
   const get = useFetch();
   const [files, setFiles] = useState();
-  const [info, setInfo] = useState([]);
+  const [info, setInfo] = useState();
   const dir = () => {
     get("http://localhost:3000/dir").then((data) => setFiles(data));
   };
@@ -59,5 +59,10 @@ export function useFilesActions() {
     );
   };
 
-  return { dir, makeFolder, info, files };
+  const changeDir = (folderName) => {
+    const url = "http://localhost:3000/cd/" + folderName;
+    get(url).then((data) => setInfo(data));
+  };
+
+  return { dir, makeFolder, info, files, setInfo, changeDir };
 }

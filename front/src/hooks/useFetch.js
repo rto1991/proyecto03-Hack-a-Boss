@@ -5,7 +5,8 @@ function useFetch() {
   const get = async (url) => {
     const headers = {};
     if (user) headers.Authorization = `${user.data.token}`;
-    const res = await fetch(url, {headers});
+    headers["Content-Type"] = "application/json";
+    const res = await fetch(url, { headers });
     if (!res.ok) {
       const mensaje = await res.json();
       throw new Error("API error: " + mensaje.message);

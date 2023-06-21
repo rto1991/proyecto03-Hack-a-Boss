@@ -2,7 +2,7 @@ const getDB = require("../../database/db");
 const fs = require("fs/promises");
 const path = require("path");
 
-const postUser = async (req, res) => {
+const postUser = async (req, res, next) => {
   let connect;
   try {
     let { mail, pwd, role, name, last_name } = req.body;
