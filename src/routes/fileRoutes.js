@@ -38,7 +38,7 @@ router.get("/rd/:directoryToDelete", isUser, deleteDirectory);
 router.get("/renameDirectory/:oldName/:newName", isUser, renameDirectory);
 router.post("/uploadFile", isUser, uploadFile);
 router.post("/moveFile", isUser, moveFile);
-router.delete("/file/:fileName", isUser, deleteFile);
+router.get("/file/:fileName", isUser, deleteFile);
 router.get("/download/:fileId", isUser, downloadfile);
 router.post("/renameFile", isUser, renameFile);
 router.get("/moveToTrash/:fileName", isUser, moveToTrash);

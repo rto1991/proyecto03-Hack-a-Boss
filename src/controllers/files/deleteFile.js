@@ -4,12 +4,13 @@ const getDB = require("../../database/db");
 const fs = require("fs/promises");
 const path = require("path");
 
-const deleteFile = async (req, res) => {
+const deleteFile = async (req, res, next) => {
+  let connect;
   try {
     // Definimos las constantes necesarias para realizar la operación
     const fileInfo = req.params; // Aquí nos traemos la información del archivo a borrar
     const idUser = req.userInfo.id;
-    const connect = await getDB();
+    connect = await getDB();
 
     const [user] = await connect.query(
       `SELECT u.*, f.fileName FROM users u INNER JOIN files f ON f.id = u.currentFolder_id WHERE u.id = ?`,
@@ -22,12 +23,13 @@ const deleteFile = async (req, res) => {
       [fileInfo.fileName, idUser, user[0].currentFolder_id]
     );
 
+    //SE ENTIENDE QUE ESTE ERROR NO VIENE A CUENTO YA QUE EN UNA INTERFAZ GRÁFICA ESTA SITUACIÓN NUNCA PODRÁ PRODUCIRSE
     if (file.length === 0) {
-      return res
-        .status(404)
-        .send(
-          `El archivo ${fileInfo.fileName} no se encuentra en el directorio "${user[0].fileName}"`
-        );
+      const error = new Error(
+        `El archivo ${fileInfo.fileName} no se encuentra en el directorio "${user[0].fileName}"`
+      );
+      error.httpStatus = 404;
+      throw error;
     }
 
     const filePath = file[0].filePath;
@@ -39,12 +41,15 @@ const deleteFile = async (req, res) => {
     await connect.query(`DELETE FROM files WHERE id = ?`, [file[0].id]);
 
     // Enviamos respuesta de que la operación finalizó correctamente
-    return res
-      .status(200)
-      .send(`El archivo ${fileInfo.fileName} se borró correctamente.`);
+    res.status(200).send({
+      status: "info",
+      message: `El archivo ${fileInfo.fileName} se borró correctamente.`,
+    });
   } catch (error) {
     console.log(error);
-    res.status(500).send(`Error al borrar el archivo ${fileInfo.fileName}.`);
+    next(error);
+  } finally {
+    connect.release();
   }
 };
 

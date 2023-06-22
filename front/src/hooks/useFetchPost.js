@@ -3,16 +3,19 @@ import { useUser } from "../UserContext";
 function useFetchPost() {
   const [user] = useUser();
   const post = async (url, body) => {
-    const isFormData = body instanceof FormData;
-
+    const isFormData = body.uploadedFile instanceof FormData;
+    console.log(isFormData, body.uploadedFile.get("uploadedFile"));
     const headers = {};
     if (user) headers.Authorization = `${user.data.token}`;
-    if (!isFormData) headers["Content-Type"] = "application/json";
+    !isFormData
+      ? (headers["Content-Type"] = "application/json")
+      : (headers["Content-type"] = body.uploadedFile.get("uploadedFile").type);
+    headers["content-length"] = `${body.uploadedFile.get("uploadedFile").size}`;
 
     const res = await fetch(url, {
       method: "POST",
       headers,
-      body: isFormData ? body : JSON.stringify(body),
+      body: isFormData ? body.uploadedFile : JSON.stringify(body),
     });
     if (!res.ok) {
       const mensaje = await res.json();

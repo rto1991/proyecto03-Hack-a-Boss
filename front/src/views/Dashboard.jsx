@@ -12,8 +12,20 @@ import { useFilesActions } from "../hooks/api";
 
 function Dashboard() {
   const [user] = useUser();
-  const { dir, setFiles, files, makeFolder, info, setInfo, changeDir } =
-    useFilesActions();
+  const {
+    dir,
+    setFiles,
+    files,
+    makeFolder,
+    info,
+    setInfo,
+    changeDir,
+    renameDir,
+    renameFile,
+    deleteDir,
+    deleteFile,
+    uploadFile,
+  } = useFilesActions();
 
   if (!user || user.status == "error") {
     return <Navigate to="/" />;
@@ -35,10 +47,16 @@ function Dashboard() {
         setInfo={setInfo}
       ></SideMenu>
       <FileArea
+        uploadFile={uploadFile}
+        deleteFile={deleteFile}
+        deleteDir={deleteDir}
+        makeFolder={makeFolder}
+        renameFile={renameFile}
         changeDir={changeDir}
         dir={dir}
         setFiles={setFiles}
         files={files}
+        renameDir={renameDir}
       ></FileArea>
       <Footer></Footer>
     </div>

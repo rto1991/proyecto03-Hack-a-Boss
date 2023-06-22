@@ -46,6 +46,7 @@ export function useUserActions() {
 }
 
 export function useFilesActions() {
+  const fetchPost = useFetchPost();
   const get = useFetch();
   const [files, setFiles] = useState();
   const [info, setInfo] = useState();
@@ -64,5 +65,44 @@ export function useFilesActions() {
     get(url).then((data) => setInfo(data));
   };
 
-  return { dir, makeFolder, info, files, setInfo, changeDir };
+  const renameDir = (folderName, newName) => {
+    get(
+      "http://localhost:3000/renameDirectory/" + folderName + "/" + newName
+    ).then((data) => setInfo(data));
+  };
+
+  const renameFile = (fileName, newFileName) => {
+    fetchPost("http://localhost:3000/renameFile", {
+      fileName,
+      newFileName,
+    }).then((data) => setInfo(data));
+  };
+
+  const deleteDir = (folderName) => {
+    get("http://localhost:3000/rd/" + folderName).then((data) => setInfo(data));
+  };
+
+  const deleteFile = (fileName) => {
+    get("http://localhost:3000/file/" + fileName).then((data) => setInfo(data));
+  };
+
+  const uploadFile = (uploadedFile) => {
+    fetchPost("http://localhost:3000/uploadFile", { uploadedFile }).then(
+      (data) => setInfo(data)
+    );
+  };
+
+  return {
+    dir,
+    makeFolder,
+    info,
+    files,
+    setInfo,
+    changeDir,
+    renameDir,
+    renameFile,
+    deleteDir,
+    deleteFile,
+    uploadFile,
+  };
 }
