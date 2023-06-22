@@ -68,11 +68,23 @@ function FileArea({
     });
 
     if (file) {
-      const fileToUpload = new FormData();
-      fileToUpload.append("uploadedFile", file, file.name);
-      console.log(fileToUpload);
-      await uploadFile(fileToUpload);
-      await dir();
+      const formData = new FormData();
+      formData.append("uploadedFile",file);
+      const myHeaders = new Headers();
+      myHeaders.append("authorization",user.data.token)
+      const requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: formData,
+        redirect: 'follow'
+      };
+      
+      fetch("http://localhost:3000/uploadFile", requestOptions)
+        .then(response => response.text())
+        .then(() => dir())
+        .catch(error => console.log('error', error));
+      //await uploadFile(formData);
+      
     }
   };
 

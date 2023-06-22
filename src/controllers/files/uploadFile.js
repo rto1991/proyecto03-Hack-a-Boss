@@ -44,8 +44,8 @@ const uploadFile = async (req, res, next) => {
 
     const [dirList] = await connect.query(
       `
-      SELECT f.filename as 'File Name', if(f.is_folder=1,'Folder','File') as Type FROM files f INNER JOIN users u ON f.parent_dir_id = u.currentFolder_id WHERE f.id_user = ?`,
-      [idUser]
+      SELECT f.filename, if(f.is_folder=1,'Folder','File') as Type FROM files f INNER JOIN users u ON f.parent_dir_id = u.currentFolder_id WHERE f.filename = ?`,
+      [uploadedFile.name]
     );
 
     if (dirList.length > 0) {

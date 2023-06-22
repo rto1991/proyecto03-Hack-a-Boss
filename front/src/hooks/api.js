@@ -86,8 +86,8 @@ export function useFilesActions() {
     get("http://localhost:3000/file/" + fileName).then((data) => setInfo(data));
   };
 
-  const uploadFile = (uploadedFile) => {
-    fetchPost("http://localhost:3000/uploadFile", { uploadedFile }).then(
+  const uploadFile = (file) => {
+    fetchPost("http://localhost:3000/uploadFile", {"uploadedFile": file }).then(
       (data) => setInfo(data)
     );
   };

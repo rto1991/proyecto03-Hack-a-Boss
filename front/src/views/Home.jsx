@@ -83,8 +83,9 @@ export default function Home() {
       event.preventDefault();
       await login(mail, pwd);
     } catch (error) {
+      console.log(error);
       Swal.fire({
-        title: "Error!",
+        title: "¡Error!",
         text: error,
         icon: "error",
         confirmButtonText: "Ok",
