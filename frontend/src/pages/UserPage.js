@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { registerUser } from '../services';
-// import Loading from '../Loading/Loading';
 
 const UserPage = () => {
 
@@ -47,7 +46,6 @@ const UserPage = () => {
   }
     return (
         <>
-        {/* <Suspense fallback={<Loading />}> */}
         <form onSubmit={handleForm}>
           <fieldset>
         <h2>Regístrate</h2>
@@ -144,7 +142,7 @@ const UserPage = () => {
             {error ? <p>{error}</p> : null}
           </fieldset>
         </form>
-        {/* </Suspense> */}
+
         </>
     );
 }

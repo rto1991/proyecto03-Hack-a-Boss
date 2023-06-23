@@ -1,13 +1,14 @@
-import React from 'react';
-import Header1 from './usersvalidates/Header1';
+import React, { useState } from 'react';
 import './usersvalidates/UserValidate.css';
+import Header1 from './usersvalidates/Header1';
 
 const Uservalidate = () => {
+
     return (
-        <div>
-            {/* <h1>Usuario validado con éxito</h1> */}
-            <Header1 className='headeruser'/>
-        </div>
+        <main>
+            <Header1 />
+
+        </main>
     );
 }
 

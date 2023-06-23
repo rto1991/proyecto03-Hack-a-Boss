@@ -9,6 +9,7 @@ const AuthProviderContext = ({ children }) => {
     // también validamos que si hay token se mantenga login, si no se desconecte.
 
     const [ token, setToken ] = useState(localStorage.getItem('token'));
+    const [ id, setId ] = useState(localStorage.getItem('id'));
     const [ user, setUser ] = useState(null);
 
     useEffect(() => {
@@ -16,30 +17,43 @@ const AuthProviderContext = ({ children }) => {
     }, [token]);
 
     useEffect(() => {
+        localStorage.setItem('id', id);
+    }, [id]);
+
+    // console.log(user);
+
+    useEffect(() => {
 
         const getMyUserData = async () => {
             try {
-                const info = await getUserData({token});
+                const info = await getUserData({ token, id });
                 setUser(info);
+                // console.log(info.id, info.token);
+                // console.log(info);
             } catch (error) {
                 logOut()
             }
         }
 
-        if(token) getMyUserData()
-    }, [token]);
+        if(token && id) getMyUserData()
+
+    }, [token, id]);
+
+    
 
     const login = (token) => {
         setToken(token);
+        // setId(id);
     }
 
     const logOut = () => {
         setToken('');
         setUser(null);
+        setId('');
     }
 
     return (
-    <AuthContext.Provider value={{token, user, login, logOut}} >{children}
+    <AuthContext.Provider value={{token, user, id, login, logOut}} >{children}
         </AuthContext.Provider>
     );
 }

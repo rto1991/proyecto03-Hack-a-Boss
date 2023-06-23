@@ -46,19 +46,42 @@ export const loginService = async ({email, password}) => {
     // }
 
     return json.token;
-        // json.id
     
+}
+
+export const loginServiceId = async ({email, password}) => {
+    const response = await fetch(`${process.env.REACT_APP_BACKEND}/login`, {
+        method: "POST",
+        body: JSON.stringify({ email, password }),
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+
+    const json = await response.json();
+
+    if(!response.ok){
+        throw new Error(json.message);
+    }
+
+    // if(response){
+    //     return json.message;
+    // }
+
+    return json.id;
     
 }
 
 export const getUserData = async ({token, id}) => {
-    const response = await fetch(`${process.env.REACT_APP_BACKEND}/login/${id}`, {
+    const response = await fetch(`${process.env.REACT_APP_BACKEND}/loginuser`, {
+        method: "GET",
         headers: {
             Authorization: token,
         },
     });
 
     const json = await response.json();
+    console.log(token);
     console.log(id);
 
     if(!response.ok){
@@ -66,4 +89,5 @@ export const getUserData = async ({token, id}) => {
     }
 
     return json.info;
+
 }
