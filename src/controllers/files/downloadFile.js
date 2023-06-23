@@ -1,16 +1,17 @@
 "use stricit";
 
 const getDB = require("../../database/db");
-const fs = require("fs/promises");
 const path = require("path");
+const fs = require("fs");
 const fileUrl = require("url");
 
-const downloadFile = async (req, res) => {
+const downloadFile = async (req, res, next) => {
+  let connect;
   try {
     const { fileId } = req.params; // obtenemos el id del archivo a descargar
     const userInfo = req.userInfo; // obtenemos la info del usuario
     const idUser = userInfo.id;
-    const connect = await getDB();
+    connect = await getDB();
 
     // buscamos el archivo en la base de datos
     const [file] = await connect.query(
@@ -20,7 +21,9 @@ const downloadFile = async (req, res) => {
 
     // verificamos si el archivo existe
     if (!file.length) {
-      return res.status(404).send("El archivo no existe");
+      const error = new Error("El archivo no existe");
+      error.httpStatus = 404;
+      throw error;
     }
 
     const filePath = file[0].filePath;
@@ -29,12 +32,23 @@ const downloadFile = async (req, res) => {
     // creamos un objeto con la URI para la descargar del fichero
     let downloadObject = {};
     downloadObject = {
-      "download url": fileUrl.pathToFileURL(path.join(filePath, fileName)),
+      downloadUrl: fileUrl.pathToFileURL(path.join(filePath, fileName)),
     };
-    res.status(200).send(downloadObject);
-    //res.download(path.join(filePath , fileName));
+
+    const stream = fs.createReadStream(path.join(filePath, fileName));
+    res.setHeader("Content-Type", "application/pdf");
+    res.setHeader("Content-Disposition", `inline; filename = "${fileName}"`);
+    stream.pipe(res);
+    console.log(stream);
+    res.status(200).send({
+      status: "info",
+      message: "Fichero descargado correctamente",
+    });
   } catch (error) {
     console.log(error);
+    next(error);
+  } finally {
+    connect.release();
   }
 };
 

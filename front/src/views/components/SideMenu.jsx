@@ -1,7 +1,10 @@
+import { useUser } from "../../UserContext";
 import "./SideMenu.css";
 import Swal from "sweetalert2";
 
 function SideMenu({ makeFolder, dir, info, setInfo }) {
+  const [user] = useUser();
+
   function closeMenu() {
     document.getElementById("mySidenav").style.width = "0";
   }
@@ -43,13 +46,39 @@ function SideMenu({ makeFolder, dir, info, setInfo }) {
     setInfo();
   }
 
+  const subirArchivo = async () => {
+    const { value: file } = await Swal.fire({
+      title: "Selecciona un fichero",
+      input: "file",
+    });
+
+    if (file) {
+      const formData = new FormData();
+      formData.append("uploadedFile", file);
+      const myHeaders = new Headers();
+      myHeaders.append("authorization", user.data.token);
+      const requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: formData,
+        redirect: "follow",
+      };
+
+      fetch("http://localhost:3000/uploadFile", requestOptions)
+        .then((response) => response.text())
+        .then(() => dir())
+        .catch((error) => console.log("error", error));
+    }
+    closeMenu();
+  };
+
   return (
     <div id="mySidenav" className="sidenav">
       <a onClick={() => closeMenu()} className="closebtn">
         &times;
       </a>
       <a onClick={() => showInputModal()}>📂 Crear carpeta</a>
-      <a href="#">📄 Subir archivo</a>
+      <a onClick={() => subirArchivo()}>📄 Subir archivo</a>
       <a href="#">⚙️ Editar perfil</a>
       <a href="#">🐜 Reportar un bug</a>
     </div>

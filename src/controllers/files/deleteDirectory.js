@@ -22,7 +22,7 @@ const deleteDirectory = async (req, res, next) => {
 
     //verificar si existe dentro de este directorio el directorio que queremos borrar
     const [fileExists] = await connect.query(
-      `SELECT fileName, filePath FROM files WHERE fileName = ? and id_user = ? and parent_dir_id = ?`,
+      `SELECT id, fileName, filePath FROM files WHERE fileName = ? and id_user = ? and parent_dir_id = ?`,
       [folderName, idUser, currentFolder_id]
     );
 
@@ -43,29 +43,27 @@ const deleteDirectory = async (req, res, next) => {
     );
 
     //borrar todo el contenido del directorio, esa acción se lleva a cabo si el directorio no está vacío
-    if (directoryEmtpy.length > 0) {
-      //borrado físico de todo el contenido de la carpeta que se va a borrar
-      for (const file of directoryEmtpy) {
-        await fs.rmdir(path.join(currentPath, file.fileName));
-      }
-      //si no hay error en el borrado físico, proceder a su eliminación de la BD
-      const [deleteDirectories] = await connect.query(
-        `
-        DELETE FROM files WHERE parent_dir_id = ?
-        `,
-        [fileExists[0].id]
-      );
-    }
+    const currentPath = user[0].filePath; //en la consulta primera que compruebo la ruta donde estoy, me traigo ya de paso el filePath de la tabla "files" enlazando por currentFolder_id de la tabla "users"
 
     //borramos la carpeta física del sistema de archivos
     const [fileToDelete] = await connect.query(
       `SELECT * FROM files WHERE fileName = ? and parent_dir_id = ?`,
       [folderName, currentFolder_id]
     );
-    const currentPath = user[0].filePath; //en la consulta primera que compruebo la ruta donde estoy, me traigo ya de paso el filePath de la tabla "files" enlazando por currentFolder_id de la tabla "users"
-    await fs.rmdir(path.join(currentPath, folderName));
+    await fs.rmdir(path.join(currentPath, folderName), {
+      recursive: true,
+      force: true,
+    });
 
     //Si el borrado de la carpeta en el filesystem no da error, continuar borrando de la BD
+    //borrado del contenido (si lo hubiere)
+    await connect.query(
+      `
+        DELETE FROM files WHERE parent_dir_id = ?
+        `,
+      [fileExists[0].id]
+    );
+
     await connect.query("DELETE FROM files WHERE id = ?", [fileToDelete[0].id]);
 
     //enviamos respuesta de que la operación finalizó correctamente

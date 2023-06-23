@@ -25,6 +25,7 @@ function Dashboard() {
     deleteDir,
     deleteFile,
     uploadFile,
+    downloadFile,
   } = useFilesActions();
 
   if (!user || user.status == "error") {
@@ -57,6 +58,8 @@ function Dashboard() {
         setFiles={setFiles}
         files={files}
         renameDir={renameDir}
+        downloadFile={downloadFile}
+        info={info}
       ></FileArea>
       <Footer></Footer>
     </div>

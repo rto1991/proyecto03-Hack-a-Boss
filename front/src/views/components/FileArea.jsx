@@ -25,6 +25,8 @@ function FileArea({
   deleteDir,
   deleteFile,
   uploadFile,
+  downloadFile,
+  info,
 }) {
   const [user] = useUser();
   const { show } = useContextMenu();
@@ -69,23 +71,25 @@ function FileArea({
 
     if (file) {
       const formData = new FormData();
-      formData.append("uploadedFile",file);
+      formData.append("uploadedFile", file);
       const myHeaders = new Headers();
-      myHeaders.append("authorization",user.data.token)
+      myHeaders.append("authorization", user.data.token);
       const requestOptions = {
-        method: 'POST',
+        method: "POST",
         headers: myHeaders,
         body: formData,
-        redirect: 'follow'
+        redirect: "follow",
       };
-      
+
       fetch("http://localhost:3000/uploadFile", requestOptions)
-        .then(response => response.text())
+        .then((response) => response.text())
         .then(() => dir())
-        .catch(error => console.log('error', error));
-      //await uploadFile(formData);
-      
+        .catch((error) => console.log("error", error));
     }
+  };
+
+  const bajarFichero = async (fileId) => {
+    await downloadFile(fileId);
   };
 
   function handleContextMenu(event, data) {
@@ -194,6 +198,9 @@ function FileArea({
       case "uploadFile":
         subirArchivo();
         break;
+      case "download":
+        bajarFichero(props.key.id);
+        break;
     }
   };
 
@@ -229,6 +236,9 @@ function FileArea({
         </Item>
         <Item id="delete" onClick={handleItemClick}>
           Eliminar
+        </Item>
+        <Item id="download" onClick={handleItemClick}>
+          Descargar
         </Item>
       </Menu>
 

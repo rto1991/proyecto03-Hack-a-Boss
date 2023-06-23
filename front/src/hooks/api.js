@@ -87,8 +87,14 @@ export function useFilesActions() {
   };
 
   const uploadFile = (file) => {
-    fetchPost("http://localhost:3000/uploadFile", {"uploadedFile": file }).then(
+    fetchPost("http://localhost:3000/uploadFile", { uploadedFile: file }).then(
       (data) => setInfo(data)
+    );
+  };
+
+  const downloadFile = (fileId) => {
+    get("http://localhost:3000/download/" + fileId).then((data) =>
+      setInfo(data)
     );
   };
 
@@ -104,5 +110,6 @@ export function useFilesActions() {
     deleteDir,
     deleteFile,
     uploadFile,
+    downloadFile,
   };
 }
