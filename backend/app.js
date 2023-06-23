@@ -20,12 +20,12 @@ app.use(cors());
 // Controllers user
 app.post('/user', newUser); // listo ✅ (Permite el registro del usuario - email en pruebas)
 app.post('/login', loginController); // listo ✅ (Permite el login de usuarios registrados con validación de token)
-app.get('/login/:id', validateUser, getUser); // (Permite la modificacion de los datos del usuario - de momento solo lista la información)
+app.get('/loginuser', validateUser, getUser); // (Permite la modificacion de los datos del usuario - de momento solo lista la información)
 
 // Controllers files
 app.get('/id/list', listFiles); // (Permite listar los archivos del usuario)
 app.post('/user/', validateUser, createFile, newCarpet); /* en vías de desarrollo */ // (Permite agregar archivos a usuarios validados)
-app.delete('/file/id', deleteFile); // (Permite eliminar los archivos del usuario)
+app.delete('/file/:id', deleteFile); // (Permite eliminar los archivos del usuario)
 app.post('/uploadFileAnonimous', uploadFileAnonimous); // Pemite la subida de ficheros mediante validación token sin registro
 
 // Middleware para rutas no definidas
@@ -33,7 +33,6 @@ app.use((req, res) => {
     res.status(404).send({
         status: 'error',
         message: 'Not found',
-
     });
 });
 

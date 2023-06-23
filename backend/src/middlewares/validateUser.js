@@ -4,6 +4,9 @@ const { newError } = require('../../helps');
 const jwt = require('jsonwebtoken');
 
 const validateUser = (req, res, next) => {
+
+    let connection;
+
     try {
         const { authorization } = req.headers;
 
@@ -27,6 +30,10 @@ const validateUser = (req, res, next) => {
         next();
     } catch (error) {
         next(error);
+    } finally{
+        if (connection) {
+            connection.release();
+        }
     }
 };
 
