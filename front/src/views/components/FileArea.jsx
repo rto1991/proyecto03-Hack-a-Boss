@@ -225,6 +225,11 @@ function FileArea({
     }
   }
 
+  if (info)
+  {
+    console.log(info);
+  }
+
   return (
     <div
       onContextMenu={(e) => handleContextMenu(e, { menu_id: MAIN_AREA_MENU })}

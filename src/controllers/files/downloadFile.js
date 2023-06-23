@@ -4,6 +4,8 @@ const getDB = require("../../database/db");
 const path = require("path");
 const fs = require("fs");
 const fileUrl = require("url");
+const cors = require("cors");
+const { Stream } = require("stream");
 
 const downloadFile = async (req, res, next) => {
   let connect;
@@ -35,15 +37,17 @@ const downloadFile = async (req, res, next) => {
       downloadUrl: fileUrl.pathToFileURL(path.join(filePath, fileName)),
     };
 
-    const stream = fs.createReadStream(path.join(filePath, fileName));
-    res.setHeader("Content-Type", "application/pdf");
-    res.setHeader("Content-Disposition", `inline; filename = "${fileName}"`);
-    stream.pipe(res);
-    console.log(stream);
-    res.status(200).send({
-      status: "info",
-      message: "Fichero descargado correctamente",
-    });
+    const pathToFile = fileUrl.pathToFileURL(path.join(filePath, fileName));
+
+    const fileContents = fs.readFileSync(path.join(filePath, fileName)); // read the file from the uploads folder with the path of the file in the database
+      const readStream = new Stream.PassThrough(); // create a stream to read the file
+      readStream.end(fileContents); // end the stream
+      res.set('Content-disposition', 'attachment; filename=' + fileName); // set the name of the file to download with the name of the file in the database
+      res.set('Content-Type', 'application/pdf');
+      const fileToSend = readStream.pipe(res); // pipe the stream to the response
+      return fileToSend;
+    
+
   } catch (error) {
     console.log(error);
     next(error);
