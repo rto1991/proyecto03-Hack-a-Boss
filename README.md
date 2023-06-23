@@ -19,7 +19,7 @@ Se trabajo entre algunas otras en las siguientes mejoras:
 
     - Se debe configurar el cors como dependencia y variable en el back.
     
-    - Se debe registrar la variable en el fichero .env con la con el localhost apuntando a  nuestro Backend.
+    - Se debe registrar la variable en el fichero .env con el localhost apuntando a  nuestro Backend.
     
     - Se amplificaron los campos permitiendo así mayor información detallada del usuario en su perfil.
 
@@ -32,7 +32,7 @@ Se trabajo entre algunas otras en las siguientes mejoras:
 
     Información adicional:
     
-        - Se utiliza los stados para la modificación constante de los datos en las distintas webs navegadas.
+        - Se utiliza los estados para la modificación constante de los datos en las distintas webs navegadas.
         
             ☎︎ useNavigate
             ☏ useState
