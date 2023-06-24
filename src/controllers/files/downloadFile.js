@@ -39,14 +39,14 @@ const downloadFile = async (req, res, next) => {
 
     const pathToFile = fileUrl.pathToFileURL(path.join(filePath, fileName));
 
-    const fileContents = fs.readFileSync(path.join(filePath, fileName)); // read the file from the uploads folder with the path of the file in the database
-      const readStream = new Stream.PassThrough(); // create a stream to read the file
-      readStream.end(fileContents); // end the stream
-      res.set('Content-disposition', 'attachment; filename=' + fileName); // set the name of the file to download with the name of the file in the database
-      res.set('Content-Type', 'application/pdf');
-      const fileToSend = readStream.pipe(res); // pipe the stream to the response
-      return fileToSend;
-    
+
+    fs.readFile(pathToFile, (err,data) => {
+      if (err) {
+        return next(err);
+      }
+      res.setHeader('Content-Disposition','attachment: filename="'+fileName+'"');
+      res.send(data);
+    })
 
   } catch (error) {
     console.log(error);

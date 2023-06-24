@@ -10,6 +10,7 @@ import {
   useContextMenu,
 } from "react-contexify";
 import "react-contexify/ReactContexify.css";
+import fileSaver from "file-saver";
 
 const MENU_ID = "contextMenu1";
 const MAIN_AREA_MENU = "mainAreaMenu";
@@ -88,8 +89,8 @@ function FileArea({
     }
   };
 
-  const bajarFichero = async (fileId) => {
-    await downloadFile(fileId);
+  const bajarFichero = async (fileId, fileName) => {
+    await downloadFile(fileId, fileName);
   };
 
   function handleContextMenu(event, data) {
@@ -199,7 +200,7 @@ function FileArea({
         subirArchivo();
         break;
       case "download":
-        bajarFichero(props.key.id);
+        bajarFichero(props.key.id, props.key.fileName);
         break;
     }
   };
@@ -223,11 +224,6 @@ function FileArea({
       });
       setFiles();
     }
-  }
-
-  if (info)
-  {
-    console.log(info);
   }
 
   return (

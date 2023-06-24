@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useUser } from "../UserContext";
 import useFetch from "./useFetch";
 import useFetchPost from "./useFetchPost";
+import useFileDownload from "./useFileDownload";
 
 export function useUserActions() {
   const fetchPost = useFetchPost();
@@ -48,6 +49,7 @@ export function useUserActions() {
 export function useFilesActions() {
   const fetchPost = useFetchPost();
   const get = useFetch();
+  const getFile = useFileDownload();
   const [files, setFiles] = useState();
   const [info, setInfo] = useState();
   const dir = () => {
@@ -92,9 +94,9 @@ export function useFilesActions() {
     );
   };
 
-  const downloadFile = (fileId) => {
-    get("http://localhost:3000/download/" + fileId).then((data) =>
-      setInfo(data)
+  const downloadFile = (fileId, fileName) => {
+    getFile("http://localhost:3000/download/" + fileId, fileName).then((data) =>
+      data
     );
   };
 
