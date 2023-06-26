@@ -200,7 +200,12 @@ function FileArea({
         subirArchivo();
         break;
       case "download":
-        bajarFichero(props.key.id, props.key.fileName);
+        bajarFichero(
+          props.key.id,
+          props.key.type == "Folder"
+            ? props.key.fileName + ".tar"
+            : props.key.fileName
+        );
         break;
     }
   };

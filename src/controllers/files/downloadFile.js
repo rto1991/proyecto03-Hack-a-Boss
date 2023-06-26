@@ -30,7 +30,7 @@ const downloadFile = async (req, res, next) => {
     }
 
     const filePath = file[0].filePath;
-    const fileName = file[0].fileName;
+    let fileName = file[0].fileName;
 
     // creamos un objeto con la URI para la descargar del fichero
     let downloadObject = {};
@@ -39,38 +39,46 @@ const downloadFile = async (req, res, next) => {
     };
 
     const pathToFile = fileUrl.pathToFileURL(path.join(filePath, fileName));
-
     let finalPath = pathToFile;
+    let compressFileName = fileName + ".tar";
 
     if (file[0].is_folder == 1) {
+      finalPath = fileUrl.pathToFileURL(path.join(filePath, compressFileName));
       //comprimir carpeta y enviar ZIP
       compressing.tar
         .compressDir(
           path.join(filePath, fileName),
-          path.join(filePath, fileName + ".tar")
+          path.join(filePath, compressFileName)
         )
         .then(() => {
-          console.log(
-            fileUrl.pathToFileURL(path.join(filePath, fileName + ".tar"))
-          );
-          finalPath = fileUrl.pathToFileURL(
-            path.join(filePath, fileName + ".tar")
-          );
+          fs.readFile(finalPath, (err, data) => {
+            console.log("Intento leer", finalPath);
+            console.log("fichero", compressFileName);
+            if (err) {
+              return next(err);
+            }
+            res.setHeader(
+              "Content-Disposition",
+              'attachment: filename="' + compressFileName + '"'
+            );
+            res.send(data);
+          });
         })
         .catch((err) => {
           throw err;
         });
+    } else {
+      fs.readFile(pathToFile, (err, data) => {
+        if (err) {
+          return next(err);
+        }
+        res.setHeader(
+          "Content-Disposition",
+          'attachment: filename="' + fileName + '"'
+        );
+        res.send(data);
+      });
     }
-    fs.readFile(finalPath, (err, data) => {
-      if (err) {
-        return next(err);
-      }
-      res.setHeader(
-        "Content-Disposition",
-        'attachment: filename="' + fileName + '"'
-      );
-      res.send(data);
-    });
   } catch (error) {
     console.log(error);
     next(error);
