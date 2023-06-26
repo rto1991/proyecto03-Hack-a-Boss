@@ -17,6 +17,8 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Swal from "sweetalert2";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import "./Home.css";
+import LanguageSelector from "./LanguageSelector";
+import { FormattedMessage } from "react-intl";
 
 function Copyright(props) {
   return (
@@ -49,36 +51,34 @@ export default function Home() {
   const { regCode } = useParams();
 
   //retrieve saved data from local storage if exists
-  
-  useEffect(() =>{
-    const localData = JSON.parse(localStorage.getItem("data"))
+
+  useEffect(() => {
+    const localData = JSON.parse(localStorage.getItem("data"));
     if (localData) {
       setEmail(localData.email);
       setPassword(localData.password);
       setSaveCredentials(true);
     }
-  },[])
+  }, []);
 
- 
- const validar = async (regCode) => {
-  try {
-   await validate(regCode);
-  } catch (error) {
-    Swal.fire({
-      title: "Error!",
-      text: error,
-      icon: "error",
-      confirmButtonText: "Ok",
-    });
-    logout();
+  const validar = async (regCode) => {
+    try {
+      await validate(regCode);
+    } catch (error) {
+      Swal.fire({
+        title: "Error!",
+        text: error,
+        icon: "error",
+        confirmButtonText: "Ok",
+      });
+      logout();
+    }
+  };
+
+  if (regCode) {
+    validar(regCode);
+    navigate("/");
   }
- }
-
- if (regCode){
-  validar(regCode)
-  navigate('/');
- }
-
 
   const handleSubmit = async (event) => {
     try {
@@ -91,7 +91,7 @@ export default function Home() {
         icon: "error",
         confirmButtonText: "Ok",
       });
-      navigate('/');
+      navigate("/");
       logout();
     }
   };
@@ -105,17 +105,15 @@ export default function Home() {
         confirmButtonText: "Ok",
       });
       logout();
-    } else if (user.status =="ok") {
+    } else if (user.status == "ok") {
       //login con éxito
-      if (saveCredentials){
+      if (saveCredentials) {
         const savedData = {
           email: mail,
-          password: pwd
-        }
-        localStorage.setItem("data",JSON.stringify(savedData))
-      }
-      else
-      {
+          password: pwd,
+        };
+        localStorage.setItem("data", JSON.stringify(savedData));
+      } else {
         localStorage.clear();
       }
       let timerInterval;
@@ -136,9 +134,7 @@ export default function Home() {
           navigate("/dashboard");
         }
       });
-      
-    } else
-    {
+    } else {
       Swal.fire({
         title: "Info!",
         text: user.message,
@@ -165,8 +161,9 @@ export default function Home() {
             <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
               <LockOutlinedIcon />
             </Avatar>
+            <LanguageSelector />
             <Typography component="h1" variant="h5">
-              Bienvenidos a MyCloudDrive
+              <FormattedMessage id="cabeceraSaludo" />
             </Typography>
             <Box
               component="form"
@@ -199,7 +196,13 @@ export default function Home() {
                 autoComplete="current-password"
               />
               <FormControlLabel
-                control={<Checkbox value="remember" checked={saveCredentials} color="primary" />}
+                control={
+                  <Checkbox
+                    value="remember"
+                    checked={saveCredentials}
+                    color="primary"
+                  />
+                }
                 label="Recuerdame en este ordenador"
                 onChange={(e) => setSaveCredentials(e.target.checked)}
               />
@@ -214,12 +217,12 @@ export default function Home() {
               <Grid container>
                 <Grid item xs>
                   <Link href="/passwordRecovery" variant="body2">
-                    ¿Olvidaste la contraseña?
+                    <FormattedMessage id="cabeceraOlvidar" />
                   </Link>
                 </Grid>
                 <Grid item>
                   <Link href="/singin" variant="body2">
-                    {"¿No tienes cuenta? Créate una"}
+                    {<FormattedMessage id="cabeceraNuevaCuenta" />}
                   </Link>
                 </Grid>
               </Grid>
