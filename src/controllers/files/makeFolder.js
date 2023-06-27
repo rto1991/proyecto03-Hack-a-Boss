@@ -4,7 +4,7 @@ const getDB = require("../../database/db");
 const fs = require("fs/promises");
 const path = require("path");
 
-const makeFolder = async (req, res) => {
+const makeFolder = async (req, res, next) => {
   let connect;
   try {
     //definimos las constantes necesarias para realizar la operación
@@ -77,7 +77,7 @@ const makeFolder = async (req, res) => {
       message: `El directorio ${folderName} se creó correctamente en la ruta ${user[0].fileName}`,
     });
   } catch (error) {
-    console.log(erro);
+    console.log(error);
     next(error);
   } finally {
     connect.release();
