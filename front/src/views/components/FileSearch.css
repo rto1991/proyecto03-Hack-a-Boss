@@ -38,3 +38,12 @@
   background-color: aqua;
   font-size: 1rem;
 }
+
+.btnBuscar {
+  cursor: pointer;
+  padding: 5px;
+}
+
+.btnBuscar:hover {
+  background-color: lightblue;
+}

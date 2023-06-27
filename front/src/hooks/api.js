@@ -95,8 +95,8 @@ export function useFilesActions() {
   };
 
   const downloadFile = (fileId, fileName) => {
-    getFile("http://localhost:3000/download/" + fileId, fileName).then((data) =>
-      data
+    getFile("http://localhost:3000/download/" + fileId, fileName).then(
+      (data) => data
     );
   };
 
@@ -113,5 +113,6 @@ export function useFilesActions() {
     deleteFile,
     uploadFile,
     downloadFile,
+    setFiles,
   };
 }

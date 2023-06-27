@@ -2,15 +2,8 @@ import { useEffect } from "react";
 import { useUser } from "../../UserContext";
 import "./FileArea.css";
 import Swal from "sweetalert2";
-import {
-  Menu,
-  Item,
-  Separator,
-  Submenu,
-  useContextMenu,
-} from "react-contexify";
+import { Menu, Item, useContextMenu } from "react-contexify";
 import "react-contexify/ReactContexify.css";
-import fileSaver from "file-saver";
 
 const MENU_ID = "contextMenu1";
 const MAIN_AREA_MENU = "mainAreaMenu";
@@ -200,6 +193,26 @@ function FileArea({
         subirArchivo();
         break;
       case "download":
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "top-right",
+          iconColor: "white",
+          customClass: {
+            popup: "colored-toast",
+          },
+          showConfirmButton: false,
+          timer: 3500,
+          timerProgressBar: true,
+        });
+
+        Toast.fire({
+          icon: "success",
+          title:
+            props.key.type == "Folder"
+              ? "Comprimiendo y descargando carpeta"
+              : "Descargando tu archivo",
+        });
+
         bajarFichero(
           props.key.id,
           props.key.type == "Folder"

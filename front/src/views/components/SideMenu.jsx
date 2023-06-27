@@ -35,13 +35,23 @@ function SideMenu({ makeFolder, dir, info, setInfo }) {
   };
 
   if (info) {
-    console.log(info);
-    Swal.fire({
-      title: info.status + "!",
-      text: info.message,
-      icon: info.status,
-      confirmButtonText: "Ok",
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "top-right",
+      iconColor: "white",
+      customClass: {
+        popup: "colored-toast",
+      },
+      showConfirmButton: false,
+      timer: 1500,
+      timerProgressBar: true,
     });
+
+    Toast.fire({
+      icon: "success",
+      title: "Directorio cambiado con éxito",
+    });
+
     dir();
     setInfo();
   }

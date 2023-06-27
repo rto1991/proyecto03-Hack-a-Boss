@@ -36,6 +36,8 @@ function Dashboard() {
     <div className="mainApp">
       <TopNavBar></TopNavBar>
       <FileSearch
+        dir={dir}
+        setFiles={setFiles}
         setInfo={setInfo}
         info={info}
         changeDir={changeDir}

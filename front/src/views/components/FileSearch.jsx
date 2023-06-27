@@ -1,14 +1,33 @@
 import { TextField } from "@mui/material";
 import "./FileSearch.css";
 import Swal from "sweetalert2";
+import { useState } from "react";
 
-function FileSearch({ files, changeDir, info, setInfo }) {
+function FileSearch({ files, changeDir, info, setInfo, setFiles, dir }) {
+  const [searchString, setSearchString] = useState();
   const upLevel = async () => {
     try {
       await changeDir("..p");
     } catch (error) {
       console.log("error chachi");
     }
+  };
+
+  const searchFiles = () => {
+    if (searchString == "") {
+      dir();
+    }
+    const newFiles = {
+      status: "info",
+      data: {
+        content: files.data.content?.filter(
+          (e) =>
+            e.fileName.toUpperCase().indexOf(searchString.toUpperCase()) >= 0
+        ),
+        currentDir: "/",
+      },
+    };
+    setFiles(newFiles);
   };
 
   if (info) {
@@ -26,6 +45,7 @@ function FileSearch({ files, changeDir, info, setInfo }) {
     <>
       <div className="searchForm">
         <TextField
+          onChange={(e) => setSearchString(e.target.value)}
           margin="normal"
           required
           fullWidth
@@ -33,7 +53,13 @@ function FileSearch({ files, changeDir, info, setInfo }) {
           label="Buscar un archivo"
           type="text"
         ></TextField>
-        <img src="/lupa.png" alt="Salir" title="Salir" />
+        <img
+          className="btnBuscar"
+          onClick={() => searchFiles()}
+          src="/lupa.png"
+          alt="Buscar"
+          title="Buscar"
+        />
       </div>
       <div className="breadCrumb">
         <p>Estás en: {files?.data.currentDir}</p>

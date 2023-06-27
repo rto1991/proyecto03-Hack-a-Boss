@@ -134,11 +134,25 @@ export default function Home() {
         }
       });
     } else {
+      let timerInterval;
       Swal.fire({
         title: "Info!",
+        timer: 5000,
+        timerProgressBar: true,
         text: user.message,
         icon: "info",
         confirmButtonText: "Ok",
+        didOpen: () => {
+          Swal.showLoading();
+          timerInterval = setInterval(() => {}, 100);
+        },
+        willClose: () => {
+          clearInterval(timerInterval);
+        },
+      }).then((result) => {
+        /* Read more about handling dismissals below */
+        if (result.dismiss === Swal.DismissReason.timer) {
+        }
       });
       logout();
     }
