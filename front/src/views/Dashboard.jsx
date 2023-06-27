@@ -8,9 +8,26 @@ import SideMenu from "./components/SideMenu";
 import FileArea from "./components/FileArea";
 import Footer from "./components/Footer";
 import FileSearch from "./components/FileSearch";
+import { useFilesActions } from "../hooks/api";
 
 function Dashboard() {
   const [user] = useUser();
+  const {
+    dir,
+    setFiles,
+    files,
+    makeFolder,
+    info,
+    setInfo,
+    changeDir,
+    renameDir,
+    renameFile,
+    deleteDir,
+    deleteFile,
+    uploadFile,
+    downloadFile,
+    moveFile,
+  } = useFilesActions();
 
   if (!user || user.status == "error") {
     return <Navigate to="/" />;
@@ -19,9 +36,35 @@ function Dashboard() {
   return (
     <div className="mainApp">
       <TopNavBar></TopNavBar>
-      <FileSearch></FileSearch>
-      <SideMenu></SideMenu>
-      <FileArea></FileArea>
+      <FileSearch
+        dir={dir}
+        setFiles={setFiles}
+        setInfo={setInfo}
+        info={info}
+        changeDir={changeDir}
+        files={files}
+      ></FileSearch>
+      <SideMenu
+        dir={dir}
+        makeFolder={makeFolder}
+        info={info}
+        setInfo={setInfo}
+      ></SideMenu>
+      <FileArea
+        moveFile={moveFile}
+        uploadFile={uploadFile}
+        deleteFile={deleteFile}
+        deleteDir={deleteDir}
+        makeFolder={makeFolder}
+        renameFile={renameFile}
+        changeDir={changeDir}
+        dir={dir}
+        setFiles={setFiles}
+        files={files}
+        renameDir={renameDir}
+        downloadFile={downloadFile}
+        info={info}
+      ></FileArea>
       <Footer></Footer>
     </div>
   );

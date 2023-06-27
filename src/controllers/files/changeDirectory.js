@@ -11,22 +11,22 @@ Middlewares usados: isUser (comprueba si el usuario está logueado y tiene un to
 */
 
 const getDB = require("../../database/db");
-
-const changeDirectory = async (req, res) => {
+const changeDirectory = async (req, res, next) => {
+  let connect;
   try {
     const userInfo = req.userInfo;
     const { destinationDirectory } = req.params;
     const idUser = userInfo.id;
-    const connect = await getDB();
+    connect = await getDB();
     //obtenemos el path actual donde se encuentra el usuario
     const [pathUser] = await connect.query(
       `
-    SELECT f.id, f.filePath, f.parent_dir_id FROM users u INNER JOIN files f ON f.id = u.currentFolder_id WHERE u.id = ?`,
+    SELECT f.id, f.filePath, f.fileName, f.parent_dir_id FROM users u INNER JOIN files f ON f.id = u.currentFolder_id WHERE u.id = ?`,
       [idUser]
     );
 
     //verificamos si en el path actual del usuario existe la carpeta a la que nos queremos mover
-    if (destinationDirectory != "..") {
+    if (destinationDirectory != "..p") {
       //queremos movernos a un directorio, obtener lista de carpetas en este directorio
       const [dirList] = await connect.query(
         `
@@ -36,11 +36,11 @@ const changeDirectory = async (req, res) => {
 
       if (dirList.length === 0) {
         //no existe el directorio, informar al FRONT
-        res
-          .status(404)
-          .send(
-            `No existe la carpeta ${destinationDirectory} en el directorio actual`
-          );
+        const error = new Error(
+          `No existe la carpeta ${destinationDirectory} en el directorio actual`
+        );
+        error.httpStatus = 404;
+        throw error;
       } else {
         //el directorio existe, hacer el "change" hacia él en la BD (en sistema de ficheros no hay que hacer nada)
         //esta consulta extrae un solo registro, la carpeta a la que nos vamos a cambiar
@@ -57,11 +57,10 @@ const changeDirectory = async (req, res) => {
           [selectedDir[0].id, idUser]
         );
         //informamos al front
-        res
-          .status(200)
-          .send(
-            `Directorio cambiado correctamente, directorio actual "${selectedDir[0].filename}"`
-          );
+        res.status(200).send({
+          status: "info",
+          message: `Directorio cambiado correctamente, directorio actual "${selectedDir[0].filename}"`,
+        });
       }
     } else {
       //usamos el parámetro ".." que hace subir un nivel
@@ -82,22 +81,24 @@ const changeDirectory = async (req, res) => {
           `,
           [pathUser[0].parent_dir_id]
         );
-        res
-          .status(200)
-          .send(
-            `Directorio cambiado correctamente, directorio actual "${selectedDir[0].filename}"`
-          );
+        res.status(200).send({
+          status: "info",
+          message: `Directorio cambiado correctamente, directorio actual "${selectedDir[0].filename}"`,
+        });
       } else {
         //estamos en el top level, informar de que no puede retroceder más
-        res
-          .status(404)
-          .send(
-            `No es posible subir más niveles, estás en tu carpeta raiz ahora mismo`
-          );
+        const error = new Error(
+          `No es posible subir más niveles, estás en tu carpeta raiz ahora mismo`
+        );
+        error.httpStatus = 404;
+        throw error;
       }
     }
   } catch (error) {
     console.log(error);
+    next(error);
+  } finally {
+    connect.release();
   }
 };
 

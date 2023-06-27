@@ -7,8 +7,9 @@ import {
 import Home from "./views/Home";
 import Dashboard from "./views/Dashboard";
 import SingIn from "./views/SingIn";
-import PasswordRecovery from './views/PasswordRecovery';
+import PasswordRecovery from "./views/PasswordRecovery";
 import PasswordChange from "./views/PasswordChange";
+// import TrashPage from "./views/components/TrashPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -19,7 +20,7 @@ const router = createBrowserRouter(
       <Route path="/validate/:regCode" element={<Home />} />
       <Route path="/passwordRecovery" element={<PasswordRecovery />} />
       <Route path="/passwordChange" element={<PasswordChange />} />
-      
+      {/* <Route path="/trash" component={TrashPage} /> */}
     </>
   )
 );

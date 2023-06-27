@@ -15,10 +15,8 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Swal from "sweetalert2";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "./Home.css";
-import LanguageSelector from "./LanguageSelector";
-import { FormattedMessage } from "react-intl";
 
 function Copyright(props) {
   return (
@@ -85,8 +83,9 @@ export default function Home() {
       event.preventDefault();
       await login(mail, pwd);
     } catch (error) {
+      console.log(error);
       Swal.fire({
-        title: "Error!",
+        title: "¡Error!",
         text: error,
         icon: "error",
         confirmButtonText: "Ok",
@@ -135,11 +134,25 @@ export default function Home() {
         }
       });
     } else {
+      let timerInterval;
       Swal.fire({
         title: "Info!",
+        timer: 5000,
+        timerProgressBar: true,
         text: user.message,
         icon: "info",
         confirmButtonText: "Ok",
+        didOpen: () => {
+          Swal.showLoading();
+          timerInterval = setInterval(() => {}, 100);
+        },
+        willClose: () => {
+          clearInterval(timerInterval);
+        },
+      }).then((result) => {
+        /* Read more about handling dismissals below */
+        if (result.dismiss === Swal.DismissReason.timer) {
+        }
       });
       logout();
     }
@@ -161,9 +174,8 @@ export default function Home() {
             <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
               <LockOutlinedIcon />
             </Avatar>
-            <LanguageSelector />
             <Typography component="h1" variant="h5">
-              <FormattedMessage id="cabeceraSaludo" />
+              Bienvenidos a MyCloudDrive
             </Typography>
             <Box
               component="form"
@@ -217,12 +229,12 @@ export default function Home() {
               <Grid container>
                 <Grid item xs>
                   <Link href="/passwordRecovery" variant="body2">
-                    <FormattedMessage id="cabeceraOlvidar" />
+                    ¿Olvidaste la contraseña?
                   </Link>
                 </Grid>
                 <Grid item>
                   <Link href="/singin" variant="body2">
-                    {<FormattedMessage id="cabeceraNuevaCuenta" />}
+                    {"¿No tienes cuenta? Créate una"}
                   </Link>
                 </Grid>
               </Grid>

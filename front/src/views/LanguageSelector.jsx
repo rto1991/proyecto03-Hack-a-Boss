@@ -25,9 +25,6 @@ function LanguageSelector() {
       messages={messages[selectedLanguage]}
     >
       <section className="language-selector">
-        <label htmlFor="language" className="language-selector__label">
-          Select Language:
-        </label>
         <select
           id="language"
           value={selectedLanguage}
@@ -35,7 +32,7 @@ function LanguageSelector() {
           className="language-selector__select"
         >
           <option value="es">
-            <img src="../../front/public/espana.png" alt="Español" />
+            <img src="./espana.png" alt="Español" />
           </option>
           <option value="en">EN</option>
           <option value="it">IT</option>

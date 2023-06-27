@@ -4,10 +4,14 @@ function useFetchPost() {
   const [user] = useUser();
   const post = async (url, body) => {
     const isFormData = body instanceof FormData;
-
+    console.log(isFormData, body);
     const headers = {};
     if (user) headers.Authorization = `${user.data.token}`;
-    if (!isFormData) headers["Content-Type"] = "application/json";
+    if (!isFormData) {
+      headers["Content-Type"] = "application/json";
+    } else {
+      headers["Content-type"] = "multipart/form-data";
+    }
 
     const res = await fetch(url, {
       method: "POST",
