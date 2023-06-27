@@ -21,6 +21,7 @@ function FileArea({
   uploadFile,
   downloadFile,
   info,
+  moveFile,
 }) {
   const [user] = useUser();
   const { show } = useContextMenu();
@@ -31,6 +32,11 @@ function FileArea({
     }
     getFiles();
   }, []);
+
+  async function moverFichero(fileId, destinationFolderName) {
+    await moveFile(fileId, destinationFolderName);
+    await dir();
+  }
 
   async function renameDirectory(oldName, newName) {
     await renameDir(oldName, newName);
@@ -220,6 +226,25 @@ function FileArea({
             : props.key.fileName
         );
         break;
+      case "move":
+        Swal.fire({
+          title: "Especifica el nombre de la carpeta de destino",
+          input: "text",
+          inputAttributes: {
+            autocapitalize: "off",
+          },
+          showCancelButton: true,
+          confirmButtonText: "Mover fichero",
+          showLoaderOnConfirm: true,
+          preConfirm: async (folderName) => {
+            await moverFichero(props.key.id, folderName);
+          },
+          allowOutsideClick: () => !Swal.isLoading(),
+        }).then((result) => {
+          if (result.isConfirmed) {
+          }
+        });
+        break;
     }
   };
 
@@ -228,7 +253,23 @@ function FileArea({
       await changeDir(f.fileName);
       await dir();
     } else {
-      alert("Pinchaste en archivo");
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-right",
+        iconColor: "white",
+        customClass: {
+          popup: "colored-toast",
+        },
+        showConfirmButton: false,
+        timer: 3500,
+        timerProgressBar: true,
+      });
+
+      Toast.fire({
+        icon: "success",
+        title: "Descargando tu archivo",
+      });
+      bajarFichero(f.id, f.fileName);
     }
   };
 
@@ -250,6 +291,9 @@ function FileArea({
       className="fileArea"
     >
       <Menu id={MENU_ID}>
+        <Item id="move" onClick={handleItemClick}>
+          Mover
+        </Item>
         <Item id="rename" onClick={handleItemClick}>
           Renombrar
         </Item>

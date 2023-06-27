@@ -26,6 +26,7 @@ function Dashboard() {
     deleteFile,
     uploadFile,
     downloadFile,
+    moveFile,
   } = useFilesActions();
 
   if (!user || user.status == "error") {
@@ -50,6 +51,7 @@ function Dashboard() {
         setInfo={setInfo}
       ></SideMenu>
       <FileArea
+        moveFile={moveFile}
         uploadFile={uploadFile}
         deleteFile={deleteFile}
         deleteDir={deleteDir}
