@@ -21,7 +21,7 @@ const loginUser = async (req, res, next) => {
     //comprobar que exista el usuario
     const [user] = await connect.query(
       `
-            SELECT u.id, u.role, u.active, u.currentFolder_id, u.name, f.fileName, f.breadCrumb
+            SELECT u.*, f.fileName, f.breadCrumb
             FROM users u
             INNER JOIN files f on u.currentFolder_id = f.id
             WHERE email = ? AND password = SHA2(?, 512)
@@ -43,6 +43,13 @@ const loginUser = async (req, res, next) => {
       currentFolder_id: user[0].currentFolder_id,
       fileName: user[0].fileName,
       breadCrumb: user[0].breadCrumb,
+      last_name: user[0].last_name,
+      tel: user[0].tel,
+      mail: user[0].email,
+      zipcode: user[0].zipcode,
+      address: user[0].address,
+      city: user[0].city,
+      province: user[0].province,
     };
 
     //está el usuario activo?

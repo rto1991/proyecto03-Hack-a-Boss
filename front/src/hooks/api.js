@@ -7,8 +7,31 @@ import useFileDownload from "./useFileDownload";
 export function useUserActions() {
   const fetchPost = useFetchPost();
   const get = useFetch();
-  const [, setUser] = useUser();
+  const [user, setUser] = useUser();
+  const [info, setInfo] = useState();
   try {
+    const updateUser = (
+      name,
+      last_name,
+      mail,
+      tel,
+      zipcode,
+      address,
+      city,
+      province
+    ) => {
+      fetchPost("http://localhost:3000/updateUser/" + user.info.id, {
+        name,
+        last_name,
+        mail,
+        tel,
+        zipcode,
+        address,
+        city,
+        province,
+      }).then((data) => setInfo(data));
+    };
+
     const signin = (name, last_name, role, mail, pwd) =>
       fetchPost("http://localhost:3000/signin", {
         name,
@@ -40,7 +63,16 @@ export function useUserActions() {
       }).then((data) => setUser(data));
 
     const logout = () => setUser();
-    return { signin, login, logout, validate, recoverPassword, resetPassword };
+    return {
+      signin,
+      login,
+      logout,
+      validate,
+      recoverPassword,
+      resetPassword,
+      updateUser,
+      info,
+    };
   } catch (error) {
     console.log(error);
   }

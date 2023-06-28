@@ -1,6 +1,7 @@
 import { useUser } from "../../UserContext";
 import "./SideMenu.css";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 function SideMenu({ makeFolder, dir, info, setInfo }) {
   const [user] = useUser();
@@ -49,7 +50,7 @@ function SideMenu({ makeFolder, dir, info, setInfo }) {
 
     Toast.fire({
       icon: "success",
-      title: "Directorio cambiado con éxito",
+      title: info.message,
     });
 
     dir();
@@ -89,7 +90,7 @@ function SideMenu({ makeFolder, dir, info, setInfo }) {
       </a>
       <a onClick={() => showInputModal()}>📂 Crear carpeta</a>
       <a onClick={() => subirArchivo()}>📄 Subir archivo</a>
-      <a href="#">⚙️ Editar perfil</a>
+      <a href="/editProfile">⚙️ Editar perfil</a>
       <a href="#">🐜 Reportar un bug</a>
     </div>
   );
