@@ -13,7 +13,7 @@ const messages = {
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <UserProvider>
-      <IntlProvider locale="es" messages={messages.es}>
+      <IntlProvider locale="es" defaultLocale="es" messages={messages.es}>
         <App />
       </IntlProvider>
     </UserProvider>

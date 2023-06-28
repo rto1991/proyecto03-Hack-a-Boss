@@ -2,7 +2,7 @@ import { TextField } from "@mui/material";
 import "./FileSearch.css";
 import Swal from "sweetalert2";
 import { useState } from "react";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function FileSearch({ files, changeDir, info, setInfo, setFiles, dir }) {
   const [searchString, setSearchString] = useState();
@@ -61,10 +61,10 @@ function FileSearch({ files, changeDir, info, setInfo, setFiles, dir }) {
           alt="Buscar"
           title="Buscar"
         />
-        {/* <nav>
+        <nav>
           🗑️
           <Link to="/trash">Papelera</Link>
-        </nav> */}
+        </nav>
       </div>
       <div className="breadCrumb">
         <p>Estás en: {files?.data.currentDir}</p>

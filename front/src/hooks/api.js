@@ -52,6 +52,7 @@ export function useFilesActions() {
   const getFile = useFileDownload();
   const [files, setFiles] = useState();
   const [info, setInfo] = useState();
+  const [trashFiles, setTrashFiles] = useState([]);
   const dir = () => {
     get("http://localhost:3000/dir").then((data) => setFiles(data));
   };
@@ -107,15 +108,15 @@ export function useFilesActions() {
     );
   };
 
-  // const getTrashFiles = () => {
-  //   // Realizar solicitud al backend para obtener los archivos de la papelera
-  //   return fetch("http://localhost:3000/trash")
-  //     .then((response) => response.json())
-  //     .catch((error) => {
-  //       console.log(error);
-  //       return []; // Manejar el error retornando un array vacío en caso de fallo
-  //     });
-  // };
+  const getTrashFiles = () => {
+    // Realizar solicitud al backend para obtener los archivos de la papelera
+    return fetch("http://localhost:3000/trash")
+      .then((response) => setTrashFiles(response))
+      .catch((error) => {
+        console.log(error);
+        return [];
+      });
+  };
 
   return {
     dir,
@@ -132,6 +133,7 @@ export function useFilesActions() {
     downloadFile,
     setFiles,
     moveFile,
-    // getTrashFiles,
+    getTrashFiles,
+    trashFiles,
   };
 }
