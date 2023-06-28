@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
+import ReactDOM from "react-dom";
 import App from "./App.jsx";
 import "./index.css";
 import esMessages from "../src/views/components/intl/es.json";
@@ -17,5 +17,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <App />
       </IntlProvider>
     </UserProvider>
-  </React.StrictMode>
+  </React.StrictMode>,
+  document.getElementById("root")
 );

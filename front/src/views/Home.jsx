@@ -17,6 +17,8 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Swal from "sweetalert2";
 import { useNavigate, useParams } from "react-router-dom";
 import "./Home.css";
+import { FormattedMessage } from "react-intl";
+import LanguageSelector from "./LanguageSelector";
 
 function Copyright(props) {
   return (
@@ -175,7 +177,8 @@ export default function Home() {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Bienvenidos a MyCloudDrive
+              <LanguageSelector />
+              <FormattedMessage id="cabeceraSaludo" />
             </Typography>
             <Box
               component="form"
@@ -215,7 +218,7 @@ export default function Home() {
                     color="primary"
                   />
                 }
-                label="Recuerdame en este ordenador"
+                label={<FormattedMessage id="cabeceraRecordar" />}
                 onChange={(e) => setSaveCredentials(e.target.checked)}
               />
               <Button
@@ -224,17 +227,17 @@ export default function Home() {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Entrar
+                <FormattedMessage id="cabeceraBoton" />
               </Button>
               <Grid container>
                 <Grid item xs>
                   <Link href="/passwordRecovery" variant="body2">
-                    ¿Olvidaste la contraseña?
+                    <FormattedMessage id="cabeceraOlvidar" />
                   </Link>
                 </Grid>
                 <Grid item>
                   <Link href="/singin" variant="body2">
-                    {"¿No tienes cuenta? Créate una"}
+                    {<FormattedMessage id="cabeceraNuevaCuenta" />}
                   </Link>
                 </Grid>
               </Grid>
