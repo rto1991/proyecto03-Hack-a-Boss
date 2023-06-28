@@ -84,6 +84,23 @@ export function useFilesActions() {
   const getFile = useFileDownload();
   const [files, setFiles] = useState();
   const [info, setInfo] = useState();
+
+  const filesInTrash = () => {
+    get("http://localhost:3000/dir/trash").then((data) => setFiles(data));
+  };
+
+  const moveToTrash = (id) => {
+    get("http://localhost:3000/moveToTrash/" + id).then((data) =>
+      setInfo(data)
+    );
+  };
+
+  const recoverFromTrash = (id) => {
+    get("http://localhost:3000/recoverFile/" + id).then((data) =>
+      setInfo(data)
+    );
+  };
+
   const dir = () => {
     get("http://localhost:3000/dir").then((data) => setFiles(data));
   };
@@ -154,5 +171,8 @@ export function useFilesActions() {
     downloadFile,
     setFiles,
     moveFile,
+    filesInTrash,
+    moveToTrash,
+    recoverFromTrash,
   };
 }

@@ -22,6 +22,11 @@ function FileArea({
   downloadFile,
   info,
   moveFile,
+  enPapelera,
+  moveToTrash,
+  recoverFromTrash,
+  filesInTrash,
+  setEnPapelera,
 }) {
   const [user] = useUser();
   const { show } = useContextMenu();
@@ -62,6 +67,16 @@ function FileArea({
     await makeFolder(folderName);
     await dir();
   };
+
+  async function moverAPapelera(id) {
+    await moveToTrash(id);
+    await dir();
+  }
+
+  async function recuperarDeLaPapelera(id) {
+    await recoverFromTrash(id);
+    setEnPapelera(false);
+  }
 
   const subirArchivo = async () => {
     const { value: file } = await Swal.fire({
@@ -158,23 +173,28 @@ function FileArea({
 
         break;
       case "delete":
-        Swal.fire({
-          title: `¿Seguro de borrar "${props.key.fileName}"? ${
-            props.key.type == "Folder"
-              ? ", este elemento es de tipo carpeta, se borrarán todos los elementos que contenga"
-              : ""
-          }`,
-          showCancelButton: true,
-          confirmButtonText: "Si, borrar",
-          cancelButtonText: "Atrás",
-        }).then((result) => {
-          /* Read more about isConfirmed, isDenied below */
-          if (result.isConfirmed) {
-            props.key.type == "Folder"
-              ? deleteDirectory(props.key.fileName)
-              : deleteFil(props.key.fileName);
-          }
-        });
+        if (enPapelera) {
+          Swal.fire({
+            title: `¿Seguro de borrar "${props.key.fileName}"? ${
+              props.key.type == "Folder"
+                ? ", este elemento es de tipo carpeta, se borrarán todos los elementos que contenga"
+                : ""
+            }`,
+            showCancelButton: true,
+            confirmButtonText: "Si, borrar",
+            cancelButtonText: "Atrás",
+          }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+              props.key.type == "Folder"
+                ? deleteDirectory(props.key.fileName)
+                : deleteFil(props.key.fileName);
+            }
+          });
+        } else {
+          moverAPapelera(props.key.id);
+        }
+
         break;
       case "makeFolder":
         Swal.fire({
@@ -245,6 +265,9 @@ function FileArea({
           }
         });
         break;
+      case "recover":
+        recuperarDeLaPapelera(props.key.id);
+        break;
     }
   };
 
@@ -298,11 +321,18 @@ function FileArea({
           Renombrar
         </Item>
         <Item id="delete" onClick={handleItemClick}>
-          Eliminar
+          {enPapelera ? "Eliminar definitivamente" : "Enviar a papelera"}
         </Item>
         <Item id="download" onClick={handleItemClick}>
           Descargar
         </Item>
+        {enPapelera ? (
+          <Item id="recover" onClick={handleItemClick}>
+            Recuperar
+          </Item>
+        ) : (
+          ""
+        )}
       </Menu>
 
       <Menu id={MAIN_AREA_MENU}>

@@ -3,13 +3,34 @@ import "./FileSearch.css";
 import Swal from "sweetalert2";
 import { useState } from "react";
 
-function FileSearch({ files, changeDir, info, setInfo, setFiles, dir }) {
+function FileSearch({
+  files,
+  changeDir,
+  info,
+  setInfo,
+  setFiles,
+  dir,
+  filesInTrash,
+  enPapelera,
+  setEnPapelera,
+}) {
   const [searchString, setSearchString] = useState();
+
   const upLevel = async () => {
     try {
       await changeDir("..p");
     } catch (error) {
       console.log("error chachi");
+    }
+  };
+
+  const trashFiles = () => {
+    if (!enPapelera) {
+      filesInTrash();
+      setEnPapelera(true);
+    } else {
+      dir();
+      setEnPapelera(false);
     }
   };
 
@@ -59,6 +80,15 @@ function FileSearch({ files, changeDir, info, setInfo, setFiles, dir }) {
           src="/lupa.png"
           alt="Buscar"
           title="Buscar"
+        />
+        <img
+          className="btnTrash"
+          onClick={() => trashFiles()}
+          src={!enPapelera ? "/basura.png" : "/volver.png"}
+          alt="Papelera"
+          title={
+            !enPapelera ? "Ver papelera" : "Volver a la carpeta donde estabas"
+          }
         />
       </div>
       <div className="breadCrumb">
