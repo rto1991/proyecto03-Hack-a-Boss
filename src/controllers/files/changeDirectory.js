@@ -46,10 +46,19 @@ const changeDirectory = async (req, res, next) => {
         //esta consulta extrae un solo registro, la carpeta a la que nos vamos a cambiar
         const [selectedDir] = await connect.query(
           `
-        SELECT f.id, f.filename FROM files f WHERE f.id_user = ? and f.filename = ?
+        SELECT f.id, f.filename, f.in_recycle_bin FROM files f WHERE f.id_user = ? and f.filename = ?
         `,
           [idUser, destinationDirectory]
         );
+
+        //verificar que no está en la papelera, si lo está lanzar error
+        if (selectedDir[0].in_recycle_bin === 1) {
+          const error = new Error(
+            "No es posible entrar en una carpeta que está en la papelera, recupérala antes a su directorio original"
+          );
+          error.httpStatus = 404;
+          throw error;
+        }
         //cambiamos el campo currentFolder_id de la tabla users
         await connect.query(
           `

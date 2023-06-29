@@ -75,7 +75,7 @@ function FileArea({
 
   async function recuperarDeLaPapelera(id) {
     await recoverFromTrash(id);
-    setEnPapelera(false);
+    filesInTrash();
   }
 
   const subirArchivo = async () => {
@@ -272,10 +272,8 @@ function FileArea({
   };
 
   const dobleClickHandler = async (f) => {
-    if (f.type == "Folder") {
-      await changeDir(f.fileName);
-      await dir();
-    } else {
+    console.log(f.in_recycle_bin);
+    if (f.in_recycle_bin === 1) {
       const Toast = Swal.mixin({
         toast: true,
         position: "top-right",
@@ -290,9 +288,33 @@ function FileArea({
 
       Toast.fire({
         icon: "success",
-        title: "Descargando tu archivo",
+        title: "No se puede entrar en una carpeta que está en la papelera",
       });
-      bajarFichero(f.id, f.fileName);
+    }
+
+    if (f.type == "Folder" && f.in_recycle_bin == 0) {
+      await changeDir(f.fileName);
+      await dir();
+    } else {
+      if (f.in_recycle_bin == 0) {
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "top-right",
+          iconColor: "white",
+          customClass: {
+            popup: "colored-toast",
+          },
+          showConfirmButton: false,
+          timer: 3500,
+          timerProgressBar: true,
+        });
+
+        Toast.fire({
+          icon: "success",
+          title: "Descargando tu archivo",
+        });
+        bajarFichero(f.id, f.fileName);
+      }
     }
   };
 
@@ -354,6 +376,7 @@ function FileArea({
               id: f.id,
               fileName: f.fileName,
               type: f.type,
+              in_recycle_bin: f.in_recycle_bin,
             })
           }
           onDoubleClick={() => dobleClickHandler(f)}

@@ -96,9 +96,7 @@ export function useFilesActions() {
   };
 
   const recoverFromTrash = (id) => {
-    get("http://localhost:3000/recoverFile/" + id).then((data) =>
-      setInfo(data)
-    );
+    get("http://localhost:3000/recoverFile/" + id).then((data) => data);
   };
 
   const dir = () => {

@@ -92,10 +92,22 @@ function FileSearch({
         />
       </div>
       <div className="breadCrumb">
-        <p>Estás en: {files?.data.currentDir}</p>
-        <button onClick={() => upLevel()} title="subir un nivel" type="button">
-          🔙
-        </button>
+        <p>
+          {!enPapelera
+            ? `Estás en: ${files?.data.currentDir}`
+            : `Estás en Papelera`}
+        </p>
+        {!enPapelera ? (
+          <button
+            onClick={() => upLevel()}
+            title="subir un nivel"
+            type="button"
+          >
+            🔙
+          </button>
+        ) : (
+          <></>
+        )}
       </div>
     </>
   );
