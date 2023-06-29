@@ -63,9 +63,7 @@ function SingIn() {
         confirmButtonText: "Ok",
       });
       logout();
-    }
-    else
-    {
+    } else {
       Swal.fire({
         title: "¡Éxito!",
         text: "Has creado tu usuario correctamente, ve a tu bandeja de entrada para validarlo y poder usar MyCloudDrive",
@@ -73,7 +71,7 @@ function SingIn() {
         confirmButtonText: "Ok",
       });
       logout();
-      navigate('/');
+      navigate("/");
     }
   }
 
@@ -139,6 +137,10 @@ function SingIn() {
                 type="password"
                 id="password"
               />
+              <Typography component="p" variant="p">
+                Password debe tener entre 8 y 30 caracteres, contener al menos
+                una letra mayúscula, un número y un símbolo especial (!@#$&*)
+              </Typography>
               <TextField
                 onChange={(e) => setRepeatPassword(e.target.value)}
                 margin="normal"
