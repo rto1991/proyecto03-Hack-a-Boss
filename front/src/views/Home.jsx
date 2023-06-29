@@ -46,7 +46,7 @@ export default function Home() {
   const [saveCredentials, setSaveCredentials] = useState(false);
   const [pwd, setPassword] = useState("");
   const navigate = useNavigate();
-  const { regCode } = useParams();
+  let { regCode } = useParams();
 
   //retrieve saved data from local storage if exists
 
@@ -75,6 +75,7 @@ export default function Home() {
 
   if (regCode) {
     validar(regCode);
+    regCode = null;
     navigate("/");
   }
 

@@ -48,7 +48,7 @@ export function useUserActions() {
 
     const validate = (regCode) =>
       get("http://localhost:3000/users/validate/" + regCode).then((data) =>
-        setUser(data)
+        setInfo(data)
       );
 
     const recoverPassword = (mail) =>

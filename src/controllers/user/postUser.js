@@ -1,13 +1,37 @@
 const getDB = require("../../database/db");
 const fs = require("fs/promises");
 const path = require("path");
+const Joi = require("joi");
 
 const postUser = async (req, res, next) => {
   let connect;
   try {
     let { mail, pwd, role, name, last_name } = req.body;
-    connect = await getDB();
 
+    //validaciones básicas
+    const schema = Joi.object({
+      password: Joi.string().pattern(
+        new RegExp("^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z]).{8,30}$")
+      ),
+      email: Joi.string().email({
+        minDomainSegments: 2,
+        tlds: { allow: ["com", "net", "es", "org"] },
+      }),
+    });
+    try {
+      await schema.validateAsync({
+        password: pwd,
+        email: mail,
+      });
+    } catch (err) {
+      const error = new Error(
+        "La contraseña o el correo electrónico no son válidos, asegúrate de escribir bien estos datos"
+      );
+      error.httpStatus = 404;
+      throw error;
+    }
+
+    connect = await getDB();
     //la variable "role" especificará que tipo de usuario se crea, actualmente para el usuario ADMIN no hay lógica creada en el programa, por tanto
     //si se crea un usuario con el parémtro ROLE = 'admin' en el bojeto BODY de esta petición, se creará un usuario ADMIN pero no funcionará correctamente
     //está para implementarse en futuras versiones de esta aplicación

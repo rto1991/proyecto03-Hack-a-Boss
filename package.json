@@ -19,6 +19,7 @@
     "express-fileupload": "^1.4.0",
     "file-saver": "^2.0.5",
     "fs-move": "^4.0.2",
+    "joi": "^17.9.2",
     "jsonwebtoken": "^9.0.0",
     "mime": "^3.0.0",
     "mysql2": "^3.2.4",
