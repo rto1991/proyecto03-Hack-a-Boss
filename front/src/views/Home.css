@@ -16,3 +16,17 @@ main {
   background-image: url("/mobile_background.jpg");
   background-size: cover;
 }
+
+.flagContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.flagContainer > img {
+  width: 32px;
+}
+
+.active {
+  border: 2px solid red;
+}
