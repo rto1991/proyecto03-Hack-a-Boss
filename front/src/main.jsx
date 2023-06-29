@@ -2,21 +2,16 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App.jsx";
 import "./index.css";
-import esMessages from "../src/views/components/intl/es.json";
 import { UserProvider } from "./UserContext.jsx";
-import { IntlProvider } from "react-intl";
-
-const messages = {
-  es: esMessages,
-};
+import { LangProvider } from "./LangContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <UserProvider>
-      <IntlProvider locale="es" defaultLocale="es" messages={messages.es}>
+    <LangProvider>
+      <UserProvider>
         <App />
-      </IntlProvider>
-    </UserProvider>
+      </UserProvider>
+    </LangProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

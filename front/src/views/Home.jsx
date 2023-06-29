@@ -1,6 +1,6 @@
 import { useUserActions } from "../hooks/api";
 import { useUser } from "../UserContext";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -19,6 +19,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import "./Home.css";
 import { FormattedMessage } from "react-intl";
 import LanguageSelector from "./LanguageSelector";
+import { langContext } from "../LangContext";
 
 function Copyright(props) {
   return (
