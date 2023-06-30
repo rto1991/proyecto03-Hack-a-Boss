@@ -1,9 +1,8 @@
-import { useUser } from "../../UserContext";
+import { FormattedMessage } from "react-intl";
 import { useUserActions } from "../../hooks/api";
 import "./TopNavBar.css";
 
 function TopNavBar() {
-  const [user] = useUser();
   const { logout } = useUserActions();
 
   function showMenu() {
@@ -20,7 +19,9 @@ function TopNavBar() {
           title="menu"
         ></img>
       </div>
-      <h3>Bienvenido a MyCloudDrive, {user.info.name}</h3>
+      <h3>
+        <FormattedMessage id="topNavBarCabecera" />
+      </h3>
       <div className="userLogo">
         <img
           onClick={() => logout()}

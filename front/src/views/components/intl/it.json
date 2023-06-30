@@ -1,8 +1,13 @@
 {
   "cabeceraSaludo": "Benvenuto in MyCloudDrive",
+  "cabeceraLabelCorreo": "E-mail",
+  "cabeceraLabelContraseña": "Parola d'ordine",
   "cabeceraRecordar": "Ricordami su questo computer",
   "cabeceraBoton": "Entrare",
   "cabeceraOlvidar": "Ha dimenticato la password?",
   "cabecera": "Ricordami su questo computer",
-  "cabeceraNuevaCuenta": "Non hai un account, creane uno?"
+  "cabeceraNuevaCuenta": "Non hai un account, creane uno?",
+
+  "modalEntrada": "`Ciao ${user.info.name}, arrivo alla tua Dashboard, solo un momento...`",
+  "topNavBarCabecera": "`Benvenuto in MyCloudDrive, ${user.info.name}`"
 }

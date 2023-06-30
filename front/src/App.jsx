@@ -1,4 +1,3 @@
-import { IntlProvider } from "react-intl";
 import {
   Route,
   RouterProvider,
@@ -11,8 +10,6 @@ import SingIn from "./views/SingIn";
 import PasswordRecovery from "./views/PasswordRecovery";
 import PasswordChange from "./views/PasswordChange";
 import TrashPage from "./views/components/TrashPage";
-import { langContext } from "./LangContext";
-import { useContext } from "react";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
