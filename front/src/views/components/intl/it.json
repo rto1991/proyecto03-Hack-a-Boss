@@ -11,15 +11,15 @@
   "modalEntrada": "`Ciao ${name}, arrivo alla tua Dashboard, solo un momento...`",
   "topNavBarCabecera": "Benvenuto in MyCloudDrive, {name}",
 
-  "BuscadorLabel": "Trova un fascicolo",
-  "BuscadorImagen": "Cercare",
+  "buscadorLabel": "Trova un fascicolo",
+  "buscadorImagen": "Cercare",
 
-  "Papelera": "Vedi cestino",
-  "PalereaVolver": "Torna alla cartella in cui ti trovavi",
-  "BotonSalir": "Cancella la sottoscrizione",
-  "Directorio": "Sei dentro: {directorio}",
-  "DirectorioPapelera": "Sei nel cestino",
-  "BotonAtras": "Salire di livello",
+  "papelera": "Vedi cestino",
+  "palereaVolver": "Torna alla cartella in cui ti trovavi",
+  "botonSalir": "Cancella la sottoscrizione",
+  "directorio": "Sei dentro: {directorio}",
+  "directorioPapelera": "Sei nel cestino",
+  "botonAtras": "Salire di livello",
 
   "recuperarCuenta": "Recupera l'accesso al tuo account",
   "solicitudReset": "Richiedere un ripristino"
