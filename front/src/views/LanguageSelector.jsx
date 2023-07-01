@@ -1,7 +1,9 @@
 import { useContext } from "react";
-import es from "../img/spain.png";
-import en from "../img/united-kingdom.png";
+import es from "../img/espana.png";
+import en from "../img/reino-unido.png";
+import it from "../img/italia.png";
 import { langContext } from "../LangContext";
+import "./LanguageSelector.css";
 
 const LanguageSelector = () => {
   const idioma = useContext(langContext);
@@ -14,7 +16,9 @@ const LanguageSelector = () => {
       <button onClick={() => idioma.establecerLenguaje("en")}>
         <img src={en} alt="" />
       </button>
-      <button onClick={() => idioma.establecerLenguaje("it")}>IT</button>
+      <button onClick={() => idioma.establecerLenguaje("it")}>
+        <img src={it} alt="" />
+      </button>
     </div>
   );
 };

@@ -9,39 +9,53 @@ import {
   Typography,
   createTheme,
 } from "@mui/material";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./SingIn.css";
 import { useState } from "react";
 import Swal from "sweetalert2";
-import { useUserActions } from "../hooks/api";
+import { useFilesActions, useUserActions } from "../hooks/api";
 import { useUser } from "../UserContext";
 
 const defaultTheme = createTheme();
-function SingIn() {
-  const [name, setName] = useState("");
-  const [last_name, setLastName] = useState("");
-  const [mail, setMail] = useState("");
-  const [password, setPassword] = useState("");
-  const [repeatPassword, setRepeatPassword] = useState("");
-  const { signin, logout } = useUserActions();
+function EditProfile() {
   const [user] = useUser();
-  let res = {}; //la usaremos para capturar la respuesta y manejar posibles mensajes de error
+  const [name, setName] = useState(user.info.name);
+  const [lastName, setLastName] = useState(user.info.last_name);
+  const [mail, setMail] = useState(user.info.mail);
+  const [tel, setTel] = useState(user.info.tel);
+  const [zipCode, setZipCode] = useState(user.info.zipcode);
+  const [address, setAddress] = useState(user.info.address);
+  const [city, setCity] = useState(user.info.city);
+  const [province, setProvince] = useState(user.info.province);
+
+  const { updateUser, info } = useUserActions();
+  const { setInfo } = useFilesActions();
   //usamos hook navigate de useNavigate porque el Componente Navigate directamente no me funciona
   const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    //comprobar coincidencia de passwords
-    if (password !== repeatPassword) {
-      return Swal.fire({
-        title: "Error!",
-        text: "Las contraseñas no coinciden",
-        icon: "error",
+
+    //actualizamos perfil
+    try {
+      await updateUser(
+        name,
+        lastName,
+        mail,
+        tel,
+        zipCode,
+        address,
+        city,
+        province
+      );
+      Swal.fire({
+        title: "¡Éxito!",
+        text: "Usuario modificado correctamente",
+        icon: "success",
         confirmButtonText: "Ok",
       });
-    }
-    //intentamos hacer el registro con los datos proporcionados
-    try {
-      await signin(name, last_name, "normal", mail, password);
+      setInfo(info);
+      navigate("/dashboard");
     } catch (error) {
       return Swal.fire({
         title: "Error!",
@@ -52,31 +66,7 @@ function SingIn() {
     }
   };
 
-  if (user) {
-    if (user.status === "error") {
-      Swal.fire({
-        title: "Error!",
-        text:
-          "Se produjo un error intentando registrar el usuario. " +
-          user.message,
-        icon: "error",
-        confirmButtonText: "Ok",
-      });
-      logout();
-    } else {
-      Swal.fire({
-        title: "¡Éxito!",
-        text: "Has creado tu usuario correctamente, ve a tu bandeja de entrada para validarlo y poder usar MyCloudDrive",
-        icon: "success",
-        confirmButtonText: "Ok",
-      });
-      logout();
-      navigate("/");
-    }
-  }
-
-  function volverAInicio(e) {
-    e.preventDefault();
+  if (!user) {
     navigate("/");
   }
 
@@ -94,7 +84,7 @@ function SingIn() {
             }}
           >
             <Typography component="h1" variant="h5">
-              Regístrate en MyCloudDrive
+              Edita los datos de tu perfil
             </Typography>
             <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
               <TextField
@@ -105,6 +95,7 @@ function SingIn() {
                 id="name"
                 label="Nombre"
                 name="name"
+                value={name}
                 autoFocus
               />
               <TextField
@@ -115,6 +106,7 @@ function SingIn() {
                 id="last_name"
                 label="Apellidos"
                 name="last_name"
+                value={lastName}
                 autoFocus
               />
               <TextField
@@ -125,37 +117,68 @@ function SingIn() {
                 id="email"
                 label="Correo electrónico"
                 name="email"
+                value={mail}
+                autoFocus
+              />
+
+              <TextField
+                onChange={(e) => setTel(e.target.value)}
+                margin="normal"
+                fullWidth
+                id="tel"
+                label="Teléfono"
+                name="tel"
+                value={tel}
+                autoFocus
+              />
+
+              <TextField
+                onChange={(e) => setZipCode(e.target.value)}
+                margin="normal"
+                fullWidth
+                id="zipcode"
+                label="Código postal"
+                name="zipcode"
+                value={zipCode}
+                autoFocus
+              />
+
+              <TextField
+                onChange={(e) => setAddress(e.target.value)}
+                margin="normal"
+                fullWidth
+                id="address"
+                label="Dirección"
+                name="address"
+                value={address}
+                autoFocus
+              />
+
+              <TextField
+                onChange={(e) => setCity(e.target.value)}
+                margin="normal"
+                fullWidth
+                id="city"
+                label="Ciudad"
+                name="city"
+                value={city}
                 autoFocus
               />
               <TextField
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => setProvince(e.target.value)}
                 margin="normal"
-                required
                 fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-              />
-              <Typography component="p" variant="p">
-                Password debe tener entre 8 y 30 caracteres, contener al menos
-                una letra mayúscula, un número y un símbolo especial (!@#$&*)
-              </Typography>
-              <TextField
-                onChange={(e) => setRepeatPassword(e.target.value)}
-                margin="normal"
-                required
-                fullWidth
-                name="repeat_password"
-                label="Repite Password"
-                type="password"
-                id="repeat_password"
+                id="province"
+                label="Provincia"
+                name="province"
+                value={province}
+                autoFocus
               />
 
               <Grid container>
                 <Grid item xs>
                   <Button
-                    onClick={(e) => volverAInicio(e)}
+                    onClick={() => navigate("/dashboard")}
                     type="button"
                     variant="contained"
                     sx={{ mt: 3, mb: 2 }}
@@ -169,7 +192,7 @@ function SingIn() {
                     variant="contained"
                     sx={{ mt: 3, mb: 2 }}
                   >
-                    Registrarse
+                    Actualizar
                   </Button>
                 </Grid>
               </Grid>
@@ -181,4 +204,4 @@ function SingIn() {
   );
 }
 
-export default SingIn;
+export default EditProfile;

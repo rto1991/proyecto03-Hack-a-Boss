@@ -9,8 +9,10 @@ import FileArea from "./components/FileArea";
 import Footer from "./components/Footer";
 import FileSearch from "./components/FileSearch";
 import { useFilesActions } from "../hooks/api";
+import { useState } from "react";
 
 function Dashboard() {
+  const [enPapelera, setEnPapelera] = useState(false);
   const [user] = useUser();
   const {
     dir,
@@ -27,6 +29,9 @@ function Dashboard() {
     uploadFile,
     downloadFile,
     moveFile,
+    filesInTrash,
+    moveToTrash,
+    recoverFromTrash,
   } = useFilesActions();
 
   if (!user || user.status == "error") {
@@ -37,12 +42,15 @@ function Dashboard() {
     <div className="mainApp">
       <TopNavBar></TopNavBar>
       <FileSearch
+        enPapelera={enPapelera}
+        setEnPapelera={setEnPapelera}
         dir={dir}
         setFiles={setFiles}
         setInfo={setInfo}
         info={info}
         changeDir={changeDir}
         files={files}
+        filesInTrash={filesInTrash}
       ></FileSearch>
       <SideMenu
         dir={dir}
@@ -51,6 +59,11 @@ function Dashboard() {
         setInfo={setInfo}
       ></SideMenu>
       <FileArea
+        setEnPapelera={setEnPapelera}
+        filesInTrash={filesInTrash}
+        recoverFromTrash={recoverFromTrash}
+        moveToTrash={moveToTrash}
+        enPapelera={enPapelera}
         moveFile={moveFile}
         uploadFile={uploadFile}
         deleteFile={deleteFile}

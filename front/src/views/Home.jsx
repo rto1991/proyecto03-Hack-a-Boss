@@ -17,6 +17,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Swal from "sweetalert2";
 import { useNavigate, useParams } from "react-router-dom";
 import "./Home.css";
+import { useIntl } from "react-intl";
 import { FormattedMessage } from "react-intl";
 import LanguageSelector from "./LanguageSelector";
 
@@ -49,6 +50,7 @@ export default function Home() {
   const [pwd, setPassword] = useState("");
   const navigate = useNavigate();
   const { regCode } = useParams();
+  const intl = useIntl();
 
   //retrieve saved data from local storage if exists
 
@@ -119,7 +121,10 @@ export default function Home() {
       }
       let timerInterval;
       Swal.fire({
-        title: <FormattedMessage id="modalEntrada" />,
+        title: intl.formatMessage(
+          { id: "modalEntrada" },
+          { name: user.info.name }
+        ),
         timer: 2000,
         timerProgressBar: true,
         didOpen: () => {

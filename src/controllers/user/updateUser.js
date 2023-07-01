@@ -2,18 +2,20 @@ const getDB = require("../../database/db");
 const sendMail = require("../../services/sendMail");
 const savePhoto = require("../../services/savePhoto");
 
-const updateUser = async (req, res) => {
+const updateUser = async (req, res, next) => {
+  let connect;
   try {
     const { id } = req.params;
-    const { name, mail } = req.body;
-    const connect = await getDB();
+    const { name, mail, last_name, tel, zipcode, address, city, province } =
+      req.body;
+    connect = await getDB();
     console.log(parseInt(id));
     console.log(req.userInfo.id);
 
     if (req.userInfo.id !== parseInt(id) && req.userInfo.role != "admin") {
-      return res
-        .status(401)
-        .send("No tiene permiso para modificar este usuario");
+      const error = new Error("No tienes permiso para modificar este usuario");
+      error.httpStatus = 403;
+      throw error;
     }
 
     const [currentUser] = await connect.query(
@@ -47,11 +49,13 @@ const updateUser = async (req, res) => {
               FROM users
               WHERE email=?
             `,
-        [email]
+        [mail]
       );
 
       if (existingEmail.length > 0) {
-        return res.status(409).send("Ya existe un usuario con ese email");
+        const error = new Error("Ya existe un usuario con ese email");
+        error.httpStatus = 409;
+        throw error;
       }
 
       // Creo un código de registro (contraseña temporal de un solo uso)
@@ -74,9 +78,9 @@ const updateUser = async (req, res) => {
               SET name=?, email=?, lastAuthUpdate=?, active=0, regCode=?
               WHERE id=?
             `,
-        [name, email, new Date(), regCode, id]
+        [name, mail, new Date(), regCode, id]
       );
-      connect.release();
+
       // Dar una respuesta
       res.send({
         status: "ok",
@@ -85,18 +89,19 @@ const updateUser = async (req, res) => {
       });
     } else {
       const [users] = await connect.query(
-        `UPDATE users SET name=? WHERE id=?`,
-        [name, id]
+        `UPDATE users SET name=?, last_name=?, tel=?, zipcode=?, address=?, city=?, province=? WHERE id=?`,
+        [name, last_name, tel, zipcode, address, city, province, id]
       );
-      connect.release();
-      return res.status(200).send({
+      res.status(200).send({
         status: "ok",
-        mensaje: "Usuario modificado correctamente",
+        message: "Usuario modificado correctamente",
       });
     }
   } catch (error) {
     console.log(error);
-    res.status(500).send(error);
+    next(error);
+  } finally {
+    connect.release();
   }
 };
 

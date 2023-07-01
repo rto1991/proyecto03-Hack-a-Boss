@@ -22,6 +22,11 @@ function FileArea({
   downloadFile,
   info,
   moveFile,
+  enPapelera,
+  moveToTrash,
+  recoverFromTrash,
+  filesInTrash,
+  setEnPapelera,
 }) {
   const [user] = useUser();
   const { show } = useContextMenu();
@@ -62,6 +67,16 @@ function FileArea({
     await makeFolder(folderName);
     await dir();
   };
+
+  async function moverAPapelera(id) {
+    await moveToTrash(id);
+    await dir();
+  }
+
+  async function recuperarDeLaPapelera(id) {
+    await recoverFromTrash(id);
+    filesInTrash();
+  }
 
   const subirArchivo = async () => {
     const { value: file } = await Swal.fire({
@@ -158,23 +173,28 @@ function FileArea({
 
         break;
       case "delete":
-        Swal.fire({
-          title: `¿Seguro de borrar "${props.key.fileName}"? ${
-            props.key.type == "Folder"
-              ? ", este elemento es de tipo carpeta, se borrarán todos los elementos que contenga"
-              : ""
-          }`,
-          showCancelButton: true,
-          confirmButtonText: "Si, borrar",
-          cancelButtonText: "Atrás",
-        }).then((result) => {
-          /* Read more about isConfirmed, isDenied below */
-          if (result.isConfirmed) {
-            props.key.type == "Folder"
-              ? deleteDirectory(props.key.fileName)
-              : deleteFil(props.key.fileName);
-          }
-        });
+        if (enPapelera) {
+          Swal.fire({
+            title: `¿Seguro de borrar "${props.key.fileName}"? ${
+              props.key.type == "Folder"
+                ? ", este elemento es de tipo carpeta, se borrarán todos los elementos que contenga"
+                : ""
+            }`,
+            showCancelButton: true,
+            confirmButtonText: "Si, borrar",
+            cancelButtonText: "Atrás",
+          }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+              props.key.type == "Folder"
+                ? deleteDirectory(props.key.fileName)
+                : deleteFil(props.key.fileName);
+            }
+          });
+        } else {
+          moverAPapelera(props.key.id);
+        }
+
         break;
       case "makeFolder":
         Swal.fire({
@@ -245,14 +265,15 @@ function FileArea({
           }
         });
         break;
+      case "recover":
+        recuperarDeLaPapelera(props.key.id);
+        break;
     }
   };
 
   const dobleClickHandler = async (f) => {
-    if (f.type == "Folder") {
-      await changeDir(f.fileName);
-      await dir();
-    } else {
+    console.log(f.in_recycle_bin);
+    if (f.in_recycle_bin === 1) {
       const Toast = Swal.mixin({
         toast: true,
         position: "top-right",
@@ -267,9 +288,33 @@ function FileArea({
 
       Toast.fire({
         icon: "success",
-        title: "Descargando tu archivo",
+        title: "No se puede entrar en una carpeta que está en la papelera",
       });
-      bajarFichero(f.id, f.fileName);
+    }
+
+    if (f.type == "Folder" && f.in_recycle_bin == 0) {
+      await changeDir(f.fileName);
+      await dir();
+    } else {
+      if (f.in_recycle_bin == 0) {
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "top-right",
+          iconColor: "white",
+          customClass: {
+            popup: "colored-toast",
+          },
+          showConfirmButton: false,
+          timer: 3500,
+          timerProgressBar: true,
+        });
+
+        Toast.fire({
+          icon: "success",
+          title: "Descargando tu archivo",
+        });
+        bajarFichero(f.id, f.fileName);
+      }
     }
   };
 
@@ -298,11 +343,18 @@ function FileArea({
           Renombrar
         </Item>
         <Item id="delete" onClick={handleItemClick}>
-          Eliminar
+          {enPapelera ? "Eliminar definitivamente" : "Enviar a papelera"}
         </Item>
         <Item id="download" onClick={handleItemClick}>
           Descargar
         </Item>
+        {enPapelera ? (
+          <Item id="recover" onClick={handleItemClick}>
+            Recuperar
+          </Item>
+        ) : (
+          ""
+        )}
       </Menu>
 
       <Menu id={MAIN_AREA_MENU}>
@@ -324,6 +376,7 @@ function FileArea({
               id: f.id,
               fileName: f.fileName,
               type: f.type,
+              in_recycle_bin: f.in_recycle_bin,
             })
           }
           onDoubleClick={() => dobleClickHandler(f)}

@@ -7,8 +7,31 @@ import useFileDownload from "./useFileDownload";
 export function useUserActions() {
   const fetchPost = useFetchPost();
   const get = useFetch();
-  const [, setUser] = useUser();
+  const [user, setUser] = useUser();
+  const [info, setInfo] = useState();
   try {
+    const updateUser = (
+      name,
+      last_name,
+      mail,
+      tel,
+      zipcode,
+      address,
+      city,
+      province
+    ) => {
+      fetchPost("http://localhost:3000/updateUser/" + user.info.id, {
+        name,
+        last_name,
+        mail,
+        tel,
+        zipcode,
+        address,
+        city,
+        province,
+      }).then((data) => setInfo(data));
+    };
+
     const signin = (name, last_name, role, mail, pwd) =>
       fetchPost("http://localhost:3000/signin", {
         name,
@@ -25,7 +48,7 @@ export function useUserActions() {
 
     const validate = (regCode) =>
       get("http://localhost:3000/users/validate/" + regCode).then((data) =>
-        setUser(data)
+        setInfo(data)
       );
 
     const recoverPassword = (mail) =>
@@ -40,7 +63,16 @@ export function useUserActions() {
       }).then((data) => setUser(data));
 
     const logout = () => setUser();
-    return { signin, login, logout, validate, recoverPassword, resetPassword };
+    return {
+      signin,
+      login,
+      logout,
+      validate,
+      recoverPassword,
+      resetPassword,
+      updateUser,
+      info,
+    };
   } catch (error) {
     console.log(error);
   }
@@ -52,7 +84,21 @@ export function useFilesActions() {
   const getFile = useFileDownload();
   const [files, setFiles] = useState();
   const [info, setInfo] = useState();
-  const [trashFiles, setTrashFiles] = useState([]);
+
+  const filesInTrash = () => {
+    get("http://localhost:3000/dir/trash").then((data) => setFiles(data));
+  };
+
+  const moveToTrash = (id) => {
+    get("http://localhost:3000/moveToTrash/" + id).then((data) =>
+      setInfo(data)
+    );
+  };
+
+  const recoverFromTrash = (id) => {
+    get("http://localhost:3000/recoverFile/" + id).then((data) => data);
+  };
+
   const dir = () => {
     get("http://localhost:3000/dir").then((data) => setFiles(data));
   };
@@ -108,16 +154,6 @@ export function useFilesActions() {
     );
   };
 
-  const getTrashFiles = () => {
-    // Realizar solicitud al backend para obtener los archivos de la papelera
-    return fetch("http://localhost:3000/trash")
-      .then((response) => setTrashFiles(response))
-      .catch((error) => {
-        console.log(error);
-        return [];
-      });
-  };
-
   return {
     dir,
     makeFolder,
@@ -133,7 +169,8 @@ export function useFilesActions() {
     downloadFile,
     setFiles,
     moveFile,
-    getTrashFiles,
-    trashFiles,
+    filesInTrash,
+    moveToTrash,
+    recoverFromTrash,
   };
 }

@@ -8,6 +8,19 @@
   "cabecera": "Recuerdame en este ordenador",
   "cabeceraNuevaCuenta": "¿No tienes cuenta, créate una?",
 
-  "modalEntrada": "`Hola ${user.info.name}, entrando a tu Dashboard, solo un momentito...`",
-  "topNavBarCabecera": "`Bienvenido a MyCloudDrive ${user.info.name}`"
+  "modalEntrada": "Hola {name}, entrando a tu Dashboard, solo un momentito...",
+  "topNavBarCabecera": "Bienvenido a MyCloudDrive, {name}",
+
+  "buscadorLabel": "Buscar un archivo",
+  "buscadorImagen": "Buscar",
+
+  "papelera": "Ver papelera",
+  "palereaVolver": "Volver a la carpeta donde estabas",
+  "botonSalir": "Cerrar sesion",
+  "directorio": "Estás en: {directorio}",
+  "directorioPapelera": "Estás en la papelera",
+  "botonAtras": "Subir un nivel",
+
+  "recuperarCuenta": "Recupera el acceso a tu cuenta",
+  "solicitudReset": "Solicita un reset"
 }

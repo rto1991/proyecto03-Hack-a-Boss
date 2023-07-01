@@ -2,15 +2,38 @@ import { TextField } from "@mui/material";
 import "./FileSearch.css";
 import Swal from "sweetalert2";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { FormattedMessage } from "react-intl";
+import { useIntl } from "react-intl";
 
-function FileSearch({ files, changeDir, info, setInfo, setFiles, dir }) {
+function FileSearch({
+  files,
+  changeDir,
+  info,
+  setInfo,
+  setFiles,
+  dir,
+  filesInTrash,
+  enPapelera,
+  setEnPapelera,
+}) {
   const [searchString, setSearchString] = useState();
+  const intl = useIntl();
+
   const upLevel = async () => {
     try {
       await changeDir("..p");
     } catch (error) {
       console.log("error chachi");
+    }
+  };
+
+  const trashFiles = () => {
+    if (!enPapelera) {
+      filesInTrash();
+      setEnPapelera(true);
+    } else {
+      dir();
+      setEnPapelera(false);
     }
   };
 
@@ -51,7 +74,7 @@ function FileSearch({ files, changeDir, info, setInfo, setFiles, dir }) {
           required
           fullWidth
           name="fileSearch"
-          label="Buscar un archivo"
+          label={<FormattedMessage id="buscadorLabel" />}
           type="text"
         ></TextField>
         <img
@@ -59,18 +82,40 @@ function FileSearch({ files, changeDir, info, setInfo, setFiles, dir }) {
           onClick={() => searchFiles()}
           src="/lupa.png"
           alt="Buscar"
-          title="Buscar"
+          title={<FormattedMessage id="buscadorImagen" />}
         />
-        <nav>
-          🗑️
-          <Link to="/trash">Papelera</Link>
-        </nav>
+        <img
+          className="btnTrash"
+          onClick={() => trashFiles()}
+          src={!enPapelera ? "/basura.png" : "/volver.png"}
+          alt="Papelera"
+          title={
+            !enPapelera
+              ? intl.formatMessage({ id: "papelera" })
+              : intl.formatMessage({ id: "papeleraVolver" })
+          }
+        />
       </div>
       <div className="breadCrumb">
-        <p>Estás en: {files?.data.currentDir}</p>
-        <button onClick={() => upLevel()} title="subir un nivel" type="button">
-          🔙
-        </button>
+        <p>
+          {!enPapelera
+            ? intl.formatMessage(
+                { id: "Directorio" }
+                // { directorio: files.data.currentDir }
+              )
+            : intl.formatMessage({ id: "directorioPapelera" })}
+        </p>
+        {!enPapelera ? (
+          <button
+            onClick={() => upLevel()}
+            title={intl.formatMessage({ id: "botonAtras" })}
+            type="button"
+          >
+            🔙
+          </button>
+        ) : (
+          <></>
+        )}
       </div>
     </>
   );

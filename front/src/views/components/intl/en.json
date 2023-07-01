@@ -8,6 +8,19 @@
   "cabecera": "Remember me on this computer",
   "cabeceraNuevaCuenta": "Don't have an account, create one?",
 
-  "modalEntrada": "`Hello ${user.info.name}, coming to your Dashboard, just a moment...`",
-  "topNavBarCabecera": "`Welcome to MyCloudDrive, ${user.info.name}`"
+  "modalEntrada": "Hello {name}, coming to your Dashboard, just a moment...",
+  "topNavBarCabecera": "Welcome to MyCloudDrive, {name}",
+
+  "BuscadorLabel": "Find a file",
+  "BuscadorImagen": "Find",
+
+  "Papelera": "See trash can",
+  "PalereaVolver": "Go back to the folder where you were",
+  "BotonSalir": "Sign off",
+  "Directorio": "You are in: {directorio}",
+  "DirectorioPapelera": "You are in the trash can",
+  "BotonAtras": "Go up a level",
+
+  "recuperarCuenta": "Recover access to your account",
+  "solicitudReset": "Request a reset"
 }

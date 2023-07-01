@@ -5,18 +5,18 @@ const move = require("fs-move");
 const path = require("path");
 const getDB = require("../../database/db");
 
-const moveFile = async (req, res) => {
+const moveFile = async (req, res, next) => {
+  let connect;
   try {
     const { fileId, destinationFolderName } = req.body;
     const userInfo = req.userInfo;
     const idUser = userInfo.id;
+    connect = await getDB();
 
-    const connect = await getDB();
-    
-    const [user] = await connect.query(`SELECT u.*, f.fileName FROM users u INNER JOIN files f ON f.id = u.currentFolder_id WHERE u.id = ?`, [
-      idUser,
-    ]);
-
+    const [user] = await connect.query(
+      `SELECT u.*, f.fileName FROM users u INNER JOIN files f ON f.id = u.currentFolder_id WHERE u.id = ?`,
+      [idUser]
+    );
 
     // Verificar si el archivo pertenece al usuario actual y existe en el current_dir
     const [file] = await connect.query(
@@ -25,7 +25,9 @@ const moveFile = async (req, res) => {
     );
 
     if (file.length === 0) {
-      return res.status(404).send({ error: "Archivo no encontrado" });
+      const error = new Error("Archivo no encontrado");
+      error.httpStatus = 404;
+      throw error;
     }
 
     // Verificar si la nueva carpeta existe y pertenece al usuario actual
@@ -35,34 +37,48 @@ const moveFile = async (req, res) => {
     );
 
     if (newFolder.length === 0) {
-      return res.status(404).send({ error: "Carpeta no encontrada" });
+      const error = new Error("Carpeta no encontrada");
+      error.httpStatus = 404;
+      throw error;
     }
 
     // Mover el archivo a la nueva carpeta
     const fileName = file[0].fileName;
-    const oldPath = path.join(file[0].filePath,fileName);
-    const newPath = path.join(newFolder[0].filePath, newFolder[0].fileName, fileName);
+    const oldPath = path.join(file[0].filePath, fileName);
+    const newPath = path.join(
+      newFolder[0].filePath,
+      newFolder[0].fileName,
+      fileName
+    );
     (async () => {
-        await move(oldPath,newPath, {
-            merge: false, 
-            overwrite:false, 
-            purge:false, 
-            filter(oldPath,newPath) {
-                return true;
-            }
-        });
+      await move(oldPath, newPath, {
+        merge: false,
+        overwrite: false,
+        purge: false,
+        filter(oldPath, newPath) {
+          return true;
+        },
+      });
     })();
 
     await connect.query(
       `UPDATE files SET parent_dir_id = ?, date_upd = now(), filePath = ? WHERE id = ?`,
-      [newFolder[0].id, path.join(newFolder[0].filePath, newFolder[0].fileName), fileId]
+      [
+        newFolder[0].id,
+        path.join(newFolder[0].filePath, newFolder[0].fileName),
+        fileId,
+      ]
     );
 
-    return res.status(200).send({ message: "Archivo movido exitosamente" });
-    
+    res.status(200).send({
+      status: "info",
+      message: "Archivo movido exitosamente",
+    });
   } catch (error) {
     console.log(error);
-    res.status(500).send({ error: "Error interno del servidor" });
+    next(error);
+  } finally {
+    connect.release();
   }
 };
 

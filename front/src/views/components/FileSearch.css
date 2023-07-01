@@ -39,11 +39,13 @@
   font-size: 1rem;
 }
 
-.btnBuscar {
+.btnBuscar,
+.btnTrash {
   cursor: pointer;
   padding: 5px;
 }
 
-.btnBuscar:hover {
+.btnBuscar:hover,
+.btnTrash:hover {
   background-color: lightblue;
 }
