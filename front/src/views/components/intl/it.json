@@ -9,7 +9,7 @@
   "cabeceraNuevaCuenta": "Non hai un account, creane uno?",
 
   "modalEntrada": "`Ciao ${name}, arrivo alla tua Dashboard, solo un momento...`",
-  "topNavBarCabecera": "Benvenuto in MyCloudDrive, ${name}",
+  "topNavBarCabecera": "Benvenuto in MyCloudDrive, {name}",
 
   "BuscadorLabel": "Trova un fascicolo",
   "BuscadorImagen": "Cercare",
