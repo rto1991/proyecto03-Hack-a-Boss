@@ -1,16 +1,19 @@
 import { FormattedMessage } from "react-intl";
 import { useUserActions } from "../../hooks/api";
 import { useIntl } from "react-intl";
+import { useUser } from "../../UserContext";
 import "./TopNavBar.css";
 
 function TopNavBar() {
   const { logout } = useUserActions();
   const intl = useIntl();
+  const [user] = useUser();
+  console.log(user);
 
   function showMenu() {
     document.getElementById("mySidenav").style.width = "300px";
   }
-
+  console.log(user.info.name);
   return (
     <section className="topnavbar">
       <div className="hamburguerMenu">
@@ -24,10 +27,10 @@ function TopNavBar() {
       <h3>
         <FormattedMessage
           id="topNavBarCabecera"
-          // values={intl.formatMessage(
-          //   { id: "topNavBarCabecera" },
-          //   { name: user.info.name }
-          // )}
+          values={{
+            name: user.info.name,
+          }}
+          defaultMessage="Bienvenido / Welcome / Benvenuto"
         />
       </h3>
       <div className="userLogo">
