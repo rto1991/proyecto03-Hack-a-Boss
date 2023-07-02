@@ -8,7 +8,7 @@
   "cabecera": "Ricordami su questo computer",
   "cabeceraNuevaCuenta": "Non hai un account, creane uno?",
 
-  "modalEntrada": "`Ciao ${name}, arrivo alla tua Dashboard, solo un momento...`",
+  "modalEntrada": "`Ciao {name}, arrivo alla tua Dashboard, solo un momento...`",
   "topNavBarCabecera": "Benvenuto in MyCloudDrive, {name}",
 
   "buscadorLabel": "Trova un fascicolo",

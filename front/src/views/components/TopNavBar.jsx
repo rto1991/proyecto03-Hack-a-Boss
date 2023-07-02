@@ -35,7 +35,7 @@ function TopNavBar() {
           onClick={() => logout()}
           src="/boton-de-encendido.png"
           alt="Salir"
-          title={intl.formatMessage({ id: "BotonSalir" })}
+          title={intl.formatMessage({ id: "botonSalir" })}
         />
       </div>
     </section>
