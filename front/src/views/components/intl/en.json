@@ -22,5 +22,13 @@
   "botonAtras": "Go up a level",
 
   "recuperarCuenta": "Recover access to your account",
-  "solicitudReset": "Request a reset"
+  "solicitudReset": "Request a reset",
+
+  "sideMenuCarpeta": "Create new folder",
+  "sideMenuCrearCarpeta": "Create folder",
+  "sideMenuFichero": "Select a file",
+  "sideMenuSubir": "Upload file",
+  "sideMenuPerfil": "Edit profile",
+  "sideMenuBug": "Report a bug",
+  "sideMenuSeleccionar": "Select a file"
 }

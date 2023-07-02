@@ -1,10 +1,13 @@
 import { useUser } from "../../UserContext";
 import "./SideMenu.css";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
+import { FormattedMessage } from "react-intl";
+import { useIntl } from "react-intl";
+import LanguageSelector from "../LanguageSelector";
 
 function SideMenu({ makeFolder, dir, info, setInfo }) {
   const [user] = useUser();
+  const intl = useIntl();
 
   function closeMenu() {
     document.getElementById("mySidenav").style.width = "0";
@@ -16,13 +19,13 @@ function SideMenu({ makeFolder, dir, info, setInfo }) {
 
   const showInputModal = () => {
     Swal.fire({
-      title: "Crear nueva carpeta",
+      title: intl.formatMessage({ id: "sideMenuCarpeta" }),
       input: "text",
       inputAttributes: {
         autocapitalize: "off",
       },
       showCancelButton: true,
-      confirmButtonText: "Crear carpeta",
+      confirmButtonText: intl.formatMessage({ id: "sideMenuCrearCarpeta" }),
       showLoaderOnConfirm: true,
       preConfirm: async (folderName) => {
         await crearCarpeta(folderName);
@@ -59,7 +62,7 @@ function SideMenu({ makeFolder, dir, info, setInfo }) {
 
   const subirArchivo = async () => {
     const { value: file } = await Swal.fire({
-      title: "Selecciona un fichero",
+      title: intl.formatMessage({ id: "sideMenuSeleccionar" }),
       input: "file",
     });
 
@@ -88,10 +91,19 @@ function SideMenu({ makeFolder, dir, info, setInfo }) {
       <a onClick={() => closeMenu()} className="closebtn">
         &times;
       </a>
-      <a onClick={() => showInputModal()}>📂 Crear carpeta</a>
-      <a onClick={() => subirArchivo()}>📄 Subir archivo</a>
-      <a href="/editProfile">⚙️ Editar perfil</a>
-      <a href="#">🐜 Reportar un bug</a>
+      <LanguageSelector />
+      <a onClick={() => showInputModal()}>
+        📂 <FormattedMessage id="sideMenuCarpeta" />
+      </a>
+      <a onClick={() => subirArchivo()}>
+        📄 <FormattedMessage id="sideMenuSubir" />
+      </a>
+      <a href="/editProfile">
+        ⚙️ <FormattedMessage id="sideMenuPerfil" />
+      </a>
+      <a href="#">
+        🐜 <FormattedMessage id="sideMenuBug" />
+      </a>
     </div>
   );
 }
