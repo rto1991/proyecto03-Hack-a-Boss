@@ -96,7 +96,7 @@ function FileSearch({
           }
         />
       </div>
-      console.log(files);
+
       <div className="breadCrumb">
         <p>
           {!enPapelera

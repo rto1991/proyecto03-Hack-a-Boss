@@ -3,6 +3,8 @@
   gap: 10px;
   align-items: center;
   justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .banderas button {
@@ -14,12 +16,9 @@
 .banderas img {
   width: 30px;
   border-radius: 50%;
+  transition: transform 0.3s ease-in-out;
 }
 
 .banderas img:hover {
   transform: scale(1.4);
-}
-
-.banderas img {
-  transition: transform 0.3s ease-in-out;
 }
