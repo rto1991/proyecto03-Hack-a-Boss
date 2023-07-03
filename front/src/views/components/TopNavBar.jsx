@@ -21,7 +21,7 @@ function TopNavBar() {
           onClick={() => showMenu()}
           src="/menu.png"
           alt="menu"
-          title="menu"
+          title={intl.formatMessage({ id: "topNavBarMenu" })}
         ></img>
       </div>
       <h3>

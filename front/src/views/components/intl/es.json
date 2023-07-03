@@ -81,5 +81,7 @@
   "editProfileDireccion": "Dirección",
   "editProfileCiudad": "Ciudad",
   "editProfileProvincia": "Provincia",
-  "editProfileActualizar": "Actualizar"
+  "editProfileActualizar": "Actualizar",
+
+  "topNavBarMenu": "menu"
 }
