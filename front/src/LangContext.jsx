@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import esMessages from "./views/components/intl/es.json";
 import enMessages from "./views/components/intl/en.json";
 import itMessages from "./views/components/intl/it.json";
+import frMessages from "./views/components/intl/fr.json";
 import { IntlProvider } from "react-intl";
 
 const langContext = React.createContext();
@@ -23,6 +24,10 @@ const LangProvider = ({ children }) => {
       case "it":
         establecerMensajes(itMessages);
         establecerLocale(`es`);
+        break;
+      case "fr":
+        establecerMensajes(frMessages);
+        establecerLocale(`fr`);
         break;
       default:
         establecerMensajes(esMessages);

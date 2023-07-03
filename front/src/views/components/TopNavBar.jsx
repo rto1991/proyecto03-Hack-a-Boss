@@ -30,7 +30,6 @@ function TopNavBar() {
           values={{
             name: user.info.name,
           }}
-          defaultMessage="Bienvenido / Welcome / Benvenuto"
         />
       </h3>
       <div className="userLogo">

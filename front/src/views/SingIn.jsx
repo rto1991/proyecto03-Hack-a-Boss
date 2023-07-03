@@ -15,6 +15,8 @@ import { useState } from "react";
 import Swal from "sweetalert2";
 import { useUserActions } from "../hooks/api";
 import { useUser } from "../UserContext";
+import { FormattedMessage } from "react-intl";
+import { useIntl } from "react-intl";
 
 const defaultTheme = createTheme();
 function SingIn() {
@@ -25,6 +27,7 @@ function SingIn() {
   const [repeatPassword, setRepeatPassword] = useState("");
   const { signin, logout } = useUserActions();
   const [user] = useUser();
+  const intl = useIntl();
   let res = {}; //la usaremos para capturar la respuesta y manejar posibles mensajes de error
   //usamos hook navigate de useNavigate porque el Componente Navigate directamente no me funciona
   const navigate = useNavigate();
@@ -33,8 +36,8 @@ function SingIn() {
     //comprobar coincidencia de passwords
     if (password !== repeatPassword) {
       return Swal.fire({
-        title: "Error!",
-        text: "Las contraseñas no coinciden",
+        title: intl.formatMessage({ id: "singInError" }),
+        text: intl.formatMessage({ id: "singInCoincidir" }),
         icon: "error",
         confirmButtonText: "Ok",
       });
@@ -44,7 +47,7 @@ function SingIn() {
       await signin(name, last_name, "normal", mail, password);
     } catch (error) {
       return Swal.fire({
-        title: "Error!",
+        title: intl.formatMessage({ id: "singInError" }),
         text: error.message,
         icon: "error",
         confirmButtonText: "Ok",
@@ -55,18 +58,16 @@ function SingIn() {
   if (user) {
     if (user.status === "error") {
       Swal.fire({
-        title: "Error!",
-        text:
-          "Se produjo un error intentando registrar el usuario. " +
-          user.message,
+        title: intl.formatMessage({ id: "singInError" }),
+        text: intl.formatMessage({ id: "singInErrorUsuario" }) + user.message,
         icon: "error",
         confirmButtonText: "Ok",
       });
       logout();
     } else {
       Swal.fire({
-        title: "¡Éxito!",
-        text: "Has creado tu usuario correctamente, ve a tu bandeja de entrada para validarlo y poder usar MyCloudDrive",
+        title: intl.formatMessage({ id: "singInExito" }),
+        text: intl.formatMessage({ id: "singInCreado" }),
         icon: "success",
         confirmButtonText: "Ok",
       });
@@ -94,7 +95,7 @@ function SingIn() {
             }}
           >
             <Typography component="h1" variant="h5">
-              Regístrate en MyCloudDrive
+              <FormattedMessage id="singInRegistro" />
             </Typography>
             <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
               <TextField
@@ -103,7 +104,7 @@ function SingIn() {
                 required
                 fullWidth
                 id="name"
-                label="Nombre"
+                label={intl.formatMessage({ id: "singInNombre" })}
                 name="name"
                 autoFocus
               />
@@ -113,7 +114,7 @@ function SingIn() {
                 required
                 fullWidth
                 id="last_name"
-                label="Apellidos"
+                label={intl.formatMessage({ id: "singInApellidos" })}
                 name="last_name"
                 autoFocus
               />
@@ -123,7 +124,7 @@ function SingIn() {
                 required
                 fullWidth
                 id="email"
-                label="Correo electrónico"
+                label={intl.formatMessage({ id: "cabeceraLabelCorreo" })}
                 name="email"
                 autoFocus
               />
@@ -133,13 +134,12 @@ function SingIn() {
                 required
                 fullWidth
                 name="password"
-                label="Password"
+                label={intl.formatMessage({ id: "cabeceraLabelContraseña" })}
                 type="password"
                 id="password"
               />
               <Typography component="p" variant="p">
-                Password debe tener entre 8 y 30 caracteres, contener al menos
-                una letra mayúscula, un número y un símbolo especial (!@#$&*)
+                <FormattedMessage id="pwdInfo" />
               </Typography>
               <TextField
                 onChange={(e) => setRepeatPassword(e.target.value)}
@@ -147,7 +147,7 @@ function SingIn() {
                 required
                 fullWidth
                 name="repeat_password"
-                label="Repite Password"
+                label={intl.formatMessage({ id: "singInRepetir" })}
                 type="password"
                 id="repeat_password"
               />
@@ -160,7 +160,7 @@ function SingIn() {
                     variant="contained"
                     sx={{ mt: 3, mb: 2 }}
                   >
-                    Volver
+                    <FormattedMessage id="pwdVolver" />
                   </Button>
                 </Grid>
                 <Grid item>
@@ -169,7 +169,7 @@ function SingIn() {
                     variant="contained"
                     sx={{ mt: 3, mb: 2 }}
                   >
-                    Registrarse
+                    <FormattedMessage id="pwdRegistrarse" />
                   </Button>
                 </Grid>
               </Grid>
