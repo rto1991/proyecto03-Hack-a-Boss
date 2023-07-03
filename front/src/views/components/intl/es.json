@@ -65,5 +65,10 @@
   "singInRegistro": "Regístrate en MyClouDrive",
   "singInNombre": "Nombre",
   "singInApellidos": "Apellidos",
-  "singInRepetir": "Repite paswword"
+  "singInRepetir": "Repite paswword",
+
+  "popUpMover": "Mover",
+  "popUpDescargar": "Descargar",
+  "popUpRenombrar": "Renombrar",
+  "popUpRecuperar": "Recuperar"
 }

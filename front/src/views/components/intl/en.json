@@ -64,5 +64,10 @@
   "singInRegistro": "Sign up for MyCloudDrive",
   "singInNombre": "First Name",
   "singInApellidos": "Last Name",
-  "singInRepetir": "Repeat password"
+  "singInRepetir": "Repeat password",
+
+  "popUpMover": "Move",
+  "popUpDescargar": "Download",
+  "popUpRenombrar": "Rename",
+  "popUpRecuperar": "Recover"
 }

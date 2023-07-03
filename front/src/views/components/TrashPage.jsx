@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useFilesActions } from "../../hooks/api";
+import { FormattedMessage } from "react-intl";
 
 function TrashPage() {
   const { getTrashFiles, trashFiles } = useFilesActions();
@@ -15,7 +16,9 @@ function TrashPage() {
   console.log(trashFiles);
   return (
     <div>
-      <h1>Papelera</h1>
+      <h1>
+        <FormattedMessage id="directorioPapelera" />
+      </h1>
       {/* Renderizar los archivos de la papelera */}
       {trashFiles?.map((file) => (
         <div key={file.id}>

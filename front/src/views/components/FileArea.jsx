@@ -342,10 +342,10 @@ function FileArea({
     >
       <Menu id={MENU_ID}>
         <Item id="move" onClick={handleItemClick}>
-          Mover
+          <FormattedMessage id="popUpMover" />
         </Item>
         <Item id="rename" onClick={handleItemClick}>
-          Renombrar
+          <FormattedMessage id="popUpRenombrar" />
         </Item>
         <Item id="delete" onClick={handleItemClick}>
           {enPapelera
@@ -353,11 +353,11 @@ function FileArea({
             : intl.formatMessage({ id: "fileAreaTrash" })}
         </Item>
         <Item id="download" onClick={handleItemClick}>
-          Descargar
+          <FormattedMessage id="popUpDescargar" />
         </Item>
         {enPapelera ? (
           <Item id="recover" onClick={handleItemClick}>
-            Recuperar
+            <FormattedMessage id="popUpRecuperar" />
           </Item>
         ) : (
           ""
