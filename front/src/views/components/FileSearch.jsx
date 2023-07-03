@@ -1,7 +1,7 @@
 import { TextField } from "@mui/material";
 import "./FileSearch.css";
 import Swal from "sweetalert2";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function FileSearch({
   files,
@@ -15,13 +15,11 @@ function FileSearch({
   setEnPapelera,
 }) {
   const [searchString, setSearchString] = useState();
-
+  let searchStringAnterior = "";
   const upLevel = async () => {
     try {
       await changeDir("..p");
-    } catch (error) {
-      console.log("error chachi");
-    }
+    } catch (error) {}
   };
 
   const trashFiles = () => {
@@ -38,6 +36,7 @@ function FileSearch({
     if (searchString == "") {
       dir();
     }
+
     const newFiles = {
       status: "info",
       data: {
@@ -62,11 +61,21 @@ function FileSearch({
     setInfo();
   }
 
+  const handleKeyboardEvent = (e) => {
+    if (e.keyCode == 13) {
+      searchFiles();
+    }
+  };
+
   return (
     <>
       <div className="searchForm">
         <TextField
-          onChange={(e) => setSearchString(e.target.value)}
+          onChange={(e) => {
+            dir();
+            setSearchString(e.target.value);
+          }}
+          onKeyDown={handleKeyboardEvent}
           margin="normal"
           required
           fullWidth
@@ -76,7 +85,9 @@ function FileSearch({
         ></TextField>
         <img
           className="btnBuscar"
-          onClick={() => searchFiles()}
+          onClick={() => {
+            searchFiles();
+          }}
           src="/lupa.png"
           alt="Buscar"
           title="Buscar"

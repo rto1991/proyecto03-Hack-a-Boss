@@ -65,17 +65,16 @@ const renameDirectory = async (req, res, next) => {
       error.httpStatus = 500;
       throw error;
     }
+    //renombramos la carpeta en el sistema de archivos
+    await fs.rename(
+      path.join(folder[0].filePath, folderName),
+      path.join(folder[0].filePath, newName)
+    );
 
     //renombramos la carpeta en la BD
     await connect.query(
       "UPDATE files SET fileName = ?, date_upd = ? WHERE id = ?",
       [newName, new Date(), folder[0].id]
-    );
-
-    //renombramos la carpeta en el sistema de archivos
-    await fs.rename(
-      path.join(folder[0].filePath, folderName),
-      path.join(folder[0].filePath, newName)
     );
 
     //enviamos respuesta de que la operación finalizó correctamente

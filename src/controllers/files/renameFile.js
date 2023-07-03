@@ -45,17 +45,17 @@ const renameFile = async (req, res, next) => {
       throw error;
     }
 
-    // Actualizar el nombre del archivo en la BD
-    await connect.query(`UPDATE files SET fileName = ? WHERE id = ?`, [
-      newFileName,
-      file[0].file_id,
-    ]);
-
     // Renombrar el archivo físicamente en el sistema de archivos
     await fs.rename(
       path.join(file[0].filePath, fileName),
       path.join(file[0].filePath, newFileName)
     );
+
+    // Actualizar el nombre del archivo en la BD
+    await connect.query(`UPDATE files SET fileName = ? WHERE id = ?`, [
+      newFileName,
+      file[0].file_id,
+    ]);
 
     res.status(200).send({
       status: "info",

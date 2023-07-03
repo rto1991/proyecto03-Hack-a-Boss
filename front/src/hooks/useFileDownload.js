@@ -8,7 +8,7 @@ function useFileDownload() {
     try {
       const headers = {};
       if (user) headers.Authorization = `${user.data.token}`;
-      headers["Content-Disposition"] = "attachment: filename = "+fileName;
+      headers["Content-Disposition"] = "attachment: filename = " + fileName;
       const res = await fetch(url, { headers });
       const blob = await res.blob();
       if (!res.ok) {
@@ -30,10 +30,6 @@ function useFileDownload() {
   };
 
   return getFile;
-
 }
-
-
-
 
 export default useFileDownload;
