@@ -62,7 +62,7 @@ const makeFolder = async (req, res, next) => {
         1,
         currentFolder_id,
         0,
-        path.join(currentFolder[0].breadCrumb, folderName),
+        path.join(currentFolder[0].fileName, folderName),
       ]
     );
 
