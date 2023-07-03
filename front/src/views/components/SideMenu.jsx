@@ -17,6 +17,7 @@ function SideMenu({ makeFolder, dir, info, setInfo }) {
   const showInputModal = () => {
     Swal.fire({
       title: "Crear nueva carpeta",
+      text: "Se permite solo letras [a-z][A-Z] y números [0-9]",
       input: "text",
       inputAttributes: {
         autocapitalize: "off",

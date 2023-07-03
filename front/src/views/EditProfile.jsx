@@ -9,9 +9,9 @@ import {
   Typography,
   createTheme,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import "./SingIn.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { useFilesActions, useUserActions } from "../hooks/api";
 import { useUser } from "../UserContext";
@@ -19,19 +19,27 @@ import { useUser } from "../UserContext";
 const defaultTheme = createTheme();
 function EditProfile() {
   const [user] = useUser();
-  const [name, setName] = useState(user.info.name);
-  const [lastName, setLastName] = useState(user.info.last_name);
-  const [mail, setMail] = useState(user.info.mail);
-  const [tel, setTel] = useState(user.info.tel);
-  const [zipCode, setZipCode] = useState(user.info.zipcode);
-  const [address, setAddress] = useState(user.info.address);
-  const [city, setCity] = useState(user.info.city);
-  const [province, setProvince] = useState(user.info.province);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!user) {
+      console.log(user);
+      navigate("/");
+    }
+  }, []);
+
+  const [name, setName] = useState(user?.info.name);
+  const [lastName, setLastName] = useState(user?.info.last_name);
+  const [mail, setMail] = useState(user?.info.mail);
+  const [tel, setTel] = useState(user?.info.tel);
+  const [zipCode, setZipCode] = useState(user?.info.zipcode);
+  const [address, setAddress] = useState(user?.info.address);
+  const [city, setCity] = useState(user?.info.city);
+  const [province, setProvince] = useState(user?.info.province);
 
   const { updateUser, info } = useUserActions();
   const { setInfo } = useFilesActions();
   //usamos hook navigate de useNavigate porque el Componente Navigate directamente no me funciona
-  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -65,10 +73,6 @@ function EditProfile() {
       });
     }
   };
-
-  if (!user) {
-    navigate("/");
-  }
 
   return (
     <ThemeProvider theme={defaultTheme}>

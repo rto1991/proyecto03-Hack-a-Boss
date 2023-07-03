@@ -3,6 +3,7 @@
 const getDB = require("../../database/db");
 const fs = require("fs/promises");
 const path = require("path");
+const Joi = require("joi");
 
 const renameFile = async (req, res, next) => {
   let connect;
@@ -11,6 +12,25 @@ const renameFile = async (req, res, next) => {
     const idUser = userInfo.id;
     const { fileName, newFileName } = req.body; // Aquí nos traemos el nombre actual del archivo y el nuevo nombre
     connect = await getDB();
+
+    //validaciones (by @joffrey)
+    const schema = Joi.object({
+      folderName: Joi.string().pattern(
+        new RegExp("^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).{8,30}$")
+      ),
+    });
+    try {
+      await schema.validateAsync({
+        filderName: newName,
+      });
+    } catch (err) {
+      const error = new Error(
+        "El nuevo nombre del fichero tiene caracteres no permitidos, por favor, utiliza sólo los carácteres permitidos"
+      );
+      error.httpStatus = 404;
+      throw error;
+    }
+
     const [file] = await connect.query(
       `SELECT u.*, f.*, f.id as file_id FROM files f INNER JOIN users u ON u.currentFolder_id = f.parent_dir_id WHERE f.fileName = ? and f.id_user = ?`,
       [fileName, idUser]

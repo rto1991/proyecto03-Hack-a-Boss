@@ -108,7 +108,6 @@ function FileArea({
   };
 
   function handleContextMenu(event, data) {
-    console.log(event, data.menu_id);
     if (event.target.className != "fileArea" && data.menu_id == MENU_ID)
       show({
         id: data.menu_id,
@@ -129,145 +128,157 @@ function FileArea({
   }
 
   const handleItemClick = ({ id, event, props }) => {
-    switch (id) {
-      case "rename":
-        if (props.key.type == "Folder") {
-          //renombramos carpeta
+    try {
+      switch (id) {
+        case "rename":
+          if (props.key.type == "Folder") {
+            //renombramos carpeta
+            Swal.fire({
+              title: "Nuevo nombre para la carpeta " + props.key.fileName,
+              text: "Se permite solo letras [a-z][A-Z] y números [0-9]",
+              input: "text",
+              inputAttributes: {
+                autocapitalize: "off",
+              },
+              showCancelButton: true,
+              confirmButtonText: "Renombrar carpeta",
+              showLoaderOnConfirm: true,
+              preConfirm: async (folderName) => {
+                await renameDirectory(props.key.fileName, folderName);
+              },
+              allowOutsideClick: () => !Swal.isLoading(),
+            }).then((result) => {
+              if (result.isConfirmed) {
+              }
+            });
+          } else {
+            //renombramos archivo
+            Swal.fire({
+              title: "Nuevo nombre para el fichero " + props.key.fileName,
+              text: "Se permite solo letras [a-z][A-Z] y números [0-9]",
+              input: "text",
+              inputAttributes: {
+                autocapitalize: "off",
+              },
+              showCancelButton: true,
+              confirmButtonText: "Renombrar fichero",
+              showLoaderOnConfirm: true,
+              preConfirm: async (fileName) => {
+                await renameFil(props.key.fileName, fileName);
+              },
+              allowOutsideClick: () => !Swal.isLoading(),
+            }).then((result) => {
+              if (result.isConfirmed) {
+              }
+            });
+          }
+
+          break;
+        case "delete":
+          if (enPapelera) {
+            Swal.fire({
+              title: `¿Seguro de borrar "${props.key.fileName}"? ${
+                props.key.type == "Folder"
+                  ? ", este elemento es de tipo carpeta, se borrarán todos los elementos que contenga"
+                  : ""
+              }`,
+              showCancelButton: true,
+              confirmButtonText: "Si, borrar",
+              cancelButtonText: "Atrás",
+            }).then((result) => {
+              /* Read more about isConfirmed, isDenied below */
+              if (result.isConfirmed) {
+                props.key.type == "Folder"
+                  ? deleteDirectory(props.key.fileName)
+                  : deleteFil(props.key.fileName);
+              }
+            });
+          } else {
+            moverAPapelera(props.key.id);
+          }
+
+          break;
+        case "makeFolder":
           Swal.fire({
-            title: "Nuevo nombre para la carpeta " + props.key.fileName,
+            title: "Crear nueva carpeta",
+            text: "Se permite solo letras [a-z][A-Z] y números [0-9]",
             input: "text",
             inputAttributes: {
               autocapitalize: "off",
             },
             showCancelButton: true,
-            confirmButtonText: "Renombrar carpeta",
+            confirmButtonText: "Crear carpeta",
             showLoaderOnConfirm: true,
             preConfirm: async (folderName) => {
-              await renameDirectory(props.key.fileName, folderName);
+              await crearCarpeta(folderName);
             },
             allowOutsideClick: () => !Swal.isLoading(),
           }).then((result) => {
             if (result.isConfirmed) {
             }
           });
-        } else {
-          //renombramos archivo
+          break;
+        case "uploadFile":
+          subirArchivo();
+          break;
+        case "download":
+          const Toast = Swal.mixin({
+            toast: true,
+            position: "top-right",
+            iconColor: "white",
+            customClass: {
+              popup: "colored-toast",
+            },
+            showConfirmButton: false,
+            timer: 3500,
+            timerProgressBar: true,
+          });
+
+          Toast.fire({
+            icon: "success",
+            title:
+              props.key.type == "Folder"
+                ? "Comprimiendo y descargando carpeta"
+                : "Descargando tu archivo",
+          });
+
+          bajarFichero(
+            props.key.id,
+            props.key.type == "Folder"
+              ? props.key.fileName + ".tar"
+              : props.key.fileName
+          );
+          break;
+        case "move":
           Swal.fire({
-            title: "Nuevo nombre para el fichero " + props.key.fileName,
+            title: "Especifica el nombre de la carpeta de destino",
             input: "text",
             inputAttributes: {
               autocapitalize: "off",
             },
             showCancelButton: true,
-            confirmButtonText: "Renombrar fichero",
+            confirmButtonText: "Mover fichero",
             showLoaderOnConfirm: true,
-            preConfirm: async (fileName) => {
-              await renameFil(props.key.fileName, fileName);
+            preConfirm: async (folderName) => {
+              await moverFichero(props.key.id, folderName);
             },
             allowOutsideClick: () => !Swal.isLoading(),
           }).then((result) => {
             if (result.isConfirmed) {
             }
           });
-        }
-
-        break;
-      case "delete":
-        if (enPapelera) {
-          Swal.fire({
-            title: `¿Seguro de borrar "${props.key.fileName}"? ${
-              props.key.type == "Folder"
-                ? ", este elemento es de tipo carpeta, se borrarán todos los elementos que contenga"
-                : ""
-            }`,
-            showCancelButton: true,
-            confirmButtonText: "Si, borrar",
-            cancelButtonText: "Atrás",
-          }).then((result) => {
-            /* Read more about isConfirmed, isDenied below */
-            if (result.isConfirmed) {
-              props.key.type == "Folder"
-                ? deleteDirectory(props.key.fileName)
-                : deleteFil(props.key.fileName);
-            }
-          });
-        } else {
-          moverAPapelera(props.key.id);
-        }
-
-        break;
-      case "makeFolder":
-        Swal.fire({
-          title: "Crear nueva carpeta",
-          input: "text",
-          inputAttributes: {
-            autocapitalize: "off",
-          },
-          showCancelButton: true,
-          confirmButtonText: "Crear carpeta",
-          showLoaderOnConfirm: true,
-          preConfirm: async (folderName) => {
-            await crearCarpeta(folderName);
-          },
-          allowOutsideClick: () => !Swal.isLoading(),
-        }).then((result) => {
-          if (result.isConfirmed) {
-          }
-        });
-        break;
-      case "uploadFile":
-        subirArchivo();
-        break;
-      case "download":
-        const Toast = Swal.mixin({
-          toast: true,
-          position: "top-right",
-          iconColor: "white",
-          customClass: {
-            popup: "colored-toast",
-          },
-          showConfirmButton: false,
-          timer: 3500,
-          timerProgressBar: true,
-        });
-
-        Toast.fire({
-          icon: "success",
-          title:
-            props.key.type == "Folder"
-              ? "Comprimiendo y descargando carpeta"
-              : "Descargando tu archivo",
-        });
-
-        bajarFichero(
-          props.key.id,
-          props.key.type == "Folder"
-            ? props.key.fileName + ".tar"
-            : props.key.fileName
-        );
-        break;
-      case "move":
-        Swal.fire({
-          title: "Especifica el nombre de la carpeta de destino",
-          input: "text",
-          inputAttributes: {
-            autocapitalize: "off",
-          },
-          showCancelButton: true,
-          confirmButtonText: "Mover fichero",
-          showLoaderOnConfirm: true,
-          preConfirm: async (folderName) => {
-            await moverFichero(props.key.id, folderName);
-          },
-          allowOutsideClick: () => !Swal.isLoading(),
-        }).then((result) => {
-          if (result.isConfirmed) {
-          }
-        });
-        break;
-      case "recover":
-        recuperarDeLaPapelera(props.key.id);
-        break;
+          break;
+        case "recover":
+          recuperarDeLaPapelera(props.key.id);
+          break;
+      }
+    } catch (error) {
+      Swal.fire({
+        title: "Error!",
+        text: error.message,
+        icon: "error",
+        confirmButtonText: "Ok",
+      });
     }
   };
 
@@ -327,6 +338,18 @@ function FileArea({
         confirmButtonText: "Ok",
       });
       setFiles();
+    }
+  }
+
+  if (info) {
+    console.log(info);
+    if (info.status == "error") {
+      Swal.fire({
+        title: "Error!",
+        text: info.message,
+        icon: "error",
+        confirmButtonText: "Ok",
+      });
     }
   }
 

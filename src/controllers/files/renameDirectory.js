@@ -3,6 +3,7 @@
 const getDB = require("../../database/db");
 const fs = require("fs/promises");
 const path = require("path");
+const Joi = require("joi");
 
 const renameDirectory = async (req, res, next) => {
   let connect;
@@ -13,6 +14,25 @@ const renameDirectory = async (req, res, next) => {
     const folderName = req.params.oldName; //aquí nos traemos el nombre de carpeta a la que queremos cambiar el nombre
     const newName = req.params.newName; //aquí nos traemos el nuevo nombre para la carpeta
     connect = await getDB();
+
+    //validaciones (by @joffrey)
+    const schema = Joi.object({
+      folderName: Joi.string().pattern(
+        new RegExp("^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).{8,30}$")
+      ),
+    });
+    try {
+      await schema.validateAsync({
+        filderName: newName,
+      });
+    } catch (err) {
+      const error = new Error(
+        "El nuevo nombre de la carpeta tiene caracteres no permitidos, por favor, utiliza sólo los carácteres permitidos"
+      );
+      error.httpStatus = 404;
+      throw error;
+    }
+
     const [user] = await connect.query(`SELECT * FROM users WHERE id = ?`, [
       idUser,
     ]);
