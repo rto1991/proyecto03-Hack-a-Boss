@@ -15,6 +15,7 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import "./Home.css";
 import { FormattedMessage } from "react-intl";
+import LanguageSelector from "./LanguageSelector";
 
 function Copyright(props) {
   return (
@@ -83,6 +84,7 @@ export default function PasswordRecovery() {
     <ThemeProvider theme={defaultTheme}>
       <div className="mainContainer">
         <Container component="main" maxWidth="xs">
+          <LanguageSelector />
           <CssBaseline />
           <Box
             sx={{
@@ -118,7 +120,7 @@ export default function PasswordRecovery() {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                <FormattedMessage id="solicitudResert" />
+                <FormattedMessage id="solicitudReset" />
               </Button>
             </Box>
           </Box>

@@ -70,5 +70,16 @@
   "popUpMover": "Mover",
   "popUpDescargar": "Descargar",
   "popUpRenombrar": "Renombrar",
-  "popUpRecuperar": "Recuperar"
+  "popUpRecuperar": "Recuperar",
+
+  "editProfileCabecera": "Edita los datos de tu perfil",
+  "editProfileCarpeta": "Nuevo nombre para la carpeta",
+  "editProfileRenombrar": "Renombrar carpeta",
+  "editProfileModificar": "Usuario modificado correctamente",
+  "editProfileTelefono": "Telefono",
+  "editProfileCP": "Código postal",
+  "editProfileDireccion": "Dirección",
+  "editProfileCiudad": "Ciudad",
+  "editProfileProvincia": "Provincia",
+  "editProfileActualizar": "Actualizar"
 }

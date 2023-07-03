@@ -69,5 +69,16 @@
   "popUpMover": "Move",
   "popUpDescargar": "Download",
   "popUpRenombrar": "Rename",
-  "popUpRecuperar": "Recover"
+  "popUpRecuperar": "Recover",
+
+  "editProfileCabecera": "Edit your profile data",
+  "editProfileCarpeta": "New name for the folder",
+  "editProfileRenombrar": "Rename folder",
+  "editProfileModificar": "User modified successfully",
+  "editProfileTelefono": "Phone",
+  "editProfileCP": "Postal code",
+  "editProfileDireccion": "Address",
+  "editProfileCiudad": "City",
+  "editProfileProvincia": "Province",
+  "editProfileActualizar": "Update"
 }

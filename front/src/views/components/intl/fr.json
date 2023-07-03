@@ -70,5 +70,16 @@
   "popUpMover": "Déplacer",
   "popUpDescargar": "Télécharger",
   "popUpRenombrar": "Renommer",
-  "popUpRecuperar": "Récupérer"
+  "popUpRecuperar": "Récupérer",
+
+  "editProfileCabecera": "Modifier les données de votre profil",
+  "editProfileCarpeta": "Nouveau nom pour le dossier",
+  "editProfileRenombrar": "Renommer le dossier",
+  "editProfileModificar": "Utilisateur modifié avec succès",
+  "editProfileTelefono": "Téléphone",
+  "editProfileCP": "Code postal",
+  "editProfileDireccion": "Adresse",
+  "editProfileCiudad": "Ville",
+  "editProfileProvincia": "Province",
+  "editProfileActualizar": "Mettre à jour"
 }

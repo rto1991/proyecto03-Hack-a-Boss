@@ -136,13 +136,17 @@ function FileArea({
         if (props.key.type == "Folder") {
           //renombramos carpeta
           Swal.fire({
-            title: "Nuevo nombre para la carpeta " + props.key.fileName,
+            title:
+              intl.formatMessage({ id: "editProfileCarpeta" }) +
+              props.key.fileName,
             input: "text",
             inputAttributes: {
               autocapitalize: "off",
             },
             showCancelButton: true,
-            confirmButtonText: "Renombrar carpeta",
+            confirmButtonText: intl.formatMessage({
+              id: "editProfileRenombrar",
+            }),
             showLoaderOnConfirm: true,
             preConfirm: async (folderName) => {
               await renameDirectory(props.key.fileName, folderName);
@@ -326,7 +330,7 @@ function FileArea({
   if (files) {
     if (files.status == "error") {
       Swal.fire({
-        title: "Error!",
+        title: intl.formatMessage({ id: "singInError" }),
         text: user.message,
         icon: "error",
         confirmButtonText: "Ok",

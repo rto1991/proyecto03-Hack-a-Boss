@@ -96,13 +96,15 @@ function FileSearch({
           }
         />
       </div>
-
+      console.log(files);
       <div className="breadCrumb">
         <p>
           {!enPapelera
-            ? intl.formatMessage({ id: "directorio" })
-            : // files.data.currentDir)
-              intl.formatMessage({ id: "directorioPapelera" })}
+            ? intl.formatMessage(
+                { id: "directorio" },
+                { directorio: files?.data.currentDir }
+              )
+            : intl.formatMessage({ id: "directorioPapelera" })}
         </p>
         {!enPapelera ? (
           <button

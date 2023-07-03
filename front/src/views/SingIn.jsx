@@ -17,6 +17,7 @@ import { useUserActions } from "../hooks/api";
 import { useUser } from "../UserContext";
 import { FormattedMessage } from "react-intl";
 import { useIntl } from "react-intl";
+import LanguageSelector from "./LanguageSelector";
 
 const defaultTheme = createTheme();
 function SingIn() {
@@ -85,6 +86,7 @@ function SingIn() {
     <ThemeProvider theme={defaultTheme}>
       <div className="mainContainer">
         <Container component="main" maxWidth="xs">
+          <LanguageSelector />
           <CssBaseline />
           <Box
             sx={{
@@ -94,9 +96,8 @@ function SingIn() {
               alignItems: "center",
             }}
           >
-            <Typography component="h1" variant="h5">
-              <FormattedMessage id="singInRegistro" />
-            </Typography>
+            <FormattedMessage id="singInRegistro" />
+            <Typography component="h1" variant="h5"></Typography>
             <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
               <TextField
                 onChange={(e) => setName(e.target.value)}
@@ -105,7 +106,7 @@ function SingIn() {
                 fullWidth
                 id="name"
                 label={intl.formatMessage({ id: "singInNombre" })}
-                name="name"
+                name={intl.formatMessage({ id: "singInNombre" })}
                 autoFocus
               />
               <TextField
@@ -115,7 +116,7 @@ function SingIn() {
                 fullWidth
                 id="last_name"
                 label={intl.formatMessage({ id: "singInApellidos" })}
-                name="last_name"
+                name={intl.formatMessage({ id: "singInApellidos" })}
                 autoFocus
               />
               <TextField
@@ -125,7 +126,7 @@ function SingIn() {
                 fullWidth
                 id="email"
                 label={intl.formatMessage({ id: "cabeceraLabelCorreo" })}
-                name="email"
+                name={intl.formatMessage({ id: "cabeceraLabelCorreo" })}
                 autoFocus
               />
               <TextField
@@ -133,7 +134,7 @@ function SingIn() {
                 margin="normal"
                 required
                 fullWidth
-                name="password"
+                name={intl.formatMessage({ id: "cabeceraLabelContraseña" })}
                 label={intl.formatMessage({ id: "cabeceraLabelContraseña" })}
                 type="password"
                 id="password"
@@ -146,7 +147,7 @@ function SingIn() {
                 margin="normal"
                 required
                 fullWidth
-                name="repeat_password"
+                name={intl.formatMessage({ id: "singInRepetir" })}
                 label={intl.formatMessage({ id: "singInRepetir" })}
                 type="password"
                 id="repeat_password"

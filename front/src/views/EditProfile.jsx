@@ -15,6 +15,9 @@ import { useState } from "react";
 import Swal from "sweetalert2";
 import { useFilesActions, useUserActions } from "../hooks/api";
 import { useUser } from "../UserContext";
+import LanguageSelector from "./LanguageSelector";
+import { FormattedMessage } from "react-intl";
+import { useIntl } from "react-intl";
 
 const defaultTheme = createTheme();
 function EditProfile() {
@@ -27,6 +30,7 @@ function EditProfile() {
   const [address, setAddress] = useState(user.info.address);
   const [city, setCity] = useState(user.info.city);
   const [province, setProvince] = useState(user.info.province);
+  const intl = useIntl();
 
   const { updateUser, info } = useUserActions();
   const { setInfo } = useFilesActions();
@@ -49,8 +53,8 @@ function EditProfile() {
         province
       );
       Swal.fire({
-        title: "¡Éxito!",
-        text: "Usuario modificado correctamente",
+        title: intl.formatMessage({ id: "singInExito" }),
+        text: intl.formatMessage({ id: "singInModificar" }),
         icon: "success",
         confirmButtonText: "Ok",
       });
@@ -58,7 +62,7 @@ function EditProfile() {
       navigate("/dashboard");
     } catch (error) {
       return Swal.fire({
-        title: "Error!",
+        title: intl.formatMessage({ id: "singInError" }),
         text: error.message,
         icon: "error",
         confirmButtonText: "Ok",
@@ -84,8 +88,9 @@ function EditProfile() {
             }}
           >
             <Typography component="h1" variant="h5">
-              Edita los datos de tu perfil
+              <FormattedMessage id="editProfileCabecera" />
             </Typography>
+            <LanguageSelector />
             <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
               <TextField
                 onChange={(e) => setName(e.target.value)}
@@ -93,7 +98,7 @@ function EditProfile() {
                 required
                 fullWidth
                 id="name"
-                label="Nombre"
+                label={intl.formatMessage({ id: "singInNombre" })}
                 name="name"
                 value={name}
                 autoFocus
@@ -104,7 +109,7 @@ function EditProfile() {
                 required
                 fullWidth
                 id="last_name"
-                label="Apellidos"
+                label={intl.formatMessage({ id: "singInApellidos" })}
                 name="last_name"
                 value={lastName}
                 autoFocus
@@ -115,7 +120,7 @@ function EditProfile() {
                 required
                 fullWidth
                 id="email"
-                label="Correo electrónico"
+                label={intl.formatMessage({ id: "cabeceraLabelCorreo" })}
                 name="email"
                 value={mail}
                 autoFocus
@@ -126,7 +131,7 @@ function EditProfile() {
                 margin="normal"
                 fullWidth
                 id="tel"
-                label="Teléfono"
+                label={intl.formatMessage({ id: "editProfileTelefono" })}
                 name="tel"
                 value={tel}
                 autoFocus
@@ -137,7 +142,7 @@ function EditProfile() {
                 margin="normal"
                 fullWidth
                 id="zipcode"
-                label="Código postal"
+                label={intl.formatMessage({ id: "editProfileCP" })}
                 name="zipcode"
                 value={zipCode}
                 autoFocus
@@ -148,7 +153,7 @@ function EditProfile() {
                 margin="normal"
                 fullWidth
                 id="address"
-                label="Dirección"
+                label={intl.formatMessage({ id: "editProfileDireccion" })}
                 name="address"
                 value={address}
                 autoFocus
@@ -159,7 +164,7 @@ function EditProfile() {
                 margin="normal"
                 fullWidth
                 id="city"
-                label="Ciudad"
+                label={intl.formatMessage({ id: "editProfileCiudad" })}
                 name="city"
                 value={city}
                 autoFocus
@@ -169,7 +174,7 @@ function EditProfile() {
                 margin="normal"
                 fullWidth
                 id="province"
-                label="Provincia"
+                label={intl.formatMessage({ id: "editProfileProvincia" })}
                 name="province"
                 value={province}
                 autoFocus
@@ -183,7 +188,7 @@ function EditProfile() {
                     variant="contained"
                     sx={{ mt: 3, mb: 2 }}
                   >
-                    Volver
+                    <FormattedMessage id="pwdVolver" />
                   </Button>
                 </Grid>
                 <Grid item>
@@ -192,7 +197,7 @@ function EditProfile() {
                     variant="contained"
                     sx={{ mt: 3, mb: 2 }}
                   >
-                    Actualizar
+                    <FormattedMessage id="editProfileActualizar" />
                   </Button>
                 </Grid>
               </Grid>
