@@ -17,6 +17,26 @@ main {
   background-size: cover;
 }
 
+.centerWrapper {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  justify-content: center;
+  margin: auto;
+  background-color: white;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+.centerWrapper > h2 {
+  text-align: center;
+}
+
+.centerWrapper > img {
+  width: 55%;
+}
+
 .flagContainer {
   display: flex;
   flex-direction: row;
