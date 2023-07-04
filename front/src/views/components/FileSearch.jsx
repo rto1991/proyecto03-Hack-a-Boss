@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 import { useState } from "react";
 import { FormattedMessage } from "react-intl";
 import { useIntl } from "react-intl";
+import { useUser } from "../../UserContext";
 
 function FileSearch({
   files,
@@ -15,16 +16,64 @@ function FileSearch({
   filesInTrash,
   enPapelera,
   setEnPapelera,
+  makeFolder,
 }) {
   const [searchString, setSearchString] = useState();
+  const [user] = useUser();
   const intl = useIntl();
+
+  const subirArchivo = async () => {
+    const { value: file } = await Swal.fire({
+      title: intl.formatMessage({ id: "sideMenuFichero" }),
+      input: "file",
+    });
+
+    if (file) {
+      const formData = new FormData();
+      formData.append("uploadedFile", file);
+      const myHeaders = new Headers();
+      myHeaders.append("authorization", user.data.token);
+      const requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: formData,
+        redirect: "follow",
+      };
+
+      fetch("http://localhost:3000/uploadFile", requestOptions)
+        .then(async (response) => {
+          const resp = await response.json();
+
+          const Toast = Swal.mixin({
+            toast: true,
+            position: "top-right",
+            iconColor: "white",
+            customClass: {
+              popup: "colored-toast",
+            },
+            showConfirmButton: false,
+            timer: 3500,
+            timerProgressBar: true,
+          });
+
+          Toast.fire({
+            icon: resp.status,
+            title: resp.message,
+          });
+        })
+        .then(() => dir())
+        .catch((error) => console.log("error", error));
+    }
+  };
+
+  const crearCarpeta = async (folderName) => {
+    await makeFolder(folderName);
+  };
 
   const upLevel = async () => {
     try {
       await changeDir("..p");
-    } catch (error) {
-      console.log("error chachi");
-    }
+    } catch (error) {}
   };
 
   const trashFiles = () => {
@@ -65,11 +114,56 @@ function FileSearch({
     setInfo();
   }
 
+  const handleKeyboardEvent = (e) => {
+    if (e.keyCode == 13) {
+      searchFiles();
+    }
+  };
+
+  const showInputModal = () => {
+    Swal.fire({
+      title: intl.formatMessage({ id: "sideMenuCarpeta" }),
+      text: intl.formatMessage({ id: "toastMensajeCarpeta" }),
+      input: "text",
+      inputAttributes: {
+        autocapitalize: "off",
+      },
+      showCancelButton: true,
+      confirmButtonText: intl.formatMessage({ id: "fileAreaCrear" }),
+      showLoaderOnConfirm: true,
+      preConfirm: async (folderName) => {
+        await crearCarpeta(folderName);
+      },
+      allowOutsideClick: () => !Swal.isLoading(),
+    }).then((result) => {
+      if (result.isConfirmed) {
+      }
+    });
+  };
+
   return (
     <>
       <div className="searchForm">
+        <img
+          className="btnMakeFolder"
+          onClick={() => showInputModal()}
+          src="/nueva_carpeta.png"
+          alt="Crear carpeta"
+          title="Nueva carpeta"
+        />
+        <img
+          className="btnUploadFile"
+          onClick={() => subirArchivo()}
+          src="/subir.png"
+          alt={<FormattedMessage id="sideMenuFichero" />}
+          title={<FormattedMessage id="sideMenuFichero" />}
+        />
         <TextField
-          onChange={(e) => setSearchString(e.target.value)}
+          onChange={(e) => {
+            dir();
+            setSearchString(e.target.value);
+          }}
+          onKeyDown={handleKeyboardEvent}
           margin="normal"
           required
           fullWidth
@@ -81,7 +175,7 @@ function FileSearch({
           className="btnBuscar"
           onClick={() => searchFiles()}
           src="/lupa.png"
-          alt="Buscar"
+          alt={<FormattedMessage id="buscadorImagen" />}
           title={<FormattedMessage id="buscadorImagen" />}
         />
         <img

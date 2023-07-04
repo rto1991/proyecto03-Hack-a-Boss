@@ -86,5 +86,7 @@
   "topNavBarMenu": "menu",
 
   "fileUploadOk": "Fichero subido corrrectamente",
-  "changeDirectory": "Directorio cambiado correctamente"
+  "changeDirectory": "Directorio cambiado correctamente",
+
+  "toastMensajeCarpeta": "Se permite solo letras [a-z][A-Z] y números [0-9]"
 }

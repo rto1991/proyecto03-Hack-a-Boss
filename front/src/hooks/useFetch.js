@@ -9,13 +9,35 @@ function useFetch() {
       if (user) headers.Authorization = `${user.data.token}`;
       headers["Content-Type"] = "application/json";
       const res = await fetch(url, { headers });
+      const mensaje = await res.json();
       if (!res.ok) {
-        const mensaje = await res.json();
         const error = new Error("API error:" + mensaje.message);
         error.httpStatus = 500;
         throw error;
+      } else {
+        if (mensaje.status == "success") {
+          let timerInterval;
+          Swal.fire({
+            icon: "success",
+            title: mensaje.message,
+            timer: 2000,
+            timerProgressBar: true,
+            didOpen: () => {
+              Swal.showLoading();
+              timerInterval = setInterval(() => {}, 100);
+            },
+            willClose: () => {
+              clearInterval(timerInterval);
+            },
+          }).then((result) => {
+            /* Read more about handling dismissals below */
+            if (result.dismiss === Swal.DismissReason.timer) {
+            }
+          });
+        }
       }
-      return await res.json();
+
+      return mensaje;
     } catch (error) {
       Swal.fire({
         title: "Error!",
