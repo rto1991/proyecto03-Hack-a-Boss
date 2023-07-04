@@ -207,7 +207,7 @@ function FileArea({
         break;
       case "makeFolder":
         Swal.fire({
-          title: intl.formatMessage({ id: "fileAreaBorrar2" }),
+          title: intl.formatMessage({ id: "fileAreaCrear" }),
           input: "text",
           inputAttributes: {
             autocapitalize: "off",
