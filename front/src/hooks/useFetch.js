@@ -9,13 +9,23 @@ function useFetch() {
       if (user) headers.Authorization = `${user.data.token}`;
       headers["Content-Type"] = "application/json";
       const res = await fetch(url, { headers });
+      const mensaje = await res.json();
       if (!res.ok) {
-        const mensaje = await res.json();
         const error = new Error("API error:" + mensaje.message);
         error.httpStatus = 500;
         throw error;
+      } else {
+        if (mensaje.status == "success") {
+          Swal.fire({
+            title: "Info!",
+            text: mensaje.message,
+            icon: "success",
+            confirmButtonText: "Ok",
+          });
+        }
       }
-      return await res.json();
+
+      return mensaje;
     } catch (error) {
       Swal.fire({
         title: "Error!",
@@ -25,11 +35,8 @@ function useFetch() {
       });
     }
   };
-  
+
   return get;
 }
-
-
-
 
 export default useFetch;

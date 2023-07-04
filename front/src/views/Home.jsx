@@ -15,9 +15,9 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Swal from "sweetalert2";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./Home.css";
-import { IntlProvider, FormattedMessage, FormattedNumber } from "react-intl";
+import { IntlProvider, FormattedMessage } from "react-intl";
 
 function Copyright(props) {
   return (
@@ -44,15 +44,15 @@ import { useLanguage } from "../languageContext";
 
 const defaultTheme = createTheme();
 export default function Home() {
-  const { login, logout, validate } = useUserActions();
+  const { login, logout } = useUserActions();
   const [user] = useUser();
   const [mail, setEmail] = useState("");
   const [saveCredentials, setSaveCredentials] = useState(false);
   const [pwd, setPassword] = useState("");
   const navigate = useNavigate();
-  let { regCode } = useParams();
   const [language, setLanguage] = useLanguage();
   let viewMessages = esMessages;
+
   //retrieve saved data from local storage if exists
 
   useEffect(() => {
@@ -63,26 +63,6 @@ export default function Home() {
       setSaveCredentials(true);
     }
   }, []);
-
-  const validar = async (regCode) => {
-    try {
-      await validate(regCode);
-    } catch (error) {
-      Swal.fire({
-        title: "Error!",
-        text: error,
-        icon: "error",
-        confirmButtonText: "Ok",
-      });
-      logout();
-    }
-  };
-
-  if (regCode) {
-    validar(regCode);
-    regCode = null;
-    navigate("/");
-  }
 
   const handleSubmit = async (event) => {
     try {

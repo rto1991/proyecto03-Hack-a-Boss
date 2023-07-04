@@ -407,7 +407,24 @@ function FileArea({
           className="fileItem"
         >
           <div>
-            <img src={f.type == "Folder" ? "/carpeta.png" : "file.png"}></img>
+            <img
+              src={
+                f.type == "Folder"
+                  ? "/carpeta.png"
+                  : f.fileName.substring(f.fileName.length - 3) == "pdf"
+                  ? "/archivo-pdf.png"
+                  : f.fileName.substring(f.fileName.length - 3) == "png"
+                  ? "/png-file.png"
+                  : f.fileName.substring(f.fileName.length - 3) == "jpg"
+                  ? "/jpg.png"
+                  : f.fileName.substring(f.fileName.length - 3) == "doc" ||
+                    f.fileName.substring(f.fileName.length - 3) == "docx"
+                  ? "/archivo-docx.png"
+                  : f.fileName.substring(f.fileName.length - 3) == "xlsx"
+                  ? "/xlsx.png"
+                  : "/file.png"
+              }
+            ></img>
             <p title={f.fileName} className="fileName">
               {f.fileName}
             </p>

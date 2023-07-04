@@ -31,7 +31,7 @@ const validateUser = async (req, res, next) => {
     );
 
     res.status(200).send({
-      status: "info",
+      status: "success",
       message: "Usuario validado",
     });
   } catch (error) {
