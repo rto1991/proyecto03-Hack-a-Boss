@@ -42,6 +42,7 @@ function Dashboard() {
     <div className="mainApp">
       <TopNavBar></TopNavBar>
       <FileSearch
+        makeFolder={makeFolder}
         enPapelera={enPapelera}
         setEnPapelera={setEnPapelera}
         dir={dir}

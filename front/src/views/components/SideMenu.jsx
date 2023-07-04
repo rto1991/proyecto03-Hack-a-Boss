@@ -1,7 +1,6 @@
 import { useUser } from "../../UserContext";
 import "./SideMenu.css";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
 
 function SideMenu({ makeFolder, dir, info, setInfo }) {
   const [user] = useUser();
@@ -12,6 +11,22 @@ function SideMenu({ makeFolder, dir, info, setInfo }) {
 
   const crearCarpeta = async (folderName) => {
     await makeFolder(folderName);
+  };
+
+  const acercaDe = () => {
+    Swal.fire({
+      title: "MY CLOUD DRIVE",
+      html: `<p>Un proyecto de final de Bootcamp</p>
+      <p>(c) 2023 - JSB18RT - A-TEAM</p>
+      <p> Joffrey Arias <p> 
+      <p> Juan Carlos Vez Vazquez <p>
+      <p> Rubén Taibo <p>
+      <p> Mario J. Rodríguez <p>
+      <p> Ni derechos reservados ni "ná", podéis hacer con este proyecto lo que queráis y esperamos que os sirva para aprender tanto como nos ha servido a nosotros</p>
+      <p> Hecho con mucho 💖 en España (Spain)`,
+
+      confirmButtonText: "Me encanta 😍 !!",
+    });
   };
 
   const showInputModal = () => {
@@ -77,7 +92,26 @@ function SideMenu({ makeFolder, dir, info, setInfo }) {
       };
 
       fetch("http://localhost:3000/uploadFile", requestOptions)
-        .then((response) => response.text())
+        .then(async (response) => {
+          const resp = await response.json();
+
+          const Toast = Swal.mixin({
+            toast: true,
+            position: "top-right",
+            iconColor: "white",
+            customClass: {
+              popup: "colored-toast",
+            },
+            showConfirmButton: false,
+            timer: 3500,
+            timerProgressBar: true,
+          });
+
+          Toast.fire({
+            icon: resp.status,
+            title: resp.message,
+          });
+        })
         .then(() => dir())
         .catch((error) => console.log("error", error));
     }
@@ -92,7 +126,7 @@ function SideMenu({ makeFolder, dir, info, setInfo }) {
       <a onClick={() => showInputModal()}>📂 Crear carpeta</a>
       <a onClick={() => subirArchivo()}>📄 Subir archivo</a>
       <a href="/editProfile">⚙️ Editar perfil</a>
-      <a href="#">🐜 Reportar un bug</a>
+      <a onClick={() => acercaDe()}> 🥳 Acerca de este programa</a>
     </div>
   );
 }

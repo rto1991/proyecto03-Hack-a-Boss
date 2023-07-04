@@ -6,7 +6,6 @@ function useFetchPost() {
   const post = async (url, body) => {
     try {
       const isFormData = body instanceof FormData;
-      console.log(isFormData, body);
       const headers = {};
       if (user) headers.Authorization = `${user.data.token}`;
       if (!isFormData) {
@@ -20,11 +19,20 @@ function useFetchPost() {
         headers,
         body: isFormData ? body : JSON.stringify(body),
       });
+      const mensaje = await res.json();
       if (!res.ok) {
-        const mensaje = await res.json();
         throw new Error("API error: " + mensaje.message);
+      } else {
+        if (mensaje.status == "success") {
+          Swal.fire({
+            title: "Info!",
+            text: mensaje.message,
+            icon: "success",
+            confirmButtonText: "Ok",
+          });
+        }
       }
-      return await res.json();
+      return await mensaje;
     } catch (error) {
       Swal.fire({
         title: "Error!",

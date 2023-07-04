@@ -15,17 +15,16 @@ const makeFolder = async (req, res, next) => {
 
     //validaciones (by @joffrey)
     const schema = Joi.object({
-      folderName: Joi.string().pattern(
-        new RegExp("^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).{8,30}$")
-      ),
+      folderName: Joi.string().pattern(new RegExp("^[A-Za-z0-9\\s]+$")),
     });
     try {
       await schema.validateAsync({
-        filderName: folderName,
+        folderName: folderName,
       });
     } catch (err) {
       const error = new Error(
-        "El nombre de la carpeta tiene caracteres no permitidos, por favor, utiliza sólo los carácteres permitidos"
+        "El nombre de la carpeta tiene caracteres no permitidos, por favor, utiliza sólo los carácteres permitidos " +
+          err.message
       );
       error.httpStatus = 404;
       throw error;

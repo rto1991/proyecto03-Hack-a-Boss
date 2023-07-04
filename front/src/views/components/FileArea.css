@@ -10,6 +10,7 @@
   align-content: flex-start;
   overflow-y: scroll;
   justify-content: center;
+  max-width: 1000px;
 }
 
 .fileItem {

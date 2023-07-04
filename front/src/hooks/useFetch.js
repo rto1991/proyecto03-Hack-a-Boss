@@ -16,11 +16,23 @@ function useFetch() {
         throw error;
       } else {
         if (mensaje.status == "success") {
+          let timerInterval;
           Swal.fire({
-            title: "Info!",
-            text: mensaje.message,
             icon: "success",
-            confirmButtonText: "Ok",
+            title: mensaje.message,
+            timer: 2000,
+            timerProgressBar: true,
+            didOpen: () => {
+              Swal.showLoading();
+              timerInterval = setInterval(() => {}, 100);
+            },
+            willClose: () => {
+              clearInterval(timerInterval);
+            },
+          }).then((result) => {
+            /* Read more about handling dismissals below */
+            if (result.dismiss === Swal.DismissReason.timer) {
+            }
           });
         }
       }

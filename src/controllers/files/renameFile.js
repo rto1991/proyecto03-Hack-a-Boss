@@ -15,13 +15,11 @@ const renameFile = async (req, res, next) => {
 
     //validaciones (by @joffrey)
     const schema = Joi.object({
-      folderName: Joi.string().pattern(
-        new RegExp("^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).{8,30}$")
-      ),
+      folderName: Joi.string().pattern(new RegExp("^[A-Za-z0-9\\s]+$")),
     });
     try {
       await schema.validateAsync({
-        filderName: newName,
+        folderName: newName,
       });
     } catch (err) {
       const error = new Error(

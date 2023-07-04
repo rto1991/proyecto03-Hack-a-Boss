@@ -34,7 +34,7 @@ const recoverFile = async (req, res, next) => {
 
     // Enviamos una respuesta al cliente indicando que la operación se realizó correctamente
     res.status(200).send({
-      status: "info",
+      status: "success",
       message: `El archivo ${file[0].fileName} se ha recuperado correctamente.`,
     });
   } catch (error) {

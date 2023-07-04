@@ -19,7 +19,7 @@ const deleteFile = async (req, res, next) => {
 
     //buscamos el fichero en la carpeta actual del usuario
     const [file] = await connect.query(
-      `SELECT * FROM files WHERE fileName = ? AND id_user = ? AND parent_dir_id = ? and in_recycle_bin = 0`,
+      `SELECT * FROM files WHERE fileName = ? AND id_user = ? AND parent_dir_id = ?`,
       [fileInfo.fileName, idUser, user[0].currentFolder_id]
     );
 

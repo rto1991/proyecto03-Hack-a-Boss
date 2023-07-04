@@ -56,11 +56,13 @@ function FileArea({
   async function deleteDirectory(folderName) {
     await deleteDir(folderName);
     await dir();
+    setEnPapelera(false);
   }
 
   async function deleteFil(fileName) {
     await deleteFile(fileName);
     await dir();
+    setEnPapelera(false);
   }
 
   const crearCarpeta = async (folderName) => {
@@ -97,9 +99,31 @@ function FileArea({
       };
 
       fetch("http://localhost:3000/uploadFile", requestOptions)
-        .then((response) => response.text())
+        .then(async (response) => {
+          const resp = await response.json();
+
+          const Toast = Swal.mixin({
+            toast: true,
+            position: "top-right",
+            iconColor: "white",
+            customClass: {
+              popup: "colored-toast",
+            },
+            showConfirmButton: false,
+            timer: 3500,
+            timerProgressBar: true,
+          });
+
+          Toast.fire({
+            icon: resp.status,
+            title: resp.message,
+          });
+        })
         .then(() => dir())
-        .catch((error) => console.log("error", error));
+        .catch((error) => {
+          console.log("error", error);
+          throw error;
+        });
     }
   };
 
@@ -283,7 +307,6 @@ function FileArea({
   };
 
   const dobleClickHandler = async (f) => {
-    console.log(f.in_recycle_bin);
     if (f.in_recycle_bin === 1) {
       const Toast = Swal.mixin({
         toast: true,
@@ -342,7 +365,6 @@ function FileArea({
   }
 
   if (info) {
-    console.log(info);
     if (info.status == "error") {
       Swal.fire({
         title: "Error!",

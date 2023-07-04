@@ -1,7 +1,8 @@
 import { TextField } from "@mui/material";
 import "./FileSearch.css";
 import Swal from "sweetalert2";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useUser } from "../../UserContext";
 
 function FileSearch({
   files,
@@ -13,9 +14,59 @@ function FileSearch({
   filesInTrash,
   enPapelera,
   setEnPapelera,
+  makeFolder,
 }) {
   const [searchString, setSearchString] = useState();
-  let searchStringAnterior = "";
+  const [user] = useUser();
+
+  const subirArchivo = async () => {
+    const { value: file } = await Swal.fire({
+      title: "Selecciona un fichero",
+      input: "file",
+    });
+
+    if (file) {
+      const formData = new FormData();
+      formData.append("uploadedFile", file);
+      const myHeaders = new Headers();
+      myHeaders.append("authorization", user.data.token);
+      const requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: formData,
+        redirect: "follow",
+      };
+
+      fetch("http://localhost:3000/uploadFile", requestOptions)
+        .then(async (response) => {
+          const resp = await response.json();
+
+          const Toast = Swal.mixin({
+            toast: true,
+            position: "top-right",
+            iconColor: "white",
+            customClass: {
+              popup: "colored-toast",
+            },
+            showConfirmButton: false,
+            timer: 3500,
+            timerProgressBar: true,
+          });
+
+          Toast.fire({
+            icon: resp.status,
+            title: resp.message,
+          });
+        })
+        .then(() => dir())
+        .catch((error) => console.log("error", error));
+    }
+  };
+
+  const crearCarpeta = async (folderName) => {
+    await makeFolder(folderName);
+  };
+
   const upLevel = async () => {
     try {
       await changeDir("..p");
@@ -51,7 +102,6 @@ function FileSearch({
   };
 
   if (info) {
-    console.log(info);
     Swal.fire({
       title: info.status + "!",
       text: info.message,
@@ -67,9 +117,44 @@ function FileSearch({
     }
   };
 
+  const showInputModal = () => {
+    Swal.fire({
+      title: "Crear nueva carpeta",
+      text: "Se permite solo letras [a-z][A-Z] y números [0-9]",
+      input: "text",
+      inputAttributes: {
+        autocapitalize: "off",
+      },
+      showCancelButton: true,
+      confirmButtonText: "Crear carpeta",
+      showLoaderOnConfirm: true,
+      preConfirm: async (folderName) => {
+        await crearCarpeta(folderName);
+      },
+      allowOutsideClick: () => !Swal.isLoading(),
+    }).then((result) => {
+      if (result.isConfirmed) {
+      }
+    });
+  };
+
   return (
     <>
       <div className="searchForm">
+        <img
+          className="btnMakeFolder"
+          onClick={() => showInputModal()}
+          src="/nueva_carpeta.png"
+          alt="Crear carpeta"
+          title="Nueva carpeta"
+        />
+        <img
+          className="btnUploadFile"
+          onClick={() => subirArchivo()}
+          src="/subir.png"
+          alt="Subir fichero"
+          title="Subir fichero"
+        />
         <TextField
           onChange={(e) => {
             dir();

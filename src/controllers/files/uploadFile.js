@@ -79,7 +79,7 @@ const uploadFile = async (req, res, next) => {
         ]
       );
       res.status(200).send({
-        status: "info",
+        status: "success",
         message: "El fichero se subió correctamente al servidor",
       });
     });
