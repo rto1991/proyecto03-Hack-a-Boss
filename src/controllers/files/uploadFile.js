@@ -80,7 +80,7 @@ const uploadFile = async (req, res, next) => {
       );
       res.status(200).send({
         status: "info",
-        message: "El fichero se subió correctamente al servidor",
+        message: "fileUploadOk",
       });
     });
   } catch (error) {

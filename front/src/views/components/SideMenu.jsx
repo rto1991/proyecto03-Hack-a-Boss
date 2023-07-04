@@ -50,12 +50,12 @@ function SideMenu({ makeFolder, dir, info, setInfo }) {
       timer: 1500,
       timerProgressBar: true,
     });
-
+    console.log(info.message);
     Toast.fire({
       icon: "success",
-      title: info.message,
+      title: intl.formatMessage({ id: "changeDirectory" }),
     });
-
+    // info.message
     dir();
     setInfo();
   }

@@ -9,7 +9,7 @@ import {
   Typography,
   createTheme,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import "./SingIn.css";
 import { useState } from "react";
 import Swal from "sweetalert2";
@@ -22,14 +22,14 @@ import { useIntl } from "react-intl";
 const defaultTheme = createTheme();
 function EditProfile() {
   const [user] = useUser();
-  const [name, setName] = useState(user.info.name);
-  const [lastName, setLastName] = useState(user.info.last_name);
-  const [mail, setMail] = useState(user.info.mail);
-  const [tel, setTel] = useState(user.info.tel);
-  const [zipCode, setZipCode] = useState(user.info.zipcode);
-  const [address, setAddress] = useState(user.info.address);
-  const [city, setCity] = useState(user.info.city);
-  const [province, setProvince] = useState(user.info.province);
+  const [name, setName] = useState(user?.info.name);
+  const [lastName, setLastName] = useState(user?.info.last_name);
+  const [mail, setMail] = useState(user?.info.mail);
+  const [tel, setTel] = useState(user?.info.tel);
+  const [zipCode, setZipCode] = useState(user?.info.zipcode);
+  const [address, setAddress] = useState(user?.info.address);
+  const [city, setCity] = useState(user?.info.city);
+  const [province, setProvince] = useState(user?.info.province);
   const intl = useIntl();
 
   const { updateUser, info } = useUserActions();

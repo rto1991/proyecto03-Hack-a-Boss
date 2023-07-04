@@ -68,7 +68,7 @@ const changeDirectory = async (req, res, next) => {
         //informamos al front
         res.status(200).send({
           status: "info",
-          message: `Directorio cambiado correctamente, directorio actual "${selectedDir[0].filename}"`,
+          message: `changeDirectory`,
         });
       }
     } else {
@@ -92,7 +92,7 @@ const changeDirectory = async (req, res, next) => {
         );
         res.status(200).send({
           status: "info",
-          message: `Directorio cambiado correctamente, directorio actual "${selectedDir[0].filename}"`,
+          message: `changeDirectory`,
         });
       } else {
         //estamos en el top level, informar de que no puede retroceder más

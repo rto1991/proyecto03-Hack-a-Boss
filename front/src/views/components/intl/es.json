@@ -83,5 +83,8 @@
   "editProfileProvincia": "Provincia",
   "editProfileActualizar": "Actualizar",
 
-  "topNavBarMenu": "menu"
+  "topNavBarMenu": "menu",
+
+  "fileUploadOk": "Fichero subido corrrectamente",
+  "changeDirectory": "Directorio cambiado correctamente"
 }

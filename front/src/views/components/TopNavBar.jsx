@@ -13,7 +13,7 @@ function TopNavBar() {
   function showMenu() {
     document.getElementById("mySidenav").style.width = "300px";
   }
-  console.log(user.info.name);
+
   return (
     <section className="topnavbar">
       <div className="hamburguerMenu">

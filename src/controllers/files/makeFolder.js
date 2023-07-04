@@ -3,6 +3,7 @@
 const getDB = require("../../database/db");
 const fs = require("fs/promises");
 const path = require("path");
+const Joi = require("joi");
 
 const makeFolder = async (req, res, next) => {
   let connect;
@@ -11,6 +12,25 @@ const makeFolder = async (req, res, next) => {
     const userInfo = req.userInfo; //aquí nos traemos la info del usuario
     const idUser = userInfo.id;
     const folderName = req.params.folderName; //aquí nos traemos el nombre de carpeta deseado
+
+    //validaciones (by @joffrey)
+    const schema = Joi.object({
+      folderName: Joi.string().pattern(
+        new RegExp("^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).{8,30}$")
+      ),
+    });
+    try {
+      await schema.validateAsync({
+        filderName: folderName,
+      });
+    } catch (err) {
+      const error = new Error(
+        "El nombre de la carpeta tiene caracteres no permitidos, por favor, utiliza sólo los carácteres permitidos"
+      );
+      error.httpStatus = 404;
+      throw error;
+    }
+
     connect = await getDB();
     const [user] = await connect.query(
       `SELECT u.*, f.fileName FROM users u INNER JOIN files f ON f.id = u.currentFolder_id WHERE u.id = ?`,
@@ -62,7 +82,7 @@ const makeFolder = async (req, res, next) => {
         1,
         currentFolder_id,
         0,
-        path.join(currentFolder[0].breadCrumb, folderName),
+        path.join(currentFolder[0].fileName, folderName),
       ]
     );
 
@@ -80,7 +100,7 @@ const makeFolder = async (req, res, next) => {
     console.log(error);
     next(error);
   } finally {
-    connect.release();
+    connect?.release();
   }
 };
 
