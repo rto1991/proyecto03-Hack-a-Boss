@@ -56,6 +56,7 @@
   "pwdRegistrarse": "Registrati",
   "pwdCódigo": "Codice di recupero",
   "pwdReset": "Richiedi un reset",
+
   "singInError": "Errore!",
   "singInCoincidir": "Le password non corrispondono",
   "singInErrorUsuario": "Si è verificato un errore durante la registrazione dell'utente",
@@ -87,5 +88,31 @@
   "fileUploadOk": "File caricato correttamente",
   "changeDirectory": "Directory modificata correttamente",
 
-  "toastMensajeCarpeta": "Sono consentite solo lettere [a-z][A-Z] e numeri [0-9]"
+  "toastMensajeCarpeta": "Sono consentite solo lettere [a-z][A-Z] e numeri [0-9]",
+
+  "aboutIntro": "Un progetto finale del Bootcamp",
+  "aboutDerechos": "Nessun diritto riservato o altro, potete fare ciò che volete con questo progetto e speriamo che vi sia utile tanto quanto lo è stato per noi nell'apprendimento",
+  "aboutAmor": "Realizzato con tanto 💖 in Spagna",
+  "aboutButton": "Mi piace tantissimo 😍 !!",
+
+  "fileUploadError": "Esiste già un file con lo stesso nome nella directory corrente",
+  "fileUploadErrorSubida": "Nessun file da caricare!",
+
+  "deleteFileError": "Il file ${fileInfo.fileName} non è presente nella directory ${user[0].fileName}",
+  "deleteFile": "Il file ${fileInfo.fileName} è stato eliminato correttamente",
+
+  "makeFolderError": "Il nome della cartella contiene caratteri non consentiti, si prega di utilizzare solo caratteri consentiti",
+  "makeFolderError2": "Il nome della cartella ${folderName} esiste già nella directory corrente",
+  "makeFolderExito": "La directory ${folderName} è stata creata correttamente nel percorso ${user[0].fileName}",
+
+  "renameDirectoryCarpeta": "Il nuovo nome della cartella contiene caratteri non consentiti, si prega di utilizzare solo caratteri consentiti",
+  "renameDirectoryError": "La cartella ${folderName} non esiste",
+  "renameDirectoryProblema": "Impossibile rinominare la cartella, esiste già una cartella con il nome ${newName} nella directory corrente",
+  "renameDirectoryOk": "La cartella è stata rinominata correttamente",
+
+  "recoverFile": "Il file ${file[0].fileName} non è nel cestino",
+  "recoverFileRecuperado": "Il file è stato recuperato correttamente",
+
+  "renameFile": "La cartella ${folderName} non esiste",
+  "renameFileError": "Impossibile rinominare la cartella, esiste già una cartella con il nome ${newName} nella directory corrente"
 }

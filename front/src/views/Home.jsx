@@ -17,8 +17,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Swal from "sweetalert2";
 import { useNavigate, useParams } from "react-router-dom";
 import "./Home.css";
-import { useIntl } from "react-intl";
-import { FormattedMessage } from "react-intl";
+import { useIntl, FormattedMessage } from "react-intl";
 import LanguageSelector from "./LanguageSelector";
 
 function Copyright(props) {
@@ -63,25 +62,6 @@ export default function Home() {
     }
   }, []);
 
-  const validar = async (regCode) => {
-    try {
-      await validate(regCode);
-    } catch (error) {
-      Swal.fire({
-        title: "Error!",
-        text: error,
-        icon: "error",
-        confirmButtonText: "Ok",
-      });
-      logout();
-    }
-  };
-
-  if (regCode) {
-    validar(regCode);
-    navigate("/");
-  }
-
   const handleSubmit = async (event) => {
     try {
       event.preventDefault();
@@ -89,7 +69,7 @@ export default function Home() {
     } catch (error) {
       console.log(error);
       Swal.fire({
-        title: "¡Error!",
+        title: intl.FormattedMessage({ id: "singInError" }),
         text: error,
         icon: "error",
         confirmButtonText: "Ok",
@@ -102,7 +82,7 @@ export default function Home() {
   if (user) {
     if (user.status == "error") {
       Swal.fire({
-        title: "Error!",
+        title: intl.FormattedMessage({ id: "singInError" }),
         text: user.message,
         icon: "error",
         confirmButtonText: "Ok",

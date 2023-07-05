@@ -20,9 +20,7 @@ const recoverFile = async (req, res, next) => {
 
     // Verificamos si el archivo ya está fuera de la papelera
     if (file.length === 0) {
-      const error = new Error(
-        `El archivo ${file[0].fileName} no está en la papelera`
-      );
+      const error = new Error("recoverFile");
       error.httpStatus = 404;
       throw error;
     }
@@ -34,8 +32,8 @@ const recoverFile = async (req, res, next) => {
 
     // Enviamos una respuesta al cliente indicando que la operación se realizó correctamente
     res.status(200).send({
-      status: "info",
-      message: `El archivo ${file[0].fileName} se ha recuperado correctamente.`,
+      status: "success",
+      message: "recoverFileRecuperado",
     });
   } catch (error) {
     console.log(error);

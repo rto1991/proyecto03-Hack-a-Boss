@@ -27,7 +27,7 @@ const uploadFile = async (req, res, next) => {
     //verificamos si viene ficheros
     console.log(req.files);
     if (!req.files || Object.keys(req.files).length === 0) {
-      const error = new Error("¡No hay ficheros para subir!");
+      const error = new Error("fileUploadErrorSubida");
       error.httpStatus = 400;
       throw error;
     }
@@ -49,9 +49,7 @@ const uploadFile = async (req, res, next) => {
     );
 
     if (dirList.length > 0) {
-      const error = new Error(
-        "Existe un fichero con el mismo nombre el el directorio actual"
-      );
+      const error = new Error("fileUploadError");
       error.httpStatus = 400;
       throw error;
     }
@@ -79,7 +77,7 @@ const uploadFile = async (req, res, next) => {
         ]
       );
       res.status(200).send({
-        status: "info",
+        status: "success",
         message: "fileUploadOk",
       });
     });

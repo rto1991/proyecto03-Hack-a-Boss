@@ -58,11 +58,13 @@ function FileArea({
   async function deleteDirectory(folderName) {
     await deleteDir(folderName);
     await dir();
+    setEnPapelera(false);
   }
 
   async function deleteFil(fileName) {
     await deleteFile(fileName);
     await dir();
+    setEnPapelera(false);
   }
 
   const crearCarpeta = async (folderName) => {
@@ -99,9 +101,31 @@ function FileArea({
       };
 
       fetch("http://localhost:3000/uploadFile", requestOptions)
-        .then((response) => response.text())
+        .then(async (response) => {
+          const resp = await response.json();
+
+          const Toast = Swal.mixin({
+            toast: true,
+            position: "top-right",
+            iconColor: "white",
+            customClass: {
+              popup: "colored-toast",
+            },
+            showConfirmButton: false,
+            timer: 3500,
+            timerProgressBar: true,
+          });
+
+          Toast.fire({
+            icon: resp.status,
+            title: resp.message,
+          });
+        })
         .then(() => dir())
-        .catch((error) => console.log("error", error));
+        .catch((error) => {
+          console.log("error", error);
+          throw error;
+        });
     }
   };
 
@@ -131,152 +155,166 @@ function FileArea({
   }
 
   const handleItemClick = ({ id, event, props }) => {
-    switch (id) {
-      case "rename":
-        if (props.key.type == "Folder") {
-          //renombramos carpeta
+    try {
+      switch (id) {
+        case "rename":
+          if (props.key.type == "Folder") {
+            //renombramos carpeta
+            Swal.fire({
+              title:
+                intl.formatMessage({ id: "editProfileCarpeta" }) +
+                props.key.fileName,
+              text: intl.formatMessage({ id: "toastMensajeCarpeta" }),
+              input: "text",
+              inputAttributes: {
+                autocapitalize: "off",
+              },
+              showCancelButton: true,
+              confirmButtonText: intl.formatMessage({
+                id: "editProfileRenombrar",
+              }),
+              showLoaderOnConfirm: true,
+              preConfirm: async (folderName) => {
+                await renameDirectory(props.key.fileName, folderName);
+              },
+              allowOutsideClick: () => !Swal.isLoading(),
+            }).then((result) => {
+              if (result.isConfirmed) {
+              }
+            });
+          } else {
+            //renombramos archivo
+            Swal.fire({
+              title:
+                intl.formatMessage({ id: "fileAreaNombre" }) +
+                props.key.fileName,
+              text: intl.formatMessage({ id: "toastMensajeCarpeta" }),
+              input: "text",
+              inputAttributes: {
+                autocapitalize: "off",
+              },
+              showCancelButton: true,
+              confirmButtonText: intl.formatMessage({
+                id: "fileAreaRenombrar",
+              }),
+              showLoaderOnConfirm: true,
+              preConfirm: async (fileName) => {
+                await renameFil(props.key.fileName, fileName);
+              },
+              allowOutsideClick: () => !Swal.isLoading(),
+            }).then((result) => {
+              if (result.isConfirmed) {
+              }
+            });
+          }
+
+          break;
+        case "delete":
+          if (enPapelera) {
+            Swal.fire({
+              title: intl.formatMessage({ id: "fileAreaBorrar" })`"${
+                props.key.fileName
+              }"? ${
+                props.key.type == "Folder"
+                  ? intl.formatMessage({ id: "fileAreaInfo" })
+                  : ""
+              }`,
+              showCancelButton: true,
+              confirmButtonText: intl.formatMessage({ id: "fileAreaBorrar2" }),
+              cancelButtonText: intl.formatMessage({ id: "fileAreaAtras" }),
+            }).then((result) => {
+              /* Read more about isConfirmed, isDenied below */
+              if (result.isConfirmed) {
+                props.key.type == "Folder"
+                  ? deleteDirectory(props.key.fileName)
+                  : deleteFil(props.key.fileName);
+              }
+            });
+          } else {
+            moverAPapelera(props.key.id);
+          }
+
+          break;
+        case "makeFolder":
           Swal.fire({
-            title:
-              intl.formatMessage({ id: "editProfileCarpeta" }) +
-              props.key.fileName,
+            title: intl.formatMessage({ id: "fileAreaCrear" }),
             input: "text",
             inputAttributes: {
               autocapitalize: "off",
             },
             showCancelButton: true,
-            confirmButtonText: intl.formatMessage({
-              id: "editProfileRenombrar",
-            }),
+            confirmButtonText: intl.formatMessage({ id: "fileAreaCrear" }),
             showLoaderOnConfirm: true,
             preConfirm: async (folderName) => {
-              await renameDirectory(props.key.fileName, folderName);
+              await crearCarpeta(folderName);
             },
             allowOutsideClick: () => !Swal.isLoading(),
           }).then((result) => {
             if (result.isConfirmed) {
             }
           });
-        } else {
-          //renombramos archivo
-          Swal.fire({
+          break;
+        case "uploadFile":
+          subirArchivo();
+          break;
+        case "download":
+          const Toast = Swal.mixin({
+            toast: true,
+            position: "top-right",
+            iconColor: "white",
+            customClass: {
+              popup: "colored-toast",
+            },
+            showConfirmButton: false,
+            timer: 3500,
+            timerProgressBar: true,
+          });
+
+          Toast.fire({
+            icon: "success",
             title:
-              intl.formatMessage({ id: "fileAreaNombre" }) + props.key.fileName,
+              props.key.type == "Folder"
+                ? intl.formatMessage({ id: "fileAreaComp" })
+                : intl.formatMessage({ id: "fileAreaDes" }),
+          });
+
+          bajarFichero(
+            props.key.id,
+            props.key.type == "Folder"
+              ? props.key.fileName + ".tar"
+              : props.key.fileName
+          );
+          break;
+        case "move":
+          Swal.fire({
+            title: intl.formatMessage({ id: "fileAreaMov" }),
             input: "text",
             inputAttributes: {
               autocapitalize: "off",
             },
             showCancelButton: true,
-            confirmButtonText: intl.formatMessage({ id: "fileAreaRenombrar" }),
+            confirmButtonText: intl.formatMessage({ id: "fileAreaMover" }),
             showLoaderOnConfirm: true,
-            preConfirm: async (fileName) => {
-              await renameFil(props.key.fileName, fileName);
+            preConfirm: async (folderName) => {
+              await moverFichero(props.key.id, folderName);
             },
             allowOutsideClick: () => !Swal.isLoading(),
           }).then((result) => {
             if (result.isConfirmed) {
             }
           });
-        }
-
-        break;
-      case "delete":
-        if (enPapelera) {
-          Swal.fire({
-            title: intl.formatMessage({ id: "fileAreaBorrar" })`"${
-              props.key.fileName
-            }"? ${
-              props.key.type == "Folder"
-                ? intl.formatMessage({ id: "fileAreaInfo" })
-                : ""
-            }`,
-            showCancelButton: true,
-            confirmButtonText: intl.formatMessage({ id: "fileAreaBorrar2" }),
-            cancelButtonText: intl.formatMessage({ id: "fileAreaAtras" }),
-          }).then((result) => {
-            /* Read more about isConfirmed, isDenied below */
-            if (result.isConfirmed) {
-              props.key.type == "Folder"
-                ? deleteDirectory(props.key.fileName)
-                : deleteFil(props.key.fileName);
-            }
-          });
-        } else {
-          moverAPapelera(props.key.id);
-        }
-
-        break;
-      case "makeFolder":
-        Swal.fire({
-          title: intl.formatMessage({ id: "fileAreaCrear" }),
-          input: "text",
-          inputAttributes: {
-            autocapitalize: "off",
-          },
-          showCancelButton: true,
-          confirmButtonText: intl.formatMessage({ id: "fileAreaCrear" }),
-          showLoaderOnConfirm: true,
-          preConfirm: async (folderName) => {
-            await crearCarpeta(folderName);
-          },
-          allowOutsideClick: () => !Swal.isLoading(),
-        }).then((result) => {
-          if (result.isConfirmed) {
-          }
-        });
-        break;
-      case "uploadFile":
-        subirArchivo();
-        break;
-      case "download":
-        const Toast = Swal.mixin({
-          toast: true,
-          position: "top-right",
-          iconColor: "white",
-          customClass: {
-            popup: "colored-toast",
-          },
-          showConfirmButton: false,
-          timer: 3500,
-          timerProgressBar: true,
-        });
-
-        Toast.fire({
-          icon: "success",
-          title:
-            props.key.type == "Folder"
-              ? intl.formatMessage({ id: "fileAreaComp" })
-              : intl.formatMessage({ id: "fileAreaDes" }),
-        });
-
-        bajarFichero(
-          props.key.id,
-          props.key.type == "Folder"
-            ? props.key.fileName + ".tar"
-            : props.key.fileName
-        );
-        break;
-      case "move":
-        Swal.fire({
-          title: intl.formatMessage({ id: "fileAreaMov" }),
-          input: "text",
-          inputAttributes: {
-            autocapitalize: "off",
-          },
-          showCancelButton: true,
-          confirmButtonText: intl.formatMessage({ id: "fileAreaMover" }),
-          showLoaderOnConfirm: true,
-          preConfirm: async (folderName) => {
-            await moverFichero(props.key.id, folderName);
-          },
-          allowOutsideClick: () => !Swal.isLoading(),
-        }).then((result) => {
-          if (result.isConfirmed) {
-          }
-        });
-        break;
-      case "recover":
-        recuperarDeLaPapelera(props.key.id);
-        break;
+          break;
+        case "recover":
+          recuperarDeLaPapelera(props.key.id);
+          break;
+      }
+    } catch (error) {
+      Swal.fire({
+        title: intl.formatMessage({ id: "singInError" }),
+        text: error.message,
+        icon: "error",
+        confirmButtonText: "Ok",
+      });
     }
   };
 
@@ -367,7 +405,6 @@ function FileArea({
           ""
         )}
       </Menu>
-
       <Menu id={MAIN_AREA_MENU}>
         <Item id="makeFolder" onClick={handleItemClick}>
           <FormattedMessage id="sideMenuCarpeta" />
@@ -376,7 +413,6 @@ function FileArea({
           <FormattedMessage id="sideMenuSubir" />
         </Item>
       </Menu>
-
       {files?.data.content.map((f) => (
         <li
           title={intl.formatMessage({ id: "fileAreaBorrar2" })}
@@ -395,7 +431,24 @@ function FileArea({
           className="fileItem"
         >
           <div>
-            <img src={f.type == "Folder" ? "/carpeta.png" : "file.png"}></img>
+            <img
+              src={
+                f.type == "Folder"
+                  ? "/carpeta.png"
+                  : f.fileName.substring(f.fileName.length - 3) == "pdf"
+                  ? "/archivo-pdf.png"
+                  : f.fileName.substring(f.fileName.length - 3) == "png"
+                  ? "/png-file.png"
+                  : f.fileName.substring(f.fileName.length - 3) == "jpg"
+                  ? "/jpg.png"
+                  : f.fileName.substring(f.fileName.length - 3) == "doc" ||
+                    f.fileName.substring(f.fileName.length - 3) == "docx"
+                  ? "/archivo-docx.png"
+                  : f.fileName.substring(f.fileName.length - 3) == "xlsx"
+                  ? "/xlsx.png"
+                  : "/file.png"
+              }
+            ></img>
             <p title={f.fileName} className="fileName">
               {f.fileName}
             </p>

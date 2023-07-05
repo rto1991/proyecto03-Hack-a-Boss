@@ -88,5 +88,31 @@
   "fileUploadOk": "Fichier téléchargé avec succès",
   "changeDirectory": "Répertoire modifié avec succès",
 
-  "toastMensajeCarpeta": "Seules les lettres [a-z][A-Z] et les chiffres [0-9] sont autorisés"
+  "toastMensajeCarpeta": "Seules les lettres [a-z][A-Z] et les chiffres [0-9] sont autorisés",
+
+  "aboutIntro": "Un projet final du Bootcamp",
+  "aboutDerechos": "Aucun droit réservé ni quoi que ce soit, vous pouvez faire ce que vous voulez avec ce projet et nous espérons qu'il vous sera aussi utile qu'il nous a été utile pour apprendre",
+  "aboutAmor": "Fait avec beaucoup de 💖 en Espagne",
+  "aboutButton": "J'adore ça 😍 !!",
+
+  "fileUploadError": "Un fichier portant le même nom existe déjà dans le répertoire actuel",
+  "fileUploadErrorSubida": "Aucun fichier à télécharger !",
+
+  "deleteFileError": "Le fichier ${fileInfo.fileName} est introuvable dans le répertoire ${user[0].fileName}",
+  "deleteFile": "Le fichier ${fileInfo.fileName} a été supprimé avec succès",
+
+  "makeFolderError": "Le nom du dossier contient des caractères non autorisés, veuillez n'utiliser que les caractères autorisés",
+  "makeFolderError2": "Le nom du dossier ${folderName} existe déjà dans le répertoire actuel",
+  "makeFolderExito": "Le répertoire ${folderName} a été créé avec succès dans le chemin ${user[0].fileName}",
+
+  "renameDirectoryCarpeta": "Le nouveau nom de dossier contient des caractères non autorisés, veuillez n'utiliser que les caractères autorisés",
+  "renameDirectoryError": "Le dossier ${folderName} n'existe pas",
+  "renameDirectoryProblema": "Nous ne pouvons pas renommer le dossier, un dossier portant le nom ${newName} existe déjà dans le répertoire actuel",
+  "renameDirectoryOk": "Le dossier a été renommé avec succès",
+
+  "recoverFile": "Le fichier ${file[0].fileName} n'est pas dans la corbeille",
+  "recoverFileRecuperado": "Le fichier a été récupéré avec succès",
+
+  "renameFile": "Le dossier ${folderName} n'existe pas",
+  "renameFileError": "Nous ne pouvons pas renommer le dossier, un dossier portant le nom ${newName} existe déjà dans le répertoire actuel"
 }

@@ -8,6 +8,7 @@
   flex-direction: row;
   align-items: center;
   gap: 5px;
+  max-width: 1000px;
 }
 
 .searchForm > input {
@@ -27,6 +28,7 @@
   margin-bottom: 5px;
   display: flex;
   flex-direction: row;
+  max-width: 1000px;
 }
 
 .breadCrumb > p {
@@ -40,12 +42,16 @@
 }
 
 .btnBuscar,
-.btnTrash {
+.btnTrash,
+.btnMakeFolder,
+.btnUploadFile {
   cursor: pointer;
   padding: 5px;
 }
 
 .btnBuscar:hover,
-.btnTrash:hover {
+.btnTrash:hover,
+.btnMakeFolder:hover,
+.btnUploadFile:hover {
   background-color: lightblue;
 }

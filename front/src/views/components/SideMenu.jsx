@@ -1,8 +1,7 @@
 import { useUser } from "../../UserContext";
 import "./SideMenu.css";
 import Swal from "sweetalert2";
-import { FormattedMessage } from "react-intl";
-import { useIntl } from "react-intl";
+import { useIntl, FormattedMessage } from "react-intl";
 import LanguageSelector from "../LanguageSelector";
 
 function SideMenu({ makeFolder, dir, info, setInfo }) {
@@ -15,6 +14,22 @@ function SideMenu({ makeFolder, dir, info, setInfo }) {
 
   const crearCarpeta = async (folderName) => {
     await makeFolder(folderName);
+  };
+
+  const acercaDe = () => {
+    Swal.fire({
+      title: "MY CLOUD DRIVE",
+      html: `<p>${intl.formatMessage({ id: "aboutIntro" })}</p>
+      <p>(c) 2023 - JSB18RT - A-TEAM</p>
+      <p> Joffrey Arias <p> 
+      <p> Juan Carlos Vez Vazquez <p>
+      <p> Rubén Taibo <p>
+      <p> Mario J. Rodríguez <p>
+      <p> ${intl.formatMessage({ id: "aboutDerechos" })}</p>
+      <p> ${intl.formatMessage({ id: "aboutAmor" })}`,
+
+      confirmButtonText: intl.formatMessage({ id: "aboutButton" }),
+    });
   };
 
   const showInputModal = () => {
@@ -63,7 +78,7 @@ function SideMenu({ makeFolder, dir, info, setInfo }) {
   const subirArchivo = async () => {
     const { value: file } = await Swal.fire({
       title: intl.formatMessage({ id: "sideMenuSeleccionar" }),
-      input: "file",
+      input: intl.formatMessage({ id: "sideMenuSeleccionar" }),
     });
 
     if (file) {
@@ -79,7 +94,26 @@ function SideMenu({ makeFolder, dir, info, setInfo }) {
       };
 
       fetch("http://localhost:3000/uploadFile", requestOptions)
-        .then((response) => response.text())
+        .then(async (response) => {
+          const resp = await response.json();
+
+          const Toast = Swal.mixin({
+            toast: true,
+            position: "top-right",
+            iconColor: "white",
+            customClass: {
+              popup: "colored-toast",
+            },
+            showConfirmButton: false,
+            timer: 3500,
+            timerProgressBar: true,
+          });
+
+          Toast.fire({
+            icon: resp.status,
+            title: resp.message,
+          });
+        })
         .then(() => dir())
         .catch((error) => console.log("error", error));
     }

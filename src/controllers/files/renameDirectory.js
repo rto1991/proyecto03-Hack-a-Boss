@@ -17,18 +17,14 @@ const renameDirectory = async (req, res, next) => {
 
     //validaciones (by @joffrey)
     const schema = Joi.object({
-      folderName: Joi.string().pattern(
-        new RegExp("^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).{8,30}$")
-      ),
+      folderName: Joi.string().pattern(new RegExp("^[A-Za-z0-9\\s]+$")),
     });
     try {
       await schema.validateAsync({
-        filderName: newName,
+        folderName: newName,
       });
     } catch (err) {
-      const error = new Error(
-        "El nuevo nombre de la carpeta tiene caracteres no permitidos, por favor, utiliza sólo los carácteres permitidos"
-      );
+      const error = new Error("renameDirectoryCarpeta");
       error.httpStatus = 404;
       throw error;
     }
@@ -59,9 +55,7 @@ const renameDirectory = async (req, res, next) => {
 
     //no puede haber en el directorio actual una carpeta que se llame igual a la propuesta (ojo, si puede haber ese nombre en otros directorios, por eso el filtro en la tabla con 3 condicionantes)
     if (fileExists.length > 0) {
-      const error = new Error(
-        `No podemos renombrar la carpeta, ya existe una carpeta con el nombre ${newName} en el directorio actual.`
-      );
+      const error = new Error("renameDirectoryProblema");
       error.httpStatus = 500;
       throw error;
     }
@@ -80,7 +74,7 @@ const renameDirectory = async (req, res, next) => {
     //enviamos respuesta de que la operación finalizó correctamente
     res.status(200).send({
       status: "info",
-      message: `La carpeta ${folderName} se ha renombrado correctamente a ${newName}.`,
+      message: "renameDirectoryOk",
     });
   } catch (error) {
     console.log(error);

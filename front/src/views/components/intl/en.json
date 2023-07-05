@@ -56,6 +56,7 @@
   "pwdRegistrarse": "Sign up",
   "pwdCódigo": "Recovery code",
   "pwdReset": "Request a reset",
+
   "singInError": "Error!",
   "singInCoincidir": "Passwords do not match",
   "singInErrorUsuario": "An error occurred while trying to register the user",
@@ -87,5 +88,31 @@
   "fileUploadOk": "File uploaded successfully",
   "changeDirectory": "Directory changed successfully",
 
-  "toastMensajeCarpeta": "Only letters [a-z][A-Z] and numbers [0-9] are allowed"
+  "toastMensajeCarpeta": "Only letters [a-z][A-Z] and numbers [0-9] are allowed",
+
+  "aboutIntro": "A final project of the Bootcamp",
+  "aboutDerechos": "No rights reserved or anything, you can do whatever you want with this project and we hope it serves you as much as it has served us in learning",
+  "aboutAmor": "Made with much 💖 in Spain",
+  "aboutButton": "I love it 😍!!",
+
+  "fileUploadError": "A file with the same name already exists in the current directory",
+  "fileUploadErrorSubida": "No files to upload!",
+
+  "deleteFileError": "The file ${fileInfo.fileName} is not found in the directory ${user[0].fileName}",
+  "deleteFile": "The file ${fileInfo.fileName} was successfully deleted",
+
+  "makeFolderError": "The folder name contains invalid characters, please use only allowed characters",
+  "makeFolderError2": "The folder name ${folderName} already exists in the current directory",
+  "makeFolderExito": "The directory ${folderName} was created successfully in the path ${user[0].fileName}",
+
+  "renameDirectoryCarpeta": "The new folder name contains invalid characters, please use only allowed characters",
+  "renameDirectoryError": "The folder ${folderName} does not exist",
+  "renameDirectoryProblema": "We cannot rename the folder, a folder named ${newName} already exists in the current directory",
+  "renameDirectoryOk": "The folder was renamed successfully",
+
+  "recoverFile": "The file ${file[0].fileName} is not in the trash",
+  "recoverFileRecuperado": "The file was successfully recovered",
+
+  "renameFile": "The folder ${folderName} does not exist",
+  "renameFileError": "We cannot rename the folder, a folder named ${newName} already exists in the current directory"
 }

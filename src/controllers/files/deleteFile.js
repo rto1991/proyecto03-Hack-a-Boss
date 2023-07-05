@@ -19,15 +19,13 @@ const deleteFile = async (req, res, next) => {
 
     //buscamos el fichero en la carpeta actual del usuario
     const [file] = await connect.query(
-      `SELECT * FROM files WHERE fileName = ? AND id_user = ? AND parent_dir_id = ? and in_recycle_bin = 0`,
+      `SELECT * FROM files WHERE fileName = ? AND id_user = ? AND parent_dir_id = ?`,
       [fileInfo.fileName, idUser, user[0].currentFolder_id]
     );
 
     //SE ENTIENDE QUE ESTE ERROR NO VIENE A CUENTO YA QUE EN UNA INTERFAZ GRÁFICA ESTA SITUACIÓN NUNCA PODRÁ PRODUCIRSE
     if (file.length === 0) {
-      const error = new Error(
-        `El archivo ${fileInfo.fileName} no se encuentra en el directorio "${user[0].fileName}"`
-      );
+      const error = new Error("deleteFileError");
       error.httpStatus = 404;
       throw error;
     }
@@ -43,7 +41,7 @@ const deleteFile = async (req, res, next) => {
     // Enviamos respuesta de que la operación finalizó correctamente
     res.status(200).send({
       status: "info",
-      message: `El archivo ${fileInfo.fileName} se borró correctamente.`,
+      message: "deleteFile",
     });
   } catch (error) {
     console.log(error);
