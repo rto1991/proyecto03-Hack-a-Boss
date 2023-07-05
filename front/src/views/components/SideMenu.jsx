@@ -21,10 +21,10 @@ function SideMenu({ makeFolder, dir, info, setInfo }) {
       title: "MY CLOUD DRIVE",
       html: `<p>${intl.formatMessage({ id: "aboutIntro" })}</p>
       <p>(c) 2023 - JSB18RT - A-TEAM</p>
-      <p> Joffrey Arias <p> 
-      <p> Juan Carlos Vez Vazquez <p>
-      <p> Rubén Taibo <p>
-      <p> Mario J. Rodríguez <p>
+      <p> Validaciones: Joffrey Arias <p> 
+      <p> Testing: Juan Carlos Vez Vazquez <p>
+      <p> Internacionalizacion: Rubén Taibo <p>
+      <p> Program Glue: Mario J. Rodríguez <p>
       <p> ${intl.formatMessage({ id: "aboutDerechos" })}</p>
       <p> ${intl.formatMessage({ id: "aboutAmor" })}`,
 
@@ -35,6 +35,7 @@ function SideMenu({ makeFolder, dir, info, setInfo }) {
   const showInputModal = () => {
     Swal.fire({
       title: intl.formatMessage({ id: "sideMenuCarpeta" }),
+      text: "Se permite solo letras [a-z][A-Z] y números [0-9]",
       input: "text",
       inputAttributes: {
         autocapitalize: "off",
@@ -65,12 +66,12 @@ function SideMenu({ makeFolder, dir, info, setInfo }) {
       timer: 1500,
       timerProgressBar: true,
     });
-    console.log(info.message);
+
     Toast.fire({
       icon: "success",
       title: intl.formatMessage({ id: "changeDirectory" }),
     });
-    // info.message
+
     dir();
     setInfo();
   }
@@ -78,7 +79,7 @@ function SideMenu({ makeFolder, dir, info, setInfo }) {
   const subirArchivo = async () => {
     const { value: file } = await Swal.fire({
       title: intl.formatMessage({ id: "sideMenuSeleccionar" }),
-      input: intl.formatMessage({ id: "sideMenuSeleccionar" }),
+      input: "file",
     });
 
     if (file) {
@@ -135,8 +136,9 @@ function SideMenu({ makeFolder, dir, info, setInfo }) {
       <a href="/editProfile">
         ⚙️ <FormattedMessage id="sideMenuPerfil" />
       </a>
-      <a href="#">
-        🐜 <FormattedMessage id="sideMenuBug" />
+      <a onClick={() => acercaDe()}>
+        {" "}
+        🥳 <FormattedMessage id="sideMenuBug" />
       </a>
     </div>
   );

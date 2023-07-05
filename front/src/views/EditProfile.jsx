@@ -9,9 +9,9 @@ import {
   Typography,
   createTheme,
 } from "@mui/material";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./SingIn.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { useFilesActions, useUserActions } from "../hooks/api";
 import { useUser } from "../UserContext";
@@ -22,6 +22,15 @@ import { useIntl } from "react-intl";
 const defaultTheme = createTheme();
 function EditProfile() {
   const [user] = useUser();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!user) {
+      console.log(user);
+      navigate("/");
+    }
+  }, []);
+
   const [name, setName] = useState(user?.info.name);
   const [lastName, setLastName] = useState(user?.info.last_name);
   const [mail, setMail] = useState(user?.info.mail);
@@ -34,8 +43,6 @@ function EditProfile() {
 
   const { updateUser, info } = useUserActions();
   const { setInfo } = useFilesActions();
-  //usamos hook navigate de useNavigate porque el Componente Navigate directamente no me funciona
-  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -69,10 +76,6 @@ function EditProfile() {
       });
     }
   };
-
-  if (!user) {
-    navigate("/");
-  }
 
   return (
     <ThemeProvider theme={defaultTheme}>

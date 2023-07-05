@@ -22,7 +22,10 @@ const makeFolder = async (req, res, next) => {
         folderName: folderName,
       });
     } catch (err) {
-      const error = new Error("makeFolderError" + err.message);
+      const error = new Error(
+        "El nombre de la carpeta tiene caracteres no permitidos, por favor, utiliza sólo los carácteres permitidos " +
+          err.message
+      );
       error.httpStatus = 404;
       throw error;
     }
@@ -46,7 +49,9 @@ const makeFolder = async (req, res, next) => {
 
     //no puede haber en el directorio actual una carpeta que se llame igual a la propuesta (ojo, si puede haber ese nombre en otros directorios, por eso el filtro en la tabla con 3 condicionantes)
     if (fileExists.length > 0) {
-      const error = new Error("makeFolderError2");
+      const error = new Error(
+        `El nombre de carpeta ${folderName} ya existe en el directorio actual`
+      );
       error.httpStatus = 500;
       throw error;
     }

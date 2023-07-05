@@ -5,14 +5,12 @@ const fs = require("fs/promises");
 const path = require("path");
 const Joi = require("joi");
 
-const renameDirectory = async (req, res, next) => {
+const renameFile = async (req, res, next) => {
   let connect;
   try {
-    //definimos las constantes necesarias para realizar la operación
-    const userInfo = req.userInfo; //aquí nos traemos la info del usuario
+    const userInfo = req.userInfo; // Aquí nos traemos la info del usuario
     const idUser = userInfo.id;
-    const folderName = req.params.oldName; //aquí nos traemos el nombre de carpeta a la que queremos cambiar el nombre
-    const newName = req.params.newName; //aquí nos traemos el nuevo nombre para la carpeta
+    const { fileName, newFileName } = req.body; // Aquí nos traemos el nombre actual del archivo y el nuevo nombre
     connect = await getDB();
 
     //validaciones (by @joffrey)
@@ -24,54 +22,39 @@ const renameDirectory = async (req, res, next) => {
         folderName: newName,
       });
     } catch (err) {
-      const error = new Error("makeFolderError");
+      const error = new Error(
+        "El nuevo nombre del fichero tiene caracteres no permitidos, por favor, utiliza sólo los carácteres permitidos"
+      );
       error.httpStatus = 404;
       throw error;
     }
 
-    const [user] = await connect.query(`SELECT * FROM users WHERE id = ?`, [
-      idUser,
-    ]);
-    const currentFolder_id = user[0].currentFolder_id;
-
-    //buscamos la carpeta que queremos renombrar en la BD
-    const [folder] = await connect.query(
-      `SELECT * FROM files WHERE fileName = ? and id_user = ? and parent_dir_id = ? and is_folder = 1`,
-      [folderName, idUser, currentFolder_id]
+    const [file] = await connect.query(
+      `SELECT u.*, f.*, f.id as file_id FROM files f INNER JOIN users u ON u.currentFolder_id = f.parent_dir_id WHERE f.fileName = ? and f.id_user = ?`,
+      [fileName, idUser]
     );
 
-    //verificamos que la carpeta exista en el directorio actual del usuario
-    if (folder.length === 0) {
-      const error = new Error("renameFile");
-      error.httpStatus = 500;
+    // Si el archivo no existe en la BD, devolver un mensaje de error
+    if (file.length === 0) {
+      const error = new Error(
+        `El archivo ${fileName} no existe en el directorio actual`
+      );
+      error.httpStatus = 404;
       throw error;
     }
 
-    //verificamos que el nuevo nombre no exista en el directorio actual del usuario
-    const [fileExists] = await connect.query(
-      `SELECT fileName FROM files WHERE fileName = ? and id_user = ? and parent_dir_id = ?`,
-      [newName, idUser, currentFolder_id]
-    );
-
-    //no puede haber en el directorio actual una carpeta que se llame igual a la propuesta (ojo, si puede haber ese nombre en otros directorios, por eso el filtro en la tabla con 3 condicionantes)
-    if (fileExists.length > 0) {
-      const error = new Error("renameFileError");
-      error.httpStatus = 500;
-      throw error;
-    }
-    //renombramos la carpeta en el sistema de archivos
+    // Renombrar el archivo físicamente en el sistema de archivos
     await fs.rename(
-      path.join(folder[0].filePath, folderName),
-      path.join(folder[0].filePath, newName)
+      path.join(file[0].filePath, fileName),
+      path.join(file[0].filePath, newFileName)
     );
 
-    //renombramos la carpeta en la BD
-    await connect.query(
-      "UPDATE files SET fileName = ?, date_upd = ? WHERE id = ?",
-      [newName, new Date(), folder[0].id]
-    );
+    // Actualizar el nombre del archivo en la BD
+    await connect.query(`UPDATE files SET fileName = ? WHERE id = ?`, [
+      newFileName,
+      file[0].file_id,
+    ]);
 
-    //enviamos respuesta de que la operación finalizó correctamente
     res.status(200).send({
       status: "info",
       message: "renameDirectoryOk",
@@ -80,8 +63,8 @@ const renameDirectory = async (req, res, next) => {
     console.log(error);
     next(error);
   } finally {
-    connect.release();
+    connect?.release();
   }
 };
 
-module.exports = renameDirectory;
+module.exports = renameFile;

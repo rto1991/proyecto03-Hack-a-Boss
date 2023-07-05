@@ -1,5 +1,5 @@
 const getDB = require("../../database/db");
-
+//ESTE MÓDULO NO SE USA EN EL PROYECTO 3
 const getCurrentFolder = async (req, res) => {
   try {
     const userInfo = req.userInfo;

@@ -35,8 +35,6 @@ function Copyright(props) {
   );
 }
 
-// TODO remove, this demo shouldn't need to reset the theme.
-
 const defaultTheme = createTheme();
 export default function PasswordRecovery() {
   const { logout, recoverPassword } = useUserActions();

@@ -89,6 +89,7 @@ function FileSearch({
     if (searchString == "") {
       dir();
     }
+
     const newFiles = {
       status: "info",
       data: {
@@ -103,7 +104,6 @@ function FileSearch({
   };
 
   if (info) {
-    console.log(info);
     Swal.fire({
       title: info.status + "!",
       text: info.message,
@@ -154,8 +154,8 @@ function FileSearch({
           className="btnUploadFile"
           onClick={() => subirArchivo()}
           src="/subir.png"
-          alt={<FormattedMessage id="sideMenuFichero" />}
-          title={<FormattedMessage id="sideMenuFichero" />}
+          alt={intl.formatMessage({ id: "sideMenuFichero" })}
+          title={intl.formatMessage({ id: "sideMenuFichero" })}
         />
         <TextField
           onChange={(e) => {
@@ -167,15 +167,17 @@ function FileSearch({
           required
           fullWidth
           name="fileSearch"
-          label={<FormattedMessage id="buscadorLabel" />}
+          label={intl.formatMessage({ id: "buscadorLabel" })}
           type="text"
         ></TextField>
         <img
           className="btnBuscar"
-          onClick={() => searchFiles()}
+          onClick={() => {
+            searchFiles();
+          }}
           src="/lupa.png"
-          alt={<FormattedMessage id="buscadorImagen" />}
-          title={<FormattedMessage id="buscadorImagen" />}
+          alt={intl.formatMessage({ id: "buscadorImagen" })}
+          title={intl.formatMessage({ id: "buscadorImagen" })}
         />
         <img
           className="btnTrash"
@@ -189,7 +191,6 @@ function FileSearch({
           }
         />
       </div>
-
       <div className="breadCrumb">
         <p>
           {!enPapelera

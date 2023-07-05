@@ -1,7 +1,7 @@
 "use strict";
+require("dotenv").config();
 
 const mysql = require("mysql2/promise");
-
 
 const { HOST, USER, PASSWORD, DATABASE } = process.env;
 
@@ -47,6 +47,7 @@ async function createTables() {
         is_public tinyint(1) DEFAULT '0',
         in_recycle_bin tinyint(1) DEFAULT '0',
         size INT (11) DEFAULT '0',
+        breadCrumb varchar(255) DEFAULT NULL,
         PRIMARY KEY (id),
         FOREIGN KEY (id_user) REFERENCES users(id)
       ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci`

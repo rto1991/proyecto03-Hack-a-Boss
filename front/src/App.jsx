@@ -11,6 +11,7 @@ import PasswordRecovery from "./views/PasswordRecovery";
 import PasswordChange from "./views/PasswordChange";
 import TrashPage from "./views/components/TrashPage";
 import EditProfile from "./views/EditProfile";
+import NotFound from "./views/NotFound";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -23,6 +24,7 @@ const router = createBrowserRouter(
       <Route path="/passwordChange" element={<PasswordChange />} />
       <Route path="/trash" element={<TrashPage />} />
       <Route path="/editProfile" element={<EditProfile />} />
+      <Route path="*" element={<NotFound />} />
     </>
   )
 );

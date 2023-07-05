@@ -5,10 +5,9 @@ import { useUser } from "../../UserContext";
 import "./TopNavBar.css";
 
 function TopNavBar() {
+  const [user] = useUser();
   const { logout } = useUserActions();
   const intl = useIntl();
-  const [user] = useUser();
-  console.log(user);
 
   function showMenu() {
     document.getElementById("mySidenav").style.width = "300px";

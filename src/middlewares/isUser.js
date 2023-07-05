@@ -2,22 +2,24 @@ const jwt = require("jsonwebtoken");
 const getDB = require("../database/db");
 
 const isUser = async (req, res, next) => {
+  let connect;
   try {
-    const connect = await getDB();
+    connect = await getDB();
 
     const authorization = req.headers["authorization"];
-    if (!authorization)
-      return res.status(401).send({
-        status: "error",
-        message: "Falta cabecera de autorización"});
+    if (!authorization) {
+      const error = new Error("Falta cabecera de autorización");
+      error.httpStatus = 401;
+      throw error;
+    }
 
     let tokenInfo;
     try {
       tokenInfo = jwt.verify(authorization, process.env.SECRET_TOKEN);
     } catch (error) {
-      return res.status(401).send({
-        status: "error",
-        message: "Token no válido, debes loguearte de nuevo"});
+      error.message = "Token no válido, debes loguearte de nuevo";
+      error.httpStatus = 401;
+      throw error;
     }
 
     /**Comprobamos que el token sea valido respecto a lastAuthUpdate */
@@ -36,20 +38,19 @@ const isUser = async (req, res, next) => {
     //iat representa un timestapm (fecha y hora del jwt fue usado por ultima vez)
 
     if (timestampCreateToken < lastAuthUpdate) {
-        return res.status(401).send({
-        status: "error",
-        message: "Token expirado, debes loguearte de nuevo"});
+      const error = new Error("Token expirado, debes loguearte de nuevo");
+      error.httpStatus = 401;
+      throw error;
     }
-    
 
     // añadimos a la req las informaciones del usuario que hace la petición (payload token)
     req.userInfo = tokenInfo;
     next();
   } catch (error) {
-    return res.status(500).send({
-      status: "error",
-      message: "Error interno del servidor. Middle isUser",
-    })
+    console.log(error);
+    next(error);
+  } finally {
+    if (connect) connect.release();
   }
 };
 

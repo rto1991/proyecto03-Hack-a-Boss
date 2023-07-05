@@ -134,7 +134,6 @@ function FileArea({
   };
 
   function handleContextMenu(event, data) {
-    console.log(event, data.menu_id);
     if (event.target.className != "fileArea" && data.menu_id == MENU_ID)
       show({
         id: data.menu_id,
@@ -238,6 +237,7 @@ function FileArea({
         case "makeFolder":
           Swal.fire({
             title: intl.formatMessage({ id: "fileAreaCrear" }),
+            text: intl.formatMessage({ id: "toastMensajeCarpeta" }),
             input: "text",
             inputAttributes: {
               autocapitalize: "off",
@@ -319,7 +319,6 @@ function FileArea({
   };
 
   const dobleClickHandler = async (f) => {
-    console.log(f.in_recycle_bin);
     if (f.in_recycle_bin === 1) {
       const Toast = Swal.mixin({
         toast: true,
@@ -377,6 +376,17 @@ function FileArea({
     }
   }
 
+  if (info) {
+    if (info.status == "error") {
+      Swal.fire({
+        title: intl.formatMessage({ id: "singInError" }),
+        text: info.message,
+        icon: "error",
+        confirmButtonText: "Ok",
+      });
+    }
+  }
+
   return (
     <div
       onContextMenu={(e) => handleContextMenu(e, { menu_id: MAIN_AREA_MENU })}
@@ -405,6 +415,7 @@ function FileArea({
           ""
         )}
       </Menu>
+
       <Menu id={MAIN_AREA_MENU}>
         <Item id="makeFolder" onClick={handleItemClick}>
           <FormattedMessage id="sideMenuCarpeta" />
@@ -413,6 +424,7 @@ function FileArea({
           <FormattedMessage id="sideMenuSubir" />
         </Item>
       </Menu>
+
       {files?.data.content.map((f) => (
         <li
           title={intl.formatMessage({ id: "fileAreaBorrar2" })}

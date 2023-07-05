@@ -25,7 +25,9 @@ const deleteFile = async (req, res, next) => {
 
     //SE ENTIENDE QUE ESTE ERROR NO VIENE A CUENTO YA QUE EN UNA INTERFAZ GRÁFICA ESTA SITUACIÓN NUNCA PODRÁ PRODUCIRSE
     if (file.length === 0) {
-      const error = new Error("deleteFileError");
+      const error = new Error(
+        `El archivo ${fileInfo.fileName} no se encuentra en el directorio "${user[0].fileName}"`
+      );
       error.httpStatus = 404;
       throw error;
     }
@@ -47,7 +49,7 @@ const deleteFile = async (req, res, next) => {
     console.log(error);
     next(error);
   } finally {
-    connect.release();
+    connect?.release();
   }
 };
 

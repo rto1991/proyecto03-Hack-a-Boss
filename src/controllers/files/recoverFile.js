@@ -20,7 +20,9 @@ const recoverFile = async (req, res, next) => {
 
     // Verificamos si el archivo ya está fuera de la papelera
     if (file.length === 0) {
-      const error = new Error("recoverFile");
+      const error = new Error(
+        `El archivo ${file[0].fileName} no está en la papelera`
+      );
       error.httpStatus = 404;
       throw error;
     }
@@ -39,7 +41,7 @@ const recoverFile = async (req, res, next) => {
     console.log(error);
     next(error);
   } finally {
-    connect.release();
+    connect?.release();
   }
 };
 

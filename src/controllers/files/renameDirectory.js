@@ -24,7 +24,9 @@ const renameDirectory = async (req, res, next) => {
         folderName: newName,
       });
     } catch (err) {
-      const error = new Error("renameDirectoryCarpeta");
+      const error = new Error(
+        "El nuevo nombre de la carpeta tiene caracteres no permitidos, por favor, utiliza sólo los carácteres permitidos"
+      );
       error.httpStatus = 404;
       throw error;
     }
@@ -55,7 +57,9 @@ const renameDirectory = async (req, res, next) => {
 
     //no puede haber en el directorio actual una carpeta que se llame igual a la propuesta (ojo, si puede haber ese nombre en otros directorios, por eso el filtro en la tabla con 3 condicionantes)
     if (fileExists.length > 0) {
-      const error = new Error("renameDirectoryProblema");
+      const error = new Error(
+        `No podemos renombrar la carpeta, ya existe una carpeta con el nombre ${newName} en el directorio actual.`
+      );
       error.httpStatus = 500;
       throw error;
     }
@@ -80,7 +84,7 @@ const renameDirectory = async (req, res, next) => {
     console.log(error);
     next(error);
   } finally {
-    connect.release();
+    connect?.release();
   }
 };
 

@@ -9,7 +9,7 @@ import {
   Typography,
   createTheme,
 } from "@mui/material";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./SingIn.css";
 import { useState } from "react";
 import Swal from "sweetalert2";
@@ -29,7 +29,6 @@ function SingIn() {
   const { signin, logout } = useUserActions();
   const [user] = useUser();
   const intl = useIntl();
-  let res = {}; //la usaremos para capturar la respuesta y manejar posibles mensajes de error
   //usamos hook navigate de useNavigate porque el Componente Navigate directamente no me funciona
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
@@ -37,9 +36,9 @@ function SingIn() {
     //comprobar coincidencia de passwords
     if (password !== repeatPassword) {
       return Swal.fire({
-        title: intl.formatMessage({ id: "singInError" }),
-        text: intl.formatMessage({ id: "singInCoincidir" }),
-        icon: "error",
+        title: "Error!",
+        text: intl.formatMessage({ id: "singInError" }),
+        icon: intl.formatMessage({ id: "singInCoincidir" }),
         confirmButtonText: "Ok",
       });
     }
@@ -86,7 +85,7 @@ function SingIn() {
     <ThemeProvider theme={defaultTheme}>
       <div className="mainContainer">
         <Container component="main" maxWidth="xs">
-          <LanguageSelector />
+          <LanguageSelector></LanguageSelector>
           <CssBaseline />
           <Box
             sx={{
@@ -96,8 +95,9 @@ function SingIn() {
               alignItems: "center",
             }}
           >
-            <FormattedMessage id="singInRegistro" />
-            <Typography component="h1" variant="h5"></Typography>
+            <Typography component="h1" variant="h5">
+              <FormattedMessage id="singInRegistro" />
+            </Typography>
             <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
               <TextField
                 onChange={(e) => setName(e.target.value)}

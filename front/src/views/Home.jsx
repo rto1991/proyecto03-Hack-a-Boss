@@ -15,7 +15,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Swal from "sweetalert2";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./Home.css";
 import { useIntl, FormattedMessage } from "react-intl";
 import LanguageSelector from "./LanguageSelector";
@@ -38,19 +38,15 @@ function Copyright(props) {
   );
 }
 
-// TODO remove, this demo shouldn't need to reset the theme.
-
 const defaultTheme = createTheme();
 export default function Home() {
-  const { login, logout, validate } = useUserActions();
+  const { login, logout } = useUserActions();
   const [user] = useUser();
   const [mail, setEmail] = useState("");
   const [saveCredentials, setSaveCredentials] = useState(false);
   const [pwd, setPassword] = useState("");
   const navigate = useNavigate();
-  const { regCode } = useParams();
   const intl = useIntl();
-
   //retrieve saved data from local storage if exists
 
   useEffect(() => {
@@ -161,6 +157,7 @@ export default function Home() {
             <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
               <LockOutlinedIcon />
             </Avatar>
+
             <Typography component="h1" variant="h5">
               <LanguageSelector />
               <FormattedMessage id="cabeceraSaludo" />
