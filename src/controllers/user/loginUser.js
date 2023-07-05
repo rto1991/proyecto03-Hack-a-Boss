@@ -80,7 +80,7 @@ const loginUser = async (req, res, next) => {
     next(error);
   } finally {
     if (connect) {
-      connect.release();
+      connect?.release();
     }
   }
 };

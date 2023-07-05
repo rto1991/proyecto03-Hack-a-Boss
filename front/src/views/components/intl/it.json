@@ -1,0 +1,118 @@
+{
+  "cabeceraSaludo": "Benvenuto in MyCloudDrive",
+  "cabeceraLabelCorreo": "E-mail",
+  "cabeceraLabelContraseña": "Parola d'ordine",
+  "cabeceraRecordar": "Ricordami su questo computer",
+  "cabeceraBoton": "Entrare",
+  "cabeceraOlvidar": "Ha dimenticato la password?",
+  "cabecera": "Ricordami su questo computer",
+  "cabeceraNuevaCuenta": "Non hai un account, creane uno?",
+
+  "modalEntrada": "Ciao {name}, arrivo alla tua Dashboard, solo un momento...",
+  "topNavBarCabecera": "Benvenuto in MyCloudDrive, {name}",
+
+  "buscadorLabel": "Trova un fascicolo",
+  "buscadorImagen": "Cercare",
+
+  "papelera": "Vedi cestino",
+  "palereaVolver": "Torna alla cartella in cui ti trovavi",
+  "botonSalir": "Cancella la sottoscrizione",
+  "directorio": "Sei dentro: {directorio}",
+  "directorioPapelera": "Sei nel cestino",
+  "botonAtras": "Salire di livello",
+
+  "recuperarCuenta": "Recupera l'accesso al tuo account",
+  "solicitudReset": "Richiedere un ripristino",
+
+  "sideMenuCarpeta": "Crea una nuova cartella",
+  "sideMenuCrearCarpeta": "Crea cartella",
+  "sideMenuFichero": "Seleziona un file",
+  "sideMenuSubir": "Carica un file",
+  "sideMenuPerfil": "Modifica profilo",
+  "sideMenuBug": "A proposito di questa fantastica app",
+  "sideMenuSeleccionar": "Seleziona un file",
+
+  "fileAreaFichero": "Seleziona un file",
+  "fileAreaNombre": "Nuovo nome per il file",
+  "fileAreaRenombrar": "Rinomina file",
+  "fileAreaBorrar": "Sei sicuro di voler eliminare?",
+  "fileAreaInfo": ", questo elemento è una cartella, tutti i suoi contenuti verranno eliminati",
+  "fileAreaBorrar2": "Sì, elimina",
+  "fileAreaAtras": "Indietro",
+  "fileAreaCrear": "Crea cartella",
+  "fileAreaComp": "Comprimendo e scaricando il tuo file",
+  "fileAreaDes": "Scaricando il tuo file",
+  "fileAreaMov": "Specifica il nome della cartella di destinazione",
+  "fileAreaMover": "Sposta file",
+  "fileAreaInfo2": "Non puoi accedere a una cartella presente nel cestino",
+  "fileAreaDescarga": "Scaricando il tuo file",
+  "fileAreaDelete": "Elimina definitivamente",
+  "fileAreaTrash": "Sposta nel cestino",
+  "fileAreaInfo3": "Clic destro per le opzioni del menu contestuale",
+
+  "pwdRecuperar": "Recupera l'accesso al tuo account",
+  "pwdInfo": "La password deve essere compresa tra 8 e 30 caratteri, contenere almeno una lettera maiuscola, un numero e un simbolo speciale (!@#$&*)",
+  "pwdVolver": "Indietro",
+  "pwdRegistrarse": "Registrati",
+  "pwdCódigo": "Codice di recupero",
+  "pwdReset": "Richiedi un reset",
+
+  "singInError": "Errore!",
+  "singInCoincidir": "Le password non corrispondono",
+  "singInErrorUsuario": "Si è verificato un errore durante la registrazione dell'utente",
+  "singInExito": "Successo!",
+  "singInCreado": "Hai creato correttamente il tuo utente, vai nella tua casella di posta per validarlo e iniziare a utilizzare MyCloudDrive",
+  "singInRegistro": "Registrati su MyCloudDrive",
+  "singInNombre": "Nome",
+  "singInApellidos": "Cognome",
+  "singInRepetir": "Ripeti password",
+
+  "popUpMover": "Sposta",
+  "popUpDescargar": "Scarica",
+  "popUpRenombrar": "Rinomina",
+  "popUpRecuperar": "Recupera",
+
+  "editProfileCabecera": "Modifica i dati del tuo profilo",
+  "editProfileCarpeta": "Nuovo nome per la cartella",
+  "editProfileRenombrar": "Rinomina cartella",
+  "editProfileModificar": "Utente modificato con successo",
+  "editProfileTelefono": "Telefono",
+  "editProfileCP": "Codice postale",
+  "editProfileDireccion": "Indirizzo",
+  "editProfileCiudad": "Città",
+  "editProfileProvincia": "Provincia",
+  "editProfileActualizar": "Aggiorna",
+
+  "topNavBarMenu": "menu",
+
+  "fileUploadOk": "File caricato correttamente",
+  "changeDirectory": "Directory modificata correttamente",
+
+  "toastMensajeCarpeta": "Sono consentite solo lettere [a-z][A-Z] e numeri [0-9]",
+
+  "aboutIntro": "Un progetto finale del Bootcamp",
+  "aboutDerechos": "Nessun diritto riservato o altro, potete fare ciò che volete con questo progetto e speriamo che vi sia utile tanto quanto lo è stato per noi nell'apprendimento",
+  "aboutAmor": "Realizzato con tanto 💖 in Spagna",
+  "aboutButton": "Mi piace tantissimo 😍 !!",
+
+  "fileUploadError": "Esiste già un file con lo stesso nome nella directory corrente",
+  "fileUploadErrorSubida": "Nessun file da caricare!",
+
+  "deleteFileError": "Il file ${fileInfo.fileName} non è presente nella directory ${user[0].fileName}",
+  "deleteFile": "Il file ${fileInfo.fileName} è stato eliminato correttamente",
+
+  "makeFolderError": "Il nome della cartella contiene caratteri non consentiti, si prega di utilizzare solo caratteri consentiti",
+  "makeFolderError2": "Il nome della cartella ${folderName} esiste già nella directory corrente",
+  "makeFolderExito": "La directory ${folderName} è stata creata correttamente nel percorso ${user[0].fileName}",
+
+  "renameDirectoryCarpeta": "Il nuovo nome della cartella contiene caratteri non consentiti, si prega di utilizzare solo caratteri consentiti",
+  "renameDirectoryError": "La cartella ${folderName} non esiste",
+  "renameDirectoryProblema": "Impossibile rinominare la cartella, esiste già una cartella con il nome ${newName} nella directory corrente",
+  "renameDirectoryOk": "La cartella è stata rinominata correttamente",
+
+  "recoverFile": "Il file ${file[0].fileName} non è nel cestino",
+  "recoverFileRecuperado": "Il file è stato recuperato correttamente",
+
+  "renameFile": "La cartella ${folderName} non esiste",
+  "renameFileError": "Impossibile rinominare la cartella, esiste già una cartella con il nome ${newName} nella directory corrente"
+}

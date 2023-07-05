@@ -2,6 +2,7 @@ import { TextField } from "@mui/material";
 import "./FileSearch.css";
 import Swal from "sweetalert2";
 import { useState } from "react";
+import { useIntl, FormattedMessage } from "react-intl";
 import { useUser } from "../../UserContext";
 
 function FileSearch({
@@ -18,10 +19,11 @@ function FileSearch({
 }) {
   const [searchString, setSearchString] = useState();
   const [user] = useUser();
+  const intl = useIntl();
 
   const subirArchivo = async () => {
     const { value: file } = await Swal.fire({
-      title: "Selecciona un fichero",
+      title: intl.formatMessage({ id: "sideMenuFichero" }),
       input: "file",
     });
 
@@ -119,14 +121,14 @@ function FileSearch({
 
   const showInputModal = () => {
     Swal.fire({
-      title: "Crear nueva carpeta",
-      text: "Se permite solo letras [a-z][A-Z] y números [0-9]",
+      title: intl.formatMessage({ id: "sideMenuCarpeta" }),
+      text: intl.formatMessage({ id: "toastMensajeCarpeta" }),
       input: "text",
       inputAttributes: {
         autocapitalize: "off",
       },
       showCancelButton: true,
-      confirmButtonText: "Crear carpeta",
+      confirmButtonText: intl.formatMessage({ id: "fileAreaCrear" }),
       showLoaderOnConfirm: true,
       preConfirm: async (folderName) => {
         await crearCarpeta(folderName);
@@ -152,8 +154,8 @@ function FileSearch({
           className="btnUploadFile"
           onClick={() => subirArchivo()}
           src="/subir.png"
-          alt="Subir fichero"
-          title="Subir fichero"
+          alt={intl.formatMessage({ id: "sideMenuFichero" })}
+          title={intl.formatMessage({ id: "sideMenuFichero" })}
         />
         <TextField
           onChange={(e) => {
@@ -165,7 +167,7 @@ function FileSearch({
           required
           fullWidth
           name="fileSearch"
-          label="Buscar un archivo"
+          label={intl.formatMessage({ id: "buscadorLabel" })}
           type="text"
         ></TextField>
         <img
@@ -174,8 +176,8 @@ function FileSearch({
             searchFiles();
           }}
           src="/lupa.png"
-          alt="Buscar"
-          title="Buscar"
+          alt={intl.formatMessage({ id: "buscadorImagen" })}
+          title={intl.formatMessage({ id: "buscadorImagen" })}
         />
         <img
           className="btnTrash"
@@ -183,20 +185,25 @@ function FileSearch({
           src={!enPapelera ? "/basura.png" : "/volver.png"}
           alt="Papelera"
           title={
-            !enPapelera ? "Ver papelera" : "Volver a la carpeta donde estabas"
+            !enPapelera
+              ? intl.formatMessage({ id: "papelera" })
+              : intl.formatMessage({ id: "papeleraVolver" })
           }
         />
       </div>
       <div className="breadCrumb">
         <p>
           {!enPapelera
-            ? `Estás en: ${files?.data.currentDir}`
-            : `Estás en Papelera`}
+            ? intl.formatMessage(
+                { id: "directorio" },
+                { directorio: files?.data.currentDir }
+              )
+            : intl.formatMessage({ id: "directorioPapelera" })}
         </p>
         {!enPapelera ? (
           <button
             onClick={() => upLevel()}
-            title="subir un nivel"
+            title={intl.formatMessage({ id: "botonAtras" })}
             type="button"
           >
             🔙

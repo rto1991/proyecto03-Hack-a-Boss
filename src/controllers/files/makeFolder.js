@@ -93,7 +93,7 @@ const makeFolder = async (req, res, next) => {
     //enviamos respuesta de que la operación finalizó correctamente
     res.status(200).send({
       status: "info",
-      message: `El directorio ${folderName} se creó correctamente en la ruta ${user[0].fileName}`,
+      message: "makeFolderExito",
     });
   } catch (error) {
     console.log(error);

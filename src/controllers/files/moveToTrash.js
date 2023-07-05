@@ -37,7 +37,7 @@ const moveToTrash = async (req, res, next) => {
   } catch (error) {
     next(error);
   } finally {
-    connect.release();
+    connect?.release();
   }
 };
 

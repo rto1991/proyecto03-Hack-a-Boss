@@ -43,13 +43,13 @@ const deleteFile = async (req, res, next) => {
     // Enviamos respuesta de que la operación finalizó correctamente
     res.status(200).send({
       status: "info",
-      message: `El archivo ${fileInfo.fileName} se borró correctamente.`,
+      message: "deleteFile",
     });
   } catch (error) {
     console.log(error);
     next(error);
   } finally {
-    connect.release();
+    connect?.release();
   }
 };
 

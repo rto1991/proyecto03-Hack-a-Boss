@@ -12,8 +12,10 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Swal from "sweetalert2";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./Home.css";
+import { FormattedMessage } from "react-intl";
+import LanguageSelector from "./LanguageSelector";
 
 function Copyright(props) {
   return (
@@ -33,16 +35,14 @@ function Copyright(props) {
   );
 }
 
-// TODO remove, this demo shouldn't need to reset the theme.
-
 const defaultTheme = createTheme();
 export default function PasswordRecovery() {
   const { logout, recoverPassword } = useUserActions();
   const [user] = useUser();
   const [mail, setEmail] = useState("");
   const navigate = useNavigate();
- 
-   const handleSubmit = async (event) => {
+
+  const handleSubmit = async (event) => {
     try {
       event.preventDefault();
       await recoverPassword(mail);
@@ -66,8 +66,7 @@ export default function PasswordRecovery() {
         confirmButtonText: "Ok",
       });
       logout();
-    } else
-    {
+    } else {
       Swal.fire({
         title: "Info!",
         text: user.message,
@@ -83,6 +82,7 @@ export default function PasswordRecovery() {
     <ThemeProvider theme={defaultTheme}>
       <div className="mainContainer">
         <Container component="main" maxWidth="xs">
+          <LanguageSelector />
           <CssBaseline />
           <Box
             sx={{
@@ -96,13 +96,9 @@ export default function PasswordRecovery() {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Recupera el acceso a tu cuenta
+              <FormattedMessage id="recuperarCuenta" />
             </Typography>
-            <Box
-              component="form"
-              onSubmit={handleSubmit}
-              sx={{ mt: 1 }}
-            >
+            <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
               <TextField
                 onChange={(e) => setEmail(e.target.value)}
                 value={mail}
@@ -110,22 +106,21 @@ export default function PasswordRecovery() {
                 required
                 fullWidth
                 id="email"
-                label="Correo electrónico"
+                label={<FormattedMessage id="cabeceraLabelCorreo" />}
                 name="email"
                 autoComplete="email"
                 autoFocus
               />
-              
+
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Solicitar un reset
+                <FormattedMessage id="solicitudReset" />
               </Button>
             </Box>
-            
           </Box>
           <Copyright sx={{ mt: 8, mb: 4 }} />
         </Container>

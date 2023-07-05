@@ -1,9 +1,12 @@
 import { useUser } from "../../UserContext";
 import "./SideMenu.css";
 import Swal from "sweetalert2";
+import { useIntl, FormattedMessage } from "react-intl";
+import LanguageSelector from "../LanguageSelector";
 
 function SideMenu({ makeFolder, dir, info, setInfo }) {
   const [user] = useUser();
+  const intl = useIntl();
 
   function closeMenu() {
     document.getElementById("mySidenav").style.width = "0";
@@ -16,29 +19,29 @@ function SideMenu({ makeFolder, dir, info, setInfo }) {
   const acercaDe = () => {
     Swal.fire({
       title: "MY CLOUD DRIVE",
-      html: `<p>Un proyecto de final de Bootcamp</p>
+      html: `<p>${intl.formatMessage({ id: "aboutIntro" })}</p>
       <p>(c) 2023 - JSB18RT - A-TEAM</p>
-      <p> Joffrey Arias <p> 
-      <p> Juan Carlos Vez Vazquez <p>
-      <p> Rubén Taibo <p>
-      <p> Mario J. Rodríguez <p>
-      <p> Ni derechos reservados ni "ná", podéis hacer con este proyecto lo que queráis y esperamos que os sirva para aprender tanto como nos ha servido a nosotros</p>
-      <p> Hecho con mucho 💖 en España (Spain)`,
+      <p> Validaciones: Joffrey Arias <p> 
+      <p> Testing: Juan Carlos Vez Vazquez <p>
+      <p> Internacionalizacion: Rubén Taibo <p>
+      <p> Program Glue: Mario J. Rodríguez <p>
+      <p> ${intl.formatMessage({ id: "aboutDerechos" })}</p>
+      <p> ${intl.formatMessage({ id: "aboutAmor" })}`,
 
-      confirmButtonText: "Me encanta 😍 !!",
+      confirmButtonText: intl.formatMessage({ id: "aboutButton" }),
     });
   };
 
   const showInputModal = () => {
     Swal.fire({
-      title: "Crear nueva carpeta",
+      title: intl.formatMessage({ id: "sideMenuCarpeta" }),
       text: "Se permite solo letras [a-z][A-Z] y números [0-9]",
       input: "text",
       inputAttributes: {
         autocapitalize: "off",
       },
       showCancelButton: true,
-      confirmButtonText: "Crear carpeta",
+      confirmButtonText: intl.formatMessage({ id: "sideMenuCrearCarpeta" }),
       showLoaderOnConfirm: true,
       preConfirm: async (folderName) => {
         await crearCarpeta(folderName);
@@ -66,7 +69,7 @@ function SideMenu({ makeFolder, dir, info, setInfo }) {
 
     Toast.fire({
       icon: "success",
-      title: info.message,
+      title: intl.formatMessage({ id: "changeDirectory" }),
     });
 
     dir();
@@ -75,7 +78,7 @@ function SideMenu({ makeFolder, dir, info, setInfo }) {
 
   const subirArchivo = async () => {
     const { value: file } = await Swal.fire({
-      title: "Selecciona un fichero",
+      title: intl.formatMessage({ id: "sideMenuSeleccionar" }),
       input: "file",
     });
 
@@ -123,10 +126,20 @@ function SideMenu({ makeFolder, dir, info, setInfo }) {
       <a onClick={() => closeMenu()} className="closebtn">
         &times;
       </a>
-      <a onClick={() => showInputModal()}>📂 Crear carpeta</a>
-      <a onClick={() => subirArchivo()}>📄 Subir archivo</a>
-      <a href="/editProfile">⚙️ Editar perfil</a>
-      <a onClick={() => acercaDe()}> 🥳 Acerca de este programa</a>
+      <LanguageSelector />
+      <a onClick={() => showInputModal()}>
+        📂 <FormattedMessage id="sideMenuCarpeta" />
+      </a>
+      <a onClick={() => subirArchivo()}>
+        📄 <FormattedMessage id="sideMenuSubir" />
+      </a>
+      <a href="/editProfile">
+        ⚙️ <FormattedMessage id="sideMenuPerfil" />
+      </a>
+      <a onClick={() => acercaDe()}>
+        {" "}
+        🥳 <FormattedMessage id="sideMenuBug" />
+      </a>
     </div>
   );
 }

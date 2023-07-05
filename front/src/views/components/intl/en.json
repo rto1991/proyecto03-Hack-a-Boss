@@ -1,0 +1,118 @@
+{
+  "cabeceraSaludo": "Welcome to MyCloudDrive",
+  "cabeceraLabelCorreo": "Email",
+  "cabeceraLabelContraseña": "Password",
+  "cabeceraRecordar": "Remember me on this computer",
+  "cabeceraBoton": "Get in",
+  "cabeceraOlvidar": "Forgot password?",
+  "cabecera": "Remember me on this computer",
+  "cabeceraNuevaCuenta": "Don't have an account, create one?",
+
+  "modalEntrada": "Hello {name}, coming to your Dashboard, just a moment...",
+  "topNavBarCabecera": "Welcome to MyCloudDrive, {name}",
+
+  "buscadorLabel": "Find a file",
+  "buscadorImagen": "Find",
+
+  "papelera": "See trash can",
+  "palereaVolver": "Go back to the folder where you were",
+  "botonSalir": "Sign off",
+  "directorio": "You are in: {directorio}",
+  "directorioPapelera": "You are in the trash can",
+  "botonAtras": "Go up a level",
+
+  "recuperarCuenta": "Recover access to your account",
+  "solicitudReset": "Request a reset",
+
+  "sideMenuCarpeta": "Create new folder",
+  "sideMenuCrearCarpeta": "Create folder",
+  "sideMenuFichero": "Select a file",
+  "sideMenuSubir": "Upload file",
+  "sideMenuPerfil": "Edit profile",
+  "sideMenuBug": "About this awesome app",
+  "sideMenuSeleccionar": "Select a file",
+
+  "fileAreaFichero": "Select a file",
+  "fileAreaNombre": "New name for the file",
+  "fileAreaRenombrar": "Rename file",
+  "fileAreaBorrar": "Are you sure you want to delete?",
+  "fileAreaInfo": ", this item is a folder, all its contents will be deleted",
+  "fileAreaBorrar2": "Yes, delete",
+  "fileAreaAtras": "Back",
+  "fileAreaCrear": "Create folder",
+  "fileAreaComp": "Compressing and downloading your file",
+  "fileAreaDes": "Downloading your file",
+  "fileAreaMov": "Specify the name of the destination folder",
+  "fileAreaMover": "Move file",
+  "fileAreaInfo2": "You cannot enter a folder that is in the trash",
+  "fileAreaDescarga": "Downloading your file",
+  "fileAreaDelete": "Permanently delete",
+  "fileAreaTrash": "Move to trash",
+  "fileAreaInfo3": "Right-click for contextual menu options",
+
+  "pwdRecuperar": "Recover access to your account",
+  "pwdInfo": "The password must be between 8 and 30 characters, contain at least one uppercase letter, one number, and one special symbol (!@#$&*)",
+  "pwdVolver": "Back",
+  "pwdRegistrarse": "Sign up",
+  "pwdCódigo": "Recovery code",
+  "pwdReset": "Request a reset",
+
+  "singInError": "Error!",
+  "singInCoincidir": "Passwords do not match",
+  "singInErrorUsuario": "An error occurred while trying to register the user",
+  "singInExito": "Success!",
+  "singInCreado": "You have successfully created your user, go to your inbox to validate it and start using MyCloudDrive",
+  "singInRegistro": "Sign up for MyCloudDrive",
+  "singInNombre": "First Name",
+  "singInApellidos": "Last Name",
+  "singInRepetir": "Repeat password",
+
+  "popUpMover": "Move",
+  "popUpDescargar": "Download",
+  "popUpRenombrar": "Rename",
+  "popUpRecuperar": "Recover",
+
+  "editProfileCabecera": "Edit your profile data",
+  "editProfileCarpeta": "New name for the folder",
+  "editProfileRenombrar": "Rename folder",
+  "editProfileModificar": "User modified successfully",
+  "editProfileTelefono": "Phone",
+  "editProfileCP": "Postal code",
+  "editProfileDireccion": "Address",
+  "editProfileCiudad": "City",
+  "editProfileProvincia": "Province",
+  "editProfileActualizar": "Update",
+
+  "topNavBarMenu": "menu",
+
+  "fileUploadOk": "File uploaded successfully",
+  "changeDirectory": "Directory changed successfully",
+
+  "toastMensajeCarpeta": "Only letters [a-z][A-Z] and numbers [0-9] are allowed",
+
+  "aboutIntro": "A final project of the Bootcamp",
+  "aboutDerechos": "No rights reserved or anything, you can do whatever you want with this project and we hope it serves you as much as it has served us in learning",
+  "aboutAmor": "Made with much 💖 in Spain",
+  "aboutButton": "I love it 😍!!",
+
+  "fileUploadError": "A file with the same name already exists in the current directory",
+  "fileUploadErrorSubida": "No files to upload!",
+
+  "deleteFileError": "The file ${fileInfo.fileName} is not found in the directory ${user[0].fileName}",
+  "deleteFile": "The file ${fileInfo.fileName} was successfully deleted",
+
+  "makeFolderError": "The folder name contains invalid characters, please use only allowed characters",
+  "makeFolderError2": "The folder name ${folderName} already exists in the current directory",
+  "makeFolderExito": "The directory ${folderName} was created successfully in the path ${user[0].fileName}",
+
+  "renameDirectoryCarpeta": "The new folder name contains invalid characters, please use only allowed characters",
+  "renameDirectoryError": "The folder ${folderName} does not exist",
+  "renameDirectoryProblema": "We cannot rename the folder, a folder named ${newName} already exists in the current directory",
+  "renameDirectoryOk": "The folder was renamed successfully",
+
+  "recoverFile": "The file ${file[0].fileName} is not in the trash",
+  "recoverFileRecuperado": "The file was successfully recovered",
+
+  "renameFile": "The folder ${folderName} does not exist",
+  "renameFileError": "We cannot rename the folder, a folder named ${newName} already exists in the current directory"
+}

@@ -17,7 +17,8 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import "./Home.css";
-import { IntlProvider, FormattedMessage } from "react-intl";
+import { useIntl, FormattedMessage } from "react-intl";
+import LanguageSelector from "./LanguageSelector";
 
 function Copyright(props) {
   return (
@@ -37,11 +38,6 @@ function Copyright(props) {
   );
 }
 
-import esMessages from "../intl/es.json";
-import enMessages from "../intl/en.json";
-import itMessages from "../intl/it.json";
-import { useLanguage } from "../languageContext";
-
 const defaultTheme = createTheme();
 export default function Home() {
   const { login, logout } = useUserActions();
@@ -50,9 +46,7 @@ export default function Home() {
   const [saveCredentials, setSaveCredentials] = useState(false);
   const [pwd, setPassword] = useState("");
   const navigate = useNavigate();
-  const [language, setLanguage] = useLanguage();
-  let viewMessages = esMessages;
-
+  const intl = useIntl();
   //retrieve saved data from local storage if exists
 
   useEffect(() => {
@@ -71,7 +65,7 @@ export default function Home() {
     } catch (error) {
       console.log(error);
       Swal.fire({
-        title: "¡Error!",
+        title: intl.FormattedMessage({ id: "singInError" }),
         text: error,
         icon: "error",
         confirmButtonText: "Ok",
@@ -84,7 +78,7 @@ export default function Home() {
   if (user) {
     if (user.status == "error") {
       Swal.fire({
-        title: "Error!",
+        title: intl.FormattedMessage({ id: "singInError" }),
         text: user.message,
         icon: "error",
         confirmButtonText: "Ok",
@@ -103,7 +97,10 @@ export default function Home() {
       }
       let timerInterval;
       Swal.fire({
-        title: `Hola ${user.info.name}, entrando a tu Dashboard, solo un momentito...`,
+        title: intl.formatMessage(
+          { id: "modalEntrada" },
+          { name: user.info.name }
+        ),
         timer: 2000,
         timerProgressBar: true,
         didOpen: () => {
@@ -144,122 +141,93 @@ export default function Home() {
     }
   }
 
-  if (language == "es") {
-    viewMessages = esMessages;
-  } else if (language == "en") {
-    viewMessages = enMessages;
-  } else {
-    viewMessages = itMessages;
-  }
-
   return (
-    <IntlProvider messages={viewMessages} locale={language} defaultLocale="es">
-      <ThemeProvider theme={defaultTheme}>
-        <div className="mainContainer">
-          <Container component="main" maxWidth="xs">
-            <CssBaseline />
-            <Box
-              sx={{
-                margin: "auto",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-              }}
-            >
-              <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-                <LockOutlinedIcon />
-              </Avatar>
-              <div className="flagContainer">
-                <img
-                  className={language == "es" ? "active" : ""}
-                  onClick={() => setLanguage("es")}
-                  src="/espana.png"
-                />
-                <img
-                  className={language == "en" ? "active" : ""}
-                  onClick={() => setLanguage("en")}
-                  src="/reino-unido.png"
-                />
-                <img
-                  className={language == "it" ? "active" : ""}
-                  onClick={() => setLanguage("it")}
-                  src="/italia.png"
-                />
-              </div>
+    <ThemeProvider theme={defaultTheme}>
+      <div className="mainContainer">
+        <Container component="main" maxWidth="xs">
+          <CssBaseline />
+          <Box
+            sx={{
+              margin: "auto",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+              <LockOutlinedIcon />
+            </Avatar>
 
-              <Typography component="h1" variant="h5">
-                <FormattedMessage
-                  id="bienvenida"
-                  defaultMessage="Bienvenidos a MyCloudDrive"
-                />
-              </Typography>
-              <Box
-                component="form"
-                onSubmit={handleSubmit}
-                noValidate
-                sx={{ mt: 1 }}
+            <Typography component="h1" variant="h5">
+              <LanguageSelector />
+              <FormattedMessage id="cabeceraSaludo" />
+            </Typography>
+            <Box
+              component="form"
+              onSubmit={handleSubmit}
+              noValidate
+              sx={{ mt: 1 }}
+            >
+              <TextField
+                onChange={(e) => setEmail(e.target.value)}
+                value={mail}
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label={<FormattedMessage id="cabeceraLabelCorreo" />}
+                name="email"
+                autoComplete="email"
+                autoFocus
+              />
+              <TextField
+                onChange={(e) => setPassword(e.target.value)}
+                value={pwd}
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label={<FormattedMessage id="cabeceraLabelContraseña" />}
+                type="password"
+                id="password"
+                autoComplete="current-password"
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    value="remember"
+                    checked={saveCredentials}
+                    color="primary"
+                  />
+                }
+                label={<FormattedMessage id="cabeceraRecordar" />}
+                onChange={(e) => setSaveCredentials(e.target.checked)}
+              />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
               >
-                <TextField
-                  onChange={(e) => setEmail(e.target.value)}
-                  value={mail}
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="email"
-                  label="Correo electrónico"
-                  name="email"
-                  autoComplete="email"
-                  autoFocus
-                />
-                <TextField
-                  onChange={(e) => setPassword(e.target.value)}
-                  value={pwd}
-                  margin="normal"
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="current-password"
-                />
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      value="remember"
-                      checked={saveCredentials}
-                      color="primary"
-                    />
-                  }
-                  label="Recuerdame en este ordenador"
-                  onChange={(e) => setSaveCredentials(e.target.checked)}
-                />
-                <Button
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  sx={{ mt: 3, mb: 2 }}
-                >
-                  Entrar
-                </Button>
-                <Grid container>
-                  <Grid item xs>
-                    <Link href="/passwordRecovery" variant="body2">
-                      ¿Olvidaste la contraseña?
-                    </Link>
-                  </Grid>
-                  <Grid item>
-                    <Link href="/singin" variant="body2">
-                      {"¿No tienes cuenta? Créate una"}
-                    </Link>
-                  </Grid>
+                <FormattedMessage id="cabeceraBoton" />
+              </Button>
+              <Grid container>
+                <Grid item xs>
+                  <Link href="/passwordRecovery" variant="body2">
+                    <FormattedMessage id="cabeceraOlvidar" />
+                  </Link>
                 </Grid>
-              </Box>
+                <Grid item>
+                  <Link href="/singin" variant="body2">
+                    {<FormattedMessage id="cabeceraNuevaCuenta" />}
+                  </Link>
+                </Grid>
+              </Grid>
             </Box>
-            <Copyright sx={{ mt: 8, mb: 4 }} />
-          </Container>
-        </div>
-      </ThemeProvider>
-    </IntlProvider>
+          </Box>
+          <Copyright sx={{ mt: 8, mb: 4 }} />
+        </Container>
+      </div>
+    </ThemeProvider>
   );
 }

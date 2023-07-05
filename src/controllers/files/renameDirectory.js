@@ -78,13 +78,13 @@ const renameDirectory = async (req, res, next) => {
     //enviamos respuesta de que la operación finalizó correctamente
     res.status(200).send({
       status: "info",
-      message: `La carpeta ${folderName} se ha renombrado correctamente a ${newName}.`,
+      message: "renameDirectoryOk",
     });
   } catch (error) {
     console.log(error);
     next(error);
   } finally {
-    connect.release();
+    connect?.release();
   }
 };
 

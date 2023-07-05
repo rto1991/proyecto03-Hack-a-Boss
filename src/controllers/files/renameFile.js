@@ -57,13 +57,13 @@ const renameFile = async (req, res, next) => {
 
     res.status(200).send({
       status: "info",
-      message: `El archivo ${fileName} se ha renombrado correctamente a ${newFileName}`,
+      message: "renameDirectoryOk",
     });
   } catch (error) {
     console.log(error);
     next(error);
   } finally {
-    connect.release();
+    connect?.release();
   }
 };
 

@@ -4,6 +4,7 @@ import "./FileArea.css";
 import Swal from "sweetalert2";
 import { Menu, Item, useContextMenu } from "react-contexify";
 import "react-contexify/ReactContexify.css";
+import { FormattedMessage, useIntl } from "react-intl";
 
 const MENU_ID = "contextMenu1";
 const MAIN_AREA_MENU = "mainAreaMenu";
@@ -30,6 +31,7 @@ function FileArea({
 }) {
   const [user] = useUser();
   const { show } = useContextMenu();
+  const intl = useIntl();
 
   useEffect(() => {
     async function getFiles() {
@@ -82,7 +84,7 @@ function FileArea({
 
   const subirArchivo = async () => {
     const { value: file } = await Swal.fire({
-      title: "Selecciona un fichero",
+      title: intl.formatMessage({ id: "fileAreaFichero" }),
       input: "file",
     });
 
@@ -158,14 +160,18 @@ function FileArea({
           if (props.key.type == "Folder") {
             //renombramos carpeta
             Swal.fire({
-              title: "Nuevo nombre para la carpeta " + props.key.fileName,
-              text: "Se permite solo letras [a-z][A-Z] y números [0-9]",
+              title:
+                intl.formatMessage({ id: "editProfileCarpeta" }) +
+                props.key.fileName,
+              text: intl.formatMessage({ id: "toastMensajeCarpeta" }),
               input: "text",
               inputAttributes: {
                 autocapitalize: "off",
               },
               showCancelButton: true,
-              confirmButtonText: "Renombrar carpeta",
+              confirmButtonText: intl.formatMessage({
+                id: "editProfileRenombrar",
+              }),
               showLoaderOnConfirm: true,
               preConfirm: async (folderName) => {
                 await renameDirectory(props.key.fileName, folderName);
@@ -178,14 +184,18 @@ function FileArea({
           } else {
             //renombramos archivo
             Swal.fire({
-              title: "Nuevo nombre para el fichero " + props.key.fileName,
-              text: "Se permite solo letras [a-z][A-Z] y números [0-9]",
+              title:
+                intl.formatMessage({ id: "fileAreaNombre" }) +
+                props.key.fileName,
+              text: intl.formatMessage({ id: "toastMensajeCarpeta" }),
               input: "text",
               inputAttributes: {
                 autocapitalize: "off",
               },
               showCancelButton: true,
-              confirmButtonText: "Renombrar fichero",
+              confirmButtonText: intl.formatMessage({
+                id: "fileAreaRenombrar",
+              }),
               showLoaderOnConfirm: true,
               preConfirm: async (fileName) => {
                 await renameFil(props.key.fileName, fileName);
@@ -201,14 +211,16 @@ function FileArea({
         case "delete":
           if (enPapelera) {
             Swal.fire({
-              title: `¿Seguro de borrar "${props.key.fileName}"? ${
+              title: intl.formatMessage({ id: "fileAreaBorrar" })`"${
+                props.key.fileName
+              }"? ${
                 props.key.type == "Folder"
-                  ? ", este elemento es de tipo carpeta, se borrarán todos los elementos que contenga"
+                  ? intl.formatMessage({ id: "fileAreaInfo" })
                   : ""
               }`,
               showCancelButton: true,
-              confirmButtonText: "Si, borrar",
-              cancelButtonText: "Atrás",
+              confirmButtonText: intl.formatMessage({ id: "fileAreaBorrar2" }),
+              cancelButtonText: intl.formatMessage({ id: "fileAreaAtras" }),
             }).then((result) => {
               /* Read more about isConfirmed, isDenied below */
               if (result.isConfirmed) {
@@ -224,14 +236,14 @@ function FileArea({
           break;
         case "makeFolder":
           Swal.fire({
-            title: "Crear nueva carpeta",
-            text: "Se permite solo letras [a-z][A-Z] y números [0-9]",
+            title: intl.formatMessage({ id: "fileAreaCrear" }),
+            text: intl.formatMessage({ id: "toastMensajeCarpeta" }),
             input: "text",
             inputAttributes: {
               autocapitalize: "off",
             },
             showCancelButton: true,
-            confirmButtonText: "Crear carpeta",
+            confirmButtonText: intl.formatMessage({ id: "fileAreaCrear" }),
             showLoaderOnConfirm: true,
             preConfirm: async (folderName) => {
               await crearCarpeta(folderName);
@@ -262,8 +274,8 @@ function FileArea({
             icon: "success",
             title:
               props.key.type == "Folder"
-                ? "Comprimiendo y descargando carpeta"
-                : "Descargando tu archivo",
+                ? intl.formatMessage({ id: "fileAreaComp" })
+                : intl.formatMessage({ id: "fileAreaDes" }),
           });
 
           bajarFichero(
@@ -275,13 +287,13 @@ function FileArea({
           break;
         case "move":
           Swal.fire({
-            title: "Especifica el nombre de la carpeta de destino",
+            title: intl.formatMessage({ id: "fileAreaMov" }),
             input: "text",
             inputAttributes: {
               autocapitalize: "off",
             },
             showCancelButton: true,
-            confirmButtonText: "Mover fichero",
+            confirmButtonText: intl.formatMessage({ id: "fileAreaMover" }),
             showLoaderOnConfirm: true,
             preConfirm: async (folderName) => {
               await moverFichero(props.key.id, folderName);
@@ -298,7 +310,7 @@ function FileArea({
       }
     } catch (error) {
       Swal.fire({
-        title: "Error!",
+        title: intl.formatMessage({ id: "singInError" }),
         text: error.message,
         icon: "error",
         confirmButtonText: "Ok",
@@ -322,7 +334,7 @@ function FileArea({
 
       Toast.fire({
         icon: "success",
-        title: "No se puede entrar en una carpeta que está en la papelera",
+        title: intl.formatMessage({ id: "fileAreaInfo2" }),
       });
     }
 
@@ -345,7 +357,7 @@ function FileArea({
 
         Toast.fire({
           icon: "success",
-          title: "Descargando tu archivo",
+          title: intl.formatMessage({ id: "fileAreaDescarga" }),
         });
         bajarFichero(f.id, f.fileName);
       }
@@ -355,7 +367,7 @@ function FileArea({
   if (files) {
     if (files.status == "error") {
       Swal.fire({
-        title: "Error!",
+        title: intl.formatMessage({ id: "singInError" }),
         text: user.message,
         icon: "error",
         confirmButtonText: "Ok",
@@ -367,7 +379,7 @@ function FileArea({
   if (info) {
     if (info.status == "error") {
       Swal.fire({
-        title: "Error!",
+        title: intl.formatMessage({ id: "singInError" }),
         text: info.message,
         icon: "error",
         confirmButtonText: "Ok",
@@ -382,20 +394,22 @@ function FileArea({
     >
       <Menu id={MENU_ID}>
         <Item id="move" onClick={handleItemClick}>
-          Mover
+          <FormattedMessage id="popUpMover" />
         </Item>
         <Item id="rename" onClick={handleItemClick}>
-          Renombrar
+          <FormattedMessage id="popUpRenombrar" />
         </Item>
         <Item id="delete" onClick={handleItemClick}>
-          {enPapelera ? "Eliminar definitivamente" : "Enviar a papelera"}
+          {enPapelera
+            ? intl.formatMessage({ id: "fileAreaDelete" })
+            : intl.formatMessage({ id: "fileAreaTrash" })}
         </Item>
         <Item id="download" onClick={handleItemClick}>
-          Descargar
+          <FormattedMessage id="popUpDescargar" />
         </Item>
         {enPapelera ? (
           <Item id="recover" onClick={handleItemClick}>
-            Recuperar
+            <FormattedMessage id="popUpRecuperar" />
           </Item>
         ) : (
           ""
@@ -404,16 +418,16 @@ function FileArea({
 
       <Menu id={MAIN_AREA_MENU}>
         <Item id="makeFolder" onClick={handleItemClick}>
-          Crear nueva carpeta
+          <FormattedMessage id="sideMenuCarpeta" />
         </Item>
         <Item id="uploadFile" onClick={handleItemClick}>
-          Subir nuevo archivo
+          <FormattedMessage id="sideMenuSubir" />
         </Item>
       </Menu>
 
       {files?.data.content.map((f) => (
         <li
-          title="Botón derecho para menú contextual de opciones"
+          title={intl.formatMessage({ id: "fileAreaBorrar2" })}
           id={`${f.id}`}
           onContextMenu={(e) =>
             handleContextMenu(e, {
