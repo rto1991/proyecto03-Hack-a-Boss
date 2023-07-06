@@ -66,6 +66,8 @@
   "singInNombre": "First Name",
   "singInApellidos": "Last Name",
   "singInRepetir": "Repeat password",
+  "singInModificar": "User modified successfully",
+  "singInError2": "An error occurred, please check your data",
 
   "popUpMover": "Move",
   "popUpDescargar": "Download",
@@ -110,9 +112,13 @@
   "renameDirectoryProblema": "We cannot rename the folder, a folder named ${newName} already exists in the current directory",
   "renameDirectoryOk": "The folder was renamed successfully",
 
-  "recoverFile": "The file ${file[0].fileName} is not in the trash",
+  "recoverFile": "The file is not in the trash",
   "recoverFileRecuperado": "The file was successfully recovered",
 
   "renameFile": "The folder ${folderName} does not exist",
-  "renameFileError": "We cannot rename the folder, a folder named ${newName} already exists in the current directory"
+  "renameFileError": "We cannot rename the folder, a folder named ${newName} already exists in the current directory",
+
+  "postUserNoValido": "Invalid email or password, make sure to enter the correct information",
+  "postUserExiste": "User already exists",
+  "postUserCorrecto": "User created successfully"
 }

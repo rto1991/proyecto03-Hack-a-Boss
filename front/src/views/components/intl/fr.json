@@ -66,6 +66,8 @@
   "singInNombre": "Prénom",
   "singInApellidos": "Nom de famille",
   "singInRepetir": "Répéter le mot de passe",
+  "singInModificar": "Utilisateur modifié avec succès",
+  "singInError2": "Une erreur s'est produite, veuillez vérifier vos données",
 
   "popUpMover": "Déplacer",
   "popUpDescargar": "Télécharger",
@@ -110,9 +112,13 @@
   "renameDirectoryProblema": "Nous ne pouvons pas renommer le dossier, un dossier portant le nom ${newName} existe déjà dans le répertoire actuel",
   "renameDirectoryOk": "Le dossier a été renommé avec succès",
 
-  "recoverFile": "Le fichier ${file[0].fileName} n'est pas dans la corbeille",
+  "recoverFile": "Le fichier n'est pas dans la corbeille",
   "recoverFileRecuperado": "Le fichier a été récupéré avec succès",
 
   "renameFile": "Le dossier ${folderName} n'existe pas",
-  "renameFileError": "Nous ne pouvons pas renommer le dossier, un dossier portant le nom ${newName} existe déjà dans le répertoire actuel"
+  "renameFileError": "Nous ne pouvons pas renommer le dossier, un dossier portant le nom ${newName} existe déjà dans le répertoire actuel",
+
+  "postUserNoValido": "Adresse e-mail ou mot de passe invalide, assurez-vous de saisir les informations correctes",
+  "postUserExiste": "L'utilisateur existe déjà",
+  "postUserCorrecto": "Utilisateur créé avec succès"
 }

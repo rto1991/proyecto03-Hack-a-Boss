@@ -66,6 +66,8 @@
   "singInNombre": "Nome",
   "singInApellidos": "Cognome",
   "singInRepetir": "Ripeti password",
+  "singInModificar": "Utente modificato correttamente",
+  "singInError2": "Si è verificato un errore, controlla i tuoi dati",
 
   "popUpMover": "Sposta",
   "popUpDescargar": "Scarica",
@@ -110,9 +112,13 @@
   "renameDirectoryProblema": "Impossibile rinominare la cartella, esiste già una cartella con il nome ${newName} nella directory corrente",
   "renameDirectoryOk": "La cartella è stata rinominata correttamente",
 
-  "recoverFile": "Il file ${file[0].fileName} non è nel cestino",
+  "recoverFile": "Il file non è nel cestino",
   "recoverFileRecuperado": "Il file è stato recuperato correttamente",
 
   "renameFile": "La cartella ${folderName} non esiste",
-  "renameFileError": "Impossibile rinominare la cartella, esiste già una cartella con il nome ${newName} nella directory corrente"
+  "renameFileError": "Impossibile rinominare la cartella, esiste già una cartella con il nome ${newName} nella directory corrente",
+
+  "postUserNoValido": "Email o password non validi, assicurati di inserire correttamente le informazioni",
+  "postUserExiste": "L'utente esiste già",
+  "postUserCorrecto": "Utente creato correttamente"
 }

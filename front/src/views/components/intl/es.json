@@ -66,6 +66,8 @@
   "singInNombre": "Nombre",
   "singInApellidos": "Apellidos",
   "singInRepetir": "Repite paswword",
+  "singInModificar": "Usuario modificado correctamente",
+  "singInError2": "Ha ocurrido un error, revisa tus datos",
 
   "popUpMover": "Mover",
   "popUpDescargar": "Descargar",
@@ -110,9 +112,13 @@
   "renameDirectoryProblema": "No podemos renombrar la carpeta, ya existe una carpeta con el nombre ${newName} en el directorio actual",
   "renameDirectoryOk": "La carpeta se ha renombrado correctamente",
 
-  "recoverFile": "El archivo ${file[0].fileName} no está en la papelera",
+  "recoverFile": "El archivo no está en la papelera",
   "recoverFileRecuperado": "El archivo se ha recuperado correctamente",
 
   "renameFile": "La carpeta ${folderName} no existe",
-  "renameFileError": "No podemos renombrar la carpeta, ya existe una carpeta con el nombre ${newName} en el directorio actual"
+  "renameFileError": "No podemos renombrar la carpeta, ya existe una carpeta con el nombre ${newName} en el directorio actual",
+
+  "postUserNoValido": "La contraseña o el correo electrónico no son válidos, asegúrate de escribir bien estos datos",
+  "postUserExiste": "El usuario ya existe",
+  "postUserCorrecto": "Usuario creado correctamente"
 }

@@ -94,7 +94,7 @@ const updateUser = async (req, res, next) => {
       );
       res.status(200).send({
         status: "ok",
-        message: "Usuario modificado correctamente",
+        message: "singInModificar",
       });
     }
   } catch (error) {

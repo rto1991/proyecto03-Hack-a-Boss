@@ -24,9 +24,7 @@ const postUser = async (req, res, next) => {
         email: mail,
       });
     } catch (err) {
-      const error = new Error(
-        "La contraseña o el correo electrónico no son válidos, asegúrate de escribir bien estos datos"
-      );
+      const error = new Error("postUserNoValido");
       error.httpStatus = 404;
       throw error;
     }
@@ -47,7 +45,7 @@ const postUser = async (req, res, next) => {
     );
 
     if (userExist.length > 0) {
-      const error = new Error("El usuario ya existe");
+      const error = new Error("postUserExiste");
       error.httpStatus = 409;
       throw error;
     }
@@ -107,7 +105,7 @@ const postUser = async (req, res, next) => {
 
     res.status(200).send({
       status: "ok",
-      message: "Usuario creado correctamente",
+      message: "postUserCorrecto",
     });
   } catch (error) {
     console.log(error);
