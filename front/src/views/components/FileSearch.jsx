@@ -57,7 +57,7 @@ function FileSearch({
 
           Toast.fire({
             icon: resp.status,
-            title: resp.message,
+            title: intl.formatMessage({ id: "fileUploadOk" }),
           });
         })
         .then(() => dir())
@@ -147,8 +147,8 @@ function FileSearch({
           className="btnMakeFolder"
           onClick={() => showInputModal()}
           src="/nueva_carpeta.png"
-          alt="Crear carpeta"
-          title="Nueva carpeta"
+          alt={intl.formatMessage({ id: "fileSearchCarpeta" })}
+          title={intl.formatMessage({ id: "fileSearchCarpeta" })}
         />
         <img
           className="btnUploadFile"

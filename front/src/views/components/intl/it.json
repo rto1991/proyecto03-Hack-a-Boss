@@ -124,5 +124,12 @@
 
   "postUserNoValido": "Email o password non validi, assicurati di inserire correttamente le informazioni",
   "postUserExiste": "L'utente esiste già",
-  "postUserCorrecto": "Utente creato correttamente"
+  "postUserCorrecto": "Utente creato correttamente",
+
+  "fileSearchCarpeta": "Crea cartella",
+
+  "validateUser": "Il codice non è valido, riprova con un codice corretto",
+  "validateUserCabecera": "Valida l'utente tramite codice",
+  "validateUserCodigo": "Codice di validazione",
+  "validateUserBoton": "Valida"
 }

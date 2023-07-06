@@ -57,9 +57,7 @@ const renameDirectory = async (req, res, next) => {
 
     //no puede haber en el directorio actual una carpeta que se llame igual a la propuesta (ojo, si puede haber ese nombre en otros directorios, por eso el filtro en la tabla con 3 condicionantes)
     if (fileExists.length > 0) {
-      const error = new Error(
-        `No podemos renombrar la carpeta, ya existe una carpeta con el nombre ${newName} en el directorio actual.`
-      );
+      const error = new Error("renameDirectoryProblema");
       error.httpStatus = 500;
       throw error;
     }

@@ -311,7 +311,7 @@ function FileArea({
     } catch (error) {
       Swal.fire({
         title: intl.formatMessage({ id: "singInError" }),
-        text: error.message,
+        text: intl.formatMessage({ id: "renameDirectoryProblema" }),
         icon: "error",
         confirmButtonText: "Ok",
       });

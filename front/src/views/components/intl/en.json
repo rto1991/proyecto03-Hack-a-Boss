@@ -124,5 +124,12 @@
 
   "postUserNoValido": "Invalid email or password, make sure to enter the correct information",
   "postUserExiste": "User already exists",
-  "postUserCorrecto": "User created successfully"
+  "postUserCorrecto": "User created successfully",
+
+  "fileSearchCarpeta": "Create folder",
+
+  "validateUser": "The code is not valid, please try again with a correct code",
+  "validateUserCabecera": "Validate User via Code",
+  "validateUserCodigo": "Validation Code",
+  "validateUserBoton": "Validate"
 }

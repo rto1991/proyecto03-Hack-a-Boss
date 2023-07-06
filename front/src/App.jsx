@@ -11,6 +11,7 @@ import PasswordRecovery from "./views/PasswordRecovery";
 import PasswordChange from "./views/PasswordChange";
 import TrashPage from "./views/components/TrashPage";
 import EditProfile from "./views/EditProfile";
+import ValidateUser from "./views/ValidateUser";
 import NotFound from "./views/NotFound";
 
 const router = createBrowserRouter(
@@ -19,7 +20,7 @@ const router = createBrowserRouter(
       <Route path="/" element={<Home />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/singin" element={<SingIn />} />
-      <Route path="/validate/:regCode" element={<Home />} />
+      <Route path="/validate/:regCode" element={<ValidateUser />} />
       <Route path="/passwordRecovery" element={<PasswordRecovery />} />
       <Route path="/passwordChange" element={<PasswordChange />} />
       <Route path="/trash" element={<TrashPage />} />

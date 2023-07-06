@@ -113,7 +113,7 @@
 
   "renameDirectoryCarpeta": "El nuevo nombre de la carpeta tiene caracteres no permitidos, por favor, utiliza sólo los carácteres permitidos",
   "renameDirectoryError": "La carpeta ${folderName} no existe",
-  "renameDirectoryProblema": "No podemos renombrar la carpeta, ya existe una carpeta con el nombre ${newName} en el directorio actual",
+  "renameDirectoryProblema": "No podemos renombrar la carpeta, ya existe una carpeta con el nombre en el directorio actual",
   "renameDirectoryOk": "La carpeta se ha renombrado correctamente",
 
   "recoverFile": "El archivo no está en la papelera",
@@ -124,5 +124,12 @@
 
   "postUserNoValido": "La contraseña o el correo electrónico no son válidos, asegúrate de escribir bien estos datos",
   "postUserExiste": "El usuario ya existe",
-  "postUserCorrecto": "Usuario creado correctamente"
+  "postUserCorrecto": "Usuario creado correctamente",
+
+  "fileSearchCarpeta": "Crear carpeta",
+
+  "validateUser": "El código no es válido, intentalo de nuevo con un código correcto",
+  "validateUserCabecera": "Validar Usuario mediante código",
+  "validateUserCodigo": "Código de validación",
+  "validateUserBoton": "Validar"
 }
