@@ -29,7 +29,7 @@
   "sideMenuFichero": "Seleziona un file",
   "sideMenuSubir": "Carica un file",
   "sideMenuPerfil": "Modifica profilo",
-  "sideMenuBug": "Segnala un bug",
+  "sideMenuAbout": "Informazioni su di noi",
   "sideMenuSeleccionar": "Seleziona un file",
 
   "fileAreaFichero": "Seleziona un file",
@@ -96,6 +96,10 @@
   "aboutDerechos": "Nessun diritto riservato o altro, potete fare ciò che volete con questo progetto e speriamo che vi sia utile tanto quanto lo è stato per noi nell'apprendimento",
   "aboutAmor": "Realizzato con tanto 💖 in Spagna",
   "aboutButton": "Mi piace tantissimo 😍 !!",
+  "aboutDev": "Validazioni: Joffrey Arias",
+  "aboutDev1": "Testing: Juan Carlos Vez Vazquez",
+  "aboutDev2": "Internazionalizzazione: Rubén Taibo",
+  "aboutDev3": "Programma Glue: Mario J. Rodríguez",
 
   "fileUploadError": "Esiste già un file con lo stesso nome nella directory corrente",
   "fileUploadErrorSubida": "Nessun file da caricare!",

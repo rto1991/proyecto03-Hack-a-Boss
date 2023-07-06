@@ -29,7 +29,7 @@
   "sideMenuFichero": "Select a file",
   "sideMenuSubir": "Upload file",
   "sideMenuPerfil": "Edit profile",
-  "sideMenuBug": "Report a bug",
+  "sideMenuAbout": "About Us",
   "sideMenuSeleccionar": "Select a file",
 
   "fileAreaFichero": "Select a file",
@@ -96,6 +96,10 @@
   "aboutDerechos": "No rights reserved or anything, you can do whatever you want with this project and we hope it serves you as much as it has served us in learning",
   "aboutAmor": "Made with much 💖 in Spain",
   "aboutButton": "I love it 😍!!",
+  "aboutDev": "Validations: Joffrey Arias",
+  "aboutDev1": "Testing: Juan Carlos Vez Vazquez",
+  "aboutDev2": "Internationalization: Rubén Taibo",
+  "aboutDev3": "Program Glue: Mario J. Rodríguez",
 
   "fileUploadError": "A file with the same name already exists in the current directory",
   "fileUploadErrorSubida": "No files to upload!",

@@ -29,7 +29,7 @@
   "sideMenuFichero": "Selecciona un fichero",
   "sideMenuSubir": "Subir archivo",
   "sideMenuPerfil": "Editar perfil",
-  "sideMenuBug": "Reportar un bug",
+  "sideMenuAbout": "Sobre nosotros",
   "sideMenuSeleccionar": "Selecciona un fichero",
 
   "fileAreaFichero": "Selecciona un fichero",
@@ -96,6 +96,10 @@
   "aboutDerechos": "Ni derechos reservados ni ná, podéis hacer con este proyecto lo que queráis y esperamos que os sirva para aprender tanto como nos ha servido a nosotros",
   "aboutAmor": "Hecho con mucho 💖 en España (Spain)",
   "aboutButton": "Me encanta 😍 !!",
+  "aboutDev": "Validaciones: Joffrey Arias",
+  "aboutDev1": "Testing: Juan Carlos Vez Vazquez",
+  "aboutDev2": "Internacionalizacion: Rubén Taibo",
+  "aboutDev3": "Program Glue: Mario J. Rodríguez",
 
   "fileUploadError": "Existe un fichero con el mismo nombre el el directorio actual",
   "fileUploadErrorSubida": "¡No hay ficheros para subir!",

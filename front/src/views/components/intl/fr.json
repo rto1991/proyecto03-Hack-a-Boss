@@ -29,7 +29,7 @@
   "sideMenuFichero": "Sélectionner un fichier",
   "sideMenuSubir": "Téléverser un fichier",
   "sideMenuPerfil": "Modifier le profil",
-  "sideMenuBug": "Signaler un bug",
+  "sideMenuAbout": "À propos de nous",
   "sideMenuSeleccionar": "Sélectionner un fichier",
 
   "fileAreaFichero": "Sélectionner un fichier",
@@ -96,6 +96,10 @@
   "aboutDerechos": "Aucun droit réservé ni quoi que ce soit, vous pouvez faire ce que vous voulez avec ce projet et nous espérons qu'il vous sera aussi utile qu'il nous a été utile pour apprendre",
   "aboutAmor": "Fait avec beaucoup de 💖 en Espagne",
   "aboutButton": "J'adore ça 😍 !!",
+  "aboutDev": "Validations : Joffrey Arias",
+  "aboutDev1": "Testing : Juan Carlos Vez Vazquez",
+  "aboutDev2": "Internationalisation : Rubén Taibo",
+  "aboutDev3": "Programme de liaison : Mario J. Rodríguez",
 
   "fileUploadError": "Un fichier portant le même nom existe déjà dans le répertoire actuel",
   "fileUploadErrorSubida": "Aucun fichier à télécharger !",
