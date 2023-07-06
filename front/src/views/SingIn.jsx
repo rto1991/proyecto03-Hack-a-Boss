@@ -36,9 +36,9 @@ function SingIn() {
     //comprobar coincidencia de passwords
     if (password !== repeatPassword) {
       return Swal.fire({
-        title: "Error!",
-        text: intl.formatMessage({ id: "singInError" }),
-        icon: intl.formatMessage({ id: "singInCoincidir" }),
+        title: intl.formatMessage({ id: "singInError" }),
+        text: intl.formatMessage({ id: "singInCoincidir" }),
+        icon: "error",
         confirmButtonText: "Ok",
       });
     }
