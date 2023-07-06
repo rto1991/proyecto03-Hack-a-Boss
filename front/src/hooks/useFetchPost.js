@@ -1,8 +1,10 @@
 import { useUser } from "../UserContext";
+import { useIntl } from "react-intl";
 import Swal from "sweetalert2";
 
 function useFetchPost() {
   const [user] = useUser();
+  const intl = useIntl();
   const post = async (url, body) => {
     try {
       const isFormData = body instanceof FormData;
@@ -36,7 +38,7 @@ function useFetchPost() {
     } catch (error) {
       Swal.fire({
         title: "Error!",
-        text: error,
+        text: intl.formattedMessage({ id: error }),
         icon: "error",
         confirmButtonText: "Ok",
       });

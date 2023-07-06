@@ -211,13 +211,13 @@ function FileArea({
         case "delete":
           if (enPapelera) {
             Swal.fire({
-              title: intl.formatMessage({ id: "fileAreaBorrar" })`"${
-                props.key.fileName
-              }"? ${
-                props.key.type == "Folder"
-                  ? intl.formatMessage({ id: "fileAreaInfo" })
-                  : ""
-              }`,
+              title:
+                intl.formatMessage({ id: "fileAreaBorrar" }) +
+                ` ${props.key.fileName} ${
+                  props.key.type == "Folder"
+                    ? intl.formatMessage({ id: "fileAreaInfo" })
+                    : ""
+                }`,
               showCancelButton: true,
               confirmButtonText: intl.formatMessage({ id: "fileAreaBorrar2" }),
               cancelButtonText: intl.formatMessage({ id: "fileAreaAtras" }),
