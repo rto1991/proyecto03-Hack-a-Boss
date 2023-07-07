@@ -10,7 +10,7 @@ import {
   createTheme,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import "./EditProfile.css";
+import "./SingIn.css";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { useFilesActions, useUserActions } from "../hooks/api";
