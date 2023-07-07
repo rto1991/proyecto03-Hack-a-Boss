@@ -48,7 +48,7 @@ function SingIn() {
     } catch (error) {
       return Swal.fire({
         title: intl.formatMessage({ id: "singInError" }),
-        text: error.message,
+        text: intl.formatMessage({ id: "postUserNoValido" }),
         icon: "error",
         confirmButtonText: "Ok",
       });

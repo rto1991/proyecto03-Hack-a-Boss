@@ -36,4 +36,5 @@
 
 .fileName {
   text-overflow: ellipsis;
+  margin: auto;
 }

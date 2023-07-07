@@ -14,6 +14,8 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Swal from "sweetalert2";
 import { useNavigate, useParams } from "react-router-dom";
 import "./Home.css";
+import { FormattedMessage, useIntl } from "react-intl";
+import LanguageSelector from "./LanguageSelector";
 
 function Copyright(props) {
   return (
@@ -42,6 +44,7 @@ export default function ValidateUser() {
   let { regCode } = useParams();
   const [code, setCode] = useState(regCode);
   const navigate = useNavigate();
+  const intl = useIntl();
 
   const handleSubmit = (event) => {
     try {
@@ -49,8 +52,8 @@ export default function ValidateUser() {
       validar(regCode);
     } catch (error) {
       Swal.fire({
-        title: "Error!",
-        text: error,
+        title: intl.formatMessage({ id: "singInError" }),
+        text: intl.formatMessage({ id: "validateUser" }),
         icon: "error",
         confirmButtonText: "Ok",
       });
@@ -79,8 +82,9 @@ export default function ValidateUser() {
             <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
               <LockOutlinedIcon />
             </Avatar>
+            <LanguageSelector />
             <Typography component="h1" variant="h5">
-              Validar Usuario mediante código
+              <FormattedMessage id="validateUserCabecera" />
             </Typography>
             <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
               <TextField
@@ -90,7 +94,7 @@ export default function ValidateUser() {
                 required
                 fullWidth
                 id="email"
-                label="Código de validación"
+                label={intl.formatMessage({ id: "validateUserCodigo" })}
                 name="email"
                 autoComplete="email"
                 autoFocus
@@ -102,7 +106,7 @@ export default function ValidateUser() {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Validar
+                <FormattedMessage id="validateUserBoton" />
               </Button>
             </Box>
           </Box>

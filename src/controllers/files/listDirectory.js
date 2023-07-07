@@ -20,13 +20,13 @@ const listDirectory = async (req, res, next) => {
     if (!trash) {
       [dirList] = await connect.query(
         `
-      SELECT f.id, f.in_recycle_bin, f.filename as 'fileName', if(f.is_folder=1,'Folder','File') as 'type' FROM files f INNER JOIN users u ON f.parent_dir_id = u.currentFolder_id WHERE f.id_user = ? and f.in_recycle_bin = 0 ORDER BY f.is_folder DESC`,
+      SELECT round(f.size/1024,2) as size, f.id, f.in_recycle_bin, f.filename as 'fileName', if(f.is_folder=1,'Folder','File') as 'type' FROM files f INNER JOIN users u ON f.parent_dir_id = u.currentFolder_id WHERE f.id_user = ? and f.in_recycle_bin = 0 ORDER BY f.is_folder DESC`,
         [idUser]
       );
     } else {
       [dirList] = await connect.query(
         `
-      SELECT f.id, f.in_recycle_bin, f.filename as 'fileName', if(f.is_folder=1,'Folder','File') as 'type' FROM files f WHERE f.id_user = ? and f.in_recycle_bin = 1 ORDER BY f.fileName ASC`,
+      SELECT round(f.size/1024,2) as size, f.id, f.in_recycle_bin, f.filename as 'fileName', if(f.is_folder=1,'Folder','File') as 'type' FROM files f WHERE f.id_user = ? and f.in_recycle_bin = 1 ORDER BY f.fileName ASC`,
         [idUser]
       );
     }

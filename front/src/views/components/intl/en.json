@@ -15,7 +15,7 @@
   "buscadorImagen": "Find",
 
   "papelera": "See trash can",
-  "palereaVolver": "Go back to the folder where you were",
+  "papeleraVolver": "Go back to the folder where you were",
   "botonSalir": "Sign off",
   "directorio": "You are in: {directorio}",
   "directorioPapelera": "You are in the trash can",
@@ -29,7 +29,7 @@
   "sideMenuFichero": "Select a file",
   "sideMenuSubir": "Upload file",
   "sideMenuPerfil": "Edit profile",
-  "sideMenuBug": "About this awesome app",
+  "sideMenuAbout": "About Us",
   "sideMenuSeleccionar": "Select a file",
 
   "fileAreaFichero": "Select a file",
@@ -66,6 +66,8 @@
   "singInNombre": "First Name",
   "singInApellidos": "Last Name",
   "singInRepetir": "Repeat password",
+  "singInModificar": "User modified successfully",
+  "singInError2": "An error occurred, please check your data",
 
   "popUpMover": "Move",
   "popUpDescargar": "Download",
@@ -94,6 +96,10 @@
   "aboutDerechos": "No rights reserved or anything, you can do whatever you want with this project and we hope it serves you as much as it has served us in learning",
   "aboutAmor": "Made with much 💖 in Spain",
   "aboutButton": "I love it 😍!!",
+  "aboutDev": "Validations & documentation: Joffre Arias",
+  "aboutDev1": "Testing: Juan Carlos Vez Vazquez",
+  "aboutDev2": "Internationalization: Rubén Taibo",
+  "aboutDev3": "Program Glue: Mario J. Rodríguez",
 
   "fileUploadError": "A file with the same name already exists in the current directory",
   "fileUploadErrorSubida": "No files to upload!",
@@ -110,9 +116,20 @@
   "renameDirectoryProblema": "We cannot rename the folder, a folder named ${newName} already exists in the current directory",
   "renameDirectoryOk": "The folder was renamed successfully",
 
-  "recoverFile": "The file ${file[0].fileName} is not in the trash",
+  "recoverFile": "The file is not in the trash",
   "recoverFileRecuperado": "The file was successfully recovered",
 
   "renameFile": "The folder ${folderName} does not exist",
-  "renameFileError": "We cannot rename the folder, a folder named ${newName} already exists in the current directory"
+  "renameFileError": "We cannot rename the folder, a folder named ${newName} already exists in the current directory",
+
+  "postUserNoValido": "Invalid email or password, make sure to enter the correct information",
+  "postUserExiste": "User already exists",
+  "postUserCorrecto": "User created successfully",
+
+  "fileSearchCarpeta": "Create folder",
+
+  "validateUser": "The code is not valid, please try again with a correct code",
+  "validateUserCabecera": "Validate User via Code",
+  "validateUserCodigo": "Validation Code",
+  "validateUserBoton": "Validate"
 }

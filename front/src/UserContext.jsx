@@ -5,6 +5,7 @@ const UserContext = React.createContext();
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
+  const [userLanguage, setUserLanguage] = useState("es");
 
   const betterSetUser = (data) => {
     setUser(data);
@@ -16,7 +17,9 @@ export const UserProvider = ({ children }) => {
   };
 
   return (
-    <UserContext.Provider value={[user, betterSetUser]}>
+    <UserContext.Provider
+      value={[user, betterSetUser, userLanguage, setUserLanguage]}
+    >
       {children}
     </UserContext.Provider>
   );

@@ -18,13 +18,13 @@ function SideMenu({ makeFolder, dir, info, setInfo }) {
 
   const acercaDe = () => {
     Swal.fire({
-      title: "MY CLOUD DRIVE",
-      html: `<p>${intl.formatMessage({ id: "aboutIntro" })}</p>
+      html: `<img class="logoApp" src="/logoApp.png"/>
+      <p>${intl.formatMessage({ id: "aboutIntro" })}</p>
       <p>(c) 2023 - JSB18RT - A-TEAM</p>
-      <p> Validaciones: Joffrey Arias <p> 
-      <p> Testing: Juan Carlos Vez Vazquez <p>
-      <p> Internacionalizacion: Rubén Taibo <p>
-      <p> Program Glue: Mario J. Rodríguez <p>
+      <p> ${intl.formatMessage({ id: "aboutDev" })} <p> 
+      <p>  ${intl.formatMessage({ id: "aboutDev1" })} <p>
+      <p>  ${intl.formatMessage({ id: "aboutDev2" })} <p>
+      <p>  ${intl.formatMessage({ id: "aboutDev3" })}<p>
       <p> ${intl.formatMessage({ id: "aboutDerechos" })}</p>
       <p> ${intl.formatMessage({ id: "aboutAmor" })}`,
 
@@ -138,7 +138,7 @@ function SideMenu({ makeFolder, dir, info, setInfo }) {
       </a>
       <a onClick={() => acercaDe()}>
         {" "}
-        🥳 <FormattedMessage id="sideMenuBug" />
+        🥳 <FormattedMessage id="sideMenuAbout" />
       </a>
     </div>
   );

@@ -15,7 +15,7 @@
   "buscadorImagen": "Rechercher",
 
   "papelera": "Voir la corbeille",
-  "palereaVolver": "Retourner au dossier précédent",
+  "papeleraVolver": "Retourner au dossier précédent",
   "botonSalir": "Déconnexion",
   "directorio": "Vous êtes ici : {directorio}",
   "directorioPapelera": "Vous êtes dans la corbeille",
@@ -29,7 +29,7 @@
   "sideMenuFichero": "Sélectionner un fichier",
   "sideMenuSubir": "Téléverser un fichier",
   "sideMenuPerfil": "Modifier le profil",
-  "sideMenuBug": "À propos de cette application incroyable",
+  "sideMenuAbout": "À propos de nous",
   "sideMenuSeleccionar": "Sélectionner un fichier",
 
   "fileAreaFichero": "Sélectionner un fichier",
@@ -66,6 +66,8 @@
   "singInNombre": "Prénom",
   "singInApellidos": "Nom de famille",
   "singInRepetir": "Répéter le mot de passe",
+  "singInModificar": "Utilisateur modifié avec succès",
+  "singInError2": "Une erreur s'est produite, veuillez vérifier vos données",
 
   "popUpMover": "Déplacer",
   "popUpDescargar": "Télécharger",
@@ -94,6 +96,10 @@
   "aboutDerechos": "Aucun droit réservé ni quoi que ce soit, vous pouvez faire ce que vous voulez avec ce projet et nous espérons qu'il vous sera aussi utile qu'il nous a été utile pour apprendre",
   "aboutAmor": "Fait avec beaucoup de 💖 en Espagne",
   "aboutButton": "J'adore ça 😍 !!",
+  "aboutDev": "Validations et Documentation : Joffre Arias",
+  "aboutDev1": "Testing : Juan Carlos Vez Vazquez",
+  "aboutDev2": "Internationalisation : Rubén Taibo",
+  "aboutDev3": "Programme de liaison : Mario J. Rodríguez",
 
   "fileUploadError": "Un fichier portant le même nom existe déjà dans le répertoire actuel",
   "fileUploadErrorSubida": "Aucun fichier à télécharger !",
@@ -110,9 +116,20 @@
   "renameDirectoryProblema": "Nous ne pouvons pas renommer le dossier, un dossier portant le nom ${newName} existe déjà dans le répertoire actuel",
   "renameDirectoryOk": "Le dossier a été renommé avec succès",
 
-  "recoverFile": "Le fichier ${file[0].fileName} n'est pas dans la corbeille",
+  "recoverFile": "Le fichier n'est pas dans la corbeille",
   "recoverFileRecuperado": "Le fichier a été récupéré avec succès",
 
   "renameFile": "Le dossier ${folderName} n'existe pas",
-  "renameFileError": "Nous ne pouvons pas renommer le dossier, un dossier portant le nom ${newName} existe déjà dans le répertoire actuel"
+  "renameFileError": "Nous ne pouvons pas renommer le dossier, un dossier portant le nom ${newName} existe déjà dans le répertoire actuel",
+
+  "postUserNoValido": "Adresse e-mail ou mot de passe invalide, assurez-vous de saisir les informations correctes",
+  "postUserExiste": "L'utilisateur existe déjà",
+  "postUserCorrecto": "Utilisateur créé avec succès",
+
+  "fileSearchCarpeta": "Créer un dossier",
+
+  "validateUser": "Le code n'est pas valide, veuillez réessayer avec un code correct",
+  "validateUserCabecera": "Valider l'utilisateur via le code",
+  "validateUserCodigo": "Code de validation",
+  "validateUserBoton": "Valider"
 }

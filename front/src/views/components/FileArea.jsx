@@ -311,7 +311,7 @@ function FileArea({
     } catch (error) {
       Swal.fire({
         title: intl.formatMessage({ id: "singInError" }),
-        text: error.message,
+        text: intl.formatMessage({ id: "renameDirectoryProblema" }),
         icon: "error",
         confirmButtonText: "Ok",
       });
@@ -464,6 +464,15 @@ function FileArea({
             <p title={f.fileName} className="fileName">
               {f.fileName}
             </p>
+            <small>
+              {f.type != "Folder"
+                ? `${
+                    f.size > 1024
+                      ? parseFloat(f.size / 1024).toFixed(2) + " Mb"
+                      : f.size + " Kb"
+                  }`
+                : ""}
+            </small>
           </div>
         </li>
       ))}

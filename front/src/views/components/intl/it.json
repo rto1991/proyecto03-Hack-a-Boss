@@ -15,7 +15,7 @@
   "buscadorImagen": "Cercare",
 
   "papelera": "Vedi cestino",
-  "palereaVolver": "Torna alla cartella in cui ti trovavi",
+  "papeleraVolver": "Torna alla cartella in cui ti trovavi",
   "botonSalir": "Cancella la sottoscrizione",
   "directorio": "Sei dentro: {directorio}",
   "directorioPapelera": "Sei nel cestino",
@@ -29,7 +29,7 @@
   "sideMenuFichero": "Seleziona un file",
   "sideMenuSubir": "Carica un file",
   "sideMenuPerfil": "Modifica profilo",
-  "sideMenuBug": "A proposito di questa fantastica app",
+  "sideMenuAbout": "Informazioni su di noi",
   "sideMenuSeleccionar": "Seleziona un file",
 
   "fileAreaFichero": "Seleziona un file",
@@ -66,6 +66,8 @@
   "singInNombre": "Nome",
   "singInApellidos": "Cognome",
   "singInRepetir": "Ripeti password",
+  "singInModificar": "Utente modificato correttamente",
+  "singInError2": "Si è verificato un errore, controlla i tuoi dati",
 
   "popUpMover": "Sposta",
   "popUpDescargar": "Scarica",
@@ -94,6 +96,10 @@
   "aboutDerechos": "Nessun diritto riservato o altro, potete fare ciò che volete con questo progetto e speriamo che vi sia utile tanto quanto lo è stato per noi nell'apprendimento",
   "aboutAmor": "Realizzato con tanto 💖 in Spagna",
   "aboutButton": "Mi piace tantissimo 😍 !!",
+  "aboutDev": "Validazioni & documentazione: Joffre Arias",
+  "aboutDev1": "Testing: Juan Carlos Vez Vazquez",
+  "aboutDev2": "Internazionalizzazione: Rubén Taibo",
+  "aboutDev3": "Programma Glue: Mario J. Rodríguez",
 
   "fileUploadError": "Esiste già un file con lo stesso nome nella directory corrente",
   "fileUploadErrorSubida": "Nessun file da caricare!",
@@ -110,9 +116,20 @@
   "renameDirectoryProblema": "Impossibile rinominare la cartella, esiste già una cartella con il nome ${newName} nella directory corrente",
   "renameDirectoryOk": "La cartella è stata rinominata correttamente",
 
-  "recoverFile": "Il file ${file[0].fileName} non è nel cestino",
+  "recoverFile": "Il file non è nel cestino",
   "recoverFileRecuperado": "Il file è stato recuperato correttamente",
 
   "renameFile": "La cartella ${folderName} non esiste",
-  "renameFileError": "Impossibile rinominare la cartella, esiste già una cartella con il nome ${newName} nella directory corrente"
+  "renameFileError": "Impossibile rinominare la cartella, esiste già una cartella con il nome ${newName} nella directory corrente",
+
+  "postUserNoValido": "Email o password non validi, assicurati di inserire correttamente le informazioni",
+  "postUserExiste": "L'utente esiste già",
+  "postUserCorrecto": "Utente creato correttamente",
+
+  "fileSearchCarpeta": "Crea cartella",
+
+  "validateUser": "Il codice non è valido, riprova con un codice corretto",
+  "validateUserCabecera": "Valida l'utente tramite codice",
+  "validateUserCodigo": "Codice di validazione",
+  "validateUserBoton": "Valida"
 }
