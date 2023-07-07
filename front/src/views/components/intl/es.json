@@ -31,6 +31,7 @@
   "sideMenuPerfil": "Editar perfil",
   "sideMenuAbout": "Sobre nosotros",
   "sideMenuSeleccionar": "Selecciona un fichero",
+  "sideMenuCarpetaCreada": "Carpeta creada correctamente",
 
   "fileAreaFichero": "Selecciona un fichero",
   "fileAreaNombre": "Nuevo nombre para el fichero",
@@ -131,5 +132,7 @@
   "validateUser": "El código no es válido, intentalo de nuevo con un código correcto",
   "validateUserCabecera": "Validar Usuario mediante código",
   "validateUserCodigo": "Código de validación",
-  "validateUserBoton": "Validar"
+  "validateUserBoton": "Validar",
+
+  "uploadFileCoincide": "Existe un fichero con el mismo nombre el el directorio actual"
 }

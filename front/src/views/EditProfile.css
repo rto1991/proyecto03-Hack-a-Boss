@@ -1,0 +1,21 @@
+body {
+  height: 100vh;
+  width: 100vw;
+}
+
+#root > div > main > div {
+  height: 100vh;
+  gap: 2px;
+}
+
+/* #root > div > main > div > form {
+  height: 80vh;
+} */
+
+#root > div > main > div > form > div {
+  height: 45px;
+}
+
+#root > div > main {
+  height: 95vh;
+}
