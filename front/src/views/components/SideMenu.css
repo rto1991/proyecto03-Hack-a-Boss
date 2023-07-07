@@ -41,3 +41,7 @@
 .colored-toast.swal2-icon-error {
   background-color: lightcoral !important;
 }
+
+.logoApp {
+  width: 200px;
+}

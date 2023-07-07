@@ -18,8 +18,8 @@ function SideMenu({ makeFolder, dir, info, setInfo }) {
 
   const acercaDe = () => {
     Swal.fire({
-      title: "MY CLOUD DRIVE",
-      html: `<p>${intl.formatMessage({ id: "aboutIntro" })}</p>
+      html: `<img class="logoApp" src="/logoApp.png"/>
+      <p>${intl.formatMessage({ id: "aboutIntro" })}</p>
       <p>(c) 2023 - JSB18RT - A-TEAM</p>
       <p> ${intl.formatMessage({ id: "aboutDev" })} <p> 
       <p>  ${intl.formatMessage({ id: "aboutDev1" })} <p>

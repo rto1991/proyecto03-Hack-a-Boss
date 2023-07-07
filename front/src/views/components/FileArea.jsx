@@ -464,6 +464,15 @@ function FileArea({
             <p title={f.fileName} className="fileName">
               {f.fileName}
             </p>
+            <small>
+              {f.type != "Folder"
+                ? `${
+                    f.size > 1024
+                      ? parseFloat(f.size / 1024).toFixed(2) + " Mb"
+                      : f.size + " Kb"
+                  }`
+                : ""}
+            </small>
           </div>
         </li>
       ))}

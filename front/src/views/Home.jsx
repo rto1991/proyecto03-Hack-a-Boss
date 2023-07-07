@@ -154,9 +154,7 @@ export default function Home() {
               alignItems: "center",
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-              <LockOutlinedIcon />
-            </Avatar>
+            <img className="logoApp" src="/logoApp.png" />
 
             <Typography component="h1" variant="h5">
               <LanguageSelector />
