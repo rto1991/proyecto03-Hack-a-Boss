@@ -2,7 +2,7 @@ import { TextField } from "@mui/material";
 import "./FileSearch.css";
 import Swal from "sweetalert2";
 import { useState } from "react";
-import { useIntl, FormattedMessage } from "react-intl";
+import { useIntl } from "react-intl";
 import { useUser } from "../../UserContext";
 
 function FileSearch({
