@@ -1,4 +1,5 @@
 👨‍💻 ⌬⎨ < ☁ MyCloudDrive ☁ > ⎬⌬ 👨‍💻
+
 El siguiente proyecto está siendo desarrollado por los alumnos del grupo A 📝 del Bootcamp de Desarrollo web; en este nuevo proyecto estaremos desarrollando el front de nuestra aplicación 💻.
 
 Realizaremos la conexión con nuestro Backend en el cual mediante servicios, hooks y los adecuados componentes en el Frontend nos permitirán tener una experiencia más dinámica y visual.
