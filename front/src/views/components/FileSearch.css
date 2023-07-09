@@ -1,0 +1,57 @@
+.searchForm {
+  width: 92%;
+  border-radius: 15px;
+  background-color: white;
+  margin-bottom: 5px;
+  padding: 0 5px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+  max-width: 1000px;
+}
+
+.searchForm > input {
+  flex-grow: 1;
+}
+
+.searchForm > img {
+  width: 48px;
+  height: 48px;
+}
+
+.breadCrumb {
+  width: 92%;
+  border-radius: 15px;
+  background-color: lightgoldenrodyellow;
+  padding: 0 5px;
+  margin-bottom: 5px;
+  display: flex;
+  flex-direction: row;
+  max-width: 1000px;
+}
+
+.breadCrumb > p {
+  flex-grow: 1;
+}
+
+.breadCrumb > button {
+  margin: 5px 0;
+  background-color: aqua;
+  font-size: 1rem;
+}
+
+.btnBuscar,
+.btnTrash,
+.btnMakeFolder,
+.btnUploadFile {
+  cursor: pointer;
+  padding: 5px;
+}
+
+.btnBuscar:hover,
+.btnTrash:hover,
+.btnMakeFolder:hover,
+.btnUploadFile:hover {
+  background-color: lightblue;
+}

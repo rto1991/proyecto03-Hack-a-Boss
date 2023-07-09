@@ -1,0 +1,35 @@
+{
+  "name": "proyecto-2-y-3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@sendgrid/mail": "^7.7.0",
+    "compressing": "^1.9.0",
+    "cors": "^2.8.5",
+    "download": "^8.0.0",
+    "express": "^4.18.2",
+    "express-fileupload": "^1.4.0",
+    "file-saver": "^2.0.5",
+    "fs-move": "^4.0.2",
+    "joi": "^17.9.2",
+    "jsonwebtoken": "^9.0.0",
+    "mime": "^3.0.0",
+    "mysql2": "^3.2.4",
+    "react-contexify": "^6.0.0",
+    "sharp": "^0.32.1",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "dotenv": "^16.0.3",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.22"
+  }
+}

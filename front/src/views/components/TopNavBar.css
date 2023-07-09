@@ -1,0 +1,23 @@
+.topnavbar {
+  width: 85%;
+  background-color: white;
+  border-radius: 30px;
+  margin: 5px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  max-width: 1000px;
+}
+
+h3 {
+  flex-grow: 1;
+}
+
+.userLogo > img,
+.hamburguerMenu > img {
+  width: 48px;
+  height: 48px;
+  right: 0;
+  cursor: pointer;
+}

@@ -1,0 +1,24 @@
+.banderas {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.banderas button {
+  border: none;
+  background: none;
+  padding: 0;
+}
+
+.banderas img {
+  width: 30px;
+  border-radius: 50%;
+  transition: transform 0.3s ease-in-out;
+}
+
+.banderas img:hover {
+  transform: scale(1.4);
+}

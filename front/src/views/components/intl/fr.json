@@ -1,0 +1,140 @@
+{
+  "cabeceraSaludo": "Bienvenue sur MyCloudDrive",
+  "cabeceraLabelCorreo": "Adresse e-mail",
+  "cabeceraLabelContraseña": "Mot de passe",
+  "cabeceraRecordar": "Se souvenir de moi sur cet ordinateur",
+  "cabeceraBoton": "Se connecter",
+  "cabeceraOlvidar": "Mot de passe oublié ?",
+  "cabecera": "Se souvenir de moi sur cet ordinateur",
+  "cabeceraNuevaCuenta": "Vous n'avez pas de compte ? Créez-en un.",
+
+  "modalEntrada": "Bonjour {name}, en train d'accéder à votre tableau de bord, juste un instant...",
+  "topNavBarCabecera": "Bienvenue sur MyCloudDrive, {name}",
+
+  "buscadorLabel": "Rechercher un fichier",
+  "buscadorImagen": "Rechercher",
+
+  "papelera": "Voir la corbeille",
+  "papeleraVolver": "Retourner au tableau de bord",
+  "botonSalir": "Déconnexion",
+  "directorio": "Vous êtes ici : {directorio}",
+  "directorioPapelera": "Vous êtes dans la corbeille",
+  "botonAtras": "Remonter d'un niveau",
+
+  "recuperarCuenta": "Récupérer l'accès à votre compte",
+  "solicitudReset": "Demander une réinitialisation",
+
+  "sideMenuCarpeta": "Créer un nouveau dossier",
+  "sideMenuCrearCarpeta": "Créer un dossier",
+  "sideMenuFichero": "Sélectionner un fichier",
+  "sideMenuSubir": "Téléverser un fichier",
+  "sideMenuPerfil": "Modifier le profil",
+  "sideMenuAbout": "À propos de nous",
+  "sideMenuSeleccionar": "Sélectionner un fichier",
+  "sideMenuCarpetaCreada": "Dossier créé avec succès",
+
+  "fileAreaFichero": "Sélectionner un fichier",
+  "fileAreaNombre": "Nouveau nom pour le fichier",
+  "fileAreaRenombrar": "Renommer le fichier",
+  "fileAreaBorrar": "Êtes-vous sûr de vouloir supprimer ?",
+  "fileAreaInfo": ", cet élément est un dossier, tous ses contenus seront supprimés",
+  "fileAreaBorrar2": "Oui, supprimer",
+  "fileAreaAtras": "Retour",
+  "fileAreaCrear": "Créer un dossier",
+  "fileAreaComp": "Compression et téléchargement de votre fichier",
+  "fileAreaDes": "Téléchargement de votre fichier",
+  "fileAreaMov": "Spécifiez le nom du dossier de destination",
+  "fileAreaMover": "Déplacer le fichier",
+  "fileAreaInfo2": "Vous ne pouvez pas accéder à un dossier qui se trouve dans la corbeille",
+  "fileAreaDescarga": "Téléchargement de votre fichier",
+  "fileAreaDelete": "Supprimer définitivement",
+  "fileAreaTrash": "Déplacer dans la corbeille",
+  "fileAreaInfo3": "Clic droit pour le menu contextuel des options",
+
+  "pwdRecuperar": "Récupérer l'accès à votre compte",
+  "pwdInfo": "Le mot de passe doit contenir entre 8 et 30 caractères, au moins une lettre majuscule, un chiffre et un symbole spécial (!@#$&*)",
+  "pwdVolver": "Retour",
+  "pwdRegistrarse": "S'inscrire",
+  "pwdCódigo": "Code de récupération",
+  "pwdReset": "Demander une réinitialisation",
+
+  "singInError": "Erreur !",
+  "singInCoincidir": "Les mots de passe ne correspondent pas",
+  "singInErrorUsuario": "Une erreur s'est produite lors de l'enregistrement de l'utilisateur ",
+  "singInExito": "Succès !",
+  "singInCreado": "Vous avez créé votre compte avec succès. Veuillez vérifier votre boîte de réception pour le valider et pouvoir utiliser MyCloudDrive.",
+  "singInRegistro": "Inscrivez-vous sur MyCloudDrive",
+  "singInNombre": "Prénom",
+  "singInApellidos": "Nom de famille",
+  "singInRepetir": "Répéter le mot de passe",
+  "singInModificar": "Utilisateur modifié avec succès",
+  "singInError2": "Une erreur s'est produite, veuillez vérifier vos données",
+
+  "popUpMover": "Déplacer",
+  "popUpDescargar": "Télécharger",
+  "popUpRenombrar": "Renommer",
+  "popUpRecuperar": "Récupérer",
+
+  "editProfileCabecera": "Modifier les données de votre profil",
+  "editProfileCarpeta": "Nouveau nom pour le dossier",
+  "editProfileRenombrar": "Renommer le dossier",
+  "editProfileModificar": "Utilisateur modifié avec succès",
+  "editProfileTelefono": "Téléphone",
+  "editProfileCP": "Code postal",
+  "editProfileDireccion": "Adresse",
+  "editProfileCiudad": "Ville",
+  "editProfileProvincia": "Province",
+  "editProfileActualizar": "Mettre à jour",
+
+  "topNavBarMenu": "menu",
+
+  "fileUploadOk": "Fichier téléchargé avec succès",
+  "changeDirectory": "Répertoire modifié avec succès",
+
+  "toastMensajeCarpeta": "Seules les lettres [a-z][A-Z] et les chiffres [0-9] sont autorisés",
+
+  "aboutIntro": "Un projet final du Bootcamp",
+  "aboutDerechos": "Aucun droit réservé ni quoi que ce soit, vous pouvez faire ce que vous voulez avec ce projet et nous espérons qu'il vous sera aussi utile qu'il nous a été utile pour apprendre",
+  "aboutAmor": "Fait avec beaucoup de 💖 en Espagne",
+  "aboutButton": "J'adore ça 😍 !!",
+  "aboutDev": "Validations : Joffrey Arias",
+  "aboutDev1": "Testing : Juan Carlos Vez Vazquez",
+  "aboutDev2": "Internationalisation : Rubén Taibo",
+  "aboutDev3": "Programme de liaison : Mario J. Rodríguez",
+
+  "fileUploadError": "Un fichier portant le même nom existe déjà dans le répertoire actuel",
+  "fileUploadErrorSubida": "Aucun fichier à télécharger !",
+
+  "deleteFileError": "Le fichier est introuvable dans le répertoire ",
+  "deleteFile": "Le fichier a été supprimé avec succès",
+
+  "makeFolderError": "Le nom du dossier contient des caractères non autorisés, veuillez n'utiliser que les caractères autorisés",
+  "makeFolderError2": "Le nom du dossier existe déjà dans le répertoire actuel",
+  "makeFolderExito": "Le répertoire a été créé avec succès dans le chemin ",
+
+  "renameDirectoryCarpeta": "Le nouveau nom de dossier contient des caractères non autorisés, veuillez n'utiliser que les caractères autorisés",
+  "renameDirectoryError": "Le dossier n'existe pas",
+  "renameDirectoryProblema": "Nous ne pouvons pas renommer le dossier, un dossier portant le nom existe déjà dans le répertoire actuel",
+  "renameDirectoryOk": "Le dossier a été renommé avec succès",
+
+  "recoverFile": "Le fichier n'est pas dans la corbeille",
+  "recoverFileRecuperado": "Le fichier a été récupéré avec succès",
+
+  "renameFile": "Le dossier n'existe pas",
+  "renameFileError": "Nous ne pouvons pas renommer le dossier, un dossier portant le nom existe déjà dans le répertoire actuel",
+
+  "postUserNoValido": "Adresse e-mail ou mot de passe invalide, assurez-vous de saisir les informations correctes",
+  "postUserExiste": "L'utilisateur existe déjà",
+  "postUserCorrecto": "Utilisateur créé avec succès",
+
+  "fileSearchCarpeta": "Créer un dossier",
+
+  "validateUser": "Le code n'est pas valide, veuillez réessayer avec un code correct",
+  "validateUserCabecera": "Valider l'utilisateur via le code",
+  "validateUserCodigo": "Code de validation",
+  "validateUserBoton": "Valider",
+
+  "uploadFileCoincide": "Un fichier portant le même nom existe déjà dans le répertoire actuel",
+
+  "changeDirectoryError": "Impossible de remonter davantage, vous vous trouvez actuellement dans votre dossier racine"
+}

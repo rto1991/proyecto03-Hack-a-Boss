@@ -1,0 +1,140 @@
+{
+  "cabeceraSaludo": "Bienvenidos a MyCloudDrive",
+  "cabeceraLabelCorreo": "Correo electrónico",
+  "cabeceraLabelContraseña": "Contraseña",
+  "cabeceraRecordar": "Recuerdame en este ordenador",
+  "cabeceraBoton": "Entrar",
+  "cabeceraOlvidar": "¿Olvidaste la contraseña?",
+  "cabecera": "Recuerdame en este ordenador",
+  "cabeceraNuevaCuenta": "¿No tienes cuenta, créate una?",
+
+  "modalEntrada": "Hola {name}, entrando a tu Dashboard, solo un momentito...",
+  "topNavBarCabecera": "Bienvenido a MyCloudDrive, {name}",
+
+  "buscadorLabel": "Buscar un archivo",
+  "buscadorImagen": "Buscar",
+
+  "papelera": "Ver papelera",
+  "papeleraVolver": "Volver al dashboard",
+  "botonSalir": "Cerrar sesion",
+  "directorio": "Estás en: {directorio}",
+  "directorioPapelera": "Estás en la papelera",
+  "botonAtras": "Subir un nivel",
+
+  "recuperarCuenta": "Recupera el acceso a tu cuenta",
+  "solicitudReset": "Solicita un reset",
+
+  "sideMenuCarpeta": "Crear nueva carpeta",
+  "sideMenuCrearCarpeta": "Crear carpeta",
+  "sideMenuFichero": "Selecciona un fichero",
+  "sideMenuSubir": "Subir archivo",
+  "sideMenuPerfil": "Editar perfil",
+  "sideMenuAbout": "Sobre nosotros",
+  "sideMenuSeleccionar": "Selecciona un fichero",
+  "sideMenuCarpetaCreada": "Carpeta creada correctamente",
+
+  "fileAreaFichero": "Selecciona un fichero",
+  "fileAreaNombre": "Nuevo nombre para el fichero",
+  "fileAreaRenombrar": "Renombrar fichero",
+  "fileAreaBorrar": "Seguro de borrar",
+  "fileAreaInfo": ", este elemento es de tipo carpeta, se borrarán todos los elementos que contenga",
+  "fileAreaBorrar2": "Si, borrar",
+  "fileAreaAtras": "Atrás",
+  "fileAreaCrear": "Crear carpeta",
+  "fileAreaComp": "Comprimiendo y descargando tu archivo",
+  "fileAreaDes": "Descargando tu archivo",
+  "fileAreaMov": "Especifica el nombre de la carpeta de destino",
+  "fileAreaMover": "Mover fichero",
+  "fileAreaInfo2": "No se puede entrar en una carpeta que esta en la papelera",
+  "fileAreaDescarga": "Descargando tu archivo",
+  "fileAreaDelete": "Eliminar definitivamente",
+  "fileAreaTrash": "Enviar a papelera",
+  "fileAreaInfo3": "Boton derecho para menú contextual de opciones",
+
+  "pwdRecuperar": " Recupera el acceso a tu cuenta",
+  "pwdInfo": "La contraseña debe tener entre 8 y 30 caracteres, contener al menos una letra mayúscula, un número y un símbolo especial (!@#$&*)",
+  "pwdVolver": "Volver",
+  "pwdRegistrarse": "Registrarse",
+  "pwdCódigo": "Código de recuperación",
+  "pwdReset": "Solicitar un reset",
+
+  "singInError": "¡Error!",
+  "singInCoincidir": "Las contraseñas no coinciden",
+  "singInErrorUsuario": "Se produjo un error intentando registrar el usuario ",
+  "singInExito": "¡Éxito!",
+  "singInCreado": "Has creado tu usuario correctamente, ve a tu bandeja de entrada para validarlo y poder usar MyCloudDrive",
+  "singInRegistro": "Regístrate en MyClouDrive",
+  "singInNombre": "Nombre",
+  "singInApellidos": "Apellidos",
+  "singInRepetir": "Repite paswword",
+  "singInModificar": "Usuario modificado correctamente",
+  "singInError2": "Ha ocurrido un error, revisa tus datos",
+
+  "popUpMover": "Mover",
+  "popUpDescargar": "Descargar",
+  "popUpRenombrar": "Renombrar",
+  "popUpRecuperar": "Recuperar",
+
+  "editProfileCabecera": "Edita los datos de tu perfil",
+  "editProfileCarpeta": "Nuevo nombre para la carpeta",
+  "editProfileRenombrar": "Renombrar carpeta",
+  "editProfileModificar": "Usuario modificado correctamente",
+  "editProfileTelefono": "Telefono",
+  "editProfileCP": "Código postal",
+  "editProfileDireccion": "Dirección",
+  "editProfileCiudad": "Ciudad",
+  "editProfileProvincia": "Provincia",
+  "editProfileActualizar": "Actualizar",
+
+  "topNavBarMenu": "menu",
+
+  "fileUploadOk": "Fichero subido corrrectamente",
+  "changeDirectory": "Directorio cambiado correctamente",
+
+  "toastMensajeCarpeta": "Se permite solo letras [a-z][A-Z] y números [0-9]",
+
+  "aboutIntro": "Un proyecto final del Bootcamp",
+  "aboutDerechos": "Ni derechos reservados ni ná, podéis hacer con este proyecto lo que queráis y esperamos que os sirva para aprender tanto como nos ha servido a nosotros",
+  "aboutAmor": "Hecho con mucho 💖 en España (Spain)",
+  "aboutButton": "Me encanta 😍 !!",
+  "aboutDev": "Validaciones: Joffrey Arias",
+  "aboutDev1": "Testing: Juan Carlos Vez Vazquez",
+  "aboutDev2": "Internacionalizacion: Rubén Taibo",
+  "aboutDev3": "Program Glue: Mario J. Rodríguez",
+
+  "fileUploadError": "Existe un fichero con el mismo nombre el el directorio actual",
+  "fileUploadErrorSubida": "¡No hay ficheros para subir!",
+
+  "deleteFileError": "El archivo  no se encuentra en el directorio",
+  "deleteFile": "El archivo se borró correctamente",
+
+  "makeFolderError": "El nombre de la carpeta tiene caracteres no permitidos, por favor, utiliza sólo los carácteres permitidos",
+  "makeFolderError2": "El nombre de carpeta ya existe en el directorio actual",
+  "makeFolderExito": "El directorio se creó correctamente en la ruta",
+
+  "renameDirectoryCarpeta": "El nuevo nombre de la carpeta tiene caracteres no permitidos, por favor, utiliza sólo los carácteres permitidos",
+  "renameDirectoryError": "La carpeta no existe",
+  "renameDirectoryProblema": "No podemos renombrar la carpeta, ya existe una carpeta con el nombre en el directorio actual",
+  "renameDirectoryOk": "La carpeta se ha renombrado correctamente",
+
+  "recoverFile": "El archivo no está en la papelera",
+  "recoverFileRecuperado": "El archivo se ha recuperado correctamente",
+
+  "renameFile": "La carpeta no existe",
+  "renameFileError": "No podemos renombrar la carpeta, ya existe una carpeta con el nombre en el directorio actual",
+
+  "postUserNoValido": "La contraseña o el correo electrónico no son válidos, asegúrate de escribir bien estos datos",
+  "postUserExiste": "El usuario ya existe",
+  "postUserCorrecto": "Usuario creado correctamente",
+
+  "fileSearchCarpeta": "Crear carpeta",
+
+  "validateUser": "El código no es válido, intentalo de nuevo con un código correcto",
+  "validateUserCabecera": "Validar Usuario mediante código",
+  "validateUserCodigo": "Código de validación",
+  "validateUserBoton": "Validar",
+
+  "uploadFileCoincide": "Existe un fichero con el mismo nombre el el directorio actual",
+
+  "changeDirectoryError": "No es posible subir más niveles, estás en tu carpeta raiz ahora mismo"
+}
