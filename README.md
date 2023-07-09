@@ -11,7 +11,17 @@ El repositorio incluye 2 carpetas, una para el back (arranque de express en puer
 - Url del proyecto backend:
     https://github.com/rto1991/proyecto03-Hack-a-Boss (carpeta Back)
   
-- Entrar dentro de la carpeta "back" y configurar el fichero .env
+- Entrar dentro de la carpeta "back" y crear y configurar el fichero .env
+  Ejemplo del fichero .env
+  HOST={host de mysql}
+  USER={usuario base de datos}
+  PASSWORD={clave base de datos}
+  DATABASE=myclouddrive
+  SENDGRID_API_KEY={send grid api key}
+  SENDGRID_FROM={correo de remitente válido creado en sendgrid}
+  PUBLIC_HOST=http://localhost:5173/validate/
+  ROOT_DIR=./src/uploads
+  SECRET_TOKEN={clave alfanumérica de longitud variable usada para la generación de tokens}
 
 - Se debe hacer npm i.
 
