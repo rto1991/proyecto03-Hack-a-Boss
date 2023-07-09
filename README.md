@@ -1,4 +1,4 @@
-# <img width="100" alt="img_123_" src="https://github.com/rto1991/proyecto02-Hack-a-Boss/assets/123706095/cca98819-db13-4f4d-ab25-918de9d27064"> ........................👨‍💻 **********************************⌬⎨ < ☁ MyCloudDrive ☁ > ⎬⌬********************************** 👨‍💻..........................
+# <img width="100" alt="img_123_" src="https://github.com/rto1991/proyecto02-Hack-a-Boss/assets/123706095/cca98819-db13-4f4d-ab25-918de9d27064"> ..............👨‍💻 **********************************⌬⎨ < ☁ MyCloudDrive ☁ > ⎬⌬********************************** 👨‍💻................
 
 El siguiente proyecto está siendo desarrollado por los alumnos del grupo A 📝 del Bootcamp de Desarrollo web; en este nuevo proyecto estaremos desarrollando el front de nuestra aplicación 💻.
 
@@ -72,7 +72,7 @@ Realizaremos la conexión con nuestro Backend en el cual mediante servicios, hoo
 
     
 
-#   ***************  Manual de uso de la aplicación ****************** 
+#   *********  Manual de uso de la aplicación ********* 
 
 ##   
 
@@ -114,7 +114,7 @@ Realizaremos la conexión con nuestro Backend en el cual mediante servicios, hoo
         Utiliza el menú lateral para hacer algunas operaciones básicas, ver nuestro “acerca de” o la opción para completar tu perfil.
 
 
-***************************************************<img width="154" alt="img_123_" src="./img/Imagen%201.png"> *************************************************
+****************************************<img width="154" alt="img_123_" src="./img/Imagen%201.png"> *************************************
 
 ## Opinión de los integrantes en el desarrollo de la App
 
