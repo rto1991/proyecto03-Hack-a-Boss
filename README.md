@@ -26,6 +26,8 @@ El repositorio incluye 2 carpetas, una para el back (arranque de express en puer
   ```
 - Se debe hacer npm i.
 
+- Se recomienda dejar la carpeta src/uploads vacia para hacer las pruebas
+
 - Arrancar con npm run start.
 
 Se trabajó entre algunas otras en las siguientes mejoras:
