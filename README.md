@@ -13,6 +13,7 @@ El repositorio incluye 2 carpetas, una para el back (arranque de express en puer
   
 - Entrar dentro de la carpeta "back" y crear y configurar el fichero .env
   Ejemplo del fichero .env
+  ```javascript
   HOST={host de mysql}
   USER={usuario base de datos}
   PASSWORD={clave base de datos}
@@ -22,7 +23,7 @@ El repositorio incluye 2 carpetas, una para el back (arranque de express en puer
   PUBLIC_HOST=http://localhost:5173/validate/
   ROOT_DIR=./src/uploads
   SECRET_TOKEN={clave alfanumérica de longitud variable usada para la generación de tokens}
-
+  ```
 - Se debe hacer npm i.
 
 - Arrancar con npm run start.
