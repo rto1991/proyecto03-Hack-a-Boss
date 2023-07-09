@@ -9,7 +9,7 @@ El repositorio incluye 2 carpetas, una para el back (arranque de express en puer
 🟢 Información Backend
 
 - Url del proyecto backend:
-    https://github.com/joffrea18/proyecto03-Hack-a-Boss (carpeta Back)
+    https://github.com/rto1991/proyecto03-Hack-a-Boss (carpeta Back)
   
 - Entrar dentro de la carpeta "back" y configurar el fichero .env
 
@@ -30,7 +30,7 @@ Se trabajó entre algunas otras en las siguientes mejoras:
 🔵 Información Frontend
 
 - Url del proyecto backend:
-    https://github.com/joffrea18/proyecto03-Hack-a-Boss (carpeta front)
+    https://github.com/rto1991/proyecto03-Hack-a-Boss (carpeta front)
   
 - Entrar dentro de la carpeta front
   
