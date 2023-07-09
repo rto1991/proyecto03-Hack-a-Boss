@@ -49,9 +49,7 @@ const makeFolder = async (req, res, next) => {
 
     //no puede haber en el directorio actual una carpeta que se llame igual a la propuesta (ojo, si puede haber ese nombre en otros directorios, por eso el filtro en la tabla con 3 condicionantes)
     if (fileExists.length > 0) {
-      const error = new Error(
-        `El nombre de carpeta ${folderName} ya existe en el directorio actual`
-      );
+      const error = new Error("makeFolderError2");
       error.httpStatus = 500;
       throw error;
     }

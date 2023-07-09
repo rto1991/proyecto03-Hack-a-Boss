@@ -35,7 +35,7 @@ function SideMenu({ makeFolder, dir, info, setInfo }) {
   const showInputModal = () => {
     Swal.fire({
       title: intl.formatMessage({ id: "sideMenuCarpeta" }),
-      text: "Se permite solo letras [a-z][A-Z] y números [0-9]",
+      text: intl.formatMessage({ id: "toastMensajeCarpeta" }),
       input: "text",
       inputAttributes: {
         autocapitalize: "off",
@@ -69,7 +69,7 @@ function SideMenu({ makeFolder, dir, info, setInfo }) {
 
     Toast.fire({
       icon: "success",
-      title: intl.formatMessage({ id: "changeDirectory" }),
+      title: intl.formatMessage({ id: "sideMenuCarpetaCreada" }),
     });
 
     dir();
@@ -112,7 +112,7 @@ function SideMenu({ makeFolder, dir, info, setInfo }) {
 
           Toast.fire({
             icon: resp.status,
-            title: resp.message,
+            title: intl.formatMessage({ id: "fileUploadOk" }),
           });
         })
         .then(() => dir())

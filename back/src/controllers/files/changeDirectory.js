@@ -96,9 +96,7 @@ const changeDirectory = async (req, res, next) => {
         });
       } else {
         //estamos en el top level, informar de que no puede retroceder más
-        const error = new Error(
-          `No es posible subir más niveles, estás en tu carpeta raiz ahora mismo`
-        );
+        const error = new Error("changeDirectoryError");
         error.httpStatus = 404;
         throw error;
       }

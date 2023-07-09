@@ -15,7 +15,7 @@
   "buscadorImagen": "Cercare",
 
   "papelera": "Vedi cestino",
-  "papeleraVolver": "Torna alla cartella in cui ti trovavi",
+  "papeleraVolver": "Torna alla dashboard",
   "botonSalir": "Cancella la sottoscrizione",
   "directorio": "Sei dentro: {directorio}",
   "directorioPapelera": "Sei nel cestino",
@@ -31,6 +31,7 @@
   "sideMenuPerfil": "Modifica profilo",
   "sideMenuAbout": "Informazioni su di noi",
   "sideMenuSeleccionar": "Seleziona un file",
+  "sideMenuCarpetaCreada": "Cartella creata correttamente",
 
   "fileAreaFichero": "Seleziona un file",
   "fileAreaNombre": "Nuovo nome per il file",
@@ -96,7 +97,7 @@
   "aboutDerechos": "Nessun diritto riservato o altro, potete fare ciò che volete con questo progetto e speriamo che vi sia utile tanto quanto lo è stato per noi nell'apprendimento",
   "aboutAmor": "Realizzato con tanto 💖 in Spagna",
   "aboutButton": "Mi piace tantissimo 😍 !!",
-  "aboutDev": "Validazioni & documentazione: Joffre Arias",
+  "aboutDev": "Validazioni: Joffrey Arias",
   "aboutDev1": "Testing: Juan Carlos Vez Vazquez",
   "aboutDev2": "Internazionalizzazione: Rubén Taibo",
   "aboutDev3": "Programma Glue: Mario J. Rodríguez",
@@ -104,23 +105,23 @@
   "fileUploadError": "Esiste già un file con lo stesso nome nella directory corrente",
   "fileUploadErrorSubida": "Nessun file da caricare!",
 
-  "deleteFileError": "Il file ${fileInfo.fileName} non è presente nella directory ${user[0].fileName}",
-  "deleteFile": "Il file ${fileInfo.fileName} è stato eliminato correttamente",
+  "deleteFileError": "Il file ${fileInfo.fileName} non è presente nella directory",
+  "deleteFile": "Il file è stato eliminato correttamente",
 
   "makeFolderError": "Il nome della cartella contiene caratteri non consentiti, si prega di utilizzare solo caratteri consentiti",
-  "makeFolderError2": "Il nome della cartella ${folderName} esiste già nella directory corrente",
-  "makeFolderExito": "La directory ${folderName} è stata creata correttamente nel percorso ${user[0].fileName}",
+  "makeFolderError2": "Il nome della cartella esiste già nella directory corrente",
+  "makeFolderExito": "La directory è stata creata correttamente nel percorso",
 
   "renameDirectoryCarpeta": "Il nuovo nome della cartella contiene caratteri non consentiti, si prega di utilizzare solo caratteri consentiti",
-  "renameDirectoryError": "La cartella ${folderName} non esiste",
-  "renameDirectoryProblema": "Impossibile rinominare la cartella, esiste già una cartella con il nome ${newName} nella directory corrente",
+  "renameDirectoryError": "La cartella  non esiste",
+  "renameDirectoryProblema": "Impossibile rinominare la cartella, esiste già una cartella con il nome nella directory corrente",
   "renameDirectoryOk": "La cartella è stata rinominata correttamente",
 
   "recoverFile": "Il file non è nel cestino",
   "recoverFileRecuperado": "Il file è stato recuperato correttamente",
 
-  "renameFile": "La cartella ${folderName} non esiste",
-  "renameFileError": "Impossibile rinominare la cartella, esiste già una cartella con il nome ${newName} nella directory corrente",
+  "renameFile": "La cartella non esiste",
+  "renameFileError": "Impossibile rinominare la cartella, esiste già una cartella con il nome nella directory corrente",
 
   "postUserNoValido": "Email o password non validi, assicurati di inserire correttamente le informazioni",
   "postUserExiste": "L'utente esiste già",
@@ -131,5 +132,9 @@
   "validateUser": "Il codice non è valido, riprova con un codice corretto",
   "validateUserCabecera": "Valida l'utente tramite codice",
   "validateUserCodigo": "Codice di validazione",
-  "validateUserBoton": "Valida"
+  "validateUserBoton": "Valida",
+
+  "uploadFileCoincide": "Esiste già un file con lo stesso nome nella directory corrente",
+
+  "changeDirectoryError": "Impossibile salire ulteriormente, ti trovi attualmente nella tua cartella principale"
 }

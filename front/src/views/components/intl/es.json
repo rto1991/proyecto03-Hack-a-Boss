@@ -15,7 +15,7 @@
   "buscadorImagen": "Buscar",
 
   "papelera": "Ver papelera",
-  "papeleraVolver": "Volver a la carpeta donde estabas",
+  "papeleraVolver": "Volver al dashboard",
   "botonSalir": "Cerrar sesion",
   "directorio": "Estás en: {directorio}",
   "directorioPapelera": "Estás en la papelera",
@@ -31,6 +31,7 @@
   "sideMenuPerfil": "Editar perfil",
   "sideMenuAbout": "Sobre nosotros",
   "sideMenuSeleccionar": "Selecciona un fichero",
+  "sideMenuCarpetaCreada": "Carpeta creada correctamente",
 
   "fileAreaFichero": "Selecciona un fichero",
   "fileAreaNombre": "Nuevo nombre para el fichero",
@@ -96,7 +97,7 @@
   "aboutDerechos": "Ni derechos reservados ni ná, podéis hacer con este proyecto lo que queráis y esperamos que os sirva para aprender tanto como nos ha servido a nosotros",
   "aboutAmor": "Hecho con mucho 💖 en España (Spain)",
   "aboutButton": "Me encanta 😍 !!",
-  "aboutDev": "Validaciones y Documentación: Joffre Arias",
+  "aboutDev": "Validaciones: Joffrey Arias",
   "aboutDev1": "Testing: Juan Carlos Vez Vazquez",
   "aboutDev2": "Internacionalizacion: Rubén Taibo",
   "aboutDev3": "Program Glue: Mario J. Rodríguez",
@@ -104,23 +105,23 @@
   "fileUploadError": "Existe un fichero con el mismo nombre el el directorio actual",
   "fileUploadErrorSubida": "¡No hay ficheros para subir!",
 
-  "deleteFileError": "El archivo ${fileInfo.fileName} no se encuentra en el directorio ${user[0].fileName}",
-  "deleteFile": "El archivo ${fileInfo.fileName} se borró correctamente",
+  "deleteFileError": "El archivo  no se encuentra en el directorio",
+  "deleteFile": "El archivo se borró correctamente",
 
   "makeFolderError": "El nombre de la carpeta tiene caracteres no permitidos, por favor, utiliza sólo los carácteres permitidos",
-  "makeFolderError2": "El nombre de carpeta ${folderName} ya existe en el directorio actual",
-  "makeFolderExito": "El directorio ${folderName} se creó correctamente en la ruta ${user[0].fileName}",
+  "makeFolderError2": "El nombre de carpeta ya existe en el directorio actual",
+  "makeFolderExito": "El directorio se creó correctamente en la ruta",
 
   "renameDirectoryCarpeta": "El nuevo nombre de la carpeta tiene caracteres no permitidos, por favor, utiliza sólo los carácteres permitidos",
-  "renameDirectoryError": "La carpeta ${folderName} no existe",
+  "renameDirectoryError": "La carpeta no existe",
   "renameDirectoryProblema": "No podemos renombrar la carpeta, ya existe una carpeta con el nombre en el directorio actual",
   "renameDirectoryOk": "La carpeta se ha renombrado correctamente",
 
   "recoverFile": "El archivo no está en la papelera",
   "recoverFileRecuperado": "El archivo se ha recuperado correctamente",
 
-  "renameFile": "La carpeta ${folderName} no existe",
-  "renameFileError": "No podemos renombrar la carpeta, ya existe una carpeta con el nombre ${newName} en el directorio actual",
+  "renameFile": "La carpeta no existe",
+  "renameFileError": "No podemos renombrar la carpeta, ya existe una carpeta con el nombre en el directorio actual",
 
   "postUserNoValido": "La contraseña o el correo electrónico no son válidos, asegúrate de escribir bien estos datos",
   "postUserExiste": "El usuario ya existe",
@@ -131,5 +132,9 @@
   "validateUser": "El código no es válido, intentalo de nuevo con un código correcto",
   "validateUserCabecera": "Validar Usuario mediante código",
   "validateUserCodigo": "Código de validación",
-  "validateUserBoton": "Validar"
+  "validateUserBoton": "Validar",
+
+  "uploadFileCoincide": "Existe un fichero con el mismo nombre el el directorio actual",
+
+  "changeDirectoryError": "No es posible subir más niveles, estás en tu carpeta raiz ahora mismo"
 }

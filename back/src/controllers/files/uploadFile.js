@@ -49,9 +49,7 @@ const uploadFile = async (req, res, next) => {
     );
 
     if (dirList.length > 0) {
-      const error = new Error(
-        "Existe un fichero con el mismo nombre el el directorio actual"
-      );
+      const error = new Error("uploadFileCoincide");
       error.httpStatus = 400;
       throw error;
     }

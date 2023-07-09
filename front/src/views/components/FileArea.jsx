@@ -79,7 +79,7 @@ function FileArea({
 
   async function recuperarDeLaPapelera(id) {
     await recoverFromTrash(id);
-    filesInTrash();
+    await filesInTrash();
   }
 
   const subirArchivo = async () => {

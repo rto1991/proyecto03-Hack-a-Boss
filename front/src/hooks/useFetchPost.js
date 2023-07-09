@@ -23,7 +23,9 @@ function useFetchPost() {
       });
       const mensaje = await res.json();
       if (!res.ok) {
-        throw new Error("API error: " + mensaje.message);
+        throw new Error(
+          "API error: " + intl.formatMessage({ id: mensaje.message })
+        );
       } else {
         if (mensaje.status == "success") {
           Swal.fire({
@@ -38,7 +40,7 @@ function useFetchPost() {
     } catch (error) {
       Swal.fire({
         title: "Error!",
-        text: intl.formattedMessage({ id: error }),
+        text: intl.formatMessage({ id: error }),
         icon: "error",
         confirmButtonText: "Ok",
       });

@@ -5,6 +5,12 @@
   align-items: center;
 }
 
+.headerWrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
 main {
   border: 1px solid black;
   border-radius: 25px;

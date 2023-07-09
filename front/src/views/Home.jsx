@@ -154,12 +154,13 @@ export default function Home() {
               alignItems: "center",
             }}
           >
-            <img className="logoApp" src="/logoApp.png" />
-
-            <Typography component="h1" variant="h5">
-              <LanguageSelector />
-              <FormattedMessage id="cabeceraSaludo" />
-            </Typography>
+            <div className="headerWrapper">
+              <img className="logoApp" src="/logoApp.png" />
+              <Typography component="h3" variant="h5">
+                <LanguageSelector />
+                <FormattedMessage id="cabeceraSaludo" />
+              </Typography>
+            </div>
             <Box
               component="form"
               onSubmit={handleSubmit}

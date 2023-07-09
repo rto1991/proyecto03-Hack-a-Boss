@@ -1,8 +1,10 @@
 import { useUser } from "../UserContext";
 import Swal from "sweetalert2";
+import { useIntl } from "react-intl";
 
 function useFetch() {
   const [user] = useUser();
+  const intl = useIntl();
   const get = async (url) => {
     try {
       const headers = {};
@@ -11,7 +13,9 @@ function useFetch() {
       const res = await fetch(url, { headers });
       const mensaje = await res.json();
       if (!res.ok) {
-        const error = new Error("API error:" + mensaje.message);
+        const error = new Error(
+          "API error:" + intl.formatMessage({ id: mensaje.message })
+        );
         error.httpStatus = 500;
         throw error;
       } else {
@@ -19,7 +23,7 @@ function useFetch() {
           let timerInterval;
           Swal.fire({
             icon: "success",
-            title: mensaje.message,
+            title: intl.formatMessage({ id: mensaje.message }),
             timer: 2000,
             timerProgressBar: true,
             didOpen: () => {

@@ -15,7 +15,7 @@
   "buscadorImagen": "Rechercher",
 
   "papelera": "Voir la corbeille",
-  "papeleraVolver": "Retourner au dossier précédent",
+  "papeleraVolver": "Retourner au tableau de bord",
   "botonSalir": "Déconnexion",
   "directorio": "Vous êtes ici : {directorio}",
   "directorioPapelera": "Vous êtes dans la corbeille",
@@ -31,6 +31,7 @@
   "sideMenuPerfil": "Modifier le profil",
   "sideMenuAbout": "À propos de nous",
   "sideMenuSeleccionar": "Sélectionner un fichier",
+  "sideMenuCarpetaCreada": "Dossier créé avec succès",
 
   "fileAreaFichero": "Sélectionner un fichier",
   "fileAreaNombre": "Nouveau nom pour le fichier",
@@ -96,7 +97,7 @@
   "aboutDerechos": "Aucun droit réservé ni quoi que ce soit, vous pouvez faire ce que vous voulez avec ce projet et nous espérons qu'il vous sera aussi utile qu'il nous a été utile pour apprendre",
   "aboutAmor": "Fait avec beaucoup de 💖 en Espagne",
   "aboutButton": "J'adore ça 😍 !!",
-  "aboutDev": "Validations et Documentation : Joffre Arias",
+  "aboutDev": "Validations : Joffrey Arias",
   "aboutDev1": "Testing : Juan Carlos Vez Vazquez",
   "aboutDev2": "Internationalisation : Rubén Taibo",
   "aboutDev3": "Programme de liaison : Mario J. Rodríguez",
@@ -104,23 +105,23 @@
   "fileUploadError": "Un fichier portant le même nom existe déjà dans le répertoire actuel",
   "fileUploadErrorSubida": "Aucun fichier à télécharger !",
 
-  "deleteFileError": "Le fichier ${fileInfo.fileName} est introuvable dans le répertoire ${user[0].fileName}",
-  "deleteFile": "Le fichier ${fileInfo.fileName} a été supprimé avec succès",
+  "deleteFileError": "Le fichier est introuvable dans le répertoire ",
+  "deleteFile": "Le fichier a été supprimé avec succès",
 
   "makeFolderError": "Le nom du dossier contient des caractères non autorisés, veuillez n'utiliser que les caractères autorisés",
-  "makeFolderError2": "Le nom du dossier ${folderName} existe déjà dans le répertoire actuel",
-  "makeFolderExito": "Le répertoire ${folderName} a été créé avec succès dans le chemin ${user[0].fileName}",
+  "makeFolderError2": "Le nom du dossier existe déjà dans le répertoire actuel",
+  "makeFolderExito": "Le répertoire a été créé avec succès dans le chemin ",
 
   "renameDirectoryCarpeta": "Le nouveau nom de dossier contient des caractères non autorisés, veuillez n'utiliser que les caractères autorisés",
-  "renameDirectoryError": "Le dossier ${folderName} n'existe pas",
-  "renameDirectoryProblema": "Nous ne pouvons pas renommer le dossier, un dossier portant le nom ${newName} existe déjà dans le répertoire actuel",
+  "renameDirectoryError": "Le dossier n'existe pas",
+  "renameDirectoryProblema": "Nous ne pouvons pas renommer le dossier, un dossier portant le nom existe déjà dans le répertoire actuel",
   "renameDirectoryOk": "Le dossier a été renommé avec succès",
 
   "recoverFile": "Le fichier n'est pas dans la corbeille",
   "recoverFileRecuperado": "Le fichier a été récupéré avec succès",
 
-  "renameFile": "Le dossier ${folderName} n'existe pas",
-  "renameFileError": "Nous ne pouvons pas renommer le dossier, un dossier portant le nom ${newName} existe déjà dans le répertoire actuel",
+  "renameFile": "Le dossier n'existe pas",
+  "renameFileError": "Nous ne pouvons pas renommer le dossier, un dossier portant le nom existe déjà dans le répertoire actuel",
 
   "postUserNoValido": "Adresse e-mail ou mot de passe invalide, assurez-vous de saisir les informations correctes",
   "postUserExiste": "L'utilisateur existe déjà",
@@ -131,5 +132,9 @@
   "validateUser": "Le code n'est pas valide, veuillez réessayer avec un code correct",
   "validateUserCabecera": "Valider l'utilisateur via le code",
   "validateUserCodigo": "Code de validation",
-  "validateUserBoton": "Valider"
+  "validateUserBoton": "Valider",
+
+  "uploadFileCoincide": "Un fichier portant le même nom existe déjà dans le répertoire actuel",
+
+  "changeDirectoryError": "Impossible de remonter davantage, vous vous trouvez actuellement dans votre dossier racine"
 }

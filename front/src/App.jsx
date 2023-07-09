@@ -9,6 +9,7 @@ import Dashboard from "./views/Dashboard";
 import SingIn from "./views/SingIn";
 import PasswordRecovery from "./views/PasswordRecovery";
 import PasswordChange from "./views/PasswordChange";
+import TrashPage from "./views/components/TrashPage";
 import EditProfile from "./views/EditProfile";
 import ValidateUser from "./views/ValidateUser";
 import NotFound from "./views/NotFound";
@@ -22,6 +23,7 @@ const router = createBrowserRouter(
       <Route path="/validate/:regCode" element={<ValidateUser />} />
       <Route path="/passwordRecovery" element={<PasswordRecovery />} />
       <Route path="/passwordChange" element={<PasswordChange />} />
+      <Route path="/trash" element={<TrashPage />} />
       <Route path="/editProfile" element={<EditProfile />} />
       <Route path="*" element={<NotFound />} />
     </>
